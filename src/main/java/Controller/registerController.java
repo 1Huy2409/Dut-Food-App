@@ -20,6 +20,7 @@ import java.sql.Statement;
 
 //import helper function
 import Helper.AlertMessage;
+import Helper.PasswordHelper;
 public class registerController {
     @FXML
     private TextField fullNameTextField;
@@ -62,7 +63,7 @@ public class registerController {
                     newUser.setFullName(fullName);
                     newUser.setEmail(email);
                     newUser.setUserName(userName);
-                    newUser.setPassWord(password);
+                    newUser.setPassWord(PasswordHelper.hashPassword(password));
                     newUser.setStatus(true);
                     Dao_User.getInstance().create(newUser);
                     String successMessage = "New account is created!!! Please click Login Button to Login into App";

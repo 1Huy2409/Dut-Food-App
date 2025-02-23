@@ -6,6 +6,7 @@ module com.example.loginapp {
     requires java.desktop;
     requires java.sql;
     requires mysql.connector.j;
+    requires jbcrypt;
     opens Controller to javafx.fxml;
     exports Controller;
     exports Application;

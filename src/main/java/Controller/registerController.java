@@ -18,6 +18,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+//import helper function
+import Helper.AlertMessage;
 public class registerController {
     @FXML
     private TextField fullNameTextField;
@@ -49,7 +51,8 @@ public class registerController {
             {
                 if (rs.getInt(1) > 0)
                 {
-                    System.out.println("This username or email have been used by another user!");
+                    String errorText = "This username or email have been used by another user!";
+                    AlertMessage.showAlertErrorMessage(errorText);
                     return;
                 }
                 else
@@ -62,7 +65,8 @@ public class registerController {
                     newUser.setPassWord(password);
                     newUser.setStatus(true);
                     Dao_User.getInstance().create(newUser);
-                    System.out.println("New user is created!!!");
+                    String successMessage = "New account is created!!! Please click Login Button to Login into App";
+                    AlertMessage.showAlertSuccessMessage(successMessage);
                 }
             }
         } catch (Exception ex) {

@@ -2,12 +2,8 @@ package Controller;
 import Database.JDBC;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -17,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//import helper function
+import Helper.AlertMessage;
 public class loginController
 {
     @FXML
@@ -29,6 +27,8 @@ public class loginController
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordPasswordField;
+
+    // method alert error
     public void loginButtonOnAction(ActionEvent e)
     {
         try {
@@ -46,7 +46,8 @@ public class loginController
                 }
                 else
                 {
-                    loginMessageLabel.setText("This account is not exist. Please try again!");
+                    String errorText = "This account is not exist. Please try again";
+                    AlertMessage.showAlertErrorMessage(errorText);
                 }
             }
         } catch (SQLException ex) {

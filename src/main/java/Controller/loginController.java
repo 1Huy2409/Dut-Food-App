@@ -1,5 +1,7 @@
 package Controller;
+import DAO.Dao_User;
 import Database.JDBC;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +13,8 @@ import java.io.IOException;
 import java.sql.*;
 
 //import helper function
-import Helper.AlertMessage;
-import Helper.PasswordHelper;
+import Helper.*;
+import DAO.Dao_User.*;
 public class loginController
 {
     @FXML
@@ -30,34 +32,40 @@ public class loginController
     public void loginButtonOnAction(ActionEvent e) {
         String userNameCheck = userNameTextField.getText();
         String passwordCheck = passwordPasswordField.getText();
+        User currentUser = Dao_User.getInstance().checkLogin(userNameCheck, passwordCheck);
+        if (currentUser != null)
+        {
+            Session.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
+            if (Session.getInstance().getRoleId() == 1)
+            {
+                // go to admin_dashboard
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Admin/admin_dashboard.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
 
-        // Checking empty input
-        if (userNameCheck.isEmpty() || passwordCheck.isEmpty()) {
-            AlertMessage.showAlertErrorMessage("Vui lòng nhập đầy đủ thông tin.");
-            return;
-        }
+                    stage.setScene(scene);
+                    stage.show();
 
-        try (Connection con = JDBC.getConnection()) {
-            String query = "SELECT password FROM users WHERE userName = ?";
-            try (PreparedStatement pstmt = con.prepareStatement(query)) {
-                pstmt.setString(1, userNameCheck);
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        String hashedPassword = rs.getString("password");
-
-                        // Check password with BCrypt
-                        if (PasswordHelper.checkPassword(passwordCheck, hashedPassword)) {
-                            loginMessageLabel.setText("Welcome " + userNameCheck);
-                        } else {
-                            AlertMessage.showAlertErrorMessage("Wrong password. Please try again!");
-                        }
-                    } else {
-                        AlertMessage.showAlertErrorMessage("This account dont exist. Please try again!");
-                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
-        } catch (SQLException ex) {
-            AlertMessage.showAlertErrorMessage("Database Connection Error: " + ex.getMessage());
+            else
+            {
+                // go to client_dashboard
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Client/client_dashboard.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         }
     }
     public void switchRegisterOnAction(ActionEvent e)

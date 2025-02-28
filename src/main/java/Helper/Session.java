@@ -7,6 +7,7 @@ public class Session {
     private String fullName;
     private String email;
     private String userName;
+    private boolean status;
     private int roleId;
     private Session() {};
     public static Session getInstance()
@@ -17,17 +18,22 @@ public class Session {
         }
         return instance;
     }
-    public void setUser(String phone, String fullName, String email, String userName, int roleId)
+    public void setUser(String phone, String fullName, String email, String userName, boolean status, int roleId)
     {
         this.phone = phone;
         this.fullName = fullName;
         this.email = email;
         this.userName = userName;
+        this.status = status;
         this.roleId = roleId;
     }
     public String getPhone()
     {
         return this.phone;
+    }
+    public boolean getStatus()
+    {
+        return this.status;
     }
     public String getFullName()
     {

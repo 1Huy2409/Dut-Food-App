@@ -3,15 +3,14 @@ package DAO;
 import Database.JDBC;
 import Model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import Helper.*;
+import javafx.scene.control.Alert;
 
 public class Dao_User implements Dao_Interface<User> {
-    // Declare all of methods be implemented from interface
+    // Declare all methods be implemented from interface
     public static Dao_User getInstance()
     {
         return new Dao_User();
@@ -51,8 +50,8 @@ public class Dao_User implements Dao_Interface<User> {
             Statement st = con.createStatement();
             // check email da ton tai hay chua
 
-            String sql = "insert into users (fullName, email, userName, password, status)" +
-                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+")";
+            String sql = "insert into users (fullName, email, userName, password, status, roleId)" +
+                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+")";
             int result = st.executeUpdate(sql);// return numbers of rows updated
             System.out.println("You executed: " + sql);
             System.out.println("Rows have been changed are: " + result);
@@ -81,5 +80,68 @@ public class Dao_User implements Dao_Interface<User> {
     @Override
     public List<User> selectByCondition(String condition) {
         return List.of();
+    }
+    public User checkLogin (String userNameCheck, String passwordCheck)
+    {
+        User currentUser = null;
+        if (userNameCheck == "" || passwordCheck == "")
+        {
+            return currentUser;
+        }
+        try (Connection con = JDBC.getConnection()) {
+            String query = "SELECT * FROM users WHERE userName = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+                pstmt.setString(1, userNameCheck);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        String hashedPassword = rs.getString("password");
+                        // Check password with BCrypt
+                        if (PasswordHelper.checkPassword(passwordCheck, hashedPassword)) {
+                            currentUser = new User(rs.getInt("id"),rs.getString("phone"), rs.getString("fullName"), rs.getString("email"), rs.getString("userName"), rs.getString("password"), rs.getInt("roleId"), rs.getBoolean("status"));
+                        } else {
+                            AlertMessage.showAlertErrorMessage("Please enter correct password!");
+                        }
+                    } else {
+                        AlertMessage.showAlertErrorMessage("This account dont exist. Please try again!");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            AlertMessage.showAlertErrorMessage("Database Connection Error: " + ex.getMessage());
+        }
+        return currentUser;
+    }
+    public void checkRegister(String fullName, String email, String userName, String password)
+    {
+        try {
+            Connection connection = JDBC.getConnection();
+            Statement statement = connection.createStatement();
+            String verifyRegister = "select count(id) from users where userName = '"+ userName +"' or email = '"+ email +"' or status = false";
+            ResultSet rs = statement.executeQuery(verifyRegister);
+            while (rs.next())
+            {
+                if (rs.getInt(1) > 0)
+                {
+                    String errorText = "This username or email have been used by another user!";
+                    AlertMessage.showAlertErrorMessage(errorText);
+                }
+                else
+                {
+                    // create new account
+                    User newUser = new User();
+                    newUser.setFullName(fullName);
+                    newUser.setEmail(email);
+                    newUser.setUserName(userName);
+                    newUser.setPassWord(PasswordHelper.hashPassword(password));
+                    newUser.setRoleId(1);
+                    this.getInstance().create(newUser);
+
+                    String successMessage = "New account is created!!! Please click Login Button to Login into App";
+                    AlertMessage.showAlertSuccessMessage(successMessage);
+                }
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

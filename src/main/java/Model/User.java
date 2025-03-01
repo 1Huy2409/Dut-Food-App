@@ -1,10 +1,10 @@
 package Model;
 
 public class User {
-    int id;
-    String phone, fullName, email, userName, passWord;
-    int roleId;
-    boolean status;
+    private int id;
+    private String phone, fullName, email, userName, passWord;
+    private int roleId;
+    private boolean status;
     // constructor
     public User()
     {

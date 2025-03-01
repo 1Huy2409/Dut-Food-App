@@ -133,7 +133,7 @@ public class Dao_User implements Dao_Interface<User> {
                     newUser.setEmail(email);
                     newUser.setUserName(userName);
                     newUser.setPassWord(PasswordHelper.hashPassword(password));
-                    newUser.setRoleId(1);
+                    newUser.setRoleId(2);
                     this.getInstance().create(newUser);
 
                     String successMessage = "New account is created!!! Please click Login Button to Login into App";

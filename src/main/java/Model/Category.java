@@ -2,19 +2,19 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class Categories {
+public class Category {
     private int id;
     private String categoryName;
     private String description;
     private Timestamp createdAt;
     private boolean status;
 
-    public Categories()
+    public Category()
     {
         this.status = true;
     }
 
-    public Categories(int id, String categoryName, String description, Timestamp createdAt, boolean status) {
+    public Category(int id, String categoryName, String description, Timestamp createdAt, boolean status) {
         this.id = id;
         this.categoryName = categoryName;
         this.description = description;

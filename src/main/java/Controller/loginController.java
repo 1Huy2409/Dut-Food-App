@@ -56,7 +56,7 @@ public class loginController
                 // go to client_dashboard
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Client/client_dashboard.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                    Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
                     Stage stage = (Stage) loginButton.getScene().getWindow();
 
                     stage.setScene(scene);

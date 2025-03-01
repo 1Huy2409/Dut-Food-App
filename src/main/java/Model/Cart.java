@@ -2,12 +2,12 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class Carts {
+public class Cart {
     private int id;
     private int userId;
     private Timestamp createdAt;
 
-    public Carts(int userId)
+    public Cart(int userId)
     {
         this.userId = userId;
     }

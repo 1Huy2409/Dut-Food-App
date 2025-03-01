@@ -2,7 +2,7 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class Payments {
+public class Payment {
     private int id;
     private int roleId;
     private String paymentMethod;
@@ -10,9 +10,9 @@ public class Payments {
     private Timestamp paymentDate;
     private String status;
 
-    public Payments() {}
+    public Payment() {}
 
-    public Payments(int id, int roleId, String paymentMethod, double amount, Timestamp paymentDate, String status) {
+    public Payment(int id, int roleId, String paymentMethod, double amount, Timestamp paymentDate, String status) {
         this.id = id;
         this.roleId = roleId;
         this.paymentMethod = paymentMethod;

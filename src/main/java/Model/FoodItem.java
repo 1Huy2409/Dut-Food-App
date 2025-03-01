@@ -2,7 +2,7 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class FoodItems {
+public class FoodItem {
     private int id;
     private String foodName;
     private String description;
@@ -13,12 +13,24 @@ public class FoodItems {
     private boolean status;
     private Timestamp createdAt;
     // constructor 1: default set status
-    public FoodItems()
+    public FoodItem()
     {
         this.status = true;
         // auto created_at current time
     }
     // constructor 2: full field
+
+    public FoodItem(int id, String foodName, String description, Double price, int stock, int categoryId, String imageUrl, boolean status, Timestamp createdAt) {
+        this.id = id;
+        this.foodName = foodName;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.categoryId = categoryId;
+        this.imageUrl = imageUrl;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
 
     public int getId() {
         return id;

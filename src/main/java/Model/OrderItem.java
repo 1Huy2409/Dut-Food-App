@@ -1,26 +1,21 @@
 package Model;
 
-import java.sql.Timestamp;
-
-public class CartItems {
+public class OrderItem {
     private int id;
-    private int cartId;
+    private int orderId;
     private int foodItemId;
     private int quantity;
-    private Timestamp addedAt;
-    // constructor
-    public CartItems()
-    {
+    private double price;
 
-    }
-    public CartItems(int id, int cartId, int foodItemId, int quantity, Timestamp addedAt) {
+    public OrderItem(){}
+
+    public OrderItem(int id, int orderId, int foodItemId, int quantity, double price) {
         this.id = id;
-        this.cartId = cartId;
+        this.orderId = orderId;
         this.foodItemId = foodItemId;
         this.quantity = quantity;
-        this.addedAt = addedAt;
+        this.price = price;
     }
-    // getter and setter
 
     public int getId() {
         return id;
@@ -30,12 +25,12 @@ public class CartItems {
         this.id = id;
     }
 
-    public int getCartId() {
-        return cartId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getFoodItemId() {
@@ -54,11 +49,11 @@ public class CartItems {
         this.quantity = quantity;
     }
 
-    public Timestamp getAddedAt() {
-        return addedAt;
+    public double getPrice() {
+        return price;
     }
 
-    public void setAddedAt(Timestamp addedAt) {
-        this.addedAt = addedAt;
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

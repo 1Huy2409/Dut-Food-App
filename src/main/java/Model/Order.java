@@ -2,7 +2,7 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class Orders {
+public class Order {
     private int id;
     private int userId;
     private int cartId;
@@ -11,11 +11,11 @@ public class Orders {
     private Timestamp orderDate;
 
     // constructor
-    public Orders()
+    public Order()
     {
 
     }
-    public Orders(int id, int userId, int cartId, double totalPrice, String status, Timestamp orderDate) {
+    public Order(int id, int userId, int cartId, double totalPrice, String status, Timestamp orderDate) {
         this.id = id;
         this.userId = userId;
         this.cartId = cartId;

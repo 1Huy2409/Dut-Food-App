@@ -1,4 +1,5 @@
 package Controller;
+import DAO.Dao_Food;
 import DAO.Dao_User;
 import Database.JDBC;
 import Model.User;
@@ -14,6 +15,7 @@ import java.sql.*;
 
 //import helper function
 import Helper.*;
+import Helper.RouteScreen;
 import DAO.Dao_User.*;
 public class loginController
 {
@@ -39,32 +41,14 @@ public class loginController
             if (Session.getInstance().getRoleId() == 1)
             {
                 // go to admin_dashboard
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Admin/admin_dashboard.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-
-                    stage.setScene(scene);
-                    stage.show();
-
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                RouteScreen.switchRouter(currentStage, "/View/Client/admin_dashboard.fxml");
             }
             else
             {
                 // go to client_dashboard
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Client/client_dashboard.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-
-                    stage.setScene(scene);
-                    stage.show();
-
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                RouteScreen.switchRouter(currentStage, "/View/Client/client_dashboard.fxml");
             }
         }
     }

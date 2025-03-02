@@ -44,7 +44,7 @@ public class Dao_User implements Dao_Interface<User> {
     }
     // create new user and insert into user table
     @Override
-    public int create(User user) {
+    public void create(User user) {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
@@ -59,7 +59,6 @@ public class Dao_User implements Dao_Interface<User> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
     }
     // find user need to be updated and update for this user
     @Override

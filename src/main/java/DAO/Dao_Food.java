@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Dao_Food implements Dao_Interface<FoodItem> {
 
+    public static Dao_Food getInstance()
+    {
+        return new Dao_Food();
+    }
     @Override
     // method for admin: get all to manage
     public List<FoodItem> getAll() {
@@ -37,13 +41,21 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return List.of();
+        return foodItems;
     }
 
     @Override
     // admin method
-    public int create(FoodItem foodItem) {
-        return 0;
+    public void create(FoodItem foodItem) {
+        // create a new food item then insert to database
+        try {
+            Connection con = JDBC.getConnection();
+            Statement st = con.createStatement();
+            String query = "insert into fooditems () values ()";
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     // admin method
     @Override

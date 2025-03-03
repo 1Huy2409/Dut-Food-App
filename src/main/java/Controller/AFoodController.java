@@ -47,8 +47,7 @@ public class AFoodController {
             Label priceLabel = new Label(String.format("%,.0fđ", item.getPrice()));
             Button addToCartButton = new Button("THÊM VÀO GIỎ");
             Button buyNowButton = new Button("MUA NGAY");
-
-            itemBox.getChildren().addAll(imageView, nameLabel, priceLabel, addToCartButton, buyNowButton); // Đặt imageView lên đầu để hiển thị ảnh
+            itemBox.getChildren().addAll(imageView, nameLabel, priceLabel, addToCartButton, buyNowButton);
             contentArea.add(itemBox, col, row);
             col++;
             if (col == 6)
@@ -58,4 +57,6 @@ public class AFoodController {
             }
         }
     }
+    // edit food item by button id
+    
 }

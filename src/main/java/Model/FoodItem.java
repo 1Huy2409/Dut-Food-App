@@ -12,6 +12,7 @@ public class FoodItem {
     private String imageUrl;
     private boolean status;
     private Timestamp createdAt;
+    private int sold;
     // constructor 1: default set status
     public FoodItem()
     {
@@ -20,7 +21,7 @@ public class FoodItem {
     }
     // constructor 2: full field
 
-    public FoodItem(int id, String foodName, String description, Double price, int stock, int categoryId, String imageUrl, boolean status, Timestamp createdAt) {
+    public FoodItem(int id, String foodName, String description, Double price, int stock, int categoryId, String imageUrl, boolean status, Timestamp createdAt, int sold) {
         this.id = id;
         this.foodName = foodName;
         this.description = description;
@@ -30,6 +31,7 @@ public class FoodItem {
         this.imageUrl = imageUrl;
         this.status = status;
         this.createdAt = createdAt;
+        this.sold = sold;
     }
 
     public int getId() {
@@ -70,6 +72,13 @@ public class FoodItem {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 
     public int getCategoryId() {

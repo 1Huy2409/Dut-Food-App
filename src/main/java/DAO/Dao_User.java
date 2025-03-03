@@ -48,11 +48,9 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            // check email da ton tai hay chua
-
             String sql = "insert into users (fullName, email, userName, password, status, roleId)" +
                     " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+")";
-            int result = st.executeUpdate(sql);// return numbers of rows updated
+            int result = st.executeUpdate(sql);
             System.out.println("You executed: " + sql);
             System.out.println("Rows have been changed are: " + result);
             JDBC.closeConnection(con);
@@ -72,7 +70,7 @@ public class Dao_User implements Dao_Interface<User> {
     }
 
     @Override
-    public User selectedById(User user) {
+    public User selectedById(int id) {
         return null;
     }
 

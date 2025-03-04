@@ -88,10 +88,16 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
     public void create(FoodItem foodItem) {
         try {
             Connection con = JDBC.getConnection();
-            Statement st = con.createStatement();
-            String query = "insert into fooditems (food_name, description, price, category_id, image_url, stock, sold)" +
-                    " values ('"+foodItem.getFoodName()+"', '"+foodItem.getDescription()+"', "+foodItem.getPrice()+", "+foodItem.getCategoryId()+", '"+foodItem.getImageUrl()+"', '"+foodItem.getStock()+"', '"+foodItem.getSold()+"')";
-            int result = st.executeUpdate(query);
+            String query = "insert into fooditems (food_name, description, price, category_id, image_url, stock)" +
+                    " values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, foodItem.getFoodName());
+            pstmt.setString(2, foodItem.getDescription());
+            pstmt.setDouble(3, foodItem.getPrice());
+            pstmt.setInt(4, foodItem.getCategoryId());
+            pstmt.setString(5, foodItem.getImageUrl());
+            pstmt.setInt(6, foodItem.getStock());
+            int result = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + result);
             JDBC.closeConnection(con);
@@ -106,10 +112,16 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         int res = 0;
         try {
             Connection con = JDBC.getConnection();
-            Statement st = con.createStatement();
-            String query = "update fooditems (food_name, description, price, category_id, image_url, stock)" +
-                    "set food_name = '"+foodItem.getFoodName()+"', description = '"+foodItem.getDescription()+"', price = "+foodItem.getPrice()+", category_id: "+foodItem.getCategoryId()+", image_url = '"+foodItem.getImageUrl()+"', stock = "+foodItem.getStock()+"";
-            res = st.executeUpdate(query);
+            String query = "update fooditems " +
+                    "set food_name = ?, description = ?, price = ?, category_id: ?, image_url = ?, stock = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, foodItem.getFoodName());
+            pstmt.setString(2, foodItem.getDescription());
+            pstmt.setDouble(3, foodItem.getPrice());
+            pstmt.setInt(4, foodItem.getCategoryId());
+            pstmt.setString (5, foodItem.getImageUrl());
+            pstmt.setInt(6, foodItem.getStock());
+            res = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + res);
             JDBC.closeConnection(con);
@@ -122,7 +134,21 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
     @Override
     public int delete(FoodItem foodItem) {
         // update status: true => false
-        return 0;
+        int res = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "update fooditems " +
+                    "set status = false where id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, foodItem.getId());
+            res = pstmt.executeUpdate();
+            System.out.println("You executed: " + query);
+            System.out.println("Rows have been changed are: " + res);
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
     }
 
     @Override
@@ -130,8 +156,9 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         FoodItem item = new FoodItem();
         try {
             Connection con = JDBC.getConnection();
-            String query = "select * from fooditems where id = "+foodItemId+"";
+            String query = "select * from fooditems where id = ?";
             PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, foodItemId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next())
             {

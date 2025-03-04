@@ -42,7 +42,7 @@ public class loginController
             {
                 // go to admin_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                RouteScreen.switchRouter(currentStage, "/View/Client/admin_dashboard.fxml");
+                RouteScreen.switchRouter(currentStage, "/View/Admin/admin_dashboard.fxml");
             }
             else
             {

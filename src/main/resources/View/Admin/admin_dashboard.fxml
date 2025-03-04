@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AFoodController">
    <children>
       <Text layoutX="214.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tôi là admin" textAlignment="CENTER" wrappingWidth="133.81561279296875" />
+      <Button fx:id="buttonCreate" layoutX="85.0" layoutY="95.0" mnemonicParsing="false" onAction="#onCreateButton" text="Create" />
    </children>
 </AnchorPane>

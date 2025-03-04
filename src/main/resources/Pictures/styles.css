@@ -1,0 +1,47 @@
+.gradient-background{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #D91F4E, #FF854C);
+}
+
+.line-color{
+    -fx-background-color: #F3ABB5;
+}
+
+.container{
+    -fx-background-color: rgb(255,255,255,0.2);
+    -fx-background-radius: 10;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+}
+
+.axis{
+    -fx-stroke: #fff;
+    -fx-fill: #fff;
+    -fx-font-size: 24;
+    -fx-tick-lable-fill: #fff;
+}
+
+.default-color0.chart-pie{-fx-pie-color: transparent;}
+.default-color1.chart-pie{-fx-pie-color: transparent;}
+.default-color2.chart-pie{-fx-pie-color: transparent;}
+.default-color3.chart-pie{-fx-pie-color: transparent;}
+
+.chart-pie-label{
+    -fx-fill: #FFD6DC;
+    -fx-stroke: #FFD6DC;
+    -fx-font-size: 15;
+}
+
+.chart-pie-line{
+    -fx-fill: #FFD6DC;
+    -fx-stroke: #FFD6DC;
+}
+
+.selected-button-container{
+    -fx-background-color: rgba(255,255,255,0.15);
+}
+
+.button-container-mouse-moved:hover{
+    -fx-background-color: rgba(255,255,255,0.1);
+}

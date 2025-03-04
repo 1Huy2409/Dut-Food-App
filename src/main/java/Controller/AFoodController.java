@@ -17,12 +17,9 @@ import java.util.List;
 
 public class AFoodController {
 
-//    private GridPane contentArea;
-    @FXML
-    private Button buttonCreate;
-//    public void initialize() {
-//        renderFood();
-//    }
+    public void initialize() {
+        renderBestSeller();
+    }
 
 //    public void renderFood() {
 //        List<FoodItem> foodItems = Dao_Food.getInstance().getAll();
@@ -75,5 +72,14 @@ public class AFoodController {
         item.setImageUrl("D:/HuyCoding/JavaCode/LoginApp/src/main/resources/Pictures/mycay.jpg");
         item.setStock(20);
         Dao_Food.getInstance().create(item);
+    }
+    // render best seller
+    public void renderBestSeller()
+    {
+        List<FoodItem> foodItems = Dao_Food.getInstance().selectByCondition("bestseller");
+        for (FoodItem item: foodItems)
+        {
+            System.out.println(item.getFoodName());
+        }
     }
 }

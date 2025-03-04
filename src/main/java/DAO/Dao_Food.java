@@ -50,17 +50,19 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         List<FoodItem> foodItems = new ArrayList<>();
         try {
             Connection con = JDBC.getConnection();
-            String query = "select * from fooditems ?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            // "bestseller":
+            String query = "select * from fooditems ";
             switch (condition)
             {
                 case "bestseller": // admin dashboard method
-                    pstmt.setString(1, "order by sold desc limit 3");
+                    query += "order by sold desc limit 2";
                     break;
                 case "active": // client method
-                    pstmt.setString(1, "where status = true");
+                    query += "where status = true";
+                    break;
+                default:
+                    break;
             }
+            PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next())
             {

@@ -93,26 +93,26 @@ public class Dao_Category implements Dao_Interface<Category>{
     }
 
     @Override
-    public Category selectedById(Category category) {
-        String sql = "SELECT * FROM categories WHERE id = ?";
-
-        try (Connection conn = JDBC.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, category.getId());
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return new Category(
-                        rs.getInt("id"),
-                        rs.getString("categoryName"),
-                        rs.getString("description"),
-                        rs.getString("createdAt")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public Category selectedById(int id) {
+//        String sql = "SELECT * FROM categories WHERE id = ?";
+//
+//        try (Connection conn = JDBC.getConnection();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//            pstmt.setInt(1, category.getId());
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            if (rs.next()) {
+//                return new Category(
+//                        rs.getInt("id"),
+//                        rs.getString("categoryName"),
+//                        rs.getString("description"),
+//                        rs.getString("createdAt")
+//                );
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
     @Override

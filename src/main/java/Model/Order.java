@@ -1,13 +1,17 @@
 package Model;
 
+<<<<<<< HEAD
 import java.sql.Timestamp;
 
+=======
+>>>>>>> phihihi
 public class Order {
     private int id;
     private int userId;
     private int cartId;
     private double totalPrice;
     private String status;
+<<<<<<< HEAD
     private Timestamp orderDate;
 
     // constructor
@@ -16,6 +20,11 @@ public class Order {
 
     }
     public Order(int id, int userId, int cartId, double totalPrice, String status, Timestamp orderDate) {
+=======
+    private String orderDate;
+
+    public Order(int id, int userId, int cartId, double totalPrice, String status, String orderDate) {
+>>>>>>> phihihi
         this.id = id;
         this.userId = userId;
         this.cartId = cartId;
@@ -23,7 +32,11 @@ public class Order {
         this.status = status;
         this.orderDate = orderDate;
     }
+<<<<<<< HEAD
     // getter and setter
+=======
+
+>>>>>>> phihihi
     public int getId() {
         return id;
     }
@@ -64,11 +77,19 @@ public class Order {
         this.status = status;
     }
 
+<<<<<<< HEAD
     public Timestamp getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(Timestamp orderDate) {
+=======
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+>>>>>>> phihihi
         this.orderDate = orderDate;
     }
 }

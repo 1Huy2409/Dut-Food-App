@@ -1,11 +1,15 @@
 package Model;
 
+<<<<<<< HEAD
 import java.sql.Timestamp;
 
+=======
+>>>>>>> phihihi
 public class FoodItem {
     private int id;
     private String foodName;
     private String description;
+<<<<<<< HEAD
     private Double price;
     private int stock;
     private int categoryId;
@@ -32,6 +36,23 @@ public class FoodItem {
         this.status = status;
         this.createdAt = createdAt;
         this.sold = sold;
+=======
+    private double price;
+    private int categoryId;
+    private String imageUrl;
+    private int status;
+    private String createdAt;
+
+    public FoodItem(int id, String foodName, String description, double price,int categoryId, String imageUrl, int status, String createdAt) {
+        this.id = id;
+        this.foodName = foodName;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.status = status;
+        this.createdAt = createdAt;
+>>>>>>> phihihi
     }
 
     public int getId() {
@@ -58,6 +79,7 @@ public class FoodItem {
         this.description = description;
     }
 
+<<<<<<< HEAD
     public Double getPrice() {
         return price;
     }
@@ -81,6 +103,16 @@ public class FoodItem {
         this.sold = sold;
     }
 
+=======
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+>>>>>>> phihihi
     public int getCategoryId() {
         return categoryId;
     }
@@ -97,6 +129,7 @@ public class FoodItem {
         this.imageUrl = imageUrl;
     }
 
+<<<<<<< HEAD
     public boolean isStatus() {
         return status;
     }
@@ -110,6 +143,21 @@ public class FoodItem {
     }
 
     public void setCreatedAt(Timestamp createdAt) {
+=======
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+>>>>>>> phihihi
         this.createdAt = createdAt;
     }
 }

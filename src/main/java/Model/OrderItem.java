@@ -7,8 +7,11 @@ public class OrderItem {
     private int quantity;
     private double price;
 
+<<<<<<< HEAD
     public OrderItem(){}
 
+=======
+>>>>>>> phihihi
     public OrderItem(int id, int orderId, int foodItemId, int quantity, double price) {
         this.id = id;
         this.orderId = orderId;
@@ -41,6 +44,7 @@ public class OrderItem {
         this.foodItemId = foodItemId;
     }
 
+<<<<<<< HEAD
     public int getQuantity() {
         return quantity;
     }
@@ -49,6 +53,8 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+=======
+>>>>>>> phihihi
     public double getPrice() {
         return price;
     }
@@ -56,4 +62,15 @@ public class OrderItem {
     public void setPrice(double price) {
         this.price = price;
     }
+<<<<<<< HEAD
+=======
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+>>>>>>> phihihi
 }

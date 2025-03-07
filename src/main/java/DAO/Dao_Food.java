@@ -86,7 +86,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         return foodItems;
     }
     @Override
-    // admin method
     public void create(FoodItem foodItem) {
         try {
             Connection con = JDBC.getConnection();

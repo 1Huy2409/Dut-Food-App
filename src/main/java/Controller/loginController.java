@@ -30,7 +30,6 @@ public class loginController
     @FXML
     private PasswordField passwordPasswordField;
 
-    // method alert error
     public void loginButtonOnAction(ActionEvent e) {
         String userNameCheck = userNameTextField.getText();
         String passwordCheck = passwordPasswordField.getText();

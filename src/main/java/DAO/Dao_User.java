@@ -10,7 +10,6 @@ import Helper.*;
 import javafx.scene.control.Alert;
 
 public class Dao_User implements Dao_Interface<User> {
-    // Declare all methods be implemented from interface
     public static Dao_User getInstance()
     {
         return new Dao_User();

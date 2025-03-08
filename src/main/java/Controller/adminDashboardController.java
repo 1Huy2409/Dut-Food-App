@@ -2,22 +2,27 @@ package Controller;
 
 import DAO.Dao_Food;
 import DAO.Dao_Role;
+import Helper.RouteScreen;
 import Helper.Session;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 //import javax.swing.text.html.ImageView;
 import java.io.File;
 import java.net.URL;
@@ -35,6 +40,7 @@ public class adminDashboardController implements Initializable{
     private Label userName;
     @FXML
     private Label roleName;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -124,5 +130,19 @@ public class adminDashboardController implements Initializable{
             System.out.println(item.getFoodName());
 
         }
+    }
+    @FXML
+    private HBox btnCategory;
+    @FXML
+    private HBox btnProduct;
+    public void CategoryOnAction(MouseEvent e)
+    {
+        Stage currentStage = (Stage) btnCategory.getScene().getWindow();
+        RouteScreen.switchRouter(currentStage, "/View/Admin/category.fxml");
+    }
+    public void ProductOnAction(MouseEvent e)
+    {
+        Stage currentStage = (Stage) btnProduct.getScene().getWindow();
+        RouteScreen.switchRouter(currentStage, "/View/Admin/product.fxml");
     }
 }

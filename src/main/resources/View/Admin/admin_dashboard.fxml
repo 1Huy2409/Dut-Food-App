@@ -112,7 +112,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Orders" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Product" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -126,7 +126,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Custumer" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Order" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -140,7 +140,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Staff" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Customer" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -154,7 +154,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Reports &amp; Statistics" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Staff" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -168,7 +168,21 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Setting" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Report &amp; Statistics" textFill="#f3abb5">
+                           <font>
+                              <Font name="Berlin Sans FB" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                           <image>
+                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Setting" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>

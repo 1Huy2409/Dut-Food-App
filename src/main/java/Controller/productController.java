@@ -30,9 +30,9 @@ public class productController {
     @FXML
     private TableColumn<FoodItem, String> created_timeColumn;
     @FXML
-    private TableColumn<Category, Boolean> selectColumn;
+    private TableColumn<FoodItem, Boolean> selectColumn;
     @FXML
-    private TableColumn<Category, Void> actionColumn;
+    private TableColumn<FoodItem, Void> actionColumn;
     @FXML
     private TableColumn<FoodItem, Number> priceColumn;
     @FXML
@@ -65,18 +65,18 @@ public class productController {
             String formattedDate = timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             return new SimpleStringProperty(formattedDate);
         });
-        actionColumn.setCellFactory(param -> new TableCell<Category, Void>() {
+        actionColumn.setCellFactory(param -> new TableCell<FoodItem, Void>() {
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
 
             {
                 editButton.setOnAction(event -> {
-                    Category category = getTableView().getItems().get(getIndex());
+                    FoodItem fooditem = getTableView().getItems().get(getIndex());
                     // thuc hien logic edit
                 });
 
                 deleteButton.setOnAction(event -> {
-                    Category category = getTableView().getItems().get(getIndex());
+                    FoodItem fooditem = getTableView().getItems().get(getIndex());
                     // thuc hien logic delete
                 });
             }
@@ -100,7 +100,7 @@ public class productController {
         });
 
         selectColumn.setCellFactory(tc -> {
-            CheckBoxTableCell<Category, Boolean> checkBoxCell = new CheckBoxTableCell<>();
+            CheckBoxTableCell<FoodItem, Boolean> checkBoxCell = new CheckBoxTableCell<>();
             checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
             return checkBoxCell;
         });

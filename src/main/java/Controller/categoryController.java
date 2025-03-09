@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.Dao_Category;
 import Model.Category;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class categoryController {
     @FXML private Button selectAll;
@@ -33,18 +35,16 @@ public class categoryController {
     private TableColumn<Category, Void> actionColumn;
 
     private ObservableList<Category> catagoryList;
-    private ObservableList<BooleanProperty> checkboxStates; // Trạng thái checkbox
+    private ObservableList<BooleanProperty> checkboxStates;
 
     @FXML
     public void initialize() {
-        catagoryList = FXCollections.observableArrayList(
-                new Category(1, "mon trang mien", "hihi", Timestamp.valueOf("2025-03-08 14:30:00"), true),
-                new Category(2, "nuoc ngot", "hehe", Timestamp.valueOf("2025-03-08 14:30:00"), true)
-        );
+        List<Category> listCategory = Dao_Category.getInstance().getAll();
+        catagoryList = FXCollections.observableArrayList(listCategory);
 
         checkboxStates = FXCollections.observableArrayList();
         for (int i = 0; i < catagoryList.size(); i++) {
-            checkboxStates.add(new SimpleBooleanProperty(false)); // mặc định chưa tick
+            checkboxStates.add(new SimpleBooleanProperty(false));
         }
 
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
@@ -62,12 +62,15 @@ public class categoryController {
             {
                 editButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    // thuc hien logic edit
+                    System.out.println("ID của danh mục này là: " + category.getId());
+                    // chuyển đến cửa sổ editCategory
                 });
 
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    // thuc hien logic delete
+                    System.out.println("ID của danh mục này là: " + category.getId());
+                    // tạo Alert "Are you sure"
+
                 });
             }
             @Override

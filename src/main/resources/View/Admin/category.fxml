@@ -14,220 +14,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../../Pictures/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.categoryController">
-    <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="290.0" spacing="20.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="DUT FOOD" textFill="WHITE">
-                    <font>
-                        <Font name="Berlin Sans FB" size="26.0" />
-                    </font>
-                </Label>
-                <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="929.0" styleClass="line-color" stylesheets="@../../Pictures/styles.css" HBox.hgrow="ALWAYS" />
-                <ImageView fitHeight="35.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" HBox.hgrow="ALWAYS">
-                    <image>
-                        <Image url="@../../Pictures/icons8-setting-50.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" HBox.hgrow="ALWAYS">
-                    <image>
-                        <Image url="@../../Pictures/icons8-alarm-50.png" />
-                    </image>
-                </ImageView>
-            </children>
-            <padding>
-                <Insets left="20.0" right="20.0" />
-            </padding>
-        </HBox>
-    </top>
-    <left>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../Pictures/styles.css" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </BorderPane.margin>
-            <children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <ImageView fitHeight="60.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                            <image>
-                                <Image url="@../../Pictures/icons8-account-50.png" />
-                            </image>
-                        </ImageView>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="193.0">
-                            <children>
-                                <Label fx:id="userName" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" textFill="#ffd6dc">
-                                    <font>
-                                        <Font size="24.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="roleName" prefHeight="17.0" prefWidth="193.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" textFill="#f3abb5">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="250.0" styleClass="line-color" stylesheets="@../../Pictures/styles.css" />
-                <VBox prefHeight="557.0" prefWidth="290.0" spacing="20.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Dashboard" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label fx:id="btnCategory" prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Categories" textFill="#ffd6dc">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                            <styleClass>
-                                <String fx:value="button-container-mouse-moved" />
-                                <String fx:value="selected-button-container" />
-                            </styleClass>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label fx:id="btnProduct" prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Product" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Order" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Customer" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label prefHeight="27.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Staff" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                                    <image>
-                                        <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                                    </image>
-                                </ImageView>
-                                <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Report &amp; Statistic" textFill="#f3abb5">
-                                    <font>
-                                        <Font name="Berlin Sans FB" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Setting" textFill="#f3abb5">
-                           <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-    </left>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.categoryController">
+    <BorderPane.margin>
+        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+    </BorderPane.margin>
     <center>
-        <VBox prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-            </BorderPane.margin>
-            <children>
-                <HBox alignment="CENTER" prefHeight="47.0" spacing="100.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="selectAll" mnemonicParsing="false" text="Select All" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" text="Add" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="reload" mnemonicParsing="false" text="Reload" />
-                     </children>
-                  </HBox>
-               </children>
-                </HBox>
-                <TableView fx:id="categoryTable" prefWidth="975.0">
-                    <columns>
-                        <TableColumn fx:id="selectColumn" prefWidth="129.0" text="Select" />
-                        <TableColumn fx:id="idColumn" prefWidth="234.0" text="ID" />
-                        <TableColumn fx:id="categoryNameColumn" prefWidth="187.0" text="Category Name" />
-                        <TableColumn fx:id="created_timeColumn" prefWidth="187.0" text="Created time" />
-                        <TableColumn fx:id="actionColumn" prefWidth="130.0" text="Action" />
-                    </columns>
-                </TableView>
-            </children>
+        <VBox spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="47.0" spacing="100.0">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Button fx:id="selectAll" mnemonicParsing="false" text="Select All" />
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Button fx:id="add" mnemonicParsing="false" text="Add" />
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Button fx:id="reload" mnemonicParsing="false" text="Reload" />
+                        </children>
+                    </HBox>
+                </children>
+            </HBox>
+            <TableView fx:id="categoryTable" prefWidth="975.0">
+                <columns>
+                    <TableColumn fx:id="selectColumn" prefWidth="129.0" text="Select" />
+                    <TableColumn fx:id="idColumn" prefWidth="234.0" text="ID" />
+                    <TableColumn fx:id="categoryNameColumn" prefWidth="187.0" text="Category Name" />
+                    <TableColumn fx:id="created_timeColumn" prefWidth="187.0" text="Created time" />
+                    <TableColumn fx:id="actionColumn" prefWidth="130.0" text="Action" />
+                </columns>
+            </TableView>
         </VBox>
     </center>
 </BorderPane>
+

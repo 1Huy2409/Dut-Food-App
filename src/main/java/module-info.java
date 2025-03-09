@@ -3,11 +3,11 @@ module com.example.loginapp {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
-    requires java.desktop;
     requires java.sql;
     requires mysql.connector.j;
     requires jbcrypt;
     requires jdk.compiler;
+    requires jdk.jconsole;
     opens Controller to javafx.fxml;
     exports Controller;
     exports Application;

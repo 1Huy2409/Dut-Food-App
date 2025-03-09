@@ -1,55 +1,40 @@
 package Controller;
 
 import DAO.Dao_Food;
-import DAO.Dao_Role;
-import Helper.RouteScreen;
-import Helper.Session;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-//import javax.swing.text.html.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
 import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class adminDashboardController implements Initializable{
+public class dashboardController implements Initializable {
     @FXML
     private LineChart<?, ?> lineChart;
     @FXML
     private HBox bestSellerBox;
     @FXML
     private PieChart pieChart;
-    @FXML
-    private Label userName;
-    @FXML
-    private Label roleName;
-
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         iniLineChart();
         iniPieChart();
         renderBestSeller();
-        getUserName();
     }
-
     private void iniLineChart()
     {
         XYChart.Series series = new XYChart.Series();
@@ -75,24 +60,6 @@ public class adminDashboardController implements Initializable{
         );
         pieChart.setData(pieChartData);
     }
-    public void getUserName()
-    {
-        userName.setText(Session.getInstance().getUserName());
-        String nameRole = (Dao_Role.getInstance().selectedById(Session.getInstance().getRoleId()).getRoleName());
-        roleName.setText(nameRole);
-    }
-//    public void addFoodItem()
-//    {
-//        FoodItem item = new FoodItem();
-//        item.setFoodName("Mì siu kay cấp độ 2703");
-//        item.setDescription("Mì j mà cay cay thế xin thưa rằng mì cay");
-//        item.setPrice(50000.0);
-//        item.setCategoryId(1);
-//        item.setImageUrl("D:/HuyCoding/JavaCode/LoginApp/src/main/resources/Pictures/mycay.jpg");
-//        item.setStock(20);
-//        Dao_Food.getInstance().create(item);
-//    }
-    // render best seller
     public void renderBestSeller()
     {
         List<FoodItem> foodItems = Dao_Food.getInstance().selectByCondition("bestseller");
@@ -128,21 +95,6 @@ public class adminDashboardController implements Initializable{
             itemBox.getChildren().addAll(imageView, nameLabel);
             bestSellerBox.getChildren().add(itemBox);
             System.out.println(item.getFoodName());
-
         }
-    }
-    @FXML
-    private HBox btnCategory;
-    @FXML
-    private HBox btnProduct;
-    public void CategoryOnAction(MouseEvent e)
-    {
-        Stage currentStage = (Stage) btnCategory.getScene().getWindow();
-        RouteScreen.switchRouter(currentStage, "/View/Admin/category.fxml");
-    }
-    public void ProductOnAction(MouseEvent e)
-    {
-        Stage currentStage = (Stage) btnProduct.getScene().getWindow();
-        RouteScreen.switchRouter(currentStage, "/View/Admin/product.fxml");
     }
 }

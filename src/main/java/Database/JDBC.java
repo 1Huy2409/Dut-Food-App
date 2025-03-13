@@ -12,9 +12,9 @@ public class JDBC {
             // register MySQL Driver with DriverManager
             DriverManager.registerDriver(new Driver());
             // parameters
-            String url = "jdbc:mySQL://localhost:3306/dutfood";
+            String url = "jdbc:mySQL://localhost:3306/demo";
             String userName = "root";
-            String password = "nhathuy2409";
+            String password = "qwertyuiop0";
             // connection
             c = DriverManager.getConnection(url, userName, password);
         } catch (SQLException e) {

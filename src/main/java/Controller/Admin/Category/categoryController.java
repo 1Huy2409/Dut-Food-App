@@ -40,7 +40,6 @@ public class categoryController {
 
     private ObservableList<Category> catagoryList;
     private ObservableList<BooleanProperty> checkboxStates;
-    protected boolean statusCategory = true;
     protected static Category categorySelected = null;
     @FXML
     public void initialize() {
@@ -56,7 +55,6 @@ public class categoryController {
     }
     public void reload()
     {
-        System.out.println("Tao reload nay!");
         List<Category> listCategory = Dao_Category.getInstance().getAll();
         for (Category item: listCategory)
         {
@@ -84,8 +82,6 @@ public class categoryController {
                     categorySelected = getTableView().getItems().get(getIndex());
                     if (categorySelected != null) {
                         Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/editCategory.fxml");
-
-                        // Khi cửa sổ Edit đóng, gọi lại hàm reload()
                         stage.setOnHidden(e -> reload());
                     }
                 });
@@ -141,8 +137,9 @@ public class categoryController {
         reload();
     }
 
-    public void BtnAddOnAction(ActionEvent e)
+    public void BtnAddOnAction(ActionEvent event)
     {
-
+        Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
+        stage.setOnHidden(e -> reload());
     }
 }

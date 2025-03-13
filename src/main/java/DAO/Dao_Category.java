@@ -40,7 +40,7 @@ public class Dao_Category implements Dao_Interface<Category> {
 
     @Override
     public void create(Category category) {
-        String query = "insert into cateogries (category_name, description)" +
+        String query = "insert into categories (category_name, description)" +
                 "values (?, ?)";
         try {
             Connection con = JDBC.getConnection();

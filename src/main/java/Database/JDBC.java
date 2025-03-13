@@ -14,7 +14,7 @@ public class JDBC {
             // parameters
             String url = "jdbc:mySQL://localhost:3306/dutfood";
             String userName = "root";
-            String password = "Ngochuy4zir1@2";
+            String password = "nhathuy2409";
             // connection
             c = DriverManager.getConnection(url, userName, password);
         } catch (SQLException e) {

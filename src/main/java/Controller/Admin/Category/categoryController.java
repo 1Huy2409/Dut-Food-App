@@ -144,4 +144,16 @@ public class categoryController {
         Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
         stage.setOnHidden(e -> reload());
     }
+    public void handleMultipleDelete(ActionEvent event)
+    {
+        for (int i = 0; i < catagoryList.size(); i++)
+        {
+            if (checkboxStates.get(i).get())
+            {
+                Category category = catagoryList.get(i);
+                Dao_Category.getInstance().delete(category);
+            }
+        }
+        reload();
+    }
 }

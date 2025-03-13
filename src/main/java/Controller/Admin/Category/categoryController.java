@@ -23,6 +23,8 @@ public class categoryController {
 
     @FXML private Button add;
     @FXML private Button reloadBtn;
+    @FXML
+    private Button multipleBtn;
 
     @FXML
     private TableView<Category> categoryTable;

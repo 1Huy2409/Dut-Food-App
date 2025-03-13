@@ -1,7 +1,5 @@
-package Controller;
-import DAO.Dao_Food;
+package Controller.Shared;
 import DAO.Dao_User;
-import Database.JDBC;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +9,11 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
-import java.sql.*;
 
 //import helper function
 import Helper.*;
 import Helper.RouteScreen;
-import DAO.Dao_User.*;
+
 public class loginController
 {
     @FXML

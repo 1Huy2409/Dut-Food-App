@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -11,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../../Pictures/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../../CSS/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.adminController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="290.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="DUT FOOD" textFill="WHITE">
+            <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="DUT FOOD" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB" size="26.0" />
                </font>
             </Label>
-            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="929.0" styleClass="line-color" stylesheets="@../../Pictures/styles.css" HBox.hgrow="ALWAYS" />
+            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="929.0" styleClass="line-color" stylesheets="@../../CSS/styles.css" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="35.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" HBox.hgrow="ALWAYS">
                <image>
                   <Image url="@../../Pictures/icons8-setting-50.png" />
@@ -38,7 +37,7 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../Pictures/styles.css" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../CSS/styles.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
@@ -52,12 +51,12 @@
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="193.0">
                      <children>
-                        <Label fx:id="userName" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" textFill="#ffd6dc">
+                        <Label fx:id="userName" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="#ffd6dc">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="roleName" prefHeight="17.0" prefWidth="193.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" textFill="#f3abb5">
+                        <Label fx:id="roleName" prefHeight="17.0" prefWidth="193.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="#f3abb5">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -66,119 +65,115 @@
                   </VBox>
                </children>
             </HBox>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="250.0" styleClass="line-color" stylesheets="@../../Pictures/styles.css" />
-            <VBox prefHeight="557.0" prefWidth="290.0" spacing="20.0">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="250.0" styleClass="line-color" stylesheets="@../../CSS/styles.css" />
+            <VBox fx:id="btnList" prefHeight="557.0" prefWidth="290.0" spacing="20.0">
                <children>
-                  <HBox fx:id="btnDashboard" alignment="CENTER" onMouseClicked="#DashboardOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnDashboard" alignment="CENTER" onMouseClicked="#DashboardOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Dashboard" textFill="#ffd6dc">
-                           <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <styleClass>
-                        <String fx:value="button-container-mouse-moved" />
-                        <String fx:value="selected-button-container" />
-                     </styleClass>
-                  </HBox>
-                  <HBox fx:id="btnCategory" alignment="CENTER" onMouseClicked="#CategoryOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Catagories" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Dashboard" textFill="#ffd6dc">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnProduct" alignment="CENTER" onMouseClicked="#ProductOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnCategory" alignment="CENTER" onMouseClicked="#CategoryOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Product" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Catagories" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnOrder" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnProduct" alignment="CENTER" onMouseClicked="#ProductOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Order" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Product" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnCustomer" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnOrder" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Customer" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Order" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnStaff" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnCustomer" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Staff" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Customer" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnReport" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnStaff" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Report &amp; Statistics" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnSetting" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../Pictures/styles.css">
+                  <HBox fx:id="btnReport" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../Pictures/styles.css" text="Setting" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Report &amp; Statistics" textFill="#f3abb5">
+                           <font>
+                              <Font name="Berlin Sans FB" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="btnSetting" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                           <image>
+                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Setting" textFill="#f3abb5">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -191,7 +186,7 @@
       </VBox>
    </left>
    <center>
-      <VBox fx:id="contentArea" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="contentArea">
       </VBox>
    </center>
 </BorderPane>

@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import DAO.Dao_Role;
 import Helper.Session;
@@ -51,11 +51,11 @@ public class adminController implements Initializable{
     public void initialize(URL location, ResourceBundle resources)
     {
         getUserName();
-        loadUI("/View/Admin/dashboard.fxml");
+        loadUI("/View/Admin/Dashboard/dashboard.fxml");
     }
 
 
-    public void getUserName()
+    private void getUserName()
     {
         userName.setText(Session.getInstance().getUserName());
         String nameRole = (Dao_Role.getInstance().selectedById(Session.getInstance().getRoleId()).getRoleName());
@@ -76,14 +76,17 @@ public class adminController implements Initializable{
     }
     public void CategoryOnAction(MouseEvent e)
     {
-        loadUI("/View/Admin/category.fxml");
+        loadUI("/View/Admin/Category/category.fxml");
+//        btnCategory.getStyleClass().add("selected-button-container");
     }
     public void DashboardOnAction(MouseEvent e)
     {
-        loadUI("/View/Admin/dashboard.fxml");
+        loadUI("/View/Admin/Dashboard/dashboard.fxml");
+//        btnDashboard.getStyleClass().add("selected-button-container");
     }
     public void ProductOnAction(MouseEvent e)
     {
-        loadUI("/View/Admin/product.fmxl");
+        loadUI("/View/Admin/Product/product.fxml");
+//        btnProduct.getStyleClass().add("selected-button-container");
     }
 }

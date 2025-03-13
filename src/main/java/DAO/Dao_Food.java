@@ -14,7 +14,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         return new Dao_Food();
     }
     @Override
-    // method for admin: get all to manage (include active and inactive status)
     public List<FoodItem> getAll() {
         List<FoodItem> foodItems = new ArrayList<>();
         try {
@@ -44,7 +43,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return foodItems;
     }
-    // dynamic method for admin and client
     @Override
     public List<FoodItem> selectByCondition(String condition) {
         List<FoodItem> foodItems = new ArrayList<>();
@@ -86,7 +84,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         return foodItems;
     }
     @Override
-    // admin method
     public void create(FoodItem foodItem) {
         try {
             Connection con = JDBC.getConnection();
@@ -107,15 +104,15 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
             throw new RuntimeException(e);
         }
     }
-    // admin method
     @Override
-    // can not edit sold field => this field auto update base on orer status
+    // id readonly
     public int update(FoodItem foodItem) {
         int res = 0;
         try {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
-                    "set food_name = ?, description = ?, price = ?, category_id: ?, image_url = ?, stock = ?";
+                    "set food_name = ?, description = ?, price = ?, category_id: ?, image_url = ?, stock = ? where id = ?";
+            // where condition ?
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, foodItem.getFoodName());
             pstmt.setString(2, foodItem.getDescription());
@@ -123,6 +120,7 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
             pstmt.setInt(4, foodItem.getCategoryId());
             pstmt.setString (5, foodItem.getImageUrl());
             pstmt.setInt(6, foodItem.getStock());
+            pstmt.setInt(7, foodItem.getId());
             res = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + res);
@@ -132,10 +130,8 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return res;
     }
-    // admin method
     @Override
     public int delete(FoodItem foodItem) {
-        // update status: true => false
         int res = 0;
         try {
             Connection con = JDBC.getConnection();

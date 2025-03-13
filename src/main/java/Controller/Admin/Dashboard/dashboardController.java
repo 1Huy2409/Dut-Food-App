@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin.Dashboard;
 
 import DAO.Dao_Food;
 import Model.FoodItem;

@@ -1,8 +1,6 @@
-package Controller;
+package Controller.Client.Account;
 
 import DAO.Dao_User;
-import Database.JDBC;
-import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,8 +14,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 //import helper function
-import Helper.AlertMessage;
-import Helper.PasswordHelper;
+
 public class registerController {
     @FXML
     private TextField fullNameTextField;

@@ -52,7 +52,7 @@ public class Category {
         this.createdAt = createdAt;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

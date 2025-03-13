@@ -41,7 +41,6 @@
 .selected-button-container{
     -fx-background-color: rgba(255,255,255,0.15);
 }
-
 .button-container-mouse-moved:hover{
     -fx-background-color: rgba(255,255,255,0.1);
 }

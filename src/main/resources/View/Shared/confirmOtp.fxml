@@ -34,7 +34,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="108.0" layoutY="110.0" prefHeight="38.0" prefWidth="263.0" promptText="Enter your email" />
+            <TextField fx:id="emailTextField" editable="false" layoutX="108.0" layoutY="110.0" prefHeight="38.0" prefWidth="263.0" promptText="Enter your email" />
             <Button fx:id="confirmOtpBtn" layoutX="131.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleConfirmOtp" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #D1D44C;" text="Confirm">
                <font>
                   <Font size="16.0" />

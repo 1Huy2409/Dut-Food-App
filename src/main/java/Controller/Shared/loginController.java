@@ -26,6 +26,8 @@ public class loginController
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordPasswordField;
+    @FXML
+    private Hyperlink forgotPwLink;
 
     public void loginButtonOnAction(ActionEvent e) {
         String userNameCheck = userNameTextField.getText();
@@ -33,8 +35,8 @@ public class loginController
         User currentUser = Dao_User.getInstance().checkLogin(userNameCheck, passwordCheck);
         if (currentUser != null)
         {
-            Session.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
-            if (Session.getInstance().getRoleId() == 1)
+            UserSession.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
+            if (UserSession.getInstance().getRoleId() == 1)
             {
                 // go to admin_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
@@ -61,5 +63,9 @@ public class loginController
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    public void handleForgotPassword(ActionEvent e)
+    {
+        RouteScreen.getInstance().newScreen("/View/Shared/forgotPassword.fxml");
     }
 }

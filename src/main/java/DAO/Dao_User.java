@@ -60,6 +60,20 @@ public class Dao_User implements Dao_Interface<User> {
     // find user need to be updated and update for this user
     @Override
     public int update(User user) {
+        String query = "update users set password = ? where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, user.getPassWord());
+            pstmt.setInt(2, user.getId());
+            int rs = pstmt.executeUpdate();
+            if (rs > 0)
+            {
+                System.out.println("You have changed: " + rs + " rows");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return 0;
     }
     // find user and delete user in user table
@@ -106,6 +120,32 @@ public class Dao_User implements Dao_Interface<User> {
             AlertMessage.showAlertErrorMessage("Database Connection Error: " + ex.getMessage());
         }
         return currentUser;
+    }
+    public User checkEmail(String email)
+    {
+        User currentUser = new User();
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "select * from users where email = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                currentUser.setId(rs.getInt("id"));
+                currentUser.setFullName(rs.getString("fullName"));
+                currentUser.setEmail(rs.getString("email"));
+                currentUser.setUserName(rs.getString("userName"));
+                currentUser.setPassWord(rs.getString("password"));
+                currentUser.setStatus(rs.getBoolean("status"));
+                currentUser.setRoleId(rs.getInt("roleId"));
+                currentUser.setPhone(rs.getString("phone"));
+                return currentUser;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
     public void checkRegister(String fullName, String email, String userName, String password)
     {

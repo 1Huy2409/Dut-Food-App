@@ -1,5 +1,6 @@
 package Database;
 import com.mysql.cj.jdbc.Driver;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
 // import java.sql.DriverManager
@@ -7,14 +8,15 @@ public class JDBC {
     // create connection
     public static Connection getConnection()
     {
+        Dotenv dotenv = Dotenv.load();
         Connection c = null;
         try {
             // register MySQL Driver with DriverManager
             DriverManager.registerDriver(new Driver());
             // parameters
-            String url = "jdbc:mySQL://localhost:3306/dutfood";
-            String userName = "root";
-            String password = "nhathuy2409";
+            String url = dotenv.get("DB_URL");
+            String userName = dotenv.get("DB_USER");
+            String password = dotenv.get("DB_PASSWORD");
             // connection
             c = DriverManager.getConnection(url, userName, password);
         } catch (SQLException e) {

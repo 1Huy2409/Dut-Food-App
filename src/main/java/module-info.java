@@ -8,6 +8,8 @@ module com.example.loginapp {
     requires jbcrypt;
     requires jdk.compiler;
     requires jdk.jconsole;
+    requires jakarta.mail;
+    requires io.github.cdimascio.dotenv.java;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;

@@ -11,7 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class editCategoryController extends categoryController{
+public class editCategoryController{
     @FXML
     private TextArea cateDesc;
 
@@ -64,7 +64,14 @@ public class editCategoryController extends categoryController{
         item.setId(Integer.parseInt(cateId.getText()));
         item.setCategoryName(cateName.getText());
         item.setDescription(cateDesc.getText());
-        item.setStatus(statusCategory);
+        if (cateTrue.isSelected())
+        {
+            item.setStatus(true);
+        }
+        else
+        {
+            item.setStatus(false);
+        }
         Dao_Category.getInstance().update(item);
         currentStage.close();
     }

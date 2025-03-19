@@ -71,23 +71,19 @@ public class dashboardController implements Initializable {
             itemBox.setAlignment(Pos.CENTER);
             ImageView imageView = new ImageView();
             String imageUrl = item.getImageUrl();
-            System.out.println(imageUrl);
-            if (imageUrl != null && !imageUrl.isEmpty())
-            {
-                File imageFile = new File(imageUrl);
-                if (imageFile.exists())
-                {
-                    Image image = new Image(imageFile.toURI().toString());
+            System.out.println("Loading image: " + imageUrl);
+
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                // Lấy đường dẫn từ resources
+                URL imageUrlPath = getClass().getResource("/" + imageUrl);
+                if (imageUrlPath != null) {
+                    Image image = new Image(imageUrlPath.toExternalForm());
                     imageView.setImage(image);
+                } else {
+                    System.err.println("This image file does not exist in resources: " + imageUrl);
                 }
-                else
-                {
-                    System.err.println("This image file does not exist: " + imageUrl);
-                }
-            }
-            else
-            {
-                System.err.println("Error file path: " + item.getFoodName());
+            } else {
+                System.err.println("Error file path for: " + item.getFoodName());
             }
             imageView.setFitHeight(140);
             imageView.setFitWidth(250);

@@ -23,16 +23,16 @@ public class loginController
     @FXML
     private Label loginMessageLabel;
     @FXML
-    private TextField userNameTextField;
+    private TextField emailTextField;
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
     private Hyperlink forgotPwLink;
 
     public void loginButtonOnAction(ActionEvent e) {
-        String userNameCheck = userNameTextField.getText();
+        String emailCheck = emailTextField.getText();
         String passwordCheck = passwordPasswordField.getText();
-        User currentUser = Dao_User.getInstance().checkLogin(userNameCheck, passwordCheck);
+        User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
             UserSession.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());

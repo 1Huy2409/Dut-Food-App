@@ -91,17 +91,17 @@ public class Dao_User implements Dao_Interface<User> {
     public List<User> selectByCondition(String condition) {
         return List.of();
     }
-    public User checkLogin (String userNameCheck, String passwordCheck)
+    public User checkLogin (String emailCheck, String passwordCheck)
     {
         User currentUser = null;
-        if (userNameCheck == "" || passwordCheck == "")
+        if (emailCheck == "" || passwordCheck == "")
         {
             return currentUser;
         }
         try (Connection con = JDBC.getConnection()) {
-            String query = "SELECT * FROM users WHERE userName = ?";
+            String query = "select * from users where email = ?";
             try (PreparedStatement pstmt = con.prepareStatement(query)) {
-                pstmt.setString(1, userNameCheck);
+                pstmt.setString(1, emailCheck);
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         String hashedPassword = rs.getString("password");

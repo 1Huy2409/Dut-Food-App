@@ -180,6 +180,7 @@
                         </Label>
                      </children>
                   </HBox>
+                  <fx:include source="../Shared/logout.fxml"/>
                </children>
             </VBox>
          </children>

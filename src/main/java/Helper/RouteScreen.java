@@ -18,12 +18,14 @@ public class RouteScreen {
         }
         return _Instance;
     }
-    public static void switchRouter(Stage stage, String link)
+    public static void switchRouter(Stage stage, String link, Integer width, Integer height)
     {
+        if (width == null) width = 1280;
+        if (height == null) height = 720;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(RouteScreen.class.getResource(link));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 1280, 720);
+            Scene scene = new Scene(root, width, height);
             stage.setScene(scene);
             stage.show();
 

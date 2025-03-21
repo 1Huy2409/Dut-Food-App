@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../../CSS/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.adminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../../CSS/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.adminController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="290.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="61.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="DUT FOOD" textFill="WHITE">
                <font>
@@ -37,7 +37,7 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../CSS/styles.css" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../CSS/styles.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
@@ -180,7 +180,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <fx:include source="../Shared/logout.fxml"/>
+                  <fx:include source="../Shared/logout.fxml" />
                </children>
             </VBox>
          </children>
@@ -188,6 +188,8 @@
    </left>
    <center>
       <VBox fx:id="contentArea">
-      </VBox>
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin></VBox>
    </center>
 </BorderPane>

@@ -111,7 +111,7 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         try {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
-                    "set food_name = ?, description = ?, price = ?, category_id: ?, image_url = ?, stock = ? where id = ?";
+                    "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ? where id = ?";
             // where condition ?
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, foodItem.getFoodName());

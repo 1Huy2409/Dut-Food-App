@@ -2,6 +2,9 @@ package Helper;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class AlertMessage {
     public static void showAlertErrorMessage(String message)
@@ -19,5 +22,13 @@ public class AlertMessage {
         alert.setTitle("Success!!!");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    public static boolean showConfirm(String message) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }

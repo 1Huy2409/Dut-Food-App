@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Product.editProductController">
+   <children>
+      <ImageView fx:id="img" fitHeight="150.0" fitWidth="218.0" layoutX="21.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="272.0" layoutY="46.0" text="Name" />
+      <Label layoutX="272.0" layoutY="94.0" text="Price" />
+      <Label layoutX="271.0" layoutY="142.0" text="Category" />
+      <Label layoutX="272.0" layoutY="199.0" text="Des" />
+      <TextField fx:id="txtName" layoutX="332.0" layoutY="41.0" />
+      <TextField fx:id="txtPrice" layoutX="333.0" layoutY="89.0" />
+      <TextField fx:id="txtDes" alignment="TOP_LEFT" layoutX="333.0" layoutY="192.0" prefHeight="118.0" prefWidth="217.0" />
+      <ComboBox fx:id="cbCategory" layoutX="331.0" layoutY="140.0" prefWidth="150.0" />
+      <Button fx:id="btnIm" layoutX="102.0" layoutY="225.0" mnemonicParsing="false" onAction="#ImportImg" text="Import" />
+      <Button fx:id="btnCancel" layoutX="169.0" layoutY="342.0" mnemonicParsing="false" onAction="#btncancel" text="Cancel" />
+      <Button fx:id="btnOK" layoutX="332.0" layoutY="342.0" mnemonicParsing="false" onAction="#btnok" prefHeight="26.0" prefWidth="51.0" text="OK" />
+      <Label layoutX="490.0" layoutY="144.0" text="Stock" />
+      <TextField fx:id="stock" layoutX="528.0" layoutY="139.0" prefHeight="26.0" prefWidth="58.0" />
+   </children>
+</AnchorPane>

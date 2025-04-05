@@ -1,4 +1,4 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 
 import Helper.RouteScreen;
 import Helper.UserSession;

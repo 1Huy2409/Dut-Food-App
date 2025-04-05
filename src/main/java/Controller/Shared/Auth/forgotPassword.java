@@ -1,4 +1,4 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 
 import DAO.Dao_ForgotPassword;
 import DAO.Dao_User;

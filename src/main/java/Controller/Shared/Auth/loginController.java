@@ -1,4 +1,4 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 import DAO.Dao_User;
 import Model.User;
 import javafx.fxml.FXML;

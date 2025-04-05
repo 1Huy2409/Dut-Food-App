@@ -1,17 +1,23 @@
 package Controller.Admin.Product;
 
+import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.AlertMessage;
+import Helper.RouteScreen;
+import Model.Category;
 import Model.FoodItem;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.InputStream;
@@ -31,7 +37,8 @@ public class productController {
 
     @FXML
     private TableView<FoodItem> productTable;
-
+    @FXML
+    private Button demul;
     @FXML
     private TableColumn<FoodItem, Number> idColumn;
     @FXML
@@ -45,16 +52,27 @@ public class productController {
     @FXML
     private TableColumn<FoodItem, Number> priceColumn;
     @FXML
-    private TableColumn<FoodItem, Number> categoryColumn;
+    private TableColumn<FoodItem, String> categoryColumn;
     @FXML
     private TableColumn<FoodItem, String> imageColumn;
-
+    protected static FoodItem foodItemSelected = null;
+//    protected static FoodItem multifoodItemSelected = null;
     private ObservableList<FoodItem> productList;
     private ObservableList<BooleanProperty> checkboxStates; // Trạng thái checkbox
-
+    private final ConcurrentHashMap<Integer, String> categoryMap = new ConcurrentHashMap<>();
     @FXML
     public void initialize()
     {
+        reload();
+    }
+    private void loadCategories() {
+        List<Category> categories = Dao_Category.getInstance().getAll();
+        for (Category category : categories) {
+            categoryMap.put(category.getId(), category.getCategoryName());
+        }
+    }
+    public void reload() {
+        loadCategories();
         List<FoodItem> listFoodItems = new ArrayList<>();
         listFoodItems = Dao_Food.getInstance().getAll();
         productList = FXCollections.observableArrayList(
@@ -68,16 +86,22 @@ public class productController {
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFoodName()));
         priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()));
-        categoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCategoryId()));
+        categoryColumn.setCellValueFactory(cellData -> {
+            int categoryId = cellData.getValue().getCategoryId();
+            String categoryName = categoryMap.getOrDefault(categoryId, " ");
+            return new SimpleStringProperty(categoryName);
+        });
         imageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getImageUrl()));
         imageColumn.setCellFactory(column -> new TableCell<FoodItem, String>() {
             private final ImageView imageView = new ImageView();
+
             {
                 imageView.setFitWidth(80);  // Giảm kích thước ảnh để tăng tốc độ
                 imageView.setFitHeight(80);
                 imageView.setPreserveRatio(false);
                 imageView.setSmooth(true);
             }
+
             @Override
             protected void updateItem(String imageUrl, boolean empty) {
                 super.updateItem(imageUrl, empty);
@@ -101,22 +125,32 @@ public class productController {
 
             {
                 editButton.setOnAction(event -> {
-                    FoodItem fooditem = getTableView().getItems().get(getIndex());
-                    // thuc hien logic edit
+                    foodItemSelected = getTableView().getItems().get(getIndex());
+                    if (foodItemSelected != null) {
+                        Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Product/editProduct.fxml");
+                        stage.setOnHidden(e -> reload());
+                    }
                 });
 
                 deleteButton.setOnAction(event -> {
-                    FoodItem fooditem = getTableView().getItems().get(getIndex());
-                    // thuc hien logic delete
+                    foodItemSelected = getTableView().getItems().get(getIndex());
+
+                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
+                    if (confirm) {
+                        Dao_Food.getInstance().delete(productController.foodItemSelected);
+                        AlertMessage.showAlertSuccessMessage("Deleted successfully");
+                        reload();
+                    }
+
                 });
             }
+
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
-                }
-                else {
+                } else {
                     HBox buttons = new HBox(10, editButton, deleteButton);
                     setGraphic(buttons);
                 }
@@ -144,6 +178,28 @@ public class productController {
         });
 
         productTable.setItems(productList);
+        add.setOnAction(event -> {
+            Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Product/addProduct.fxml");
+            stage.setOnHidden(e -> reload());
+        });
+        demul.setOnAction(event -> {
+            List<FoodItem> selectedItems = new ArrayList<FoodItem>();
+            for (int i = 0; i < productList.size(); i++) {
+                if (checkboxStates.get(i).get()) {
+                    selectedItems.add(productList.get(i));
+                }
+            }
+            for (FoodItem items : selectedItems) {
+                Dao_Food.getInstance().delete(items);
+            }
+            for (BooleanProperty state : checkboxStates) {
+                state.set(false); // Hủy chọn tất cả
+            }
+
+        });
+        reload.setOnAction(event -> {
+            reload();
+        });
     }
     private void loadImageAsync(String imageUrl, ImageView imageView) {
         if (imageCache.containsKey(imageUrl)) {

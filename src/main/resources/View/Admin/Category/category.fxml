@@ -32,12 +32,12 @@
                 </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="multipleBtn" mnemonicParsing="false" onAction="#handleMultipleDelete" text="Multiple delete" />
+                  <Button fx:id="multipleBtn" mnemonicParsing="false" onAction="#handleMultipleDelete" text="Multiple Delete" />
                </children>
             </HBox>
             </children>
         </HBox>
-        <TableView fx:id="categoryTable" prefHeight="400.0" prefWidth="259.0">
+        <TableView fx:id="categoryTable" prefHeight="400.0" prefWidth="422.0">
             <columns>
                 <TableColumn fx:id="selectColumn" prefWidth="129.0" text="Select" />
                 <TableColumn fx:id="idColumn" prefWidth="234.0" text="ID" />

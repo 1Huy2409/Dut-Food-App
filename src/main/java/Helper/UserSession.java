@@ -1,7 +1,7 @@
 package Helper;
 
-public class Session {
-    private static Session instance;
+public class UserSession {
+    private static UserSession instance;
     private int id;
     private String phone;
     private String fullName;
@@ -9,12 +9,12 @@ public class Session {
     private String userName;
     private boolean status;
     private int roleId;
-    private Session() {};
-    public static Session getInstance()
+    private UserSession() {};
+    public static UserSession getInstance()
     {
         if (instance == null)
         {
-            instance = new Session();
+            instance = new UserSession();
         }
         return instance;
     }

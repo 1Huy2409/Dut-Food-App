@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Shared.Auth.confirmOtp">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="205.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Pictures/cho.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="428.0" style="-fx-background-color: #D44C65;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="87.0" layoutY="40.0" prefHeight="17.0" prefWidth="222.0" text="Confirm OTP" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="111.0" prefHeight="34.0" prefWidth="83.0" text="Email" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailTextField" editable="false" layoutX="108.0" layoutY="110.0" prefHeight="38.0" prefWidth="263.0" promptText="Enter your email" />
+            <Button fx:id="confirmOtpBtn" layoutX="131.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleConfirmOtp" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #D1D44C;" text="Confirm">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBack" layoutX="300.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="70.0" text="Back" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="171.0" prefHeight="34.0" prefWidth="83.0" text="OTP" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="otpTextField" layoutX="108.0" layoutY="169.0" prefHeight="38.0" prefWidth="263.0" promptText="Enter your OTP code" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

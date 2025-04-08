@@ -28,7 +28,6 @@ public class categoryController {
 
     @FXML
     private TableView<Category> categoryTable;
-
     @FXML
     private TableColumn<Category, Number> idColumn;
     @FXML
@@ -129,7 +128,12 @@ public class categoryController {
         });
 
         categoryTable.setItems(catagoryList);
+        add.setOnAction(event -> {
+            Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
+            stage.setOnHidden(e -> reload());
+        });
     }
+
     @FXML private void handleSelectAll() {
         checkboxStates.forEach(state -> state.set(true)); // Chọn tất cả
         categoryTable.refresh();

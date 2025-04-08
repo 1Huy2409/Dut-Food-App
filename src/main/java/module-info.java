@@ -8,6 +8,8 @@ module com.example.loginapp {
     requires jbcrypt;
     requires jdk.compiler;
     requires jdk.jconsole;
+    requires jakarta.mail;
+    requires io.github.cdimascio.dotenv.java;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;
@@ -22,8 +24,6 @@ module com.example.loginapp {
     opens Controller.Admin to javafx.fxml;
     exports Controller.Client.Account;
     opens Controller.Client.Account to javafx.fxml;
-    exports Controller.Shared;
-    opens Controller.Shared to javafx.fxml;
-    opens Controller.Admin.Customer to javafx.fxml;
-    exports Controller.Admin.Customer;
+    exports Controller.Shared.Auth;
+    opens Controller.Shared.Auth to javafx.fxml;
 }

@@ -1,7 +1,7 @@
 package Controller.Admin;
 
 import DAO.Dao_Role;
-import Helper.Session;
+import Helper.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -57,10 +57,10 @@ public class adminController implements Initializable{
 
     private void getUserName()
     {
-        userName.setText(Session.getInstance().getUserName());
-        String nameRole = (Dao_Role.getInstance().selectedById(Session.getInstance().getRoleId()).getRoleName());
+        userName.setText(UserSession.getInstance().getUserName());
+        String nameRole = (Dao_Role.getInstance().selectedById(UserSession.getInstance().getRoleId()).getRoleName());
         roleName.setText(nameRole);
-        System.out.println(Session.getInstance().getUserName());
+        System.out.println(UserSession.getInstance().getUserName());
         System.out.println(nameRole);
     }
 

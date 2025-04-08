@@ -3,8 +3,6 @@ package Model;
 public class Role {
     private int id;
     private String roleName;
-
-    // constructor
     public Role () {};
     public Role (int id, String roleName)
     {

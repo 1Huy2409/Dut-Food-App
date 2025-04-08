@@ -27,7 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
+import javafx.geometry.Pos;
 public class productController {
     @FXML
     private Button selectAll;
@@ -63,6 +63,7 @@ public class productController {
     @FXML
     public void initialize()
     {
+        productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         reload();
     }
     private void loadCategories() {
@@ -124,6 +125,9 @@ public class productController {
             private final Button deleteButton = new Button("Delete");
 
             {
+                // Thêm class CSS cho nút delete
+                deleteButton.getStyleClass().add("delete-button");
+
                 editButton.setOnAction(event -> {
                     foodItemSelected = getTableView().getItems().get(getIndex());
                     if (foodItemSelected != null) {
@@ -134,14 +138,12 @@ public class productController {
 
                 deleteButton.setOnAction(event -> {
                     foodItemSelected = getTableView().getItems().get(getIndex());
-
                     boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
                     if (confirm) {
                         Dao_Food.getInstance().delete(productController.foodItemSelected);
                         AlertMessage.showAlertSuccessMessage("Deleted successfully");
                         reload();
                     }
-
                 });
             }
 
@@ -152,6 +154,7 @@ public class productController {
                     setGraphic(null);
                 } else {
                     HBox buttons = new HBox(10, editButton, deleteButton);
+                    buttons.setAlignment(Pos.CENTER_LEFT);
                     setGraphic(buttons);
                 }
             }
@@ -203,18 +206,31 @@ public class productController {
     }
     private void loadImageAsync(String imageUrl, ImageView imageView) {
         if (imageCache.containsKey(imageUrl)) {
-            Platform.runLater(() -> imageView.setImage(imageCache.get(imageUrl))); // Dùng ảnh đã cache
+            Platform.runLater(() -> {
+                imageView.setImage(imageCache.get(imageUrl));
+                imageView.setStyle("-fx-opacity: 1;"); // Hiển thị rõ khi đã load xong
+            });
             return;
         }
+
+        // Hiệu ứng loading
+        imageView.setStyle("-fx-opacity: 0.5;");
 
         new Thread(() -> {
             File file = new File("src/main/resources/" + imageUrl);
             if (file.exists()) {
-                Image image = new Image(file.toURI().toString(), 80, 80, false, true); // Giảm kích thước ảnh
-                imageCache.put(imageUrl, image); // Lưu vào cache
-                Platform.runLater(() -> imageView.setImage(image)); // Cập nhật UI
+                Image image = new Image(file.toURI().toString(), 80, 80, false, true, true);
+                imageCache.put(imageUrl, image);
+                Platform.runLater(() -> {
+                    imageView.setImage(image);
+                    imageView.setStyle("-fx-opacity: 1;");
+                });
             } else {
                 System.err.println("Không tìm thấy ảnh: " + file.getAbsolutePath());
+                Platform.runLater(() -> {
+                    imageView.setStyle("-fx-opacity: 1;");
+                    // Có thể thêm icon ảnh lỗi ở đây
+                });
             }
         }).start();
     }

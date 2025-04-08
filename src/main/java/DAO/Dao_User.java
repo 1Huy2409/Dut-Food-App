@@ -17,11 +17,11 @@ public class Dao_User implements Dao_Interface<User> {
     @Override
     // return all users in user table
     public List<User> getAll() {
-        ArrayList<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<User>();
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            String sql = "select * from users";
+            String sql = "select * from users where roleId = 2";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next())
             {
@@ -33,13 +33,14 @@ public class Dao_User implements Dao_Interface<User> {
                 String password = rs.getString("password");
                 boolean status = rs.getBoolean("status");
                 int roleId = rs.getInt("roleId");
-                System.out.println(id + " - " + phone + " - " + fullName + " - " + email + " - " + userName + " - " + password + " - " + status + " - " + roleId);
+                User newUser = new User(id,phone,fullName,email,userName,password,roleId,status);
+                users.add(newUser);
             }
-
+            JDBC.closeConnection(con);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return List.of();
+        return users;
     }
     // create new user and insert into user table
     @Override
@@ -47,8 +48,8 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            String sql = "insert into users (fullName, email, userName, password, status, roleId)" +
-                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+")";
+            String sql = "insert into users (fullName, email, userName, password, status, roleId, phone)" +
+                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+" , "+user.getPhone()+")";
             int result = st.executeUpdate(sql);
             System.out.println("You executed: " + sql);
             System.out.println("Rows have been changed are: " + result);
@@ -60,14 +61,48 @@ public class Dao_User implements Dao_Interface<User> {
     // find user need to be updated and update for this user
     @Override
     public int update(User user) {
-        return 0;
+        int res = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "update users set phone = ?, fullName = ?, email = ?, userName = ?, passWord = ?, roleId = ?, status = ? where id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, user.getPhone());
+            pstmt.setString(2, user.getFullName());
+            pstmt.setString(3, user.getEmail());
+            pstmt.setString(4, user.getUserName());
+            pstmt.setString(5, user.getPassWord());
+            pstmt.setInt(6, user.getRoleId());
+            pstmt.setBoolean(7, user.getStatus());
+            pstmt.setInt(8, user.getId());
+            res = pstmt.executeUpdate();
+            System.out.println("You executed: " + query);
+            System.out.println("Rows have been changed: " + res);
+
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
     }
     // find user and delete user in user table
     @Override
-    public int delete(User user) {
-        return 0;
-    }
+    public int delete(User user){
+        int res = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "update users set status = false where id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, user.getId());
+            res = pstmt.executeUpdate();
+            System.out.println("You executed: " + query);
 
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
     @Override
     public User selectedById(int id) {
         return null;

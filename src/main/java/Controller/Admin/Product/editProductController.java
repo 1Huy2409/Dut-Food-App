@@ -123,7 +123,12 @@ public class editProductController {
         item.setDescription(txtDes.getText());
         item.setStock(Integer.parseInt(stock.getText()));
         item.setCategoryId(cbCategory.getValue().getId());
-        item.setImageUrl(productController.foodItemSelected.getImageUrl().substring(43,productController.foodItemSelected.getImageUrl().length()).replace("\\","/"));
+        if(productController.foodItemSelected.getImageUrl().length()  < 43){
+            item.setImageUrl(productController.foodItemSelected.getImageUrl());
+        }
+        else {
+            item.setImageUrl(productController.foodItemSelected.getImageUrl().substring(43, productController.foodItemSelected.getImageUrl().length()).replace("\\", "/"));
+        }
         Dao_Food.getInstance().update(item);
         currentStage.close();
     }

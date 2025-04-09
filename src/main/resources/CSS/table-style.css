@@ -48,7 +48,7 @@
 .table-view .table-cell {
     -fx-border-color: transparent;
     -fx-padding: 8px;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-font-weight: 400;
     -fx-text-fill: #333;
     -fx-alignment: CENTER;

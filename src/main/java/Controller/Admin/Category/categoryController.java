@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import Helper.AlertMessage;
 import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import javafx.scene.shape.Rectangle;
 
 public class categoryController {
     @FXML private Button selectAll;
@@ -38,12 +40,15 @@ public class categoryController {
     private TableColumn<Category, Boolean> selectColumn;
     @FXML
     private TableColumn<Category, Void> actionColumn;
-
+    @FXML
+    private HBox functional;
     private ObservableList<Category> catagoryList;
     private ObservableList<BooleanProperty> checkboxStates;
     protected static Category categorySelected = null;
     @FXML
     public void initialize() {
+        functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        categoryTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         reload();
     }
     public static categoryController getInstance()
@@ -57,6 +62,13 @@ public class categoryController {
     public void reload()
     {
         List<Category> listCategory = Dao_Category.getInstance().getAll();
+        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+
+        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
+        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
+        categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+        created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+        actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
         for (Category item: listCategory)
         {
             System.out.println(item.getCategoryName());
@@ -79,6 +91,7 @@ public class categoryController {
             private final Button deleteButton = new Button("Delete");
 
             {
+                editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {
                     categorySelected = getTableView().getItems().get(getIndex());
                     if (categorySelected != null) {
@@ -86,7 +99,7 @@ public class categoryController {
                         stage.setOnHidden(e -> reload());
                     }
                 });
-
+                deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
                     Dao_Category.getInstance().delete(category);

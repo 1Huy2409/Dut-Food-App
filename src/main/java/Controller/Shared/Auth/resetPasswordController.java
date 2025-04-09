@@ -1,12 +1,10 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 
-import DAO.Dao_ForgotPassword;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.EmailSession;
 import Helper.PasswordHelper;
 import Model.User;
-import com.sun.tools.jconsole.JConsoleContext;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

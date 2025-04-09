@@ -1,4 +1,4 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 import DAO.Dao_User;
 import Model.User;
 import javafx.fxml.FXML;
@@ -23,16 +23,16 @@ public class loginController
     @FXML
     private Label loginMessageLabel;
     @FXML
-    private TextField userNameTextField;
+    private TextField emailTextField;
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
     private Hyperlink forgotPwLink;
 
     public void loginButtonOnAction(ActionEvent e) {
-        String userNameCheck = userNameTextField.getText();
+        String emailCheck = emailTextField.getText();
         String passwordCheck = passwordPasswordField.getText();
-        User currentUser = Dao_User.getInstance().checkLogin(userNameCheck, passwordCheck);
+        User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
             UserSession.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
@@ -40,13 +40,13 @@ public class loginController
             {
                 // go to admin_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                RouteScreen.switchRouter(currentStage, "/View/Admin/admin_dashboard.fxml");
+                RouteScreen.switchRouter(currentStage, "/View/Admin/admin_dashboard.fxml", null, null);
             }
             else
             {
                 // go to client_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                RouteScreen.switchRouter(currentStage, "/View/Client/client_dashboard.fxml");
+                RouteScreen.switchRouter(currentStage, "/View/Client/client_dashboard.fxml",null, null);
             }
         }
     }

@@ -1,4 +1,4 @@
-package Controller.Shared;
+package Controller.Shared.Auth;
 
 import DAO.Dao_ForgotPassword;
 import DAO.Dao_User;
@@ -30,7 +30,7 @@ public class forgotPassword {
     @FXML
     public void handleBackLogin(ActionEvent event) {
         Stage currentStage = (Stage) btnBack.getScene().getWindow();
-        RouteScreen.switchRouter(currentStage, "/View/Shared/login.fxml");
+        RouteScreen.switchRouter(currentStage, "/View/Shared/login.fxml", 600, 400);
     }
 
     @FXML

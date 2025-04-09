@@ -24,6 +24,6 @@ module com.example.loginapp {
     opens Controller.Admin to javafx.fxml;
     exports Controller.Client.Account;
     opens Controller.Client.Account to javafx.fxml;
-    exports Controller.Shared;
-    opens Controller.Shared to javafx.fxml;
+    exports Controller.Shared.Auth;
+    opens Controller.Shared.Auth to javafx.fxml;
 }

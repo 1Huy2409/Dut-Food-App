@@ -75,7 +75,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Dashboard" textFill="#ffd6dc">
+                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Dashboard" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -89,7 +89,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Catagories" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Catagories" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -103,7 +103,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Product" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Product" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -117,7 +117,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Order" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Order" textFill="#f8f8f8">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -131,7 +131,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Customer" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Customer" textFill="#f8f8f8">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -145,7 +145,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -159,7 +159,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Report &amp; Statistics" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Report &amp; Statistics" textFill="#f8f8f8">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>
@@ -173,7 +173,7 @@
                               <Image url="@../../Pictures/icons8-dashboard-48.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Setting" textFill="#f3abb5">
+                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Setting" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="24.0" />
                            </font>

@@ -12,11 +12,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -32,6 +34,7 @@ public class productController {
     @FXML
     private Button selectAll;
     private final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
+    @FXML private HBox functional;
     @FXML private Button add;
     @FXML private Button reload;
 
@@ -63,6 +66,7 @@ public class productController {
     @FXML
     public void initialize()
     {
+        functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         reload();
     }
@@ -74,6 +78,15 @@ public class productController {
     }
     public void reload() {
         loadCategories();
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+
+        idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
+        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
         List<FoodItem> listFoodItems = new ArrayList<>();
         listFoodItems = Dao_Food.getInstance().getAll();
         productList = FXCollections.observableArrayList(
@@ -97,10 +110,16 @@ public class productController {
             private final ImageView imageView = new ImageView();
 
             {
-                imageView.setFitWidth(80);  // Giảm kích thước ảnh để tăng tốc độ
-                imageView.setFitHeight(80);
-                imageView.setPreserveRatio(false);
+                imageView.setFitWidth(100);  // hoặc kích thước bạn muốn
+                imageView.setFitHeight(120);
                 imageView.setSmooth(true);
+                imageView.setPreserveRatio(true);
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                setAlignment(Pos.CENTER);
+                Rectangle clip = new Rectangle(100, 100); // Kích thước giống với ImageView
+                clip.setArcWidth(20);  // Độ bo góc theo chiều ngang
+                clip.setArcHeight(20); // Độ bo góc theo chiều dọc
+                imageView.setClip(clip);
             }
 
             @Override
@@ -125,9 +144,8 @@ public class productController {
             private final Button deleteButton = new Button("Delete");
 
             {
-                // Thêm class CSS cho nút delete
                 deleteButton.getStyleClass().add("delete-button");
-
+                editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {
                     foodItemSelected = getTableView().getItems().get(getIndex());
                     if (foodItemSelected != null) {
@@ -135,7 +153,6 @@ public class productController {
                         stage.setOnHidden(e -> reload());
                     }
                 });
-
                 deleteButton.setOnAction(event -> {
                     foodItemSelected = getTableView().getItems().get(getIndex());
                     boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");

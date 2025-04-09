@@ -1,0 +1,63 @@
+/* css functional buttons for all tables */
+.functional-buttons {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2px;
+    -fx-border-color: #00785C;
+    -fx-text-fill: #00785C;
+    -fx-font-weight: bold;
+}
+.table-view {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 5px;
+}
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #e8fdf9, #d1f3ec);
+    -fx-background-radius: 15 15 0 0;
+}
+
+.table-view .column-header {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0,0,0,0.05);
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #00785C;
+    -fx-alignment: CENTER;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #00785C;
+}
+.table-view .table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0;
+    -fx-margin: 50;
+}
+
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: #f0fdfa;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #d1f3ec;
+    -fx-text-fill: #00785C;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 8px;
+    -fx-font-size: 16px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #333;
+    -fx-alignment: CENTER;
+}
+.edit-button {
+    -fx-background-color: #ffff66;
+}
+.delete-button {
+    -fx-background-color: #f44336;
+}
+
+

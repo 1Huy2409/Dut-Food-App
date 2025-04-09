@@ -1,18 +1,21 @@
 .gradient-background{
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #D91F4E, #FF854C);
+    -fx-background-color: linear-gradient(to right, rgb(60, 167, 153), rgb(200, 230, 225));
 }
 
 .line-color{
-    -fx-background-color: #F3ABB5;
+    -fx-background-color: rgba(60, 167, 153, 1);
+    -fx-height: 12px;
 }
 
 .container{
-    -fx-background-color: rgb(255,255,255,0.2);
+    /*-fx-background-color: rgb(255,255,255,0.2);*/
+    -fx-background-color: rgb(60,167,153);
     -fx-background-radius: 10;
 }
 
 .shadow{
     -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+    -fx-color: white;
 }
 
 .axis{

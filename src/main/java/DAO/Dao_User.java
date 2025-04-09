@@ -80,25 +80,6 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return result;
     }
-
-
-    public int updatePassword(User user) {
-        String query = "update users set password = ? where id = ?";
-        try {
-            Connection con = JDBC.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, user.getPassWord());
-            pstmt.setInt(2, user.getId());
-            int rs = pstmt.executeUpdate();
-            if (rs > 0)
-            {
-                System.out.println("You have changed: " + rs + " rows");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
-    }
     public int updatePassword(User user) {
         String query = "update users set password = ? where id = ?";
         try {

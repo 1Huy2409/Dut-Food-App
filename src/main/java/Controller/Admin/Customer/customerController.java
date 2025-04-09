@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,10 +156,11 @@ public class customerController {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return user.getFullName().toLowerCase().contains(lowerCaseFilter) ||
-                        user.getEmail().toLowerCase().contains(lowerCaseFilter) ||
-                        user.getPhone().toLowerCase().contains(lowerCaseFilter);
+                String filter = removeDiacritics(newValue.toLowerCase());
+
+                return removeDiacritics(user.getFullName().toLowerCase()).contains(filter) ||
+                        removeDiacritics(user.getEmail().toLowerCase()).contains(filter) ||
+                        removeDiacritics(user.getPhone().toLowerCase()).contains(filter);
             });
         });
         selectColumn.setCellValueFactory(cellData -> {
@@ -217,6 +220,10 @@ public class customerController {
         reloadBtn.setOnAction(event -> {
             reload();
         });
+    }
+    public static String removeDiacritics(String input) {
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+        return normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
 }

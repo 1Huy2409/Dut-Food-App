@@ -42,7 +42,7 @@ public class resetPasswordController {
             String newPassword = newPasswordField.getText();
             String hashedPassword = PasswordHelper.hashPassword(newPassword);
             currentUser.setPassWord(hashedPassword);
-            Dao_User.getInstance().update(currentUser);
+            Dao_User.getInstance().updatePassword(currentUser);
             AlertMessage.showAlertSuccessMessage("Please login to your account again");
             Stage currentStage = (Stage) ResetPasswordBtn.getScene().getWindow();
             currentStage.close();

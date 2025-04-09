@@ -1,0 +1,120 @@
+[33mde2d21f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mphihihi[m[33m)[m HEAD@{0}: commit (merge): merge Dao_User
+[33m9ebd9e8[m HEAD@{1}: reset: moving to HEAD
+[33m9ebd9e8[m HEAD@{2}: checkout: moving from main to phihihi
+[33mbe8de39[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{3}: checkout: moving from phihihi to main
+[33m9ebd9e8[m HEAD@{4}: checkout: moving from main to phihihi
+[33mbe8de39[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: commit: change UI
+[33m8515715[m HEAD@{6}: commit: rÃefactor
+[33m20f93c8[m HEAD@{7}: merge phihihi: Merge made by the 'ort' strategy.
+[33m0326c9c[m HEAD@{8}: pull: Fast-forward
+[33m12f4993[m[33m ([m[1;31morigin/huyskibidi[m[33m, [m[1;32mhuyskibidi[m[33m)[m HEAD@{9}: checkout: moving from phihihi to main
+[33m9ebd9e8[m HEAD@{10}: commit: pom
+[33me76c7d6[m HEAD@{11}: pull: Merge made by the 'ort' strategy.
+[33ma246fb2[m HEAD@{12}: checkout: moving from main to phihihi
+[33m12f4993[m[33m ([m[1;31morigin/huyskibidi[m[33m, [m[1;32mhuyskibidi[m[33m)[m HEAD@{13}: merge huyskibidi: Fast-forward
+[33mce31b08[m HEAD@{14}: checkout: moving from huyskibidi to main
+[33m12f4993[m[33m ([m[1;31morigin/huyskibidi[m[33m, [m[1;32mhuyskibidi[m[33m)[m HEAD@{15}: commit: add mÃysql-connector-j to pom.xml
+[33m8f8678a[m HEAD@{16}: pull: Fast-forward
+[33m86435bd[m HEAD@{17}: checkout: moving from main to huyskibidi
+[33mce31b08[m HEAD@{18}: checkout: moving from huyskibidi to main
+[33m86435bd[m HEAD@{19}: checkout: moving from main to huyskibidi
+[33mce31b08[m HEAD@{20}: checkout: moving from huyskibidi to main
+[33m86435bd[m HEAD@{21}: checkout: moving from main to huyskibidi
+[33mce31b08[m HEAD@{22}: commit: logout function
+[33mdcd3046[m HEAD@{23}: commit: change login method and UI
+[33ma246fb2[m HEAD@{24}: merge phihihi: Fast-forward
+[33m3a9c456[m HEAD@{25}: checkout: moving from phihihi to main
+[33ma246fb2[m HEAD@{26}: commit (merge): .env merge
+[33m7ad8bb4[m HEAD@{27}: commit (merge): short merge
+[33mc2b701d[m HEAD@{28}: checkout: moving from main to phihihi
+[33m3a9c456[m HEAD@{29}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{30}: reset: moving to HEAD
+[33mc2b701d[m HEAD@{31}: checkout: moving from main to phihihi
+[33m3a9c456[m HEAD@{32}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{33}: checkout: moving from main to phihihi
+[33m3a9c456[m HEAD@{34}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{35}: checkout: moving from main to phihihi
+[33m3a9c456[m HEAD@{36}: commit: .env variable
+[33m90269b2[m HEAD@{37}: commit: readonly email field
+[33maabfe9a[m HEAD@{38}: commit: forgot pÃassword otp send
+[33m6586934[m HEAD@{39}: commit: validate and alert for add cate
+[33md5b596d[m HEAD@{40}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{41}: checkout: moving from main to phihihi
+[33md5b596d[m HEAD@{42}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{43}: checkout: moving from main to phihihi
+[33md5b596d[m HEAD@{44}: checkout: moving from phihihi to main
+[33mc2b701d[m HEAD@{45}: pull: Fast-forward
+[33m5c4e8c4[m HEAD@{46}: checkout: moving from main to phihihi
+[33md5b596d[m HEAD@{47}: commit: multiple delelte
+[33m86435bd[m HEAD@{48}: merge huyskibidi: Fast-forward
+[33m7abd23b[m[33m ([m[1;32mtest-branch[m[33m)[m HEAD@{49}: checkout: moving from huyskibidi to main
+[33m86435bd[m HEAD@{50}: pull: Fast-forward
+[33m59fced7[m HEAD@{51}: checkout: moving from main to huyskibidi
+[33m7abd23b[m[33m ([m[1;32mtest-branch[m[33m)[m HEAD@{52}: checkout: moving from test-branch to main
+[33m7abd23b[m[33m ([m[1;32mtest-branch[m[33m)[m HEAD@{53}: checkout: moving from main to test-branch
+[33m7abd23b[m[33m ([m[1;32mtest-branch[m[33m)[m HEAD@{54}: commit: add category
+[33mdeea464[m HEAD@{55}: commit: edit category, realtime reload
+[33mec025f5[m HEAD@{56}: checkout: moving from huyskibidi to main
+[33m59fced7[m HEAD@{57}: checkout: moving from phihihi to huyskibidi
+[33m5c4e8c4[m HEAD@{58}: checkout: moving from main to phihihi
+[33mec025f5[m HEAD@{59}: commit: spa
+[33m3c65b21[m HEAD@{60}: checkout: moving from huyskibidi to main
+[33m59fced7[m HEAD@{61}: checkout: moving from main to huyskibidi
+[33m3c65b21[m HEAD@{62}: commit: fix main branch
+[33m59fced7[m HEAD@{63}: merge huyskibidi: Fast-forward
+[33m2b088dc[m HEAD@{64}: checkout: moving from huyskibidi to main
+[33m59fced7[m HEAD@{65}: checkout: moving from main to huyskibidi
+[33m2b088dc[m HEAD@{66}: checkout: moving from huyskibidi to main
+[33m59fced7[m HEAD@{67}: pull: Fast-forward
+[33m7ecc4d3[m HEAD@{68}: checkout: moving from main to huyskibidi
+[33m2b088dc[m HEAD@{69}: pull origin main: Fast-forward
+[33m9df41e0[m HEAD@{70}: checkout: moving from huyskibidi to main
+[33m7ecc4d3[m HEAD@{71}: checkout: moving from main to huyskibidi
+[33m9df41e0[m HEAD@{72}: checkout: moving from huyskibidi to main
+[33m7ecc4d3[m HEAD@{73}: pull: Merge made by the 'ort' strategy.
+[33m29891a6[m HEAD@{74}: checkout: moving from main to huyskibidi
+[33m9df41e0[m HEAD@{75}: checkout: moving from huyskibidi to main
+[33m29891a6[m HEAD@{76}: commit: route
+[33m655e6eb[m HEAD@{77}: checkout: moving from main to huyskibidi
+[33m9df41e0[m HEAD@{78}: checkout: moving from ngoc-huy to main
+[33mfd9d353[m[33m ([m[1;31morigin/ngoc-huy[m[33m)[m HEAD@{79}: pull: Merge made by the 'ort' strategy.
+[33m418550b[m HEAD@{80}: checkout: moving from main to ngoc-huy
+[33m9df41e0[m HEAD@{81}: checkout: moving from ngoc-huy to main
+[33m418550b[m HEAD@{82}: merge main: Merge made by the 'ort' strategy.
+[33m6d8a1fa[m HEAD@{83}: checkout: moving from main to ngoc-huy
+[33m9df41e0[m HEAD@{84}: commit: del
+[33m87df9dc[m HEAD@{85}: checkout: moving from ngoc-huy to main
+[33m6d8a1fa[m HEAD@{86}: pull: Merge made by the 'ort' strategy.
+[33m87df9dc[m HEAD@{87}: checkout: moving from main to ngoc-huy
+[33m87df9dc[m HEAD@{88}: checkout: moving from ngoc-huy to main
+[33m87df9dc[m HEAD@{89}: merge main: Fast-forward
+[33m0fe3041[m HEAD@{90}: checkout: moving from main to ngoc-huy
+[33m87df9dc[m HEAD@{91}: commit: delete cmt
+[33m5c4e8c4[m HEAD@{92}: checkout: moving from phihihi to main
+[33m5c4e8c4[m HEAD@{93}: merge main: Fast-forward
+[33m2505b51[m HEAD@{94}: checkout: moving from main to phihihi
+[33m5c4e8c4[m HEAD@{95}: commit: fix conflict
+[33m2857067[m HEAD@{96}: commit (merge): Dao
+[33m3c546d6[m HEAD@{97}: checkout: moving from phihihi to main
+[33m2505b51[m HEAD@{98}: commit: fix phihihi branch
+[33m604b1e1[m HEAD@{99}: checkout: moving from main to phihihi
+[33m3c546d6[m HEAD@{100}: checkout: moving from phihihi to main
+[33m604b1e1[m HEAD@{101}: checkout: moving from main to phihihi
+[33m3c546d6[m HEAD@{102}: commit: readd Dao_Role, Model Role and render Ãá»ÃUserBox
+[33m9f39868[m HEAD@{103}: commit (merge): merge admin_dashboard
+[33m7446b9c[m HEAD@{104}: checkout: moving from ngoc-huy to main
+[33m0fe3041[m HEAD@{105}: checkout: moving from main to ngoc-huy
+[33m7446b9c[m HEAD@{106}: checkout: moving from ngoc-huy to main
+[33m0fe3041[m HEAD@{107}: checkout: moving from main to ngoc-huy
+[33m7446b9c[m HEAD@{108}: commit: change
+[33m8db04a0[m HEAD@{109}: commit: add fnc DaoFood
+[33m8a91d50[m HEAD@{110}: commit: route screen
+[33m03f7613[m HEAD@{111}: commit: tÃest pictures
+[33m6e95786[m HEAD@{112}: commit: add class to model
+[33m2405d0f[m HEAD@{113}: commit: login register flow
+[33ma502706[m HEAD@{114}: commit: add password helper
+[33mbfe579f[m HEAD@{115}: commit: singleton pattern using session class
+[33m545fe6a[m HEAD@{116}: commit: alert helper
+[33m1d66a08[m HEAD@{117}: commit: basic register and login
+[33mc95c5a6[m HEAD@{118}: Branch: renamed refs/heads/master to refs/heads/main
+[33mc95c5a6[m HEAD@{120}: commit (initial): first login app

@@ -33,13 +33,15 @@ public class Dao_User implements Dao_Interface<User> {
                 String password = rs.getString("password");
                 boolean status = rs.getBoolean("status");
                 int roleId = rs.getInt("roleId");
+                User user = new User(id,phone,fullName,email,userName,password,roleId,status);
+                users.add(user);
                 System.out.println(id + " - " + phone + " - " + fullName + " - " + email + " - " + userName + " - " + password + " - " + status + " - " + roleId);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return List.of();
+        return users;
     }
     // create new user and insert into user table
     @Override
@@ -47,8 +49,8 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            String sql = "insert into users (fullName, email, userName, password, status, roleId)" +
-                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+")";
+            String sql = "insert into users (fullName, email, userName, password, status, roleId, phone)" +
+                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+" , "+user.getPhone()+")";
             int result = st.executeUpdate(sql);
             System.out.println("You executed: " + sql);
             System.out.println("Rows have been changed are: " + result);
@@ -58,8 +60,29 @@ public class Dao_User implements Dao_Interface<User> {
         }
     }
     // find user need to be updated and update for this user
+
     @Override
     public int update(User user) {
+        int result = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String sql = "update users set fullName = ?, email = ?, phone = ? where id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhone());
+            ps.setInt(4, user.getId());
+            result = ps.executeUpdate();
+            System.out.println("Rows updated: " + result);
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+
+    public int updatePassword(User user) {
         String query = "update users set password = ? where id = ?";
         try {
             Connection con = JDBC.getConnection();
@@ -96,7 +119,19 @@ public class Dao_User implements Dao_Interface<User> {
     // find user and delete user in user table
     @Override
     public int delete(User user) {
-        return 0;
+        int result = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String sql = "update users set status = false where id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, user.getId());
+            result = ps.executeUpdate();
+            System.out.println("Rows marked as deleted: " + result);
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
     @Override

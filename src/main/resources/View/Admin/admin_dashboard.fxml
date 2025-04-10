@@ -16,7 +16,7 @@
          <children>
             <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="DUT FOOD" textFill="WHITE">
                <font>
-                  <Font name="Berlin Sans FB" size="26.0" />
+                  <Font name="Berlin Sans FB" size="30.0" />
                </font>
             </Label>
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="929.0" styleClass="line-color" stylesheets="@../../CSS/styles.css" HBox.hgrow="ALWAYS" />
@@ -51,15 +51,18 @@
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="193.0">
                      <children>
-                        <Label fx:id="userName" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="#ffd6dc">
+                        <Label fx:id="userName" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label fx:id="roleName" prefHeight="17.0" prefWidth="193.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="#f3abb5">
+                        <Label fx:id="roleName" prefHeight="17.0" prefWidth="193.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
                         </Label>
                      </children>
                   </VBox>
@@ -77,7 +80,7 @@
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Dashboard" textFill="WHITE">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -86,12 +89,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-category-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Catagories" textFill="WHITE">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -100,12 +103,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-product-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="191.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Product" textFill="WHITE">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -114,12 +117,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-order-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="190.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Order" textFill="#f8f8f8">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -128,12 +131,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-customer-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="186.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Customer" textFill="#f8f8f8">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -142,12 +145,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-staff-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="WHITE">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -156,12 +159,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-report-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Report &amp; Statistics" textFill="#f8f8f8">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -170,12 +173,12 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>
-                              <Image url="@../../Pictures/icons8-dashboard-48.png" />
+                              <Image url="@../../Pictures/icons8-settings-50.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Setting" textFill="WHITE">
                            <font>
-                              <Font name="Berlin Sans FB" size="24.0" />
+                              <Font name="Berlin Sans FB" size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -187,9 +190,9 @@
       </VBox>
    </left>
    <center>
-      <VBox fx:id="contentArea">
+      <VBox fx:id="contentArea" prefHeight="671.0" prefWidth="995.0">
          <BorderPane.margin>
-            <Insets right="10.0" />
+            <Insets bottom="80.0" right="10.0" top="10.0" />
          </BorderPane.margin></VBox>
    </center>
 </BorderPane>

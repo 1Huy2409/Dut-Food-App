@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -55,6 +56,9 @@ public class customerController {
 
     @FXML
     private TableColumn<User, Boolean> status;
+
+    @FXML
+    private HBox functional;
     private ObservableList<User> userList;
     private ObservableList<BooleanProperty> checkboxStates;
     protected static User userSelected = null;
@@ -65,10 +69,19 @@ public class customerController {
     }
     @FXML
     public void initialize() {
+        functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        customerTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         reload();
     }
     public void reload() {
         List<User> listUser = Dao_User.getInstance().getAll();
+        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.05));
+        name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+        email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
+        phone.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
+        status.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+        actionColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.25));
         userList = FXCollections.observableArrayList(listUser);
         filteredUsers = new FilteredList<>(userList, p -> true);
         checkboxStates = FXCollections.observableArrayList();
@@ -147,7 +160,9 @@ public class customerController {
                     setGraphic(null);
                 } else {
                     HBox buttons = new HBox(10, editButton, deleteButton);
+                    buttons.setStyle("-fx-alignment: CENTER;");
                     setGraphic(buttons);
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });

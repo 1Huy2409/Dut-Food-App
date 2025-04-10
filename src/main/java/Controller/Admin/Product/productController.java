@@ -172,7 +172,9 @@ public class productController {
                 } else {
                     HBox buttons = new HBox(10, editButton, deleteButton);
                     buttons.setAlignment(Pos.CENTER_LEFT);
+                    buttons.setStyle("-fx-alignment: CENTER;");
                     setGraphic(buttons);
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });

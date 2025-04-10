@@ -202,7 +202,7 @@ public class Dao_User implements Dao_Interface<User> {
                     newUser.setEmail(email);
                     newUser.setUserName(userName);
                     newUser.setPassWord(PasswordHelper.hashPassword(password));
-                    newUser.setRoleId(1);
+                    newUser.setRoleId(2);
                     newUser.setPhone(phone);
                     this.getInstance().create(newUser);
 

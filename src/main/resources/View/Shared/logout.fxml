@@ -15,7 +15,7 @@
       </ImageView>
       <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Logout" textFill="WHITE">
          <font>
-            <Font name="Berlin Sans FB" size="24.0" />
+            <Font name="Berlin Sans FB" size="26.0" />
          </font>
       </Label>
    </children>

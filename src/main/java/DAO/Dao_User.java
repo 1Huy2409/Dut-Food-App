@@ -180,7 +180,7 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return null;
     }
-    public void checkRegister(String fullName, String email, String userName, String password)
+    public void checkRegister(String fullName, String email, String userName, String password, String phone)
     {
         try {
             Connection connection = JDBC.getConnection();
@@ -203,6 +203,7 @@ public class Dao_User implements Dao_Interface<User> {
                     newUser.setUserName(userName);
                     newUser.setPassWord(PasswordHelper.hashPassword(password));
                     newUser.setRoleId(1);
+                    newUser.setPhone(phone);
                     this.getInstance().create(newUser);
 
                     String successMessage = "New account is created!!! Please click Login Button to Login into App";

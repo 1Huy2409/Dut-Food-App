@@ -25,6 +25,8 @@ public class registerController {
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
+    private TextField phoneTextField;
+    @FXML
     private Button registerButton;
     @FXML
     private Button switchLoginButton;
@@ -36,8 +38,9 @@ public class registerController {
         String email = emailTextField.getText();
         String userName = userNameTextField.getText();
         String password = passwordPasswordField.getText();
+        String phone = phoneTextField.getText();
         // check userName and email has been existed in databases yet, if yes => "try again", else => "create new user"
-        Dao_User.getInstance().checkRegister(fullName, email, userName, password);
+        Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
     }
     public void switchLoginOnAction(ActionEvent e)
     {

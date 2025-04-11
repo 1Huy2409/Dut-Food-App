@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.sql.Timestamp;
@@ -87,10 +89,21 @@ public class categoryController {
         });
 
         actionColumn.setCellFactory(param -> new TableCell<Category, Void>() {
+            private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
+            private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
+            private final HBox buttons = new HBox(10, editButton, deleteButton);
 
             {
+                editIcon.setFitWidth(20);
+                editIcon.setFitHeight(20);
+                deleteIcon.setFitWidth(20);
+                deleteIcon.setFitHeight(20);
+
+                // Gán icon vào button
+                editButton.setGraphic(editIcon);
+                deleteButton.setGraphic(deleteIcon);
                 editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {
                     categorySelected = getTableView().getItems().get(getIndex());

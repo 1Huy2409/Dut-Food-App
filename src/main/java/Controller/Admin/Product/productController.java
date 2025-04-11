@@ -140,10 +140,20 @@ public class productController {
             return new SimpleStringProperty(formattedDate);
         });
         actionColumn.setCellFactory(param -> new TableCell<FoodItem, Void>() {
+            private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
+            private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
-
+            private final HBox buttons = new HBox(10, editButton, deleteButton);
             {
+                editIcon.setFitWidth(20);
+                editIcon.setFitHeight(20);
+                deleteIcon.setFitWidth(20);
+                deleteIcon.setFitHeight(20);
+
+                // Gán icon vào button
+                editButton.setGraphic(editIcon);
+                deleteButton.setGraphic(deleteIcon);
                 deleteButton.getStyleClass().add("delete-button");
                 editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {

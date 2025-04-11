@@ -48,3 +48,13 @@
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-border-radius: 10;
 }
+.button-themvaogio{
+    -fx-background-color: #F49CA8;
+}
+.container-client{
+    -fx-border-color: #808080;
+    -fx-border-radius: 10;
+}
+.line-color-client{
+    -fx-background-color: #000000;
+}

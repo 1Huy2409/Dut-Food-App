@@ -37,12 +37,12 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../CSS/styles.css" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="686.0" prefWidth="290.0" spacing="10.0" styleClass="container" stylesheets="@../../CSS/styles.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="60.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="290.0">
                <children>
                   <ImageView fitHeight="60.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                      <image>
@@ -192,7 +192,7 @@
    <center>
       <VBox fx:id="contentArea" prefHeight="671.0" prefWidth="995.0">
          <BorderPane.margin>
-            <Insets bottom="80.0" right="10.0" top="10.0" />
+            <Insets bottom="60.0" right="10.0" top="10.0" />
          </BorderPane.margin></VBox>
    </center>
 </BorderPane>

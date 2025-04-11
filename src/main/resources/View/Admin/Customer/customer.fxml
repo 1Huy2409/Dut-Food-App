@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="576.0" prefWidth="755.0" spacing="20.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Customer.customerController">
+<VBox prefHeight="576.0" prefWidth="755.0" spacing="20.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Customer.customerController" VBox.vgrow = "ALWAYS">
     <BorderPane.margin>
         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
     </BorderPane.margin>
@@ -53,7 +53,7 @@
             <TextField fx:id="search" layoutX="591.0" layoutY="20.0" promptText="Search" styleClass="functional-buttons" />
          </children>
       </HBox>
-        <TableView fx:id="customerTable" prefHeight="400.0" prefWidth="259.0" style="-fx-background-color: white;">
+        <TableView fx:id="customerTable" prefHeight="400.0" prefWidth="259.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="selectColumn" prefWidth="77.59994351863861" text="Select" />
                 <TableColumn fx:id="name" prefWidth="186.39997100830078" text="Name" />

@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 import java.net.URL;
@@ -66,9 +68,8 @@ public class dashboardController implements Initializable {
         for (FoodItem item: foodItems)
         {
             VBox itemBox = new VBox();
-            itemBox.setPrefWidth(399);
+            itemBox.setPrefWidth(300);
             itemBox.setPrefHeight(210);
-            itemBox.setAlignment(Pos.CENTER);
             ImageView imageView = new ImageView();
             String imageUrl = item.getImageUrl();
             System.out.println("Loading image: " + imageUrl);
@@ -86,7 +87,11 @@ public class dashboardController implements Initializable {
                 System.err.println("Error file path for: " + item.getFoodName());
             }
             imageView.setFitHeight(140);
-            imageView.setFitWidth(250);
+            imageView.setFitWidth(200);
+            Rectangle clip = new Rectangle();
+            clip.setArcWidth(20);
+            clip.setArcHeight(20);
+            imageView.setClip(clip);
             Label nameLabel = new Label(item.getFoodName());
             itemBox.getChildren().addAll(imageView, nameLabel);
             bestSellerBox.getChildren().add(itemBox);

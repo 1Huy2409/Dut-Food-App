@@ -3,6 +3,7 @@ package Controller.Admin.Category;
 import DAO.Dao_Category;
 import Helper.RouteScreen;
 import Model.Category;
+import Model.FoodItem;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import Helper.AlertMessage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.shape.Rectangle;
@@ -40,6 +42,8 @@ public class categoryController {
     private TableColumn<Category, String> created_timeColumn;
     @FXML
     private TableColumn<Category, Boolean> selectColumn;
+    @FXML
+    private TableColumn<Category, String> statusColumn;
     @FXML
     private TableColumn<Category, Void> actionColumn;
     @FXML
@@ -71,6 +75,7 @@ public class categoryController {
         categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
+        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.1));
         for (Category item: listCategory)
         {
             System.out.println(item.getCategoryName());
@@ -87,7 +92,28 @@ public class categoryController {
             String formattedDate = timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             return new SimpleStringProperty(formattedDate);
         });
+        statusColumn.setCellValueFactory(cellData -> {
+            boolean status = cellData.getValue().getStatus();
+            return new SimpleStringProperty(status ? "Active" : "Inactive");
+        });
+        statusColumn.setCellFactory(column -> new TableCell<Category, String>() {
+            @Override
+            protected void updateItem(String statusText, boolean empty) {
+                super.updateItem(statusText, empty);
 
+                if (empty || statusText == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(statusText);
+                    if (statusText.equals("Active")) {
+                        setTextFill(Color.GREEN);
+                    } else {
+                        setTextFill(Color.GRAY);
+                    }
+                }
+            }
+        });
         actionColumn.setCellFactory(param -> new TableCell<Category, Void>() {
             private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
             private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));

@@ -18,6 +18,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -58,6 +59,8 @@ public class productController {
     private TableColumn<FoodItem, String> categoryColumn;
     @FXML
     private TableColumn<FoodItem, String> imageColumn;
+    @FXML
+    private TableColumn<FoodItem, String> statusColumn;
     protected static FoodItem foodItemSelected = null;
 //    protected static FoodItem multifoodItemSelected = null;
     private ObservableList<FoodItem> productList;
@@ -87,6 +90,29 @@ public class productController {
         imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
+        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        statusColumn.setCellValueFactory(cellData -> {
+            boolean status = cellData.getValue().isStatus();
+            return new SimpleStringProperty(status ? "Active" : "Inactive");
+        });
+        statusColumn.setCellFactory(column -> new TableCell<FoodItem, String>() {
+            @Override
+            protected void updateItem(String statusText, boolean empty) {
+                super.updateItem(statusText, empty);
+
+                if (empty || statusText == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(statusText);
+                    if (statusText.equals("Active")) {
+                        setTextFill(Color.GREEN);
+                    } else {
+                        setTextFill(Color.GRAY);
+                    }
+                }
+            }
+        });
         List<FoodItem> listFoodItems = new ArrayList<>();
         listFoodItems = Dao_Food.getInstance().getAll();
         productList = FXCollections.observableArrayList(

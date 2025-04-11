@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Priority?>
 
-<VBox prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Category.categoryController" VBox.vgrow = "ALWAYS">
+<VBox prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Category.categoryController">
     <BorderPane.margin>
         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
     </BorderPane.margin>
@@ -18,22 +17,22 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="selectAll" mnemonicParsing="false" text="Select All" styleClass="functional-buttons"/>
+                        <Button fx:id="selectAll" mnemonicParsing="false" styleClass="functional-buttons" text="Select All" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" onAction="#BtnAddOnAction" text="Add" styleClass="functional-buttons" />
+                        <Button fx:id="add" mnemonicParsing="false" onAction="#BtnAddOnAction" styleClass="functional-buttons" text="Add" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="reloadBtn" mnemonicParsing="false" onAction="#ReloadOnAction" text="Reload" styleClass="functional-buttons" />
+                        <Button fx:id="reloadBtn" mnemonicParsing="false" onAction="#ReloadOnAction" styleClass="functional-buttons" text="Reload" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="multipleBtn" mnemonicParsing="false" onAction="#handleMultipleDelete" text="Multiple Delete" styleClass="functional-buttons" />
+                        <Button fx:id="multipleBtn" mnemonicParsing="false" onAction="#handleMultipleDelete" styleClass="functional-buttons" text="Multiple Delete" />
                     </children>
                 </HBox>
             </children>
@@ -44,6 +43,7 @@
                 <TableColumn fx:id="idColumn" prefWidth="234.0" text="ID" />
                 <TableColumn fx:id="categoryNameColumn" prefWidth="187.0" text="Category Name" />
                 <TableColumn fx:id="created_timeColumn" prefWidth="187.0" text="Created time" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
                 <TableColumn fx:id="actionColumn" prefWidth="130.0" text="Action" />
             </columns>
         </TableView>

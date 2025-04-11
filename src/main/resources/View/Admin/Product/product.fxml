@@ -46,6 +46,7 @@
                 <TableColumn fx:id="categoryColumn" minWidth="20.0" prefWidth="130.0" text="Category" />
                 <TableColumn fx:id="imageColumn" minWidth="80.0" text="Image" />
                 <TableColumn fx:id="created_timeColumn" prefWidth="200.0" text="Created At" />
+            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
                 <TableColumn fx:id="actionColumn" prefWidth="149.0" text="Action" />
             </columns>
          <VBox.margin>

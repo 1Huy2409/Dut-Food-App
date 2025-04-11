@@ -1,8 +1,10 @@
 package Controller.Admin.Category;
 
 import DAO.Dao_Category;
+import DAO.Dao_Food;
 import Helper.RouteScreen;
 import Model.Category;
+import Model.FoodItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +12,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class editCategoryController{
     @FXML
@@ -70,6 +75,15 @@ public class editCategoryController{
         }
         else
         {
+            List<FoodItem> listFoodItem = new ArrayList<>();
+            listFoodItem = Dao_Food.getInstance().getAll();
+            for (FoodItem foodItem : listFoodItem)
+            {
+                if (foodItem.getCategoryId() == item.getId())
+                {
+                    Dao_Food.getInstance().delete(foodItem);
+                }
+            }
             item.setStatus(false);
         }
         Dao_Category.getInstance().update(item);

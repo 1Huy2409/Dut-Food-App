@@ -81,15 +81,15 @@ public class productController {
     }
     public void reload() {
         loadCategories();
-        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
         nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
+        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.3));
         statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();

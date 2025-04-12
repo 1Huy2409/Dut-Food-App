@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -24,7 +25,8 @@ import java.util.List;
 public class editProductController {
     @FXML
     private Button btnCancel;
-
+    @FXML
+    private CheckBox active;
     @FXML
     private Button btnIm;
 
@@ -47,6 +49,7 @@ public class editProductController {
     private TextField txtPrice;
     @FXML
     private TextField stock;
+    String imgURL = "";
     private ObservableList<Category> categoryList;
 //    public static editCategoryController getInstance()
 //    {
@@ -63,6 +66,13 @@ public class editProductController {
         txtPrice.setText(Double.toString(item.getPrice()));
         txtDes.setText(item.getDescription());
         stock.setText(Integer.toString(item.getStock()));
+        if(item.isStatus()){
+            active.setSelected(true);
+        }
+        else{
+            active.setSelected(false);
+        }
+        imgURL = item.getImageUrl();
         File file = new File("src/main/resources/" + item.getImageUrl());
         Image image = new Image(file.toURI().toString());
         img.setImage(image);
@@ -103,13 +113,10 @@ public class editProductController {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Hình ảnh", "*.png", "*.jpg", "*.jpeg")
         );
-
         File selectedFile = fileChooser.showOpenDialog(null);
-
         if (selectedFile != null) {
             Image newImage = new Image(selectedFile.toURI().toString());
             img.setImage(newImage);
-
             productController.foodItemSelected.setImageUrl(selectedFile.getAbsolutePath());
             System.out.println("Ảnh mới: " + selectedFile.getAbsolutePath());
         }
@@ -123,11 +130,12 @@ public class editProductController {
         item.setDescription(txtDes.getText());
         item.setStock(Integer.parseInt(stock.getText()));
         item.setCategoryId(cbCategory.getValue().getId());
-        if(productController.foodItemSelected.getImageUrl().length()  < 43){
+        item.setStatus(active.isSelected());
+        if(productController.foodItemSelected.getImageUrl().equals(imgURL)){
             item.setImageUrl(productController.foodItemSelected.getImageUrl());
         }
         else {
-            item.setImageUrl(productController.foodItemSelected.getImageUrl().substring(43, productController.foodItemSelected.getImageUrl().length()).replace("\\", "/"));
+            item.setImageUrl(productController.foodItemSelected.getImageUrl().substring(productController.foodItemSelected.getImageUrl().indexOf("Picture"), productController.foodItemSelected.getImageUrl().length()).replace("\\", "/"));
         }
         Dao_Food.getInstance().update(item);
         currentStage.close();

@@ -146,13 +146,10 @@ public class customerController {
                      boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this usert?");
                     if (confirm) {
                         Dao_User.getInstance().delete(customerController.userSelected);
-                        AlertMessage.showAlertSuccessMessage("Deleted successfully");
                        reload();
                     }
                 });
             }
-
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -216,10 +213,8 @@ public class customerController {
                 if (checkboxStates.get(i).get()) {
                      selectedItems.add(userList.get(i));
                 }
-
             }
             if(selectedItems.size()== 0){
-
             }
             else {
                 for (User items : selectedItems) {

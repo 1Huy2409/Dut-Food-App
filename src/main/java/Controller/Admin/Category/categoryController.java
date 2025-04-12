@@ -1,6 +1,7 @@
 package Controller.Admin.Category;
 
 import DAO.Dao_Category;
+import DAO.Dao_Food;
 import Helper.RouteScreen;
 import Model.Category;
 import Model.FoodItem;
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import Helper.AlertMessage;
 import javafx.scene.paint.Color;
@@ -186,12 +188,36 @@ public class categoryController {
             Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
             stage.setOnHidden(e -> reload());
         });
+        reloadBtn.setOnAction(event -> {
+            reload();
+        });
+        multipleBtn.setOnAction(actionEvent -> {
+            List<Category> selectedItems = new ArrayList<Category>();
+            for (int i = 0; i < catagoryList.size(); i++) {
+                if (checkboxStates.get(i).get()) {
+                    selectedItems.add(catagoryList.get(i));
+                }
+            }
+            boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
+            if(confirm){
+                for (Category items : selectedItems) {
+                    Dao_Category.getInstance().delete(items);
+                }
+                for (BooleanProperty state : checkboxStates) {
+                    state.set(false);
+                }
+                AlertMessage.showAlertSuccessMessage("Deleted successfully");
+                reload();
+            }
+
+        });
     }
 
     @FXML private void handleSelectAll() {
         checkboxStates.forEach(state -> state.set(true)); // Chọn tất cả
         categoryTable.refresh();
     }
+
     public void ReloadOnAction(ActionEvent e)
     {
         reload();
@@ -202,16 +228,16 @@ public class categoryController {
         Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
         stage.setOnHidden(e -> reload());
     }
-    public void handleMultipleDelete(ActionEvent event)
-    {
-        for (int i = 0; i < catagoryList.size(); i++)
-        {
-            if (checkboxStates.get(i).get())
-            {
-                Category category = catagoryList.get(i);
-                Dao_Category.getInstance().delete(category);
-            }
-        }
-        reload();
-    }
+//    public void handleMultipleDelete(ActionEvent event)
+//    {
+//        for (int i = 0; i < catagoryList.size(); i++)
+//        {
+//            if (checkboxStates.get(i).get())
+//            {
+//                Category category = catagoryList.get(i);
+//                Dao_Category.getInstance().delete(category);
+//            }
+//        }
+//        reload();
+//    }
 }

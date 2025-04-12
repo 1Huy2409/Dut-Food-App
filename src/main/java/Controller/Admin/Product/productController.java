@@ -59,6 +59,7 @@ public class productController {
     private TableColumn<FoodItem, String> categoryColumn;
     @FXML
     private TableColumn<FoodItem, String> imageColumn;
+
     @FXML
     private TableColumn<FoodItem, String> statusColumn;
     protected static FoodItem foodItemSelected = null;
@@ -242,18 +243,22 @@ public class productController {
         });
         demul.setOnAction(event -> {
             List<FoodItem> selectedItems = new ArrayList<FoodItem>();
-            for (int i = 0; i < productList.size(); i++) {
-                if (checkboxStates.get(i).get()) {
-                    selectedItems.add(productList.get(i));
+
+                for (int i = 0; i < productList.size(); i++) {
+                    if (checkboxStates.get(i).get()) {
+                        selectedItems.add(productList.get(i));
+                    }
+                }
+            boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
+            if(confirm) {
+                for (FoodItem items : selectedItems) {
+                    Dao_Food.getInstance().delete(items);
+                }
+                for (BooleanProperty state : checkboxStates) {
+                    state.set(false);
+                    reload();
                 }
             }
-            for (FoodItem items : selectedItems) {
-                Dao_Food.getInstance().delete(items);
-            }
-            for (BooleanProperty state : checkboxStates) {
-                state.set(false); // Hủy chọn tất cả
-            }
-
         });
         reload.setOnAction(event -> {
             reload();

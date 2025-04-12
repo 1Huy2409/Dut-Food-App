@@ -111,7 +111,7 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         try {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
-                    "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ? where id = ?";
+                    "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ?, status = ? where id = ?";
             // where condition ?
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, foodItem.getFoodName());
@@ -120,7 +120,8 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
             pstmt.setInt(4, foodItem.getCategoryId());
             pstmt.setString (5, foodItem.getImageUrl());
             pstmt.setInt(6, foodItem.getStock());
-            pstmt.setInt(7, foodItem.getId());
+            pstmt.setBoolean(7, foodItem.isStatus());
+            pstmt.setInt(8, foodItem.getId());
             res = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + res);

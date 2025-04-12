@@ -32,7 +32,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="multipleBtn" mnemonicParsing="false" onAction="#handleMultipleDelete" styleClass="functional-buttons" text="Multiple Delete" />
+                        <Button fx:id="multipleBtn" mnemonicParsing="false" styleClass="functional-buttons" text="Multiple Delete" />
                     </children>
                 </HBox>
             </children>

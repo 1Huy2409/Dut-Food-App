@@ -1,5 +1,6 @@
 package Controller.Admin.Category;
 
+import Controller.Admin.Product.productController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.RouteScreen;
@@ -72,12 +73,12 @@ public class categoryController {
         List<Category> listCategory = Dao_Category.getInstance().getAll();
         categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
 
-        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
-        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
+        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.05));
+        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
         categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
-        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.1));
+        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
         for (Category item: listCategory)
         {
             System.out.println(item.getCategoryName());
@@ -143,9 +144,22 @@ public class categoryController {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    Dao_Category.getInstance().delete(category);
-                    reload();
-                    AlertMessage.showAlertSuccessMessage("You have deleted this category!");
+                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
+                    if (confirm) {
+                        Dao_Category.getInstance().delete(category);
+                        // update status của product thuộc category này về inactive
+                        List<FoodItem> listFoodItem = new ArrayList<>();
+                        listFoodItem = Dao_Food.getInstance().getAll();
+                        for (FoodItem item : listFoodItem)
+                        {
+                            if (item.getCategoryId() == category.getId())
+                            {
+                                Dao_Food.getInstance().delete(item);
+                            }
+                        }
+                        AlertMessage.showAlertSuccessMessage("You have deleted this category!");
+                        reload();
+                    }
                 });
             }
             @Override

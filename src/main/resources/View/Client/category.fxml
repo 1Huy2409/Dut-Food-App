@@ -20,7 +20,7 @@
                     <children>
                         <TilePane fx:id="categoryButtonBox" hgap="10.0" prefColumns="2" vgap="10.0">
                             <children>
-                                <Button text="Tất cả" />
+                                <Button fx:id="btnAll" onMouseClicked="#btnAllOnAction" text="Tất cả" />
                             </children>
                         </TilePane>
 

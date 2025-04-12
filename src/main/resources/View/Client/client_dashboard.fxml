@@ -14,13 +14,13 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="61.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="DUT FOOD">
+            <Label alignment="CENTER" prefHeight="61.0" prefWidth="168.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="DUT FOOD" onMouseClicked="#DUTFOODOnAction">
                <font>
                   <Font name="Berlin Sans FB" size="26.0" />
                </font>
             </Label>
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="987.0" styleClass="line-color-client" stylesheets="@../../CSS/styles.css" />
-            <ImageView fitHeight="34.0" fitWidth="31.0" onMouseClicked="#CartOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="34.0" fitWidth="31.0"  pickOnBounds="true" preserveRatio="true" onMouseClicked="#CartOnAction">
                <image>
                   <Image url="@../../Pictures/icons8-cart-50.png" />
                </image>

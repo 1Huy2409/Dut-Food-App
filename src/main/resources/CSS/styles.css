@@ -58,3 +58,35 @@
 .line-color-client{
     -fx-background-color: #000000;
 }
+.checkout-container{
+    -fx-background-color: #4B3B9D;
+    -fx-background-radius: 20;
+    -fx-border-color: #4B3B9D;
+    -fx-border-radius: 20;
+}
+.checkout-textfield{
+    -fx-background-radius:12;
+    -fx-background-color: #8469C6;
+}
+.checkout-button{
+    -fx-background-color: #3CE8C3;
+    -fx-background-radius: 16;
+    -fx-border-color: #3CE8C3;
+    -fx-border-radius: 16;
+}
+.checkout-line-color {
+    -fx-background-color: #8469C6;
+    -fx-border-color: #8469C6;
+    -fx-border-width: 1;
+}
+.list-product-line-color {
+    -fx-background-color: #a0a0a0;
+    -fx-border-color: #a0a0a0;
+    -fx-border-width: 1;
+}
+.list-product-container{
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-color: white;
+    -fx-border-radius: 20;
+}

@@ -18,6 +18,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -58,6 +59,8 @@ public class productController {
     private TableColumn<FoodItem, String> categoryColumn;
     @FXML
     private TableColumn<FoodItem, String> imageColumn;
+    @FXML
+    private TableColumn<FoodItem, String> statusColumn;
     protected static FoodItem foodItemSelected = null;
 //    protected static FoodItem multifoodItemSelected = null;
     private ObservableList<FoodItem> productList;
@@ -78,15 +81,38 @@ public class productController {
     }
     public void reload() {
         loadCategories();
-        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
         nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
+        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.3));
+        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        statusColumn.setCellValueFactory(cellData -> {
+            boolean status = cellData.getValue().isStatus();
+            return new SimpleStringProperty(status ? "Active" : "Inactive");
+        });
+        statusColumn.setCellFactory(column -> new TableCell<FoodItem, String>() {
+            @Override
+            protected void updateItem(String statusText, boolean empty) {
+                super.updateItem(statusText, empty);
+
+                if (empty || statusText == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(statusText);
+                    if (statusText.equals("Active")) {
+                        setTextFill(Color.GREEN);
+                    } else {
+                        setTextFill(Color.GRAY);
+                    }
+                }
+            }
+        });
         List<FoodItem> listFoodItems = new ArrayList<>();
         listFoodItems = Dao_Food.getInstance().getAll();
         productList = FXCollections.observableArrayList(
@@ -140,10 +166,20 @@ public class productController {
             return new SimpleStringProperty(formattedDate);
         });
         actionColumn.setCellFactory(param -> new TableCell<FoodItem, Void>() {
+            private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
+            private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
-
+            private final HBox buttons = new HBox(10, editButton, deleteButton);
             {
+                editIcon.setFitWidth(20);
+                editIcon.setFitHeight(20);
+                deleteIcon.setFitWidth(20);
+                deleteIcon.setFitHeight(20);
+
+                // Gán icon vào button
+                editButton.setGraphic(editIcon);
+                deleteButton.setGraphic(deleteIcon);
                 deleteButton.getStyleClass().add("delete-button");
                 editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {

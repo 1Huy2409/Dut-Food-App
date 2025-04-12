@@ -1,8 +1,11 @@
 package Controller.Admin.Category;
 
+import Controller.Admin.Product.productController;
 import DAO.Dao_Category;
+import DAO.Dao_Food;
 import Helper.RouteScreen;
 import Model.Category;
+import Model.FoodItem;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,12 +13,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import Helper.AlertMessage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javafx.geometry.Insets;
@@ -39,6 +46,8 @@ public class categoryController {
     private TableColumn<Category, String> created_timeColumn;
     @FXML
     private TableColumn<Category, Boolean> selectColumn;
+    @FXML
+    private TableColumn<Category, String> statusColumn;
     @FXML
     private TableColumn<Category, Void> actionColumn;
     @FXML
@@ -65,11 +74,12 @@ public class categoryController {
         List<Category> listCategory = Dao_Category.getInstance().getAll();
         categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
 
-        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
-        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
+        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.05));
+        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
         categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
         actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
+        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
         for (Category item: listCategory)
         {
             System.out.println(item.getCategoryName());
@@ -86,12 +96,44 @@ public class categoryController {
             String formattedDate = timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             return new SimpleStringProperty(formattedDate);
         });
+        statusColumn.setCellValueFactory(cellData -> {
+            boolean status = cellData.getValue().getStatus();
+            return new SimpleStringProperty(status ? "Active" : "Inactive");
+        });
+        statusColumn.setCellFactory(column -> new TableCell<Category, String>() {
+            @Override
+            protected void updateItem(String statusText, boolean empty) {
+                super.updateItem(statusText, empty);
 
+                if (empty || statusText == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(statusText);
+                    if (statusText.equals("Active")) {
+                        setTextFill(Color.GREEN);
+                    } else {
+                        setTextFill(Color.GRAY);
+                    }
+                }
+            }
+        });
         actionColumn.setCellFactory(param -> new TableCell<Category, Void>() {
+            private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
+            private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
+            private final HBox buttons = new HBox(10, editButton, deleteButton);
 
             {
+                editIcon.setFitWidth(20);
+                editIcon.setFitHeight(20);
+                deleteIcon.setFitWidth(20);
+                deleteIcon.setFitHeight(20);
+
+                // Gán icon vào button
+                editButton.setGraphic(editIcon);
+                deleteButton.setGraphic(deleteIcon);
                 editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {
                     categorySelected = getTableView().getItems().get(getIndex());
@@ -103,9 +145,22 @@ public class categoryController {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    Dao_Category.getInstance().delete(category);
-                    reload();
-                    AlertMessage.showAlertSuccessMessage("You have deleted this category!");
+                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
+                    if (confirm) {
+                        Dao_Category.getInstance().delete(category);
+                        // update status của product thuộc category này về inactive
+                        List<FoodItem> listFoodItem = new ArrayList<>();
+                        listFoodItem = Dao_Food.getInstance().getAll();
+                        for (FoodItem item : listFoodItem)
+                        {
+                            if (item.getCategoryId() == category.getId())
+                            {
+                                Dao_Food.getInstance().delete(item);
+                            }
+                        }
+                        AlertMessage.showAlertSuccessMessage("You have deleted this category!");
+                        reload();
+                    }
                 });
             }
             @Override

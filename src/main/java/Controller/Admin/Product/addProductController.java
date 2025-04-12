@@ -81,7 +81,8 @@ public class addProductController {
             Image newImage = new Image(selectedFile.toURI().toString());
             img.setImage(newImage);
             img.setPreserveRatio(false);
-            item.setImageUrl(selectedFile.getAbsolutePath().substring(43,selectedFile.getAbsolutePath().toString().length()).replace("\\","/"));
+
+            item.setImageUrl(selectedFile.getAbsolutePath().substring(selectedFile.getAbsolutePath().indexOf("Picture"),selectedFile.getAbsolutePath().toString().length()).replace("\\","/"));
             System.out.println("Ảnh mới: " + selectedFile.getAbsolutePath());
         }
     }
@@ -98,6 +99,7 @@ public class addProductController {
         else {
             AlertMessage.showAlertErrorMessage("Please fill in complete information");
         }
+        System.out.println();
     }
     public void btncancel(){
         Stage currentStage = (Stage) btnCancel.getScene().getWindow();

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -30,8 +31,11 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <RadioButton fx:id="cateTrue" layoutX="184.0" layoutY="329.0" mnemonicParsing="false" text="True" textFill="WHITE" />
-      <RadioButton fx:id="cateFalse" layoutX="395.0" layoutY="329.0" mnemonicParsing="false" text="False" textFill="WHITE" />
+      <RadioButton fx:id="cateTrue" layoutX="184.0" layoutY="329.0" mnemonicParsing="false" text="True" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="group1" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="cateFalse" layoutX="395.0" layoutY="329.0" mnemonicParsing="false" text="False" textFill="WHITE" toggleGroup="$group1" />
       <Label alignment="CENTER" layoutX="36.0" layoutY="320.0" prefHeight="36.0" prefWidth="96.0" text="Status" textFill="WHITE">
          <font>
             <Font size="14.0" />

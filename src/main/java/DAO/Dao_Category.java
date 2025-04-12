@@ -78,7 +78,7 @@ public class Dao_Category implements Dao_Interface<Category> {
 
     @Override
     public int delete(Category category) {
-        String query = "delete from categories where id = ?";
+        String query = "update categories set status = false where id = ?";
         try {
             Connection con = JDBC.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query);

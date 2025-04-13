@@ -90,3 +90,59 @@
     -fx-border-color: white;
     -fx-border-radius: 20;
 }
+.cart-button{
+    -fx-background-color: #FB5C7A;
+    -fx-background-radius: 6;
+    -fx-border-color: #FB5C7A;
+    -fx-border-radius: 6;
+}
+.pretty-checkbox {
+    -fx-padding: 0;
+}
+
+.pretty-checkbox .box {
+    -fx-background-color: white;
+    -fx-border-color: #FB5C7A;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(251, 92, 122, 0.2), 4, 0.3, 0, 0);
+}
+
+/* Chấm tròn nhỏ bên trong khi được chọn */
+.pretty-checkbox:selected .mark {
+    -fx-shape: "M0,0 A3,3 0 1,1 0.1,0 Z";
+    -fx-background-color: #FB5C7A;
+    -fx-background-radius: 50%;
+    -fx-min-width: 10px;
+    -fx-min-height: 10px;
+    -fx-max-width: 10px;
+    -fx-max-height: 10px;
+}
+
+/* Ẩn mark khi chưa chọn */
+.pretty-checkbox .mark {
+    -fx-background-color: transparent;
+    -fx-min-width: 10px;
+    -fx-min-height: 10px;
+    -fx-max-width: 10px;
+    -fx-max-height: 10px;
+}
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+
+
+
+
+

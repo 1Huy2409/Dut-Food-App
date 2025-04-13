@@ -35,7 +35,7 @@ public class loginController
         User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
-            UserSession.getInstance().setUser(currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
+            UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
             if (UserSession.getInstance().getRoleId() == 1)
             {
                 // go to admin_dashboard

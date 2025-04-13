@@ -18,8 +18,9 @@ public class UserSession {
         }
         return instance;
     }
-    public void setUser(String phone, String fullName, String email, String userName, boolean status, int roleId)
+    public void setUser(int id, String phone, String fullName, String email, String userName, boolean status, int roleId)
     {
+        this.id = id;
         this.phone = phone;
         this.fullName = fullName;
         this.email = email;
@@ -27,6 +28,7 @@ public class UserSession {
         this.status = status;
         this.roleId = roleId;
     }
+    public int getId(){return this.id;}
     public String getPhone()
     {
         return this.phone;

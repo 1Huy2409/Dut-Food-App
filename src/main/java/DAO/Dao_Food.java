@@ -57,6 +57,9 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
                 case "active": // client method
                     query += "where status = true";
                     break;
+//                case "foodOfCategory":
+//                    query += ;
+//                    break;
                 default:
                     break;
             }
@@ -179,4 +182,34 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return item;
     }
+    public List<FoodItem> selectByCategory(int categoryId) {
+        List<FoodItem> foodItems = new ArrayList<>();
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "SELECT * FROM fooditems WHERE category_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, categoryId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                FoodItem item = new FoodItem();
+                item.setId(rs.getInt("id"));
+                item.setFoodName(rs.getString("food_name"));
+                item.setDescription(rs.getString("description"));
+                item.setPrice(rs.getDouble("price"));
+                item.setCategoryId(rs.getInt("category_id"));
+                item.setImageUrl(rs.getString("image_url"));
+                item.setStatus(rs.getBoolean("status"));
+                item.setCreatedAt(rs.getTimestamp("created_at"));
+                item.setStock(rs.getInt("stock"));
+                item.setSold(rs.getInt("sold"));
+
+                foodItems.add(item);
+            }
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return foodItems;
+    }
+
 }

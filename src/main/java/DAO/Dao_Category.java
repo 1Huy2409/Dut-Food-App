@@ -2,6 +2,7 @@ package DAO;
 
 import Database.JDBC;
 import Model.Category;
+import Model.FoodItem;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -116,6 +117,35 @@ public class Dao_Category implements Dao_Interface<Category> {
 
     @Override
     public List<Category> selectByCondition(String condition) {
-        return List.of();
+        List<Category> categoryItems = new ArrayList<>();
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "select * from categories ";
+            switch (condition)
+            {
+                case "categoriesBtn":
+//                    query += "order by sold desc limit 2";
+                    break;
+                default:
+                    break;
+            }
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String categoryName = rs.getString("category_name");
+                String desc = rs.getString("description");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                boolean status = rs.getBoolean("status");
+                Category item = new Category(id, categoryName, desc, createdAt, status);
+                categoryItems.add(item);
+            }
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return categoryItems;
+
     }
 }

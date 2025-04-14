@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
@@ -19,6 +20,8 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Helper.HandleCartBuy;
 
 public class detailProductController implements Initializable {
     @FXML
@@ -61,12 +64,17 @@ public class detailProductController implements Initializable {
 //        renderDetail(this.item);
     }
 
-    private void handleAddCart(FoodItem item) {
-        System.out.println("Thêm vào giỏ: " + item.getFoodName());
-    }
-
-    private void handleBuyNow(FoodItem item) {
-        System.out.println("Mua ngay: " + item.getFoodName());
+    private void loadUI(String fxml)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
+            VBox.setVgrow(root, Priority.ALWAYS);
+            this.contentArea.getChildren().clear();
+            this.contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void setContentArea(VBox contentArea) {
         this.contentArea = contentArea;
@@ -137,5 +145,16 @@ public class detailProductController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void handleAddCart(FoodItem item) {
+        System.out.println("Thêm vào giỏ: " + item.getFoodName());
+        HandleCartBuy.getInstance().handleAddToCart(item, Integer.parseInt(textNum.getText()));
+    }
+
+    private void handleBuyNow(FoodItem item) {
+
+        System.out.println("Mua ngay: " + item.getFoodName());
+        // loadUI ra cart
+        loadUI("/View/Client/cart.fxml");
     }
 }

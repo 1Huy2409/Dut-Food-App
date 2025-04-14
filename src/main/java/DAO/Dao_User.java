@@ -180,7 +180,7 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return null;
     }
-    public void checkRegister(String fullName, String email, String userName, String password, String phone)
+    public User checkRegister(String fullName, String email, String userName, String password, String phone)
     {
         try {
             Connection connection = JDBC.getConnection();
@@ -208,8 +208,10 @@ public class Dao_User implements Dao_Interface<User> {
 
                     String successMessage = "New account is created!!! Please click Login Button to Login into App";
                     AlertMessage.showAlertSuccessMessage(successMessage);
+                    return newUser;
                 }
             }
+            return null;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

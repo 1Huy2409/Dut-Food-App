@@ -1,5 +1,7 @@
 package Controller.Shared.Auth;
+import DAO.Dao_Cart;
 import DAO.Dao_User;
+import Model.Cart;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,9 @@ public class loginController
         User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
-            UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId());
+            // user khác null thì gán cart_id vào user session
+            Cart currentCart = Dao_Cart.getInstance().selectedByUserId(currentUser.getId());
+            UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId(), currentCart.getId());
             if (UserSession.getInstance().getRoleId() == 1)
             {
                 // go to admin_dashboard

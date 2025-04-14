@@ -9,17 +9,21 @@ public class UserSession {
     private String userName;
     private boolean status;
     private int roleId;
-    private UserSession() {};
-    public static UserSession getInstance()
-    {
-        if (instance == null)
-        {
+    private int cartId;
+
+    private UserSession() {
+    }
+
+    ;
+
+    public static UserSession getInstance() {
+        if (instance == null) {
             instance = new UserSession();
         }
         return instance;
     }
-    public void setUser(int id, String phone, String fullName, String email, String userName, boolean status, int roleId)
-    {
+
+    public void setUser(int id, String phone, String fullName, String email, String userName, boolean status, int roleId, int cartId) {
         this.id = id;
         this.phone = phone;
         this.fullName = fullName;
@@ -27,34 +31,42 @@ public class UserSession {
         this.userName = userName;
         this.status = status;
         this.roleId = roleId;
+        this.cartId = cartId;
     }
-    public int getId(){return this.id;}
-    public String getPhone()
-    {
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getPhone() {
         return this.phone;
     }
-    public boolean getStatus()
-    {
+
+    public boolean getStatus() {
         return this.status;
     }
-    public String getFullName()
-    {
+
+    public String getFullName() {
         return this.fullName;
     }
-    public String getEmail()
-    {
+
+    public String getEmail() {
         return this.email;
     }
-    public String getUserName()
-    {
+
+    public String getUserName() {
         return this.userName;
     }
-    public int getRoleId()
-    {
+
+    public int getRoleId() {
         return this.roleId;
     }
-    public void clearSession()
-    {
+
+    public int getCartId() {
+        return this.cartId;
+    }
+
+    public void clearSession() {
         instance = null;
     }
 }

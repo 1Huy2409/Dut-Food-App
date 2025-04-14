@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="574.0" prefWidth="835.0" spacing="10.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.detailProductController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="835.0">
+         <children>
+            <Button fx:id="btnBackDetail" mnemonicParsing="false" onAction="#backDetailOnAction" text="Back">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox prefHeight="250.0" prefWidth="835.0" spacing="50.0">
+         <children>
+            <ImageView fx:id="foodImage" fitHeight="189.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="50.0" top="50.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox fx:id="foodInfo" alignment="CENTER" prefHeight="250.0" prefWidth="517.0">
+               <children>
+                  <Label fx:id="lbName" alignment="CENTER" prefHeight="29.0" prefWidth="70.0" />
+                  <Label fx:id="lbPrice" alignment="CENTER" prefHeight="35.0" prefWidth="70.0" />
+                  <HBox alignment="CENTER" prefHeight="66.0" prefWidth="495.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="51.0" text="Số lượng">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="btnAdd" mnemonicParsing="false" text="+" />
+                        <TextField fx:id="textNum" prefHeight="25.0" prefWidth="34.0">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnSub" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" text="-" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="137.0" prefHeight="66.0" prefWidth="495.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnAddCart" mnemonicParsing="false" text="Thêm vào giỏ hàng" />
+                        <Button fx:id="btnBuyNow" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Mua ngay" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="255.0" prefWidth="835.0">
+         <children>
+            <TextArea fx:id="foodDesc" prefHeight="223.0" prefWidth="735.0">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+   </children>
+</VBox>

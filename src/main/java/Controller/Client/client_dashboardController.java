@@ -1,17 +1,14 @@
-package Controller.Client.Account;
+package Controller.Client;
 
-import DAO.Dao_Role;
-import Helper.UserSession;
+import Controller.Client.Product.categoryController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.Priority;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,12 +29,28 @@ public class client_dashboardController implements Initializable {
 
     private void loadUI(String fxml) {
         try {
-            contentArea.getChildren().clear();
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
+
+            switch (fxml)
+            {
+                case "/View/Client/category.fxml":
+                    categoryController controller = loader.getController();
+                    controller.setContentArea(contentArea);
+                    break;
+//                case "/View/Client/category.fxml":
+//                    categoryController controller = loader.getController();
+//                    controller.setContentArea(contentArea);
+//                case "/View/Client/category.fxml":
+//                    categoryController controller = loader.getController();
+//                    controller.setContentArea(contentArea);
+            }
+//            detailProductController controller = loader.getController();
+//            controller.setContentArea(contentArea);
 
             // 🔑 Cho phép root giãn chiều cao trong VBox
             VBox.setVgrow(root, Priority.ALWAYS);
-
+            contentArea.getChildren().clear();
             contentArea.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,12 +66,12 @@ public class client_dashboardController implements Initializable {
 
     public void ProfileOnAction(MouseEvent e)
     {
-        loadUI("/View/Client/profile.fxml");
+//        loadUI("/View/Client/profile.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
     public void CartOnAction(MouseEvent e)
     {
-        loadUI("/View/Client/cart.fxml");
+//        loadUI("/View/Client/cart.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
 }

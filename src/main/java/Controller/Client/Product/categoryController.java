@@ -1,14 +1,19 @@
-package Controller.Client.Account;
+package Controller.Client.Product;
 
 
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Model.Category;
 import Model.FoodItem;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
@@ -18,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.geometry.Pos;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,11 +48,35 @@ public class categoryController implements Initializable {
     private VBox VBoxProduct;
     @FXML
     private VBox productItemBox;
+    @FXML
+    private ScrollPane productCover;
 
+    private VBox contentArea;
     public void initialize(URL location, ResourceBundle resources)
     {
         renderBtnCategory();
         renderProduct();
+    }
+    public void setContentArea(VBox contentArea)
+    {
+        this.contentArea = contentArea;
+    }
+    private void loadUI(String fxml, FoodItem selectedItem)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
+
+            // getController
+            detailProductController controller = loader.getController();
+            controller.setFoodItem(selectedItem);
+            controller.setContentArea(contentArea);
+            VBox.setVgrow(root, Priority.ALWAYS);
+            this.contentArea.getChildren().clear();
+            this.contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void renderBtnCategory()
     {
@@ -129,6 +159,12 @@ public class categoryController implements Initializable {
 
                 productItemBox.getChildren().addAll(imageview, nameLabel, priceLabel, addToCart, buyNow);
 
+                // bắt sự kiện click ở label của productItemBox
+                nameLabel.setOnMouseClicked(event ->
+                {
+                    loadUI("/View/Client/detailProduct.fxml", foodItemOfCategory);
+                });
+
                 // Bọc trong TilePane hoặc VBox nếu cần layout grid
                 productBox.getChildren().add(productItemBox);
             }
@@ -198,6 +234,10 @@ public class categoryController implements Initializable {
             });
 
             productItemBox.getChildren().addAll(imageview, nameLabel, priceLabel, addToCart, buyNow);
+            nameLabel.setOnMouseClicked(event ->
+            {
+                loadUI("/View/Client/detailProduct.fxml", foodItemOfCategory);
+            });
             productBox.getChildren().add(productItemBox);
         }
 
@@ -210,11 +250,9 @@ public class categoryController implements Initializable {
     }
     private void handleAddToCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
-
     }
 
     private void handleBuyNow(FoodItem item) {
         System.out.println("Mua ngay: " + item.getFoodName());
-
     }
 }

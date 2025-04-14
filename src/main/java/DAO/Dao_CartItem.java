@@ -171,4 +171,48 @@ public class Dao_CartItem implements Dao_Interface<CartItem> {
         }
         return cart;
     }
+    public CartItem checkItemExist(int cartId, int foodItemId)
+    {
+        String query = "select * from cartitems where cart_id = ? and foodItem_id = ?";
+        try {
+
+            int count = 0;
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, cartId);
+            pstmt.setInt(2, foodItemId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                int cart_id = rs.getInt("cart_id");
+                int foodItem_id = rs.getInt("foodItem_id");
+                int quantity = rs.getInt("quantity");
+                Timestamp added_at = rs.getTimestamp("added_at");
+                CartItem findItem = new CartItem(id, cart_id, foodItem_id, quantity, added_at);
+                return findItem;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    // update quantity in cart
+    public void updateQuantity(CartItem cartItem)
+    {
+        String query = "update cartitems set quantity = ? where cart_id = ? and foodItem_id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, cartItem.getQuantity());
+            pstmt.setInt(2, cartItem.getCartId());
+            pstmt.setInt(3, cartItem.getFoodItemId());
+            int rs = pstmt.executeUpdate();
+            System.out.println("Rows have been changed: " + rs);
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return;
+    }
 }

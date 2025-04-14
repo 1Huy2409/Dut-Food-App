@@ -7,6 +7,7 @@ import Helper.UserSession;
 import Model.CartItem;
 import Model.Category;
 import Model.FoodItem;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -252,15 +253,28 @@ public class categoryController implements Initializable {
     }
     private void handleAddToCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
-        CartItem cartItem = new CartItem();
-        cartItem.setCartId(UserSession.getInstance().getCartId());
-        cartItem.setFoodItemId(item.getId());
-        cartItem.setQuantity(1);
-        Dao_CartItem.getInstance().create(cartItem);
+        // Dao check xem thử đối với cart_id này đã tồn tại foodItemId này trong đó cart đó chưa
+        CartItem findItem = Dao_CartItem.getInstance().checkItemExist(UserSession.getInstance().getCartId(), item.getId());
+        if (findItem != null)
+        {
+            // update quantity
+            int newQuantity = findItem.getQuantity();
+            newQuantity++;
+            findItem.setQuantity(newQuantity);
+            Dao_CartItem.getInstance().updateQuantity(findItem);
+        }
+        else
+        {
+            CartItem cartItem = new CartItem();
+            cartItem.setCartId(UserSession.getInstance().getCartId());
+            cartItem.setFoodItemId(item.getId());
+            cartItem.setQuantity(1);
+            Dao_CartItem.getInstance().create(cartItem);
+        }
     }
 
     private void handleBuyNow(FoodItem item) {
         System.out.println("Mua ngay: " + item.getFoodName());
-
+        // add to cart but select this one
     }
 }

@@ -1,8 +1,11 @@
 package Controller.Client.Product;
 
-
+import DAO.Dao_CartItem;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.UserSession;
+import Helper.UserSession;
+import Model.CartItem;
 import Model.Category;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
@@ -250,9 +253,15 @@ public class categoryController implements Initializable {
     }
     private void handleAddToCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
+        CartItem cartItem = new CartItem();
+        cartItem.setCartId(UserSession.getInstance().getCartId());
+        cartItem.setFoodItemId(item.getId());
+        cartItem.setQuantity(1);
+        Dao_CartItem.getInstance().create(cartItem);
     }
 
     private void handleBuyNow(FoodItem item) {
         System.out.println("Mua ngay: " + item.getFoodName());
+
     }
 }

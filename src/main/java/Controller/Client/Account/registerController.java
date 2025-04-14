@@ -1,6 +1,9 @@
 package Controller.Client.Account;
 
+import DAO.Dao_Cart;
 import DAO.Dao_User;
+import Model.Cart;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,7 +43,9 @@ public class registerController {
         String password = passwordPasswordField.getText();
         String phone = phoneTextField.getText();
         // check userName and email has been existed in databases yet, if yes => "try again", else => "create new user"
-        Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
+        User newUser = Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
+        Cart newCart = new Cart(newUser.getId());
+        Dao_Cart.getInstance().create(newCart);
     }
     public void switchLoginOnAction(ActionEvent e)
     {

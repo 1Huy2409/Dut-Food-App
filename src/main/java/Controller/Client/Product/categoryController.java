@@ -4,7 +4,6 @@ import DAO.Dao_CartItem;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.UserSession;
-import Helper.UserSession;
 import Model.CartItem;
 import Model.Category;
 import Model.FoodItem;
@@ -145,7 +144,7 @@ public class categoryController implements Initializable {
                 Label priceLabel = new Label(foodItemOfCategory.getPrice().toString());
 
                 Button addToCart = new Button("THÊM VÀO GIỎ");
-                addToCart.setStyle("-fx-background-color: #ffb6c1; -fx-text-fill: white; -fx-font-weight: bold;");
+                addToCart.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-font-weight: bold;");
                 addToCart.setUserData(foodItemOfCategory);
                 addToCart.setOnAction(event -> {
                     FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();
@@ -153,7 +152,7 @@ public class categoryController implements Initializable {
                 });
 
                 Button buyNow = new Button("MUA NGAY");
-                buyNow.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffb6c1; -fx-font-weight: bold;");
+                buyNow.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #e93940; -fx-font-weight: bold;");
                 buyNow.setUserData(foodItemOfCategory);
                 buyNow.setOnAction(event -> {
                     FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();
@@ -221,7 +220,7 @@ public class categoryController implements Initializable {
             Label priceLabel = new Label(foodItemOfCategory.getPrice().toString());
 
             Button addToCart = new Button("THÊM VÀO GIỎ");
-            addToCart.setStyle("-fx-background-color: #ffb6c1; -fx-text-fill: white; -fx-font-weight: bold;");
+            addToCart.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-font-weight: bold;");
             addToCart.setUserData(foodItemOfCategory);
             addToCart.setOnAction(event -> {
                 FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();

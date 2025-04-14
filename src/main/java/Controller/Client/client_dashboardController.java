@@ -66,12 +66,12 @@ public class client_dashboardController implements Initializable {
 
     public void ProfileOnAction(MouseEvent e)
     {
-//        loadUI("/View/Client/profile.fxml");
+        loadUI("/View/Client/profile.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
     public void CartOnAction(MouseEvent e)
     {
-//        loadUI("/View/Client/cart.fxml");
+        loadUI("/View/Client/cart.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
 }

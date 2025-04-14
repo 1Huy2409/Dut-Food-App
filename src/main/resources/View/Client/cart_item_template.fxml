@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 
 <HBox fx:id="cartItemTemplate" stylesheets="@../../CSS/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS" styleClass="list-product-container, shadow">
+      alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS" styleClass="list-product-container, shadow" >
 
     <CheckBox fx:id="productCheckbox" mnemonicParsing="false" styleClass="pretty-checkbox">
         <HBox.margin>
@@ -35,7 +35,7 @@
         </padding>
         <children>
             <Button fx:id="minusButton" mnemonicParsing="false" styleClass="transparent-button" text="-" />
-            <Label fx:id="productQuantity" text="1" />
+            <TextField fx:id="productQuantity" alignment="CENTER" prefWidth="35.0"/>
             <Button fx:id="plusButton" mnemonicParsing="false" styleClass="transparent-button" text="+" />
         </children>
     </HBox>

@@ -43,7 +43,8 @@ public class registerController {
         String password = passwordPasswordField.getText();
         String phone = phoneTextField.getText();
         // check userName and email has been existed in databases yet, if yes => "try again", else => "create new user"
-        User newUser = Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
+        User newUser = Dao_User.getInstance().checkEmail(Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone).getEmail());
+        System.out.println(newUser.getId());
         Cart newCart = new Cart(newUser.getId());
         Dao_Cart.getInstance().create(newCart);
     }

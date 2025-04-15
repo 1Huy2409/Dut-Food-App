@@ -66,12 +66,13 @@ public class Dao_User implements Dao_Interface<User> {
         int result = 0;
         try {
             Connection con = JDBC.getConnection();
-            String sql = "update users set fullName = ?, email = ?, phone = ? where id = ?";
+            String sql = "update users set fullName = ?, email = ?, phone = ?, image = ? where id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
-            ps.setInt(4, user.getId());
+            ps.setInt(5, user.getId());
+            ps.setString(4,user.getImage());
             result = ps.executeUpdate();
             System.out.println("Rows updated: " + result);
             JDBC.closeConnection(con);
@@ -87,6 +88,24 @@ public class Dao_User implements Dao_Interface<User> {
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, user.getPassWord());
             pstmt.setInt(2, user.getId());
+            int rs = pstmt.executeUpdate();
+            if (rs > 0)
+            {
+                System.out.println("You have changed: " + rs + " rows");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+    public int updateAccount(User user) {
+        String query = "update users set password = ?, username = ? where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, user.getPassWord());
+            pstmt.setString(2, user.getUserName());
+            pstmt.setInt(3,user.getId());
             int rs = pstmt.executeUpdate();
             if (rs > 0)
             {
@@ -117,8 +136,38 @@ public class Dao_User implements Dao_Interface<User> {
 
     @Override
     public User selectedById(int id) {
-        return null;
+        User currentUser = null;
+        try {
+            Connection con = JDBC.getConnection();
+            String sql = "select * from users where id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String phone = rs.getString("phone");
+                String fullName = rs.getString("fullName");
+                String email = rs.getString("email");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                boolean status = rs.getBoolean("status");
+                String img = rs.getString("image");
+                int roleId = rs.getInt("roleId");
+
+                currentUser = new User(id, phone, fullName, email, userName, password, roleId, status);
+                currentUser.setImage(img);
+
+                System.out.println(id + " - " + phone + " - " + fullName + " - " + email + " - " +
+                        userName + " - " + password + " - " + status + " - " + roleId);
+                JDBC.closeConnection(con);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return currentUser;
     }
+
 
     @Override
     public List<User> selectByCondition(String condition) {
@@ -205,9 +254,9 @@ public class Dao_User implements Dao_Interface<User> {
                     newUser.setRoleId(2);
                     newUser.setPhone(phone);
                     this.getInstance().create(newUser);
-
                     String successMessage = "New account is created!!! Please click Login Button to Login into App";
                     AlertMessage.showAlertSuccessMessage(successMessage);
+
                     return newUser;
                 }
             }

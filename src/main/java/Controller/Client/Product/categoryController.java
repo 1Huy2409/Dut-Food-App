@@ -252,6 +252,7 @@ public class categoryController implements Initializable {
     }
     private void handleAddToCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
+        System.out.println(UserSession.getInstance().getCartId());
         CartItem cartItem = new CartItem();
         cartItem.setCartId(UserSession.getInstance().getCartId());
         cartItem.setFoodItemId(item.getId());

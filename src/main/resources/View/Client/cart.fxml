@@ -17,9 +17,9 @@
 
       <VBox prefHeight="281.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="263.0" prefWidth="600.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="500.0" prefWidth="600.0">
                <content>
-                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" prefColumns="1" prefHeight="262.0" prefWidth="597.0">
+                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" prefColumns="1" prefHeight="500.0" prefWidth="597.0">
                      <children>
 <!--                        <HBox fx:id="cartItemTemplate" alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS">-->
 <!--                           <children>-->

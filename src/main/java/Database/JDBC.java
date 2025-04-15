@@ -32,7 +32,7 @@ public class JDBC {
             if (c != null)
             {
                 c.close();
-                System.out.println("The connection to our Database has been closed!!!");
+//                System.out.println("The connection to our Database has been closed!!!");
             }
         }
         catch (Exception e)
@@ -48,7 +48,7 @@ public class JDBC {
             if (c != null)
             {
                 DatabaseMetaData metaData = c.getMetaData();
-                System.out.println(metaData.toString());
+//                System.out.println(metaData.toString());
             }
         }
         catch (Exception e)

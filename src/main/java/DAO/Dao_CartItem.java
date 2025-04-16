@@ -78,7 +78,7 @@ public class Dao_CartItem implements Dao_Interface<CartItem> {
     @Override
     public int delete(CartItem cartItem)
     {
-        String query = "update cartitems set status = false where id = ?";
+        String query = "delete from cartitems where id = ?";
         try {
             Connection con = JDBC.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query);

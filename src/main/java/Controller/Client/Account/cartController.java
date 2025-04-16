@@ -129,6 +129,7 @@ public class cartController implements Initializable {
             TextField quantityTextfield = (TextField) clonedItem.lookup("#productQuantity");
             Button minusButton = (Button) clonedItem.lookup("#minusButton");
             Button plusButton = (Button) clonedItem.lookup("#plusButton");
+            ImageView btnDel = (ImageView) clonedItem.lookup("#deleteIcon");
 
             nameLabel.setText(foodName);
             descLabel.setText(foodDesc);
@@ -235,6 +236,20 @@ public class cartController implements Initializable {
                 }
             });
 
+            // bắt sự kiện cho btnDel
+            btnDel.setOnMouseClicked(event ->
+            {
+                int index = this.cartItemsChecked.indexOf(item);
+                if (index != -1) // không tìm thấy trong danh sách đã check
+                {
+
+                    this.cartItemsChecked.remove(item);
+                }
+                // xóa thẳng ra khỏi database
+                Dao_CartItem.getInstance().delete(item);
+
+                // xóa item này ra khỏi giao diện cart
+            });
 
             productContainer.getChildren().add(clonedItem);
         }

@@ -163,6 +163,7 @@ public class cartController implements Initializable {
                     quantityTextfield.setText(String.valueOf(newQuantity));
                 }
                 stockLimitLabel.setVisible(false);
+                renderTotalPrice();
             });
 
             plusButton.setOnAction(e -> {
@@ -180,6 +181,7 @@ public class cartController implements Initializable {
                     quantityTextfield.setText(String.valueOf(newQuantity));
                 }
                 stockLimitLabel.setVisible(newQuantity == stock);
+                renderTotalPrice();
             });
 
             quantityTextfield.setOnAction(e -> {

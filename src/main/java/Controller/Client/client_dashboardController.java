@@ -4,10 +4,12 @@ import Controller.Client.Product.categoryController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.layout.Priority;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -52,6 +54,11 @@ public class client_dashboardController implements Initializable {
             VBox.setVgrow(root, Priority.ALWAYS);
             contentArea.getChildren().clear();
             contentArea.getChildren().add(root);
+            if (root instanceof Region) {
+                Region region = (Region) root;
+                region.prefWidthProperty().bind(contentArea.widthProperty());
+                region.prefHeightProperty().bind(contentArea.heightProperty());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,7 @@ package Model;
 
 public class User {
     private int id;
-    private String phone, fullName, email, userName, passWord;
+    private String phone, fullName, email, userName, passWord, image;
     private int roleId;
     private boolean status;
     // constructor
@@ -20,6 +20,18 @@ public class User {
         this.passWord = passWord;
         this.roleId = roleId;
         this.status = status;
+    }
+    public User(int id, String phone, String fullName, String email, String userName, String passWord, int roleId, boolean status, String image)
+    {
+        this.id = id;
+        this.phone = phone;
+        this.fullName = fullName;
+        this.email = email;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.roleId = roleId;
+        this.status = status;
+        this.image = image;
     }
     // getter;
     public String getUserName()
@@ -54,6 +66,7 @@ public class User {
     {
         return this.status;
     }
+    public String getImage(){return this.image;}
     // setter
     public void setUserName(String userName)
     {
@@ -87,4 +100,5 @@ public class User {
     {
         this.status = status;
     }
+    public void setImage(String image){this.image = image;}
 }

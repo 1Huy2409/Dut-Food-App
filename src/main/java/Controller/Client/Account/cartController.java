@@ -1,6 +1,8 @@
 package Controller.Client.Account;
 
 import javafx.fxml.FXMLLoader;
+
+import java.awt.*;
 import java.io.IOException;
 import DAO.Dao_Cart;
 import DAO.Dao_CartItem;
@@ -23,7 +25,7 @@ import javafx.scene.layout.TilePane;
 import javafx.application.Platform;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-
+import javafx.scene.shape.Rectangle;
 
 
 import java.net.URL;
@@ -145,6 +147,13 @@ public class cartController implements Initializable {
 
             Image image = new Image(getClass().getResource(correctedPath).toString());
             imageView.setImage(image);
+            imageView.setFitWidth(120);
+            imageView.setFitHeight(90);
+            imageView.setPreserveRatio(false);
+            Rectangle clip = new Rectangle(120, 90);
+            clip.setArcWidth(20);
+            clip.setArcHeight(20);
+            imageView.setClip(clip);
 
             minusButton.setOnAction(e -> {
                 int newQuantity = item.getQuantity() - 1;

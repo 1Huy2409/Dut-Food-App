@@ -27,6 +27,7 @@ import javafx.scene.input.KeyEvent;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -79,6 +80,11 @@ public class cartController implements Initializable {
     @FXML
     private Label stockLimitLabel;
 
+    private double totalPrice;
+    private List<CartItem> cartItemsChecked = new ArrayList<>();
+
+    // create list cartChecked => then set on action push to order list
+
     public void initialize(URL location, ResourceBundle resources)
     {
         renderCart();
@@ -100,11 +106,16 @@ public class cartController implements Initializable {
     }
     public void renderCart()
     {
+        total.setText("0.0");
         Cart cart = Dao_Cart.getInstance().selectedByUserId(UserSession.getInstance().getId());
         List<CartItem> cartItems = Dao_CartItem.getInstance().selectedByIdCart(cart.getId());
         productContainer.getChildren().clear();
         for (CartItem item : cartItems)
         {
+            String foodName = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getFoodName();
+            String foodDesc = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getDescription();
+            Double foodPrice = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice();
+            int stock = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock();
             HBox clonedItem = cloneTemplate();
 
             CheckBox checkBox = (CheckBox) clonedItem.lookup("#productCheckbox");
@@ -117,10 +128,10 @@ public class cartController implements Initializable {
             Button minusButton = (Button) clonedItem.lookup("#minusButton");
             Button plusButton = (Button) clonedItem.lookup("#plusButton");
 
-            nameLabel.setText(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getFoodName());
-            descLabel.setText(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getDescription());
-            priceLabel.setText(String.format("%,.0f VND", Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice()));
-            quantityTextfield.setText(String.format("%,d", Dao_CartItem.getInstance().selectedById(item.getId()).getQuantity()));
+            nameLabel.setText(foodName);
+            descLabel.setText(foodDesc);
+            priceLabel.setText(String.format("%,.0f VND", foodPrice));
+            quantityTextfield.setText(String.format("%,d", item.getQuantity()));
             // chi cho phep nhap so
             quantityTextfield.setTextFormatter(new TextFormatter<>(change -> {
                 if (change.getText().matches("[0-9]*")) {
@@ -128,7 +139,7 @@ public class cartController implements Initializable {
                 }
                 return null;
             }));
-//            imageView.setImage(new Image(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getImageUrl()));
+            // imageView.setImage(new Image(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getImageUrl()));
             String dbPath = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getImageUrl();
             String correctedPath = dbPath.startsWith("/") ? dbPath : "/" + dbPath;
 
@@ -137,7 +148,7 @@ public class cartController implements Initializable {
 
             minusButton.setOnAction(e -> {
                 int newQuantity = item.getQuantity() - 1;
-                if (newQuantity > 0 && newQuantity <= Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock()) {
+                if (newQuantity > 0 && newQuantity <= stock) {
                     item.setQuantity(newQuantity);
                     Dao_CartItem.getInstance().update(item);
                     quantityTextfield.setText(String.valueOf(newQuantity));
@@ -147,30 +158,30 @@ public class cartController implements Initializable {
 
             plusButton.setOnAction(e -> {
                 int newQuantity = item.getQuantity() + 1;
-                if (newQuantity <= Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock()) {
+                if (newQuantity <= stock) {
                     item.setQuantity(newQuantity);
                     Dao_CartItem.getInstance().update(item);
                     quantityTextfield.setText(String.valueOf(newQuantity));
                 }
                 else
                 {
-                    newQuantity = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock();
+                    newQuantity = stock;
                     item.setQuantity(newQuantity);
                     Dao_CartItem.getInstance().update(item);
                     quantityTextfield.setText(String.valueOf(newQuantity));
                 }
-                stockLimitLabel.setVisible(newQuantity == Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock());
+                stockLimitLabel.setVisible(newQuantity == stock);
             });
 
             quantityTextfield.setOnAction(e -> {
                 try {
                     int newQuantity = Integer.parseInt(quantityTextfield.getText());
 
-                    int stock = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getStock();
+                    int currentStock = stock;
 
-                    if (newQuantity > stock) {
-                        newQuantity = stock;
-                        quantityTextfield.setText(String.valueOf(stock));
+                    if (newQuantity > currentStock) {
+                        newQuantity = currentStock;
+                        quantityTextfield.setText(String.valueOf(currentStock));
                     }
 
                     if (newQuantity > 0) {
@@ -179,7 +190,7 @@ public class cartController implements Initializable {
                     } else {
                         quantityTextfield.setText(String.valueOf(item.getQuantity()));
                     }
-                    stockLimitLabel.setVisible(newQuantity == stock);
+                    stockLimitLabel.setVisible(newQuantity == currentStock);
 
                 } catch (NumberFormatException ex) {
                     quantityTextfield.setText(String.valueOf(item.getQuantity()));
@@ -191,8 +202,24 @@ public class cartController implements Initializable {
                 CartItem checkedItem = (CartItem) source.getUserData();
 
                 if (source.isSelected()) {
+                    // tinh tien vao total price
+                    this.cartItemsChecked.add(checkedItem);
+                    for (CartItem ct : this.cartItemsChecked)
+                    {
+                        System.out.print(ct.getFoodItemId() + ", ");
+                    }
+                    System.out.println();
+                    renderTotalPrice();
                     System.out.println("da chon cartitem co id: " + checkedItem.getId());
                 } else {
+                    // bo mon do ra khoi thi tru ra khoi total price
+                    this.cartItemsChecked.remove(checkedItem);
+                    for (CartItem ct : this.cartItemsChecked)
+                    {
+                        System.out.print(ct.getFoodItemId() + ", ");
+                    }
+                    System.out.println();
+                    renderTotalPrice();
                     System.out.println("da bo chon cartitem co id: " + checkedItem.getId());
                 }
             });
@@ -200,7 +227,15 @@ public class cartController implements Initializable {
 
             productContainer.getChildren().add(clonedItem);
         }
-
     }
-
+    public void renderTotalPrice()
+    {
+        this.totalPrice = 0.0;
+        for (CartItem item: this.cartItemsChecked)
+        {
+            double priceEachItem = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice();
+            this.totalPrice += priceEachItem * item.getQuantity();
+        }
+        total.setText(Double.toString(this.totalPrice));
+    }
 }

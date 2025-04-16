@@ -112,7 +112,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="288.0" spacing="200.0">
                                  <children>
                                     <Label text="Total" />
-                                    <Label fx:id="total" text="Label" />
+                                    <Label fx:id="total" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" top="4.0" />

@@ -15,11 +15,11 @@
    <children>
       <Label prefHeight="34.0" prefWidth="50.0" text="Your Cart" />
 
-      <VBox prefHeight="281.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+      <VBox  prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="500.0" prefWidth="600.0">
+            <ScrollPane fx:id="cartScrollPane" fitToHeight="true" fitToWidth="true"  VBox.vgrow="ALWAYS">
                <content>
-                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" prefColumns="1" prefHeight="500.0" prefWidth="597.0">
+                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" prefColumns="1" VBox.vgrow="ALWAYS">
                      <children>
 <!--                        <HBox fx:id="cartItemTemplate" alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS">-->
 <!--                           <children>-->

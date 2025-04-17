@@ -13,6 +13,7 @@ import Model.Category;
 import Helper.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -82,7 +83,9 @@ public class cartController implements Initializable {
     @FXML
     private Label stockLimitLabel;
 
+    @FXML
     private double totalPrice;
+
     private List<CartItem> cartItemsChecked = new ArrayList<>();
 
     // create list cartChecked => then set on action push to order list

@@ -1,5 +1,8 @@
 package Controller.Client.Account;
 
+import Controller.Client.Payment.addressController;
+import Controller.Client.Payment.paymentController;
+import Helper.AlertMessage;
 import javafx.fxml.FXMLLoader;
 
 import java.awt.*;
@@ -13,19 +16,22 @@ import Model.Category;
 import Helper.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.TilePane;
 import javafx.application.Platform;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.net.URL;
@@ -82,7 +88,9 @@ public class cartController implements Initializable {
     @FXML
     private Label stockLimitLabel;
 
+    private VBox contentArea;
     private double totalPrice;
+    private double totalPrice1;
     private List<CartItem> cartItemsChecked = new ArrayList<>();
 
     // create list cartChecked => then set on action push to order list
@@ -91,7 +99,9 @@ public class cartController implements Initializable {
     {
         renderCart();
     }
-
+    public void setContentArea(VBox contentArea) {
+        this.contentArea = contentArea;
+    }
     private HBox cloneTemplate() {
         try {
             HBox item = FXMLLoader.load(getClass().getResource("/View/Client/cart_item_template.fxml"));
@@ -169,7 +179,7 @@ public class cartController implements Initializable {
 
             plusButton.setOnAction(e -> {
                 int newQuantity = item.getQuantity() + 1;
-                if (newQuantity <= stock) {
+                if (stock !=0 && newQuantity <= stock) {
                     item.setQuantity(newQuantity);
                     Dao_CartItem.getInstance().update(item);
                     quantityTextfield.setText(String.valueOf(newQuantity));
@@ -239,19 +249,20 @@ public class cartController implements Initializable {
             // bắt sự kiện cho btnDel
             btnDel.setOnMouseClicked(event ->
             {
-                int index = this.cartItemsChecked.indexOf(item);
-                if (index != -1) // không tìm thấy trong danh sách đã check
+                //int index = this.cartItemsChecked.indexOf(item);
+                if (cartItemsChecked.contains(item)) // không tìm thấy trong danh sách đã check
                 {
-
                     this.cartItemsChecked.remove(item);
+                    renderTotalPrice();
                 }
                 // xóa thẳng ra khỏi database
                 Dao_CartItem.getInstance().delete(item);
-
+                productContainer.getChildren().remove(clonedItem);
                 // xóa item này ra khỏi giao diện cart
             });
 
             productContainer.getChildren().add(clonedItem);
+            proceedToCheckoutBtn.setOnAction(e -> handleCheckout());
         }
     }
     public void renderTotalPrice()
@@ -263,5 +274,58 @@ public class cartController implements Initializable {
             this.totalPrice += priceEachItem * item.getQuantity();
         }
         total.setText(Double.toString(this.totalPrice));
+    }
+    public double priceChecked()
+    {
+        this.totalPrice1 = 0.0;
+        for (CartItem item: this.cartItemsChecked)
+        {
+            double priceEachItem = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice();
+            this.totalPrice1 += priceEachItem * item.getQuantity();
+        }
+      return totalPrice1;
+    }
+    public void handleCheckout() {
+        try {
+            // Tải màn hình thanh toán từ FXML
+            FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/address.fxml"));
+            Parent addressRoot = addressLoader.load();
+            addressController addressCtrl = addressLoader.getController();
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UTILITY);
+            popupStage.setScene(new Scene(addressRoot));
+            addressCtrl.setPopupStage(popupStage);
+
+            addressCtrl.setOnConfirm(() -> {
+                try {
+                    // Sau khi xác nhận địa chỉ, mới load giao diện payment
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
+                    Parent paymentRoot = loader.load();
+                    paymentController paymentCtrl = loader.getController();
+
+                    paymentCtrl.setCheckedItems(cartItemsChecked);
+                    paymentCtrl.setAddress(addressCtrl.getAddress());
+                    paymentCtrl.setPrice(priceChecked());
+                    contentArea.getChildren().clear();
+                    contentArea.getChildren().add(paymentRoot);
+                    VBox.setVgrow(paymentRoot, Priority.ALWAYS);
+
+                    popupStage.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            // Gán sự kiện cho Cancel → không làm gì, vẫn ở giỏ hàng
+            addressCtrl.setOnCancel(() -> {
+                popupStage.close(); // Chỉ đóng popup, giữ nguyên giao diện giỏ hàng
+            });
+
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

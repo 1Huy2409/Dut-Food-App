@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Payment {
     private int id;
-    private int roleId;
+    private int orderId;
     private String paymentMethod;
     private double amount;
     private Timestamp paymentDate;
@@ -12,9 +12,9 @@ public class Payment {
 
     public Payment() {}
 
-    public Payment(int id, int roleId, String paymentMethod, double amount, Timestamp paymentDate, String status) {
+    public Payment(int id, int orderId, String paymentMethod, double amount, Timestamp paymentDate, String status) {
         this.id = id;
-        this.roleId = roleId;
+        this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.amount = amount;
         this.paymentDate = paymentDate;
@@ -29,12 +29,12 @@ public class Payment {
         this.id = id;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getPaymentMethod() {

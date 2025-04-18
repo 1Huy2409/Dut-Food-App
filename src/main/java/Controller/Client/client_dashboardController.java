@@ -1,5 +1,6 @@
 package Controller.Client;
 
+import Controller.Client.Account.cartController;
 import Controller.Client.Product.categoryController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +41,10 @@ public class client_dashboardController implements Initializable {
                     categoryController controller = loader.getController();
                     controller.setContentArea(contentArea);
                     break;
-//                case "/View/Client/category.fxml":
-//                    categoryController controller = loader.getController();
-//                    controller.setContentArea(contentArea);
+                case "/View/Client/cart.fxml":
+                    cartController cartCtrl = loader.getController();
+                    cartCtrl.setContentArea(contentArea);
+                    break;
 //                case "/View/Client/category.fxml":
 //                    categoryController controller = loader.getController();
 //                    controller.setContentArea(contentArea);

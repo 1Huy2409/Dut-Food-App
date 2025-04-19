@@ -52,7 +52,7 @@
     -fx-background-color: #E93940;
 }
 .container-client{
-    -fx-border-color: #808080;
+    -fx-background-color: rgb(255,255,255,0.2);
     -fx-border-radius: 10;
 }
 .line-color-client{
@@ -140,9 +140,112 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
+.client-background {
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #ff5f6d 0%, #ffc3a0 45%, #ffc3a0 55%, #6a82fb 100%);
+}
+.menu-background {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+.btnAll {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+.btnAll:pressed {
+    -fx-background-color: #E93940;
+    -fx-text-fill: white;
+}
+.text-area {
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-background-color: rgb(255,255,255,0.2);
+    -fx-border-radius: 10;
+}
 
+.text-area .content {
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 0;
+}
 
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
 
-
-
+.text-area:focused {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.image-view {
+    -fx-object-fit: cover;
+}
+.buy-now
+{
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #ff5f6d 0%, #ffc3a0 45%, #ffc3a0 55%, #6a82fb 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+.buy-now:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e74c3c, #f39c12);
+        -fx-text-fill: white;
+        -fx-font-size: 14px;
+        -fx-font-weight: bold;
+        -fx-background-radius: 10;
+        -fx-border-radius: 10;
+}
+.back {
+    -fx-background-color: transparent;
+        -fx-text-fill: #e74c3c; /* Màu đỏ cam */
+        -fx-font-size: 14px;
+        -fx-font-weight: bold;
+        -fx-border-color: #e74c3c;
+        -fx-border-width: 1px;
+        -fx-border-radius: 15px;
+        -fx-padding: 5px 15px;
+        -fx-cursor: hand;
+}
+.back:hover {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15;
+}
+.quantity-btn {
+    -fx-background-color: #f39c12;
+        -fx-text-fill: white;
+        -fx-font-weight: bold;
+        -fx-font-size: 12px;
+        -fx-min-width: 25px;
+        -fx-min-height: 25px;
+        -fx-padding: 0;               /* Quan trọng */
+            -fx-background-radius: 3px;
+            -fx-border-radius: 3px;
+            -fx-alignment: center;
+}
+.quantity-btn:hover {
+     -fx-background-color: #e67e22;
+}
+.btnAddToCart-detail {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fddb92, #d1fdff);
+    -fx-text-fill: black;
+        -fx-font-size: 14px;
+        -fx-background-radius: 10;
+        -fx-border-radius: 10;
+}
+.btnAddToCart-detail:hover {
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #fbcb6a, #a0f8ff);
+        -fx-text-fill: black;
+            -fx-font-size: 14px;
+            -fx-background-radius: 10;
+            -fx-border-radius: 10;
+}
 

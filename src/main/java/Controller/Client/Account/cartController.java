@@ -127,8 +127,11 @@ public class cartController implements Initializable {
             checkBox.setUserData(item);
             ImageView imageView = (ImageView) clonedItem.lookup("#productImage");
             Label nameLabel = (Label) clonedItem.lookup("#productName");
+            nameLabel.setStyle("-fx-text-fill: black");
             Label descLabel = (Label) clonedItem.lookup("#productDesc");
+            descLabel.setStyle("-fx-text-fill: black");
             Label priceLabel = (Label) clonedItem.lookup("#productPrice");
+            priceLabel.setStyle("-fx-text-fill: black");
             TextField quantityTextfield = (TextField) clonedItem.lookup("#productQuantity");
             Button minusButton = (Button) clonedItem.lookup("#minusButton");
             Button plusButton = (Button) clonedItem.lookup("#plusButton");

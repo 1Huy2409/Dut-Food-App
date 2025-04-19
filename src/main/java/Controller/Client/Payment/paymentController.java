@@ -1,19 +1,13 @@
 package Controller.Client.Payment;
 
-import DAO.Dao_Food;
-import DAO.Dao_OrderItems;
-import DAO.Dao_Orders;
-import DAO.Dao_Payment;
+import DAO.*;
 import Helper.AlertMessage;
 import Helper.UserSession;
 import Model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -26,15 +20,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class paymentController implements Initializable {
-//    private List<CartItem> selectedItems;
-//    private Runnable onCancel;
-//    public void setSelectedItems(List<CartItem> items) {
-//        this.selectedItems = items;
-//        //renderItems();
-//    }
-//    public void setOnCancel(Runnable onCancel) {
-//        this.onCancel = onCancel;
-//    }
     @FXML
     private VBox productListContainer; // Container chứa sản phẩm
     @FXML
@@ -43,11 +28,35 @@ public class paymentController implements Initializable {
     private Label address;
     @FXML
     private Label lbtien;
+
+    @FXML
+    private RadioButton zalopay;
+    @FXML
+    private RadioButton momo;
+    @FXML
+    private RadioButton cash;
+    @FXML
+    private RadioButton credit_card;
+    private ToggleGroup paymentGroup;
     private List<CartItem> checkedItems;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // renderCheckedProducts();
+        paymentGroup = new ToggleGroup();
+        cash.setToggleGroup(paymentGroup);
+        credit_card.setToggleGroup(paymentGroup);
+        momo.setToggleGroup(paymentGroup);
+        zalopay.setToggleGroup(paymentGroup);
     }
+    private String getSelectedPaymentMethod() {
+        RadioButton selected = (RadioButton) paymentGroup.getSelectedToggle();
+        if (selected == cash) return "cash";
+        if (selected == credit_card) return "credit_card";
+        if (selected == momo) return "momo";
+        if (selected == zalopay) return "zalopay";
+        return null;
+    }
+
     public void setCheckedItems(List<CartItem> checkedItems) {
         this.checkedItems = checkedItems;
         renderCheckedProducts();
@@ -96,29 +105,47 @@ public class paymentController implements Initializable {
         this.address.setText(address);
     }
     public void setPrice(double price) {
-        this.lbtien.setText(Double.toString(price));
+        this.lbtien.setText("Thành Tiền: " + Double.toString(price) + " VND");
     }
-    public void acceptPay(){
-        Order order = new Order();
-        order.setUserId(UserSession.getInstance().getId());
-        order.setCartId(UserSession.getInstance().getCartId());
-        order.setTotalPrice(Double.parseDouble(lbtien.getText()));
-        Dao_Orders.getInstance().create(order);
+    public void acceptPay() {
+        if (getSelectedPaymentMethod() == null) {
+            AlertMessage.showAlertErrorMessage("Please select payment method");
+        } else {
+            Order order = new Order();
+            order.setUserId(UserSession.getInstance().getId());
+            order.setCartId(UserSession.getInstance().getCartId());
+            order.setTotalPrice(Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));
+            Dao_Orders.getInstance().create(order);
 
 
-        for(CartItem item : checkedItems){
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrderId(order.getId());
-            orderItem.setFoodItemId(item.getFoodItemId());
-            orderItem.setQuantity(1);
-            orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice());
-            Dao_OrderItems.getInstance().create(orderItem);
+            for (CartItem item : checkedItems) {
+                FoodItem foodItem = new FoodItem();
+                foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
+                foodItem.setStock(foodItem.getStock() - item.getQuantity());
+                Dao_Food.getInstance().update(foodItem);
+                OrderItem orderItem = new OrderItem();
+                orderItem.setOrderId(order.getId());
+                orderItem.setFoodItemId(item.getFoodItemId());
+                orderItem.setQuantity(item.getQuantity());
+                orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
+                Dao_OrderItems.getInstance().create(orderItem);
+                Dao_CartItem.getInstance().delete(item);
+            }
+
+            Payment payment = new Payment();
+            payment.setOrderId(order.getId());
+            payment.setPaymentMethod(getSelectedPaymentMethod());
+            payment.setAmount(order.getTotalPrice());
+            Dao_Payment.getInstance().create(payment);
+            AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
+
+            if (onCheckoutSuccess != null) {
+                onCheckoutSuccess.run();
+            }
         }
-        Payment payment = new Payment();
-        payment.setOrderId(order.getId());
-        payment.setPaymentMethod("momo");
-        payment.setAmount(order.getTotalPrice());
-        Dao_Payment.getInstance().create(payment);
-        AlertMessage.showAlertSuccessMessage("Dat hang thanh cong");
+    }
+    private Runnable onCheckoutSuccess;
+    public void setOnCheckoutSuccess(Runnable callback) {
+        this.onCheckoutSuccess = callback;
     }
 }

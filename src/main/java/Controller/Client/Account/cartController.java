@@ -286,46 +286,54 @@ public class cartController implements Initializable {
       return totalPrice1;
     }
     public void handleCheckout() {
-        try {
-            // Tải màn hình thanh toán từ FXML
-            FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/address.fxml"));
-            Parent addressRoot = addressLoader.load();
-            addressController addressCtrl = addressLoader.getController();
+        if(cartItemsChecked.size() == 0){
+            AlertMessage.showAlertErrorMessage("Please select product to checkout");
+        }
+        else {
+            try {
+                // Tải màn hình thanh toán từ FXML
+                FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/address.fxml"));
+                Parent addressRoot = addressLoader.load();
+                addressController addressCtrl = addressLoader.getController();
 
-            Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.initStyle(StageStyle.UTILITY);
-            popupStage.setScene(new Scene(addressRoot));
-            addressCtrl.setPopupStage(popupStage);
+                Stage popupStage = new Stage();
+                popupStage.initModality(Modality.APPLICATION_MODAL);
+                popupStage.initStyle(StageStyle.UTILITY);
+                popupStage.setScene(new Scene(addressRoot));
+                addressCtrl.setPopupStage(popupStage);
 
-            addressCtrl.setOnConfirm(() -> {
-                try {
-                    // Sau khi xác nhận địa chỉ, mới load giao diện payment
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
-                    Parent paymentRoot = loader.load();
-                    paymentController paymentCtrl = loader.getController();
+                addressCtrl.setOnConfirm(() -> {
+                    try {
+                        // Sau khi xác nhận địa chỉ, mới load giao diện payment
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
+                        Parent paymentRoot = loader.load();
+                        paymentController paymentCtrl = loader.getController();
 
-                    paymentCtrl.setCheckedItems(cartItemsChecked);
-                    paymentCtrl.setAddress(addressCtrl.getAddress());
-                    paymentCtrl.setPrice(priceChecked());
-                    contentArea.getChildren().clear();
-                    contentArea.getChildren().add(paymentRoot);
-                    VBox.setVgrow(paymentRoot, Priority.ALWAYS);
+                        paymentCtrl.setCheckedItems(cartItemsChecked);
+                        paymentCtrl.setAddress(addressCtrl.getAddress());
+                        paymentCtrl.setPrice(priceChecked());
+                        paymentCtrl.setOnCheckoutSuccess(() -> {
+                            // Xóa các item đã chọn khỏi giao diện
+                            cartItemsChecked.clear();
+                            renderCart(); // Render lại giỏ hàng
+                        });
+                        contentArea.getChildren().clear();
+                        contentArea.getChildren().add(paymentRoot);
+                        VBox.setVgrow(paymentRoot, Priority.ALWAYS);
 
-                    popupStage.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+                        popupStage.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                addressCtrl.setOnCancel(() -> {
+                    popupStage.close(); // Chỉ đóng popup, giữ nguyên giao diện giỏ hàng
+                });
 
-            // Gán sự kiện cho Cancel → không làm gì, vẫn ở giỏ hàng
-            addressCtrl.setOnCancel(() -> {
-                popupStage.close(); // Chỉ đóng popup, giữ nguyên giao diện giỏ hàng
-            });
-
-            popupStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
+                popupStage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

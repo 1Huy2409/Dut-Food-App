@@ -1,8 +1,7 @@
 package Controller.Client.Account;
-
-import Controller.Client.Payment.addressController;
 import Controller.Client.Payment.paymentController;
 import Helper.AlertMessage;
+import Controller.Client.Payment.addressController;
 import javafx.fxml.FXMLLoader;
 
 import java.awt.*;
@@ -22,12 +21,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
 import javafx.application.Platform;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -88,6 +92,7 @@ public class cartController implements Initializable {
     @FXML
     private Label stockLimitLabel;
 
+    @FXML
     private VBox contentArea;
     private double totalPrice;
     private double totalPrice1;
@@ -99,9 +104,7 @@ public class cartController implements Initializable {
     {
         renderCart();
     }
-    public void setContentArea(VBox contentArea) {
-        this.contentArea = contentArea;
-    }
+
     private HBox cloneTemplate() {
         try {
             HBox item = FXMLLoader.load(getClass().getResource("/View/Client/cart_item_template.fxml"));
@@ -134,8 +137,11 @@ public class cartController implements Initializable {
             checkBox.setUserData(item);
             ImageView imageView = (ImageView) clonedItem.lookup("#productImage");
             Label nameLabel = (Label) clonedItem.lookup("#productName");
+            nameLabel.setStyle("-fx-text-fill: black");
             Label descLabel = (Label) clonedItem.lookup("#productDesc");
+            descLabel.setStyle("-fx-text-fill: black");
             Label priceLabel = (Label) clonedItem.lookup("#productPrice");
+            priceLabel.setStyle("-fx-text-fill: black");
             TextField quantityTextfield = (TextField) clonedItem.lookup("#productQuantity");
             Button minusButton = (Button) clonedItem.lookup("#minusButton");
             Button plusButton = (Button) clonedItem.lookup("#plusButton");

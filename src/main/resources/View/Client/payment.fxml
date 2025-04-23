@@ -2,71 +2,74 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox fx:id="productListContainer" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Payment.paymentController">
+<VBox fx:id="productListContainer" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Payment.paymentController2">
    <children>
-      <Label text="Thanh Toán">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label text="Địa chỉ nhận hàng">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="address" />
-      <ScrollPane prefHeight="500.0" prefWidth="1280.0">
-         <content>
-            <TilePane fx:id="paymentItemContainer" prefHeight="500.0" prefWidth="1280.0" />
-         </content>
-      </ScrollPane>
-      <HBox prefHeight="136.0" prefWidth="1280.0">
+      <HBox prefHeight="718.0" prefWidth="1280.0">
          <children>
-            <VBox prefHeight="134.0" prefWidth="54.0" />
-            <VBox prefHeight="100.0" prefWidth="264.0">
+            <VBox prefHeight="700.0" prefWidth="808.0">
                <children>
-                  <HBox prefHeight="35.0" prefWidth="264.0">
+                  <Label prefHeight="36.0" prefWidth="173.0" text="Select Payment Method" />
+                  <HBox prefHeight="44.0" prefWidth="808.0">
                      <children>
-                        <Label text="Cash               " />
-                        <RadioButton fx:id="cash" mnemonicParsing="false" />
+                        <Button mnemonicParsing="false" text="VNPay" />
+                        <Button mnemonicParsing="false" text="Cash" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="32.0" prefWidth="264.0">
-                     <children>
-                        <Label text="Credit Card     " />
-                        <RadioButton fx:id="credit_card" mnemonicParsing="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="33.0" prefWidth="264.0">
-                     <children>
-                        <Label text="Momo             " />
-                        <RadioButton fx:id="momo" mnemonicParsing="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="27.0" prefWidth="264.0">
-                     <children>
-                        <Label text="ZaloPay           " />
-                        <RadioButton fx:id="zalopay" mnemonicParsing="false" />
-                     </children>
-                  </HBox>
+                  <VBox prefHeight="625.0" prefWidth="808.0" />
                </children>
             </VBox>
-            <VBox prefHeight="100.0" prefWidth="292.0">
+            <VBox prefHeight="700.0" prefWidth="471.0">
                <children>
-                  <HBox prefHeight="24.0" prefWidth="292.0" />
-                  <HBox prefHeight="27.0" prefWidth="292.0">
+                  <Label prefHeight="32.0" prefWidth="99.0" text="Order Summary" />
+                  <ScrollPane prefHeight="384.0" prefWidth="471.0">
+                     <content>
+                        <TilePane fx:id="paymentItemContainer" prefHeight="382.0" prefWidth="470.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox prefHeight="36.0" prefWidth="471.0">
                      <children>
-                        <Label fx:id="lbtien" />
+                        <Label text="Purchase Date" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Label" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#acceptPay" text="Xác nhận thanh toán" />
+                  <HBox prefHeight="36.0" prefWidth="471.0">
+                     <children>
+                        <Label text="Invoice" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="1.0" prefWidth="200.0" />
+                  <HBox prefHeight="38.0" prefWidth="471.0">
+                     <children>
+                        <Label text="Discount" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="471.0">
+                     <children>
+                        <Label text="Subtotal" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="1.0" prefWidth="200.0" />
+                  <HBox prefHeight="38.0" prefWidth="471.0">
+                     <children>
+                        <Label  text="Total" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label  fx:id="lbTotal" text="Label" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

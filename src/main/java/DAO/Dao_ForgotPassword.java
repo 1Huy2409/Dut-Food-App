@@ -1,9 +1,8 @@
 package DAO;
 
-import Database.JDBC;
+import Config.JDBC;
 import Model.ForgotPassword;
 
-import java.lang.constant.Constable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

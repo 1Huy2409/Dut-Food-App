@@ -135,6 +135,8 @@ public class paymentController implements Initializable {
             Payment payment = new Payment();
             payment.setOrderId(order.getId());
             payment.setPaymentMethod(getSelectedPaymentMethod());
+            //  xử lý lại phần chọn phương thức thanh toán
+
             payment.setAmount(order.getTotalPrice());
             Dao_Payment.getInstance().create(payment);
             AlertMessage.showAlertSuccessMessage("Order successful, thank you!");

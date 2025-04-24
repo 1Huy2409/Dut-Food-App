@@ -1,4 +1,4 @@
-package Database;
+package Config;
 import com.mysql.cj.jdbc.Driver;
 import io.github.cdimascio.dotenv.Dotenv;
 

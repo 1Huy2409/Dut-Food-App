@@ -104,7 +104,10 @@ public class cartController implements Initializable {
     {
         renderCart();
     }
-
+    public void setContentArea(VBox contentArea)
+    {
+        this.contentArea = contentArea;
+    }
     private HBox cloneTemplate() {
         try {
             HBox item = FXMLLoader.load(getClass().getResource("/View/Client/cart_item_template.fxml"));

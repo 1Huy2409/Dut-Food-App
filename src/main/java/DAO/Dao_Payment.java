@@ -1,10 +1,9 @@
 package DAO;
 
-import Database.JDBC;
+import Config.JDBC;
 import Model.Payment;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;

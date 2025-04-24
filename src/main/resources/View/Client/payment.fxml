@@ -18,11 +18,11 @@
                   <Label prefHeight="36.0" prefWidth="173.0" text="Select Payment Method" />
                   <HBox prefHeight="44.0" prefWidth="808.0">
                      <children>
-                        <Button mnemonicParsing="false" text="VNPay" />
+                        <Button mnemonicParsing="false" text="VNPay" onMouseClicked="#VNPAYOnAction"/>
                         <Button mnemonicParsing="false" text="Cash" />
                      </children>
                   </HBox>
-                  <VBox prefHeight="625.0" prefWidth="808.0" />
+                  <VBox fx:id="paymentMethodArea" prefHeight="625.0" prefWidth="808.0" />
                </children>
             </VBox>
             <VBox prefHeight="700.0" prefWidth="471.0">
@@ -65,9 +65,9 @@
                   <Pane prefHeight="1.0" prefWidth="200.0" />
                   <HBox prefHeight="38.0" prefWidth="471.0">
                      <children>
-                        <Label  text="Total" />
+                        <Label text="Total" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Label  fx:id="lbTotal" text="Label" />
+                        <Label fx:id="lbTotal" text="Label" />
                      </children>
                   </HBox>
                </children>

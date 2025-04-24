@@ -1,5 +1,7 @@
 package Controller.Client.Payment;
 
+import Controller.Client.Account.cartController;
+import Controller.Client.Product.categoryController;
 import DAO.*;
 import DAO.Dao_Food;
 import Model.CartItem;
@@ -10,15 +12,15 @@ import Helper.AlertMessage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,14 +36,56 @@ public class paymentController2 implements Initializable {
     private VBox productListContainer;
     @FXML
     private Label lbTotal;
+    @FXML
+    private VBox paymentMethodArea;
     private double totalPrice;
     private double totalPrice1;
     private List<CartItem> checkedItems;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadUI("/View/Client/vnpay.fxml");
     }
+    public void setContentArea(VBox contentArea)
+    {
+        this.paymentMethodArea = contentArea;
+    }
+    private void loadUI(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
 
+            switch (fxml)
+            {
+                case "/View/Client/vnpay.fxml":
+                    paymentController2 controller = loader.getController();
+                    //chu thich dong ben duoi vi vnpay chua co controller
+//                    controller.setContentArea(paymentMethodArea);
+
+                    break;
+//                case "/View/Client/cart.fxml":
+//                    cartController cartCtrl = loader.getController();
+//                    cartCtrl.setContentArea(paymentMethodArea);
+//                    break;
+//                case "/View/Client/category.fxml":
+//                    categoryController controller = loader.getController();
+//                    controller.setContentArea(contentArea);
+            }
+//            detailProductController controller = loader.getController();
+//            controller.setContentArea(contentArea);
+
+            // 🔑 Cho phép root giãn chiều cao trong VBox
+            VBox.setVgrow(root, Priority.ALWAYS);
+            paymentMethodArea.getChildren().clear();
+            paymentMethodArea.getChildren().add(root);
+            if (root instanceof Region) {
+                Region region = (Region) root;
+                region.prefWidthProperty().bind(paymentMethodArea.widthProperty());
+                region.prefHeightProperty().bind(paymentMethodArea.heightProperty());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void setCheckedItems(List<CartItem> checkedItems) {
         this.checkedItems = checkedItems;
         renderCheckedProducts();
@@ -149,5 +193,10 @@ public class paymentController2 implements Initializable {
             this.totalPrice1 += priceEachItem * item.getQuantity();
         }
         return totalPrice1;
+    }
+    public void VNPAYOnAction(MouseEvent e)
+    {
+        loadUI("/View/Client/vnpay.fxml");
+//        btnCategory.getStyleClass().add("selected-button-container");
     }
 }

@@ -1,5 +1,5 @@
 package Controller.Client.Account;
-import Controller.Client.Payment.paymentController;
+import Controller.Client.Payment.paymentController2;
 import Helper.AlertMessage;
 import Controller.Client.Payment.addressController;
 import javafx.fxml.FXMLLoader;
@@ -316,16 +316,16 @@ public class cartController implements Initializable {
                         // Sau khi xác nhận địa chỉ, mới load giao diện payment
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
                         Parent paymentRoot = loader.load();
-                        paymentController paymentCtrl = loader.getController();
+                        paymentController2 paymentCtrl = loader.getController();
 
                         paymentCtrl.setCheckedItems(cartItemsChecked);
-                        paymentCtrl.setAddress(addressCtrl.getAddress());
-                        paymentCtrl.setPrice(priceChecked());
-                        paymentCtrl.setOnCheckoutSuccess(() -> {
-                            // Xóa các item đã chọn khỏi giao diện
-                            cartItemsChecked.clear();
-                            renderCart(); // Render lại giỏ hàng
-                        });
+//                        paymentCtrl.setAddress(addressCtrl.getAddress());
+//                        paymentCtrl.setPrice(priceChecked());
+//                        paymentCtrl.setOnCheckoutSuccess(() -> {
+//                            // Xóa các item đã chọn khỏi giao diện
+//                            cartItemsChecked.clear();
+//                            renderCart(); // Render lại giỏ hàng
+//                        });
                         contentArea.getChildren().clear();
                         contentArea.getChildren().add(paymentRoot);
                         VBox.setVgrow(paymentRoot, Priority.ALWAYS);

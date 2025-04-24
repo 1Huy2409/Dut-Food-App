@@ -14,15 +14,27 @@ public class vnpayController implements Initializable {
     private Button btnOpenPaymentBrowser;
     @FXML
     private VBox paymentMethodArea;
+    private String orderId;
+    private int amount;
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
     public void OpenPaymentBrowserOnAction(MouseEvent e)
     {
         System.out.println("open payment browser");
+        // open browser
+
     }
     public void setContentArea(VBox contentArea)
     {
         this.paymentMethodArea = contentArea;
+    }
+    public void setOrderId(String id)
+    {
+        this.orderId = id;
+    }
+    public void setAmount(int amount)
+    {
+        this.amount = amount;
     }
 }

@@ -56,7 +56,6 @@ public class paymentController2 implements Initializable {
                 case "/View/Client/vnpay.fxml":
                     vnpayController controller = loader.getController();
                     controller.setContentArea(paymentMethodArea);
-
                     break;
 //                case "/View/Client/cart.fxml":
 //                    cartController cartCtrl = loader.getController();
@@ -139,7 +138,6 @@ public class paymentController2 implements Initializable {
             order.setCartId(UserSession.getInstance().getCartId());
             order.setTotalPrice(Double.parseDouble(lbTotal.getText().replaceAll("[^\\d.]", "")));
             Dao_Orders.getInstance().create(order);
-
 
             for (CartItem item : checkedItems) {
                 FoodItem foodItem = new FoodItem();

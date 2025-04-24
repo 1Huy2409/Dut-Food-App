@@ -45,10 +45,7 @@ public class paymentController2 implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadUI("/View/Client/vnpay.fxml");
     }
-    public void setContentArea(VBox contentArea)
-    {
-        this.paymentMethodArea = contentArea;
-    }
+
     private void loadUI(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
@@ -57,9 +54,8 @@ public class paymentController2 implements Initializable {
             switch (fxml)
             {
                 case "/View/Client/vnpay.fxml":
-                    paymentController2 controller = loader.getController();
-                    //chu thich dong ben duoi vi vnpay chua co controller
-//                    controller.setContentArea(paymentMethodArea);
+                    vnpayController controller = loader.getController();
+                    controller.setContentArea(paymentMethodArea);
 
                     break;
 //                case "/View/Client/cart.fxml":

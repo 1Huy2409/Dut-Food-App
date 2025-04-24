@@ -1,5 +1,6 @@
 package Controller.Client.Product;
 
+import Controller.Client.Account.cartController;
 import DAO.Dao_CartItem;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
@@ -260,10 +261,14 @@ public class categoryController implements Initializable {
 
     private void handleBuyNow(FoodItem item) {
         System.out.println("Mua ngay: " + item.getFoodName());
-        // add to cart but select this one
+        HandleCartBuy.getInstance().handleAddToCart(item, null);
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
             Parent root = loader.load();
+            cartController controller = loader.getController();
+            controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea
+            controller.setCheckedItem(item); // Gọi hàm này để render + tích
             VBox.setVgrow(root, Priority.ALWAYS);
             this.contentArea.getChildren().clear();
             this.contentArea.getChildren().add(root);

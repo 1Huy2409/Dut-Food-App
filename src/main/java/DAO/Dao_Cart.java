@@ -1,9 +1,7 @@
 package DAO;
 
-import Database.JDBC;
+import Config.JDBC;
 import Model.Cart;
-import Model.Category;
-import Model.FoodItem;
 
 import java.sql.*;
 import java.util.ArrayList;

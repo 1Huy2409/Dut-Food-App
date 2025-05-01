@@ -10,16 +10,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="TOP_CENTER" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Account.cartController">
    <children>
-      <Label prefHeight="34.0" prefWidth="50.0" text="Your Cart" />
+      <Label prefHeight="35.0" prefWidth="115.0" text="Your Cart">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
 
-      <VBox prefHeight="281.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+      <VBox prefWidth="600.0" styleClass="menu-background" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="500.0" prefWidth="600.0">
+            <ScrollPane fx:id="cartScrollPane" fitToHeight="true" fitToWidth="true" styleClass="menu-background" VBox.vgrow="ALWAYS">
                <content>
-                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" prefColumns="1" prefHeight="500.0" prefWidth="597.0">
+                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" prefColumns="1" VBox.vgrow="ALWAYS">
                      <children>
 <!--                        <HBox fx:id="cartItemTemplate" alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS">-->
 <!--                           <children>-->

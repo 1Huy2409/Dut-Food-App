@@ -1,6 +1,6 @@
 package DAO;
 
-import Database.JDBC;
+import Config.JDBC;
 import Model.FoodItem;
 
 import java.sql.*;

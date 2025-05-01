@@ -1,9 +1,7 @@
 package DAO;
 
-import DAO.Dao_Interface;
-import Database.JDBC;
+import Config.JDBC;
 import Model.CartItem;
-import Model.Category;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -10,6 +10,7 @@ module com.example.loginapp {
     requires jdk.jconsole;
     requires jakarta.mail;
     requires io.github.cdimascio.dotenv.java;
+    requires stripe.java;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;

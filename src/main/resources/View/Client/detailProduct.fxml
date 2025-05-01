@@ -7,30 +7,41 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-<VBox prefHeight="574.0" prefWidth="835.0" spacing="10.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.detailProductController">
+<VBox spacing="10.0" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.detailProductController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="835.0">
          <children>
-            <Button fx:id="btnBackDetail" mnemonicParsing="false" onAction="#backDetailOnAction" text="Back">
+            <Button fx:id="btnBackDetail" mnemonicParsing="false" onAction="#backDetailOnAction" styleClass="back" text="Back">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox prefHeight="250.0" prefWidth="835.0" spacing="50.0">
+      <HBox spacing="50.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="foodImage" fitHeight="189.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="50.0" top="50.0" />
-               </HBox.margin>
-            </ImageView>
-            <VBox fx:id="foodInfo" alignment="CENTER" prefHeight="250.0" prefWidth="517.0">
+            <!--            <ImageView fx:id="foodImage" fitHeight="189.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">-->
+            <!--               <HBox.margin>-->
+            <!--                  <Insets left="50.0" top="50.0" />-->
+            <!--               </HBox.margin>-->
+            <!--            </ImageView>-->
+            <StackPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+               <Rectangle arcHeight="20" arcWidth="20" fill="#eeeeee" height="240" width="300" />
+               <ImageView fx:id="foodImage" fitHeight="240" fitWidth="300" styleClass="image-view">
+                  <clip>
+                     <!-- Clip ảnh theo hình dạng của Rectangle -->
+                     <Rectangle arcHeight="20" arcWidth="20" height="240" width="300" />
+                  </clip>
+               </ImageView>
+            </StackPane>
+            <VBox fx:id="foodInfo" alignment="CENTER" prefHeight="250.0" prefWidth="517.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="lbName" alignment="CENTER" prefHeight="29.0" prefWidth="70.0" />
-                  <Label fx:id="lbPrice" alignment="CENTER" prefHeight="35.0" prefWidth="70.0" />
+                  <Label fx:id="lbName" alignment="CENTER" prefHeight="29.0" prefWidth="150.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                  <Label fx:id="lbPrice" alignment="CENTER" prefHeight="35.0" prefWidth="70.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
                   <HBox alignment="CENTER" prefHeight="66.0" prefWidth="495.0">
                      <children>
                         <Label prefHeight="26.0" prefWidth="51.0" text="Số lượng">
@@ -38,33 +49,42 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" text="+" />
-                        <TextField fx:id="textNum" prefHeight="25.0" prefWidth="34.0">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="quantity-btn" text="+" />
+                        <TextField fx:id="textNum" alignment="CENTER" prefHeight="25.0" prefWidth="34.0">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnSub" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" text="-" />
+                        <Button fx:id="btnSub" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="quantity-btn" text="-" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="137.0" prefHeight="66.0" prefWidth="495.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="btnAddCart" mnemonicParsing="false" text="Thêm vào giỏ hàng" />
-                        <Button fx:id="btnBuyNow" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Mua ngay" />
-                     </children>
-                  </HBox>
+                  <Button fx:id="btnAddCart" maxWidth="Infinity" mnemonicParsing="false" styleClass="btnAddToCart-detail" text="Thêm vào giỏ hàng">
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btnBuyNow" maxWidth="Infinity" mnemonicParsing="false" styleClass="buy-now" text="Mua ngay" />
                </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
             </VBox>
          </children>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </HBox>
-      <VBox alignment="CENTER" prefHeight="255.0" prefWidth="835.0">
+      <VBox alignment="CENTER" prefHeight="255.0" prefWidth="835.0" styleClass="menu-background" VBox.vgrow="ALWAYS">
          <children>
-            <TextArea fx:id="foodDesc" prefHeight="223.0" prefWidth="735.0">
+            <TextArea fx:id="foodDesc" prefHeight="223.0" prefWidth="735.0" styleClass="text-area" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
             </TextArea>
          </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
       </VBox>
    </children>
 </VBox>

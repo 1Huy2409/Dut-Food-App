@@ -1,13 +1,12 @@
 package DAO;
 
-import Database.JDBC;
+import Config.JDBC;
 import Model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Helper.*;
-import javafx.scene.control.Alert;
 
 public class Dao_User implements Dao_Interface<User> {
     public static Dao_User getInstance()

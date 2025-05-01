@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.beans.binding.Bindings;
 
 import javafx.fxml.Initializable;
 
@@ -57,11 +60,23 @@ public class detailProductController implements Initializable {
     private Label lbName;
     @FXML
     private Label lbPrice;
+    @FXML
+    private StackPane imageContainer;
+    @FXML
+    private Rectangle imageBackground;
+    @FXML
+    private Rectangle clipRectangle;
+
 
     public void initialize(URL location, ResourceBundle resources) {
         // render food item detail
 
 //        renderDetail(this.item);
+//        foodImage.fitWidthProperty().bind(imageContainer.widthProperty());
+//
+//        // Clip theo bo góc
+//        clipRectangle.widthProperty().bind(foodImage.fitWidthProperty());
+//        clipRectangle.heightProperty().bind(foodImage.fitHeightProperty());
     }
 
     private void loadUI(String fxml)

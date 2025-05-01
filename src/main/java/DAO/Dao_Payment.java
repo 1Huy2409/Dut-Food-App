@@ -38,7 +38,20 @@ public class Dao_Payment implements Dao_Interface<Payment>{
 
     @Override
     public int update(Payment payment) {
-        return 0;
+        String query = "update payment set status = ? where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1,"completed");
+            pstmt.setInt(2, payment.getId());
+
+            int rs = pstmt.executeUpdate();
+            System.out.println("Payment status updated: " + rs);
+            JDBC.closeConnection(con);
+            return rs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

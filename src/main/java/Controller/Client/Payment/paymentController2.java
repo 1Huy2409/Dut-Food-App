@@ -1,7 +1,5 @@
 package Controller.Client.Payment;
 
-import Controller.Client.Account.cartController;
-import Controller.Client.Product.categoryController;
 import DAO.*;
 import DAO.Dao_Food;
 import Model.CartItem;
@@ -19,8 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,51 +35,17 @@ public class paymentController2 implements Initializable {
     private VBox productListContainer;
     @FXML
     private Label lbTotal;
+
     @FXML
-    private VBox paymentMethodArea;
+    private VBox boxpayment;
     private double totalPrice;
     private double totalPrice1;
     private List<CartItem> checkedItems;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadUI("/View/Client/vnpay.fxml");
+
     }
 
-    private void loadUI(String fxml) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Parent root = loader.load();
-
-            switch (fxml)
-            {
-                case "/View/Client/vnpay.fxml":
-                    vnpayController controller = loader.getController();
-                    controller.setContentArea(paymentMethodArea);
-                    break;
-//                case "/View/Client/cart.fxml":
-//                    cartController cartCtrl = loader.getController();
-//                    cartCtrl.setContentArea(paymentMethodArea);
-//                    break;
-//                case "/View/Client/category.fxml":
-//                    categoryController controller = loader.getController();
-//                    controller.setContentArea(contentArea);
-            }
-//            detailProductController controller = loader.getController();
-//            controller.setContentArea(contentArea);
-
-            // 🔑 Cho phép root giãn chiều cao trong VBox
-            VBox.setVgrow(root, Priority.ALWAYS);
-            paymentMethodArea.getChildren().clear();
-            paymentMethodArea.getChildren().add(root);
-            if (root instanceof Region) {
-                Region region = (Region) root;
-                region.prefWidthProperty().bind(paymentMethodArea.widthProperty());
-                region.prefHeightProperty().bind(paymentMethodArea.heightProperty());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public void setCheckedItems(List<CartItem> checkedItems) {
         this.checkedItems = checkedItems;
         renderCheckedProducts();
@@ -133,36 +98,37 @@ public class paymentController2 implements Initializable {
     }
 
     public void acceptPay() {
-            Order order = new Order();
-            order.setUserId(UserSession.getInstance().getId());
-            order.setCartId(UserSession.getInstance().getCartId());
-            order.setTotalPrice(Double.parseDouble(lbTotal.getText().replaceAll("[^\\d.]", "")));
-            Dao_Orders.getInstance().create(order);
+        Order order = new Order();
+        order.setUserId(UserSession.getInstance().getId());
+        order.setCartId(UserSession.getInstance().getCartId());
+        order.setTotalPrice(Double.parseDouble(lbTotal.getText().replaceAll("[^\\d.]", "")));
+        Dao_Orders.getInstance().create(order);
 
-            for (CartItem item : checkedItems) {
-                FoodItem foodItem = new FoodItem();
-                foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
-                foodItem.setStock(foodItem.getStock() - item.getQuantity());
-                Dao_Food.getInstance().update(foodItem);
-                OrderItem orderItem = new OrderItem();
-                orderItem.setOrderId(order.getId());
-                orderItem.setFoodItemId(item.getFoodItemId());
-                orderItem.setQuantity(item.getQuantity());
-                orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
-                Dao_OrderItems.getInstance().create(orderItem);
-                Dao_CartItem.getInstance().delete(item);
-            }
 
-            Payment payment = new Payment();
-            payment.setOrderId(order.getId());
-//            payment.setPaymentMethod(getSelectedPaymentMethod());
-            payment.setAmount(order.getTotalPrice());
-            Dao_Payment.getInstance().create(payment);
-            AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
+        for (CartItem item : checkedItems) {
+            FoodItem foodItem = new FoodItem();
+            foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
+            foodItem.setStock(foodItem.getStock() - item.getQuantity());
+            Dao_Food.getInstance().update(foodItem);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrderId(order.getId());
+            orderItem.setFoodItemId(item.getFoodItemId());
+            orderItem.setQuantity(item.getQuantity());
+            orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
+            Dao_OrderItems.getInstance().create(orderItem);
+            Dao_CartItem.getInstance().delete(item);
+        }
 
-            if (onCheckoutSuccess != null) {
-                onCheckoutSuccess.run();
-            }
+        Payment payment = new Payment();
+        payment.setOrderId(order.getId());
+        //payment.setPaymentMethod(getSelectedPaymentMethod());
+        payment.setAmount(order.getTotalPrice());
+        Dao_Payment.getInstance().create(payment);
+        AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
+
+        if (onCheckoutSuccess != null) {
+            onCheckoutSuccess.run();
+        }
     }
     private Runnable onCheckoutSuccess;
     public void setOnCheckoutSuccess(Runnable callback) {
@@ -188,9 +154,48 @@ public class paymentController2 implements Initializable {
         }
         return totalPrice1;
     }
-    public void VNPAYOnAction(MouseEvent e)
-    {
-        loadUI("/View/Client/vnpay.fxml");
-//        btnCategory.getStyleClass().add("selected-button-container");
-    }
+    public void OpenVnPay(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/vnpay.fxml"));
+            Parent paymentUI = loader.load();
+            boxpayment.getChildren().add(paymentUI);
+
+
+            Order order = new Order();
+            order.setUserId(UserSession.getInstance().getId());
+            order.setCartId(UserSession.getInstance().getCartId());
+            order.setTotalPrice(Double.parseDouble(lbTotal.getText().replaceAll("[^\\d.]", "")));
+            Dao_Orders.getInstance().create(order);
+
+
+            for (CartItem item : checkedItems) {
+                FoodItem foodItem = new FoodItem();
+                foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
+                foodItem.setStock(foodItem.getStock() - item.getQuantity());
+                Dao_Food.getInstance().update(foodItem);
+                OrderItem orderItem = new OrderItem();
+                orderItem.setOrderId(order.getId());
+                orderItem.setFoodItemId(item.getFoodItemId());
+                orderItem.setQuantity(item.getQuantity());
+                orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
+                Dao_OrderItems.getInstance().create(orderItem);
+                Dao_CartItem.getInstance().delete(item);
+            }
+
+            Payment payment = new Payment();
+            payment.setOrderId(order.getId());
+            payment.setPaymentMethod("VNPay");
+            payment.setAmount(order.getTotalPrice());
+            Dao_Payment.getInstance().create(payment);
+
+            int tmpOrderId = order.getId();
+
+            vnpayController vnpaycontroller = loader.getController();
+            vnpaycontroller.setAmount((int)Double.parseDouble(lbTotal.getText().replaceAll("[^\\d.]", "")));
+            vnpaycontroller.setOrderId(Integer.toString(tmpOrderId));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+     }
 }

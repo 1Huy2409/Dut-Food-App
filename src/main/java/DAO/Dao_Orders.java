@@ -44,7 +44,20 @@ public class Dao_Orders implements Dao_Interface<Order>{
 
     @Override
     public int update(Order order) {
-        return 0;
+        String query = "update orders set status = ? where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, order.getStatus());
+            pstmt.setInt(2, order.getId());
+
+            int rs = pstmt.executeUpdate();
+            System.out.println("Order status updated: " + rs);
+            JDBC.closeConnection(con);
+            return rs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -54,7 +67,29 @@ public class Dao_Orders implements Dao_Interface<Order>{
 
     @Override
     public Order selectedById(int id) {
-        return null;
+        String query = "select * from orders where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("id"));
+                order.setUserId(rs.getInt("user_id"));
+                order.setCartId(rs.getInt("cart_id"));
+                order.setTotalPrice(rs.getDouble("total_price"));
+                order.setStatus(rs.getString("status"));
+                order.setOrderDate(rs.getTimestamp("order_date"));
+                JDBC.closeConnection(con);
+                return order;
+            }
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null; // không tìm thấy
     }
 
     @Override

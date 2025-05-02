@@ -301,7 +301,7 @@ public class cartController implements Initializable {
         }
         else {
             try {
-                // Tải màn hình thanh toán từ FXML
+                // Tải màn hình nhập địa chỉ từ
                 FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/address.fxml"));
                 Parent addressRoot = addressLoader.load();
                 addressController addressCtrl = addressLoader.getController();
@@ -321,13 +321,16 @@ public class cartController implements Initializable {
 
                         paymentCtrl.setCheckedItems(cartItemsChecked);
 
-                            paymentCtrl.setAddress(addressCtrl.getAddress());
-
+                        paymentCtrl.setAddress(addressCtrl.getAddress());
+                        paymentCtrl.setContentArea(this.contentArea);
                         paymentCtrl.setPrice(priceChecked());
                         paymentCtrl.setOnCheckoutSuccess(() -> {
                             // Xóa các item đã chọn khỏi giao diện
                             cartItemsChecked.clear();
                             renderCart(); // Render lại giỏ hàng
+                            // set lại content area
+                            // 1.Cash: back về Home
+                            // 2.VNPay: đưa tới giao diện vnpay có button
                         });
                         contentArea.getChildren().clear();
                         contentArea.getChildren().add(paymentRoot);

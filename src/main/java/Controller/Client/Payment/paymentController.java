@@ -8,6 +8,7 @@ import Model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,13 +34,25 @@ public class paymentController implements Initializable {
     @FXML
     private RadioButton vnpay;
     @FXML
-    private RadioButton momo;
-    @FXML
     private RadioButton cash;
-    @FXML
-    private RadioButton credit_card;
     private ToggleGroup paymentGroup;
     private List<CartItem> checkedItems;
+
+    private VBox contentArea;
+    private void loadUI(String fxml)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
+            this.contentArea.getChildren().clear();
+            this.contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setContentArea(VBox contentArea) {
+        this.contentArea = contentArea;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // renderCheckedProducts();
@@ -135,10 +148,30 @@ public class paymentController implements Initializable {
             payment.setPaymentMethod(getSelectedPaymentMethod());
             payment.setAmount(order.getTotalPrice());
             Dao_Payment.getInstance().create(payment);
-            AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
 
+            AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
             if (onCheckoutSuccess != null) {
                 onCheckoutSuccess.run();
+            }
+            if (payment.getPaymentMethod().equals("Cash"))
+            {
+                // load ra giao dien home
+                loadUI("/View/Client/category.fxml");
+            }
+            else
+            {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/vnpay.fxml"));
+                    Parent root = loader.load();
+                    vnpayController vnpaycontroller = loader.getController();
+                    vnpaycontroller.setAmount((int)Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));
+                    vnpaycontroller.setOrderId(Integer.toString(order.getId()));
+                    this.contentArea.getChildren().clear();
+                    this.contentArea.getChildren().add(root);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         }
     }

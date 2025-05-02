@@ -1,6 +1,6 @@
 package Controller.Client.Payment;
 
-import Config.VNPayPayment;
+import Config.StripeService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,8 +26,8 @@ public class vnpayController implements Initializable {
     {
         System.out.println("open payment browser");
         try{
-        String url = VNPayPayment.createPaymentUrl(50000,Integer.toString(5));
-            Desktop.getDesktop().browse(new URI(url));
+            String checkoutUrl = StripeService.createCheckoutSession(amount, "Đơn hàng " + orderId);
+            Desktop.getDesktop().browse(new URI(checkoutUrl));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

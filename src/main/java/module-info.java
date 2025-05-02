@@ -11,6 +11,10 @@ module com.example.loginapp {
     requires jakarta.mail;
     requires io.github.cdimascio.dotenv.java;
     requires stripe.java;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
+    requires org.json;
+    requires org.apache.commons.codec;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;

@@ -36,7 +36,6 @@ import java.util.ResourceBundle;
 public class categoryController implements Initializable {
 //    @FXML
 //    private Button categoryBtn;
-    private Button lastSelectedButton;
 
     @FXML
     private TilePane categoryButtonBox;
@@ -60,8 +59,6 @@ public class categoryController implements Initializable {
     private VBox contentArea;
     public void initialize(URL location, ResourceBundle resources)
     {
-        btnAll.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-background-radius: 12; -fx-border-radius: 12;");
-        lastSelectedButton = btnAll;
         renderBtnCategory();
         renderProduct();
     }
@@ -92,11 +89,7 @@ public class categoryController implements Initializable {
         for (Category item : categoryItems)
         {
             Button btn = new Button(item.getCategoryName());
-            btn.setStyle("-fx-background-color: white;-fx-background-radius: 12;-fx-border-radius: 12; -fx-text-fill: black");
             btn.setOnAction(event -> {
-                lastSelectedButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 12; -fx-border-radius: 12;");
-                btn.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-background-radius: 12;-fx-border-radius: 12;");
-                lastSelectedButton = btn;
                 renderProductByCategory(item);
             });
             categoryButtonBox.getChildren().add(btn);
@@ -111,7 +104,6 @@ public class categoryController implements Initializable {
 
         for (Category item : categoryItems) {
             Label nameCategory = new Label(item.getCategoryName());
-            nameCategory.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14pt;");
             VBoxProduct.getChildren().add(nameCategory);
 
             // Tạo productBox 1 lần duy nhất cho mỗi Category
@@ -129,7 +121,7 @@ public class categoryController implements Initializable {
                 VBox productItemBox = new VBox();
                 productItemBox.setSpacing(5); // khoảng cách giữa các phần tử
                 productItemBox.setAlignment(Pos.CENTER); // căn giữa các phần tử con
-                productItemBox.setStyle("-fx-padding: 10; -fx-background-color: rgba(255,255,255,0.2); -fx-border-radius: 10; -fx-background-radius: 10;");
+                productItemBox.setStyle("-fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
 
                 ImageView imageview = new ImageView();
                 imageview.setFitWidth(120);
@@ -190,7 +182,6 @@ public class categoryController implements Initializable {
         VBoxProduct.getChildren().removeIf(node -> node != categoryButtonBox);
 
         Label nameCategory = new Label(category.getCategoryName());
-        nameCategory.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14pt;");
         VBoxProduct.getChildren().add(nameCategory);
 
         TilePane productBox = new TilePane();
@@ -260,9 +251,6 @@ public class categoryController implements Initializable {
 
     public void btnAllOnAction(MouseEvent e)
     {
-        lastSelectedButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 12; -fx-border-radius: 12;");
-        btnAll.setStyle("-fx-background-color: #E93940; -fx-text-fill: white;");
-        lastSelectedButton = btnAll;
         renderProduct();
     }
     private void handleAddToCart(FoodItem item) {
@@ -280,7 +268,7 @@ public class categoryController implements Initializable {
             Parent root = loader.load();
             cartController controller = loader.getController();
             controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea
-            //controller.setCheckedItem(item); // Gọi hàm này để render + tích
+            controller.setCheckedItem(item); // Gọi hàm này để render + tích
             VBox.setVgrow(root, Priority.ALWAYS);
             this.contentArea.getChildren().clear();
             this.contentArea.getChildren().add(root);

@@ -1,5 +1,6 @@
 package Controller.Client.Payment;
 
+import Helper.AlertMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,18 +61,26 @@ public class addressController {
 
     @FXML
     private void handleConfirm(ActionEvent event) {
+        if(getAddress() == null ){
+            AlertMessage.showAlertErrorMessage("Please enter complete information");
+            return;
+        }
         if (onConfirm != null) {
             onConfirm.run();
         }
     }
     @FXML
     private void handleCancel( ActionEvent event) {
+
         if (onCancel != null) {
             onCancel.run();
         }
     }
     public String getAddress() {
-        return txtName.getText() +", " + "(+84) " + txtSdt.getText() +", " + address.getText() + ", " + cbbCity.getValue();
+        if(!txtName.getText().isEmpty() && !txtSdt.getText().isEmpty() && !address.getText().isEmpty() && !cbbCity.getValue().isEmpty()){
+            return txtName.getText() +", " + "(+84) " + txtSdt.getText() +", " + address.getText() + ", " + cbbCity.getValue();
+        }
+        return null;
     }
 
 }

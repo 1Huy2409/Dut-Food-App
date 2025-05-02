@@ -1,8 +1,9 @@
 package Controller.Client.Account;
-//import Controller.Client.Payment.paymentController;
-import Controller.Client.Payment.paymentController2;
-import Helper.AlertMessage;
+
 import Controller.Client.Payment.addressController;
+import Controller.Client.Payment.paymentController;
+import Helper.AlertMessage;
+import Model.FoodItem;
 import javafx.fxml.FXMLLoader;
 
 import java.awt.*;
@@ -22,17 +23,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.TilePane;
 import javafx.application.Platform;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -93,11 +89,12 @@ public class cartController implements Initializable {
     @FXML
     private Label stockLimitLabel;
 
-    @FXML
     private VBox contentArea;
     private double totalPrice;
     private double totalPrice1;
-    private List<CartItem> cartItemsChecked = new ArrayList<>();
+    public List<CartItem> cartItemsChecked = new ArrayList<>();
+    private FoodItem checkedItem = null;
+
 
     // create list cartChecked => then set on action push to order list
 
@@ -105,8 +102,7 @@ public class cartController implements Initializable {
     {
         renderCart();
     }
-    public void setContentArea(VBox contentArea)
-    {
+    public void setContentArea(VBox contentArea) {
         this.contentArea = contentArea;
     }
     private HBox cloneTemplate() {
@@ -139,13 +135,17 @@ public class cartController implements Initializable {
 
             CheckBox checkBox = (CheckBox) clonedItem.lookup("#productCheckbox");
             checkBox.setUserData(item);
+            if (checkedItem != null && item.getFoodItemId() == checkedItem.getId()) {
+                checkBox.setSelected(true);
+                if (!cartItemsChecked.contains(item)) {
+                    cartItemsChecked.add(item);
+                }
+                renderTotalPrice();
+            }
             ImageView imageView = (ImageView) clonedItem.lookup("#productImage");
             Label nameLabel = (Label) clonedItem.lookup("#productName");
-            nameLabel.setStyle("-fx-text-fill: black");
             Label descLabel = (Label) clonedItem.lookup("#productDesc");
-            descLabel.setStyle("-fx-text-fill: black");
             Label priceLabel = (Label) clonedItem.lookup("#productPrice");
-            priceLabel.setStyle("-fx-text-fill: black");
             TextField quantityTextfield = (TextField) clonedItem.lookup("#productQuantity");
             Button minusButton = (Button) clonedItem.lookup("#minusButton");
             Button plusButton = (Button) clonedItem.lookup("#plusButton");
@@ -317,24 +317,18 @@ public class cartController implements Initializable {
                         // Sau khi xác nhận địa chỉ, mới load giao diện payment
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
                         Parent paymentRoot = loader.load();
-                        //paymentController paymentCtrl = loader.getController();
-                        paymentController2 paymentCtrl = loader.getController();
+                        paymentController paymentCtrl = loader.getController();
 
                         paymentCtrl.setCheckedItems(cartItemsChecked);
-//                        paymentCtrl.setAddress(addressCtrl.getAddress());
-//                        paymentCtrl.setPrice(priceChecked());
-//                        paymentCtrl.setOnCheckoutSuccess(() -> {
-//                            // Xóa các item đã chọn khỏi giao diện
-//                            cartItemsChecked.clear();
-//                            renderCart(); // Render lại giỏ hàng
-//                        });
-                        //                        paymentCtrl.setAddress(addressCtrl.getAddress());
-                        //                        paymentCtrl.setPrice(priceChecked());
-                        //                        paymentCtrl.setOnCheckoutSuccess(() -> {
-                        //                            // Xóa các item đã chọn khỏi giao diện
-                        //                            cartItemsChecked.clear();
-                        //                            renderCart(); // Render lại giỏ hàng
-                        //                        });
+
+                            paymentCtrl.setAddress(addressCtrl.getAddress());
+
+                        paymentCtrl.setPrice(priceChecked());
+                        paymentCtrl.setOnCheckoutSuccess(() -> {
+                            // Xóa các item đã chọn khỏi giao diện
+                            cartItemsChecked.clear();
+                            renderCart(); // Render lại giỏ hàng
+                        });
                         contentArea.getChildren().clear();
                         contentArea.getChildren().add(paymentRoot);
                         VBox.setVgrow(paymentRoot, Priority.ALWAYS);
@@ -353,5 +347,9 @@ public class cartController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+    public void setCheckedItem(FoodItem item) {
+        this.checkedItem = item;
+        renderCart();
     }
 }

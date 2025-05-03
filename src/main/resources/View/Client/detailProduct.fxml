@@ -58,12 +58,12 @@
                         <Button fx:id="btnSub" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="quantity-btn" text="-" />
                      </children>
                   </HBox>
-                  <Button fx:id="btnAddCart" maxWidth="Infinity" mnemonicParsing="false" styleClass="btnAddToCart-detail" text="Thêm vào giỏ hàng">
+                  <Button fx:id="btnAddCart" mnemonicParsing="false" prefWidth="250.0" styleClass="btnAddToCart-detail" text="Thêm vào giỏ hàng">
                      <VBox.margin>
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnBuyNow" maxWidth="Infinity" mnemonicParsing="false" styleClass="buy-now" text="Mua ngay" />
+                  <Button fx:id="btnBuyNow" mnemonicParsing="false" prefWidth="250.0" styleClass="buy-now" text="Mua ngay" />
                </children>
                <HBox.margin>
                   <Insets right="20.0" />

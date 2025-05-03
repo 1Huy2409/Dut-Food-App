@@ -50,6 +50,16 @@
 }
 .btnAddCart{
     -fx-background-color: #E93940;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btnBuyNow{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #e93940;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 .container-client{
     -fx-background-color: rgb(255,255,255,0.2);
@@ -152,6 +162,9 @@
     -fx-background-radius: 12;
     -fx-border-radius: 12;
 }
+.btnAll:hover{
+    -fx-cursor: hand;
+}
 .btnAll:pressed {
     -fx-background-color: #E93940;
     -fx-text-fill: white;
@@ -193,6 +206,7 @@
     -fx-font-weight: bold;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
+    -fx-cursor: hand;
 }
 .buy-now:hover {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e74c3c, #f39c12);
@@ -230,6 +244,7 @@
             -fx-background-radius: 3px;
             -fx-border-radius: 3px;
             -fx-alignment: center;
+            -fx-cursor: hand;
 }
 .quantity-btn:hover {
      -fx-background-color: #e67e22;
@@ -240,6 +255,7 @@
         -fx-font-size: 14px;
         -fx-background-radius: 10;
         -fx-border-radius: 10;
+        -fx-cursor: hand;
 }
 .btnAddToCart-detail:hover {
     -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #fbcb6a, #a0f8ff);
@@ -249,3 +265,40 @@
             -fx-border-radius: 10;
 }
 
+.cart-text {
+    -fx-text-fill: black;
+    -fx-font-size: 14;
+}
+
+.categories-button{
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.categories-button:hover {
+    -fx-cursor: hand;
+}
+
+.product-item-box{
+    -fx-padding: 10;
+    -fx-border-color: rgb(255,255,255,0.2);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: rgb(255,255,255,0.2);
+}
+
+.selected-category{
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+}
+.unselected-category{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+}

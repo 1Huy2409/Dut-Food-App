@@ -57,8 +57,11 @@ public class categoryController implements Initializable {
     private ScrollPane productCover;
 
     private VBox contentArea;
+    private Button lastSelectedButton;
     public void initialize(URL location, ResourceBundle resources)
     {
+        btnAll.getStyleClass().add("selected-category");
+        lastSelectedButton = btnAll;
         renderBtnCategory();
         renderProduct();
     }
@@ -89,7 +92,12 @@ public class categoryController implements Initializable {
         for (Category item : categoryItems)
         {
             Button btn = new Button(item.getCategoryName());
+            btn.getStyleClass().add("categories-button");
             btn.setOnAction(event -> {
+                lastSelectedButton.getStyleClass().add("unselected-category");
+                lastSelectedButton = btn;
+                lastSelectedButton.getStyleClass().remove("unselected-category");
+                lastSelectedButton.getStyleClass().add("selected-category");
                 renderProductByCategory(item);
             });
             categoryButtonBox.getChildren().add(btn);
@@ -104,6 +112,7 @@ public class categoryController implements Initializable {
 
         for (Category item : categoryItems) {
             Label nameCategory = new Label(item.getCategoryName());
+            nameCategory.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14pt;");
             VBoxProduct.getChildren().add(nameCategory);
 
             // Tạo productBox 1 lần duy nhất cho mỗi Category
@@ -121,7 +130,8 @@ public class categoryController implements Initializable {
                 VBox productItemBox = new VBox();
                 productItemBox.setSpacing(5); // khoảng cách giữa các phần tử
                 productItemBox.setAlignment(Pos.CENTER); // căn giữa các phần tử con
-                productItemBox.setStyle("-fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
+//                productItemBox.setStyle("-fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
+                productItemBox.getStyleClass().add("product-item-box");
 
                 ImageView imageview = new ImageView();
                 imageview.setFitWidth(120);
@@ -142,12 +152,13 @@ public class categoryController implements Initializable {
                 imageview.setClip(clip);
 
                 Label nameLabel = new Label(foodItemOfCategory.getFoodName());
-                nameLabel.setStyle("-fx-font-weight: bold;");
+                nameLabel.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
 
                 Label priceLabel = new Label(foodItemOfCategory.getPrice().toString());
 
                 Button addToCart = new Button("THÊM VÀO GIỎ");
-                addToCart.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-font-weight: bold;");
+//                addToCart.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
+                addToCart.getStyleClass().add("btnAddCart");
                 addToCart.setUserData(foodItemOfCategory);
                 addToCart.setOnAction(event -> {
                     FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();
@@ -155,7 +166,8 @@ public class categoryController implements Initializable {
                 });
 
                 Button buyNow = new Button("MUA NGAY");
-                buyNow.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #e93940; -fx-font-weight: bold;");
+//                buyNow.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #e93940; -fx-font-weight: bold; -fx-cursor: hand;");
+                buyNow.getStyleClass().add("btnBuyNow");
                 buyNow.setUserData(foodItemOfCategory);
                 buyNow.setOnAction(event -> {
                     FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();
@@ -197,7 +209,8 @@ public class categoryController implements Initializable {
             VBox productItemBox = new VBox();
             productItemBox.setSpacing(5);
             productItemBox.setAlignment(Pos.CENTER);
-            productItemBox.setStyle("-fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
+//            productItemBox.setStyle("-fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
+            productItemBox.getStyleClass().add("product-item-box");
 
             ImageView imageview = new ImageView();
             imageview.setFitWidth(120);
@@ -251,6 +264,10 @@ public class categoryController implements Initializable {
 
     public void btnAllOnAction(MouseEvent e)
     {
+        lastSelectedButton.getStyleClass().add("unselected-category");
+        btnAll.getStyleClass().remove("unselected-category");
+        btnAll.getStyleClass().add("selected-category");
+        lastSelectedButton = btnAll;
         renderProduct();
     }
     private void handleAddToCart(FoodItem item) {

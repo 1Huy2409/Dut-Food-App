@@ -23,7 +23,7 @@
          <children>
             <ScrollPane fx:id="cartScrollPane" fitToHeight="true" fitToWidth="true" styleClass="menu-background" VBox.vgrow="ALWAYS">
                <content>
-                  <TilePane fx:id="productContainer" alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" prefColumns="1" VBox.vgrow="ALWAYS">
+                  <TilePane fx:id="productContainer" alignment="TOP_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefColumns="1" VBox.vgrow="ALWAYS">
                      <children>
 <!--                        <HBox fx:id="cartItemTemplate" alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS">-->
 <!--                           <children>-->

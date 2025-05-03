@@ -21,12 +21,12 @@
 
     <VBox alignment="CENTER" prefHeight="101.0" prefWidth="159.0">
         <children>
-            <Label fx:id="productName" text="Tên sản phẩm" />
-            <Label fx:id="productDesc" text="Mô tả sản phẩm" />
+            <Label fx:id="productName" text="Tên sản phẩm"  styleClass="cart-text"/>
+            <Label fx:id="productDesc" text="Mô tả sản phẩm" styleClass="cart-text"/>
         </children>
     </VBox>
 
-    <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" text="0 VND" />
+    <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" text="0 VND" styleClass="cart-text"/>
 
     <HBox alignment="CENTER" fillHeight="false" prefHeight="20.0" prefWidth="100.0"
           styleClass="cart-button" spacing="0">

@@ -27,9 +27,9 @@
 
                         <Label text="Label" />
 
-                        <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" vgap="15.0" VBox.vgrow="ALWAYS">
+                        <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" tileAlignment="TOP_LEFT"  vgap="15.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <VBox fx:id="productItemBox" alignment="CENTER" maxWidth="200" styleClass="container-client" stylesheets="@../../CSS/styles.css">
+                                <VBox fx:id="productItemBox" maxWidth="200" styleClass="container-client" stylesheets="@../../CSS/styles.css">
                                     <children>
                                         <ImageView fitHeight="93.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                             <VBox.margin>

@@ -194,6 +194,7 @@ public class categoryController implements Initializable {
         VBoxProduct.getChildren().removeIf(node -> node != categoryButtonBox);
 
         Label nameCategory = new Label(category.getCategoryName());
+        nameCategory.setStyle("-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14pt;");
         VBoxProduct.getChildren().add(nameCategory);
 
         TilePane productBox = new TilePane();
@@ -236,7 +237,7 @@ public class categoryController implements Initializable {
             Label priceLabel = new Label(foodItemOfCategory.getPrice().toString());
 
             Button addToCart = new Button("THÊM VÀO GIỎ");
-            addToCart.setStyle("-fx-background-color: #E93940; -fx-text-fill: white; -fx-font-weight: bold;");
+            addToCart.getStyleClass().add("btnAddCart");
             addToCart.setUserData(foodItemOfCategory);
             addToCart.setOnAction(event -> {
                 FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();
@@ -244,7 +245,7 @@ public class categoryController implements Initializable {
             });
 
             Button buyNow = new Button("MUA NGAY");
-            buyNow.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffb6c1; -fx-font-weight: bold;");
+            buyNow.getStyleClass().add("btnBuyNow");
             buyNow.setUserData(foodItemOfCategory);
             buyNow.setOnAction(event -> {
                 FoodItem selectedItem = (FoodItem) ((Button) event.getSource()).getUserData();

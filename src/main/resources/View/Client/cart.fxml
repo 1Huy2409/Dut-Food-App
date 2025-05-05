@@ -78,42 +78,32 @@
 
       <HBox alignment="CENTER" prefHeight="134.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <TextField fx:id="couponCodeTextField" promptText="Coupon Code">
-               <HBox.margin>
-                  <Insets bottom="70" left="10.0" right="10.0" />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="applyCouponBtn" mnemonicParsing="false" prefHeight="27.0" styleClass="cart-button" text="Apply coupon" textFill="WHITE">
-               <HBox.margin>
-                  <Insets bottom="70" right="30.0" />
-               </HBox.margin>
-            </Button>
             <VBox alignment="CENTER" prefHeight="144.0" prefWidth="303.0">
                <children>
                   <Pane prefHeight="89.0" prefWidth="400.0">
                      <children>
                         <VBox alignment="CENTER_LEFT" layoutY="1.0" prefHeight="82.0" prefWidth="288.0">
                            <children>
-                              <Label text="Cart total">
-                                 <VBox.margin>
-                                    <Insets bottom="4.0" left="10.0" top="2.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="400.0" spacing="180.0">
-                                 <children>
-                                    <Label text="Subtotal" />
-                                    <Label fx:id="subtotal" text="Label" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <Pane prefHeight="1.0" prefWidth="400.0" styleClass="checkout-line-color">
-                                 <VBox.margin>
-                                    <Insets bottom="4.0" left="10.0" right="10.0" />
-                                 </VBox.margin>
-                              </Pane>
-                              <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="288.0" spacing="200.0">
+<!--                              <Label text="Cart total">-->
+<!--                                 <VBox.margin>-->
+<!--                                    <Insets bottom="4.0" left="10.0" top="2.0" />-->
+<!--                                 </VBox.margin>-->
+<!--                              </Label>-->
+<!--                              <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="400.0" spacing="180.0">-->
+<!--                                 <children>-->
+<!--                                    <Label text="Subtotal" />-->
+<!--                                    <Label fx:id="subtotal" text="Label" />-->
+<!--                                 </children>-->
+<!--                                 <VBox.margin>-->
+<!--                                    <Insets left="10.0" />-->
+<!--                                 </VBox.margin>-->
+<!--                              </HBox>-->
+<!--                              <Pane prefHeight="1.0" prefWidth="400.0" styleClass="checkout-line-color">-->
+<!--                                 <VBox.margin>-->
+<!--                                    <Insets bottom="4.0" left="10.0" right="10.0" />-->
+<!--                                 </VBox.margin>-->
+<!--                              </Pane>-->
+                              <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="288.0" spacing="200.0">
                                  <children>
                                     <Label text="Total" />
                                     <Label fx:id="total" />

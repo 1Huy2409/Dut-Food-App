@@ -105,9 +105,11 @@
     -fx-background-radius: 6;
     -fx-border-color: #FB5C7A;
     -fx-border-radius: 6;
+    -fx-cursor: hand;
 }
 .pretty-checkbox {
     -fx-padding: 0;
+    -fx-cursor: hand;
 }
 
 .pretty-checkbox .box {
@@ -306,4 +308,8 @@
 .container-payment{
     -fx-background-color: rgb(255,255,255,0.2);
     -fx-border-radius: 20;
+}
+
+.delete-button{
+    -fx-cursor: hand;
 }

@@ -40,7 +40,7 @@
         </children>
     </HBox>
 
-    <StackPane fx:id="deleteContainer" prefHeight="101.0" prefWidth="74.0">
+    <StackPane fx:id="deleteContainer" prefHeight="101.0" prefWidth="74.0" styleClass="delete-button">
         <children>
             <ImageView fx:id="deleteIcon" fitHeight="28.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                 <image>

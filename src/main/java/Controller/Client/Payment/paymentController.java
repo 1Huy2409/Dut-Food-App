@@ -131,9 +131,12 @@ public class paymentController implements Initializable {
 
             for (CartItem item : checkedItems) {
                 FoodItem foodItem = new FoodItem();
+                // cập nhật lại fooditem (stock và sold)
                 foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
                 foodItem.setStock(foodItem.getStock() - item.getQuantity());
+                foodItem.setSold(item.getQuantity());
                 Dao_Food.getInstance().update(foodItem);
+                // done update fooditem
                 OrderItem orderItem = new OrderItem();
                 orderItem.setOrderId(order.getId());
                 orderItem.setFoodItemId(item.getFoodItemId());

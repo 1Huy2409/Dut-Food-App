@@ -1,5 +1,6 @@
 package Controller.Client.Product;
 
+import Controller.Client.Account.cartController;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -170,6 +171,17 @@ public class detailProductController implements Initializable {
 
         System.out.println("Mua ngay: " + item.getFoodName());
         // loadUI ra cart
-        loadUI("/View/Client/cart.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
+            Parent root = loader.load();
+            cartController controller = loader.getController();
+            controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea
+            controller.setCheckedItem(item); // Gọi hàm này để render + tích
+            VBox.setVgrow(root, Priority.ALWAYS);
+            this.contentArea.getChildren().clear();
+            this.contentArea.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

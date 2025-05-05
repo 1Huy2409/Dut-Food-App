@@ -15,7 +15,19 @@ public class HandleCartBuy {
         {
             // update quantity
             int newQuantity = findItem.getQuantity();
-            newQuantity++;
+            // check coi quantity set có vượt quá stock hay không
+            if (quantity != null)
+            {
+                newQuantity += quantity;
+            }
+            else {
+                newQuantity++;
+            }
+            if (newQuantity > item.getStock())
+            {
+                AlertMessage.showAlertErrorMessage("Vượt quá số lượng tồn kho của sản phẩm!");
+                return;
+            }
             findItem.setQuantity(newQuantity);
             Dao_CartItem.getInstance().updateQuantity(findItem);
         }
@@ -24,6 +36,11 @@ public class HandleCartBuy {
             if (quantity == null)
             {
                 quantity = 1;
+            }
+            if (quantity > item.getStock())
+            {
+                AlertMessage.showAlertErrorMessage("Vượt quá số lượng tồn kho của sản phẩm!");
+                return;
             }
             CartItem cartItem = new CartItem();
             cartItem.setCartId(UserSession.getInstance().getCartId());

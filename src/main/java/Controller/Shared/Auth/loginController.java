@@ -3,6 +3,7 @@ import DAO.Dao_Cart;
 import DAO.Dao_User;
 import Model.Cart;
 import Model.User;
+import Helper.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,6 +35,11 @@ public class loginController
     public void loginButtonOnAction(ActionEvent e) {
         String emailCheck = emailTextField.getText();
         String passwordCheck = passwordPasswordField.getText();
+        // validate data
+        if (!Validation.getInstance().loginValidation(emailCheck, passwordCheck))
+        {
+            return;
+        }
         User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {

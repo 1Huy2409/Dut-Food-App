@@ -4,6 +4,7 @@ import DAO.Dao_Cart;
 import DAO.Dao_User;
 import Model.Cart;
 import Model.User;
+import Helper.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,11 +38,16 @@ public class registerController {
     //method
     public void registerButtonOnAction(ActionEvent e)
     {
-        String fullName = fullNameTextField.getText();
-        String email = emailTextField.getText();
-        String userName = userNameTextField.getText();
-        String password = passwordPasswordField.getText();
-        String phone = phoneTextField.getText();
+        String fullName = fullNameTextField.getText().trim();
+        String email = emailTextField.getText().trim();
+        String userName = userNameTextField.getText().trim();
+        String password = passwordPasswordField.getText().trim();
+        String phone = phoneTextField.getText().trim();
+        // validate data
+        if (!Validation.getInstance().registerValidate(fullName, email, userName, password, phone))
+        {
+            return;
+        }
         // check userName and email has been existed in databases yet, if yes => "try again", else => "create new user"
         User newUser = Dao_User.getInstance().checkEmail(Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone).getEmail());
         if (newUser != null)

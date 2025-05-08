@@ -85,13 +85,13 @@ public class productController {
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
-        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.22));
         priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.3));
-        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.2));
+        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.08));
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();
             return new SimpleStringProperty(status ? "Active" : "Inactive");

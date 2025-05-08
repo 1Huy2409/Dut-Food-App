@@ -1,6 +1,7 @@
 package Controller.Client.Payment;
 
 import Helper.AlertMessage;
+import Helper.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -61,6 +62,10 @@ public class addressController {
 
     @FXML
     private void handleConfirm(ActionEvent event) {
+        if(!Validation.isValidPhone(txtSdt.getText())){
+            AlertMessage.showAlertErrorMessage("Invalid phone number");
+            return;
+        }
         if(getAddress() == null ){
             AlertMessage.showAlertErrorMessage("Please enter complete information");
             return;
@@ -77,6 +82,7 @@ public class addressController {
         }
     }
     public String getAddress() {
+
         if(!txtName.getText().isEmpty() && !txtSdt.getText().isEmpty() && !address.getText().isEmpty() && !cbbCity.getValue().isEmpty()){
             return txtName.getText() +", " + "(+84) " + txtSdt.getText() +", " + address.getText() + ", " + cbbCity.getValue();
         }

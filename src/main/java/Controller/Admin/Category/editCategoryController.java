@@ -2,7 +2,9 @@ package Controller.Admin.Category;
 
 import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.AlertMessage;
 import Helper.RouteScreen;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
@@ -69,6 +71,10 @@ public class editCategoryController{
         item.setId(Integer.parseInt(cateId.getText()));
         item.setCategoryName(cateName.getText());
         item.setDescription(cateDesc.getText());
+        if(Validation.isCategoryExists(cateName.getText())){
+            AlertMessage.showAlertErrorMessage("Category already exists");
+            return;
+        }
         if (cateTrue.isSelected())
         {
             item.setStatus(true);

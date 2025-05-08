@@ -3,6 +3,7 @@ package Controller.Admin.Product;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
@@ -88,7 +89,8 @@ public class addProductController {
     }
     public void btnok(){
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
-        if(txtName.getText() != " " && txtPrice.getText() != " " && txtDes.getText() != " " && img.getImage() != null && cbCategory.getValue() != null){
+
+        if(!txtName.getText().isEmpty() && Validation.isValidPrice(txtPrice.getText()) && !txtDes.getText().isEmpty() && img.getImage() != null && cbCategory.getValue() != null){
             item.setFoodName(txtName.getText());
             item.setPrice(Double.parseDouble(txtPrice.getText()));
             item.setDescription(txtDes.getText());

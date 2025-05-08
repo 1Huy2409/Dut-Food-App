@@ -2,6 +2,7 @@ package Controller.Admin.Category;
 
 import DAO.Dao_Category;
 import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,9 +28,12 @@ public class addCategoryController {
     {
         Stage currentStage = (Stage) btnAdd.getScene().getWindow();
         // validate for add form
-        if (cateName.getText() == "" || cateDesc.getText() == "")
+        if (cateName.getText().isEmpty() || cateDesc.getText().isEmpty())
         {
             AlertMessage.showAlertErrorMessage("Please enter category name and description!");
+        }
+        else if(Validation.isCategoryExists(cateName.getText())){
+            AlertMessage.showAlertErrorMessage("Category already exists");
         }
         else
         {

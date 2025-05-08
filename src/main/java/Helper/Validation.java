@@ -1,4 +1,13 @@
 package Helper;
+import Config.JDBC;
+import DAO.Dao_Category;
+import Model.Category;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.Normalizer;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 public class Validation {
@@ -81,5 +90,30 @@ public class Validation {
             return false;
         }
         return true;
+    }
+    public static boolean isCategoryExists(String nameInput) {
+        String normalizedInput = normalizeName(nameInput);
+
+        // Lấy toàn bộ danh mục từ database
+        List<Category> categoryList = Dao_Category.getInstance().getAll();
+
+        for (Category c : categoryList) {
+            String normalizedExisting = normalizeName(c.getCategoryName());
+            if (normalizedInput.equals(normalizedExisting)) {
+                return true; // Đã tồn tại
+            }
+        }
+        return false; // Không tồn tại
+    }
+
+    // Hàm phụ trợ xóa dấu tiếng Việt
+    private static String normalizeName(String s) {
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        return temp.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .toLowerCase()
+                .trim();
+    }
+    public static boolean isValidPrice(String priceText) {
+        return priceText.matches("\\d+(\\.\\d+)?");
     }
 }

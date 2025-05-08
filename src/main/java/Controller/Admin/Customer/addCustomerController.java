@@ -3,6 +3,7 @@ package Controller.Admin.Customer;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.PasswordHelper;
+import Helper.Validation;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,6 +59,14 @@ public class addCustomerController {
             user.setPhone(txtphone.getText());
             user.setUserName(txtusername.getText());
             user.setRoleId(2);
+        }
+        else if(!Validation.isValidEmail(txtemail.getText())){
+            checkinfo = false;
+            AlertMessage.showAlertErrorMessage("Invalid email");
+        }
+        else if(!Validation.isValidPhone(txtphone.getText())){
+            checkinfo = false;
+            AlertMessage.showAlertErrorMessage("Invalid phone number");
         }
         else {
             checkinfo = false;

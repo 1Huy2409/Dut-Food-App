@@ -13,35 +13,35 @@
 
 <AnchorPane prefHeight="485.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Profile.profileController">
    <children>
-      <Label fx:id="lbfullname" layoutX="189.0" layoutY="72.0">
+      <Label fx:id="lbfullname" layoutX="189.0" layoutY="72.0" textFill="aliceblue">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lbemail" layoutX="189.0" layoutY="96.0">
+      <Label fx:id="lbemail" layoutX="189.0" layoutY="96.0" textFill="aliceblue">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
       <Button layoutX="57.0" layoutY="169.0" mnemonicParsing="false" onAction="#importImg" text="Upload a photo" textFill="#130505" />
       <Line endX="6.5999755859375" endY="347.0000305175781" layoutX="362.0" layoutY="138.0" startX="6.5999755859375" startY="-138.0" />
-      <Label layoutX="419.0" layoutY="89.0" text="FullName" />
-      <Label layoutX="419.0" layoutY="167.0" text="Email" />
-      <Label layoutX="421.0" layoutY="247.0" text="Phone" />
+      <Label layoutX="419.0" layoutY="89.0" text="FullName" textFill="aliceblue"/>
+      <Label layoutX="419.0" layoutY="167.0" text="Email" textFill="aliceblue"/>
+      <Label layoutX="421.0" layoutY="247.0" text="Phone" textFill="aliceblue"/>
       <TextField fx:id="fullname" layoutX="419.0" layoutY="109.0" prefHeight="37.0" prefWidth="223.0" />
       <TextField fx:id="email" layoutX="419.0" layoutY="187.0" prefHeight="38.0" prefWidth="223.0" />
       <TextField fx:id="phone" layoutX="421.0" layoutY="269.0" prefHeight="38.0" prefWidth="223.0" />
       <Button fx:id="btnUI" layoutX="419.0" layoutY="355.0" mnemonicParsing="false" onAction="#saveUI" prefHeight="30.0" prefWidth="223.0" text="Update Information" />
-      <Label layoutX="483.0" layoutY="16.0" text="Your Informaition">
+      <Label layoutX="483.0" layoutY="16.0" text="Your Information" textFill="aliceblue">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <AnchorPane fx:id="anchoACC" layoutX="-1.0" layoutY="207.0" prefHeight="278.0" prefWidth="370.0">
          <children>
-            <Label layoutX="24.0" layoutY="33.0" text="Username" />
-            <Label layoutX="25.0" layoutY="85.0" text="Password" />
-            <Label layoutX="24.0" layoutY="137.0" text="Confirm Passwprd" />
+            <Label layoutX="24.0" layoutY="33.0" text="Username" textFill="aliceblue"/>
+            <Label layoutX="25.0" layoutY="85.0" text="Password" textFill="aliceblue"/>
+            <Label layoutX="24.0" layoutY="137.0" text="Confirm Passwprd" textFill="aliceblue"/>
             <TextField fx:id="username" layoutX="149.0" layoutY="29.0" />
             <Label fx:id="err" layoutX="150.0" layoutY="159.0" textFill="RED" />
             <Button fx:id="saveacc" layoutX="106.0" layoutY="213.0" mnemonicParsing="false" onAction="#btnSavaChange" prefHeight="26.0" prefWidth="150.0" text="Save Change" />

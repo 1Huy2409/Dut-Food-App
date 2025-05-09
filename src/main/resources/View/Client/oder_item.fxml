@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<HBox fx:id="orderItemTemplate" stylesheets="@../../CSS/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS" styleClass="list-product-container, shadow" >
 
 
-<HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="117.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      <VBox alignment="CENTER_LEFT" prefHeight="117.0" prefWidth="206.0">
-         <children>
-            <Label text="Label" />
-            <Label text="Label" />
-         </children>
-      </VBox>
-      <Label text="Label" />
-   </children>
+   <ImageView fx:id="productImage" fitHeight="101.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" />
+   <HBox.margin>
+      <Insets left="10"/>
+   </HBox.margin>
+
+   <VBox alignment="CENTER" prefHeight="101.0" prefWidth="159.0">
+      <children>
+         <Label fx:id="productName" text="Tên sản phẩm"  styleClass="cart-text"/>
+         <Label fx:id="quantity" text="Số lượng" styleClass="cart-text"/>
+      </children>
+   </VBox>
+
+   <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" text="0 VND" styleClass="cart-text"/>
+
+<!--   <TilePane.margin>-->
+<!--      <Insets left="10.0" right="10.0" top="10.0" />-->
+<!--   </TilePane.margin>-->
 </HBox>

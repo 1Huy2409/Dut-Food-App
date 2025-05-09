@@ -14,7 +14,7 @@
 
 <VBox alignment="TOP_CENTER" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Account.cartController">
    <children>
-      <Label prefHeight="35.0" prefWidth="115.0" text="Your Cart">
+      <Label prefHeight="35.0" prefWidth="200.0" text="Your Cart" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 32px">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -23,7 +23,7 @@
          <children>
             <ScrollPane fx:id="cartScrollPane" fitToHeight="true" fitToWidth="true" styleClass="menu-background" VBox.vgrow="ALWAYS">
                <content>
-                  <TilePane fx:id="productContainer" alignment="TOP_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefColumns="1" VBox.vgrow="ALWAYS">
+                  <TilePane fx:id="productContainer" alignment="TOP_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" VBox.vgrow="ALWAYS">
                      <children>
 <!--                        <HBox fx:id="cartItemTemplate" alignment="CENTER" fillHeight="false" HBox.hgrow="ALWAYS">-->
 <!--                           <children>-->
@@ -80,7 +80,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="144.0" prefWidth="303.0">
                <children>
-                  <Pane prefHeight="89.0" prefWidth="400.0">
+                  <Pane prefHeight="89.0" prefWidth="200.0">
                      <children>
                         <VBox alignment="CENTER_LEFT" layoutY="1.0" prefHeight="82.0" prefWidth="288.0">
                            <children>
@@ -103,7 +103,7 @@
 <!--                                    <Insets bottom="4.0" left="10.0" right="10.0" />-->
 <!--                                 </VBox.margin>-->
 <!--                              </Pane>-->
-                              <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="288.0" spacing="200.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="288.0" spacing="180.0">
                                  <children>
                                     <Label text="Total" />
                                     <Label fx:id="total" />

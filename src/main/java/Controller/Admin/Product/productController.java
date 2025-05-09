@@ -73,6 +73,16 @@ public class productController {
     {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
+        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
+        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
+        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.08));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.2));
+        idColumn.setPrefWidth(80);
+        selectColumn.setPrefWidth(80);
         reload();
         productTable.setFixedCellSize(100);
 
@@ -85,40 +95,6 @@ public class productController {
     }
     public void reload() {
         loadCategories();
-        productTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-
-//        idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
-//        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.22));
-//        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-//        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-//        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-//        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-//        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.2));
-//        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.08));
-        idColumn.setPrefWidth(100);
-        idColumn.setMinWidth(100);
-        idColumn.setMaxWidth(100);
-        nameColumn.setPrefWidth(350);
-        nameColumn.setMinWidth(350);
-        nameColumn.setMaxWidth(350);
-        priceColumn.setPrefWidth(150);
-        priceColumn.setMinWidth(150);
-        priceColumn.setMaxWidth(150);
-        categoryColumn.setPrefWidth(250);
-        categoryColumn.setMinWidth(250);
-        categoryColumn.setMaxWidth(250);
-        imageColumn.setPrefWidth(150);
-        imageColumn.setMinWidth(150);
-        imageColumn.setMaxWidth(150);
-        created_timeColumn.setPrefWidth(150);
-        created_timeColumn.setMinWidth(150);
-        created_timeColumn.setMaxWidth(150);
-        actionColumn.setPrefWidth(200);
-        actionColumn.setMinWidth(200);
-        actionColumn.setMaxWidth(200);
-        statusColumn.setPrefWidth(150);
-        statusColumn.setMinWidth(150);
-        statusColumn.setMaxWidth(150);
 
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();

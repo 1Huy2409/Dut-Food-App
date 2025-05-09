@@ -59,6 +59,14 @@ public class categoryController {
     public void initialize() {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         categoryTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+
+        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.1));
+        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
+        categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+        created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+        actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.25));
+        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
         reload();
     }
     public static categoryController getInstance()
@@ -72,14 +80,14 @@ public class categoryController {
     public void reload()
     {
         List<Category> listCategory = Dao_Category.getInstance().getAll();
-        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
-
-        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.05));
-        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
-        categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
-        created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
-        actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
-        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
+//        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
+//
+//        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.05));
+//        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
+//        categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+//        created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
+//        actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
+//        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
         for (Category item: listCategory)
         {
             System.out.println(item.getCategoryName());

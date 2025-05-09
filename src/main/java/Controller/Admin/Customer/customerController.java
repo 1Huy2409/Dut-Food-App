@@ -71,17 +71,24 @@ public class customerController {
     public void initialize() {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         customerTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.1));
+        name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.2));
+        email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
+        phone.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+        status.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+        actionColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.2));
         reload();
     }
     public void reload() {
         List<User> listUser = Dao_User.getInstance().getAll();
-        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.05));
-        name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
-        email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
-        phone.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
-        status.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
-        actionColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.25));
+//        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//        selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.05));
+//        name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+//        email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
+//        phone.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
+//        status.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
+//        actionColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.25));
         userList = FXCollections.observableArrayList(listUser);
         filteredUsers = new FilteredList<>(userList, p -> true);
         checkboxStates = FXCollections.observableArrayList();

@@ -6,68 +6,68 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.paint.CycleMethod?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-
-        <VBox styleClass="menu-background" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.categoryController">
+<VBox styleClass="menu-background" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.categoryController">
     <children>
         <ScrollPane fx:id="productCover" fitToHeight="true" fitToWidth="true" styleClass="menu-background" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
         <content>
 
-                <VBox fx:id="VBoxProduct" spacing="10.0" styleClass="menu-background" VBox.vgrow="ALWAYS" alignment="TOP_CENTER">
+                <VBox fx:id="VBoxProduct" alignment="TOP_CENTER" spacing="10.0" styleClass="menu-background" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets bottom="10.0"  top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                     </padding>
                     <children>
                         <StackPane fx:id="root" maxHeight="Infinity" maxWidth="Infinity" prefHeight="600.0" VBox.vgrow="ALWAYS">
 
                             <ImageView fx:id="introImage" fitHeight="600.0" fitWidth="800.0" preserveRatio="true" />
 
-                            <Rectangle fx:id="gradientOverlayTop" height="200.0"  StackPane.alignment="TOP_CENTER">
+                            <Rectangle fx:id="gradientOverlayTop" height="200.0" StackPane.alignment="TOP_CENTER">
                                 <fill>
-                                    <LinearGradient startY="0" endY="1" startX="0" endX="0" proportional="true" cycleMethod="NO_CYCLE">
+                                    <LinearGradient cycleMethod="NO_CYCLE" endX="0" endY="1" proportional="true" startX="0" startY="0">
                                         <stops>
-                                            <Stop offset="0.0" color="rgb(23, 59, 54)" />
-                                            <Stop offset="1.0" color="transparent" />
+                                            <Stop color="rgb(23, 59, 54)" offset="0.0" />
+                                            <Stop color="transparent" offset="1.0" />
                                         </stops>
                                     </LinearGradient>
                                 </fill>
                             </Rectangle>
 <!--                            <Rectangle fx:id="blackOverlay" fill="#000000" opacity="0.4" StackPane.alignment="CENTER" mouseTransparent="true"/>-->
                             <VBox alignment="CENTER" spacing="10.0">
-                                <Label text="Dut Food" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 80px;" />
-                                <Button fx:id="btnScrollToProducts" text="🛒 Mua sắm ngay" styleClass="btn-buy" />
+                                <Label style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 80px;" text="Dut Food" />
+                                <Button fx:id="btnScrollToProducts" styleClass="btn-buy" text="🛒 Mua sắm ngay" />
                             </VBox>
 
-                            <Rectangle fx:id="gradientOverlayBot" height="200.0"  StackPane.alignment="BOTTOM_CENTER">
+                            <Rectangle fx:id="gradientOverlayBot" height="200.0" StackPane.alignment="BOTTOM_CENTER">
                                 <fill>
-                                    <LinearGradient startY="0" endY="1" startX="0" endX="0" proportional="true" cycleMethod="NO_CYCLE">
+                                    <LinearGradient cycleMethod="NO_CYCLE" endX="0" endY="1" proportional="true" startX="0" startY="0">
                                         <stops>
-                                            <Stop offset="0.0" color="transparent" />
-                                            <Stop offset="1.0" color="rgb(23, 59, 54)" />
+                                            <Stop color="transparent" offset="0.0" />
+                                            <Stop color="rgb(23, 59, 54)" offset="1.0" />
                                         </stops>
                                     </LinearGradient>
                                 </fill>
                             </Rectangle>
                         </StackPane>
-                        <Label fx:id="lbThucdon" text="Thực đơn của chúng tôi" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 40px;" />
-                        <TilePane fx:id="categoryButtonBox" hgap="10.0" prefColumns="2" styleClass="menu-background" vgap="10.0" alignment="TOP_CENTER" >
+                        <Label fx:id="lbThucdon" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 40px;" text="Thực đơn của chúng tôi" />
+                        <TilePane fx:id="categoryButtonBox" alignment="TOP_CENTER" hgap="10.0" prefColumns="2" styleClass="menu-background" vgap="10.0">
                             <children>
-                                <Button fx:id="btnAll" onMouseClicked="#btnAllOnAction"  prefHeight="25.0" prefWidth="100.0" styleClass="btnAll" text="Tất cả" />
+                                <Button fx:id="btnAll" onMouseClicked="#btnAllOnAction" prefHeight="25.0" prefWidth="100.0" styleClass="btnAll" text="Tất cả" />
                             </children>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
                         </TilePane>
 
 <!--                        <Label text="Label" />-->
 
-                        <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" tileAlignment="TOP_LEFT"  vgap="15.0" VBox.vgrow="ALWAYS">
+                        <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" tileAlignment="TOP_LEFT" vgap="15.0" VBox.vgrow="ALWAYS">
                             <children>
                                 <VBox fx:id="productItemBox" maxWidth="200" styleClass="container-client" stylesheets="@../../CSS/styles.css">
                                     <children>
@@ -121,6 +121,9 @@
                                     </children>
                                 </VBox>
                             </children>
+                     <VBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </VBox.margin>
                         </TilePane>
                     </children>
                 </VBox>

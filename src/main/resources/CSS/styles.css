@@ -57,7 +57,7 @@
 .btnBuyNow{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-text-fill: #e93940;
+    -fx-text-fill: #D69C52;
     -fx-font-weight: bold;
     -fx-cursor: hand;
 }
@@ -99,11 +99,13 @@
     -fx-background-radius: 20;
     -fx-border-color: white;
     -fx-border-radius: 20;
+    -fx-border-color: #D69C52;
+    -fx-border-width: 3;
 }
 .cart-button{
-    -fx-background-color: #FB5C7A;
+    -fx-background-color: #D69C52;
     -fx-background-radius: 6;
-    -fx-border-color: #FB5C7A;
+    -fx-border-color: #D69C52;
     -fx-border-radius: 6;
     -fx-cursor: hand;
 }
@@ -114,7 +116,7 @@
 
 .pretty-checkbox .box {
     -fx-background-color: white;
-    -fx-border-color: #FB5C7A;
+    -fx-border-color: #D69C52;
     -fx-border-width: 2px;
     -fx-border-radius: 50%;
     -fx-background-radius: 50%;
@@ -129,7 +131,7 @@
 /* Chấm tròn nhỏ bên trong khi được chọn */
 .pretty-checkbox:selected .mark {
     -fx-shape: "M0,0 A3,3 0 1,1 0.1,0 Z";
-    -fx-background-color: #FB5C7A;
+    -fx-background-color: #D69C52;
     -fx-background-radius: 50%;
     -fx-min-width: 10px;
     -fx-min-height: 10px;
@@ -153,7 +155,7 @@
     -fx-faint-focus-color: transparent;
 }
 .client-background {
-    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #ff5f6d 0%, #ffc3a0 45%, #ffc3a0 55%, #6a82fb 100%);
+    -fx-background-color: rgb(23, 59, 54);
 }
 .menu-background {
     -fx-background-color: transparent;
@@ -202,7 +204,7 @@
 }
 .buy-now
 {
-    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #ff5f6d 0%, #ffc3a0 45%, #ffc3a0 55%, #6a82fb 100%);
+    -fx-background-color: #E93940;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -252,8 +254,8 @@
      -fx-background-color: #e67e22;
 }
 .btnAddToCart-detail {
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fddb92, #d1fdff);
-    -fx-text-fill: black;
+    -fx-background-color: #D69C52;
+    -fx-text-fill: white;
         -fx-font-size: 14px;
         -fx-background-radius: 10;
         -fx-border-radius: 10;
@@ -273,12 +275,29 @@
 }
 
 .categories-button{
-    -fx-background-color: white;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-border-color: white;
+    -fx-border-radius: 8;
+    -fx-font-weight: bold;
+    -fx-pref-height: 25;
+    -fx-font-size: 15;
+    -fx-pref-width: 120px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
 }
 
 .categories-button:hover {
+    -fx-background-color: #D69C52;
+    -fx-text-fill: white;
+    -fx-border-radius: 8px;
+    -fx-border-color: #D69C52;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-pref-height: 25;
+    -fx-font-size: 15;
     -fx-cursor: hand;
 }
 
@@ -291,18 +310,37 @@
 }
 
 .selected-category{
-    -fx-background-color: #e74c3c;
+    -fx-background-color: #D69C52;
     -fx-text-fill: white;
-    -fx-border-radius: 15px;
-    -fx-background-radius: 15;
+    -fx-border-radius: 8px;
+    -fx-border-color: #D69C52;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-pref-height: 25;
+    -fx-font-size: 15;
     -fx-cursor: hand;
 }
+
 .unselected-category{
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-border-color: white;
+    -fx-border-radius: 8;
+    -fx-font-weight: bold;
+    -fx-pref-height: 25;
+    -fx-font-size: 15;
     -fx-cursor: hand;
+}
+.unselected-category:hover{
+    -fx-background-color: #D69C52;
+        -fx-text-fill: white;
+        -fx-border-radius: 8px;
+        -fx-background-radius: 8;
+        -fx-font-weight: bold;
+        -fx-pref-height: 25;
+        -fx-font-size: 15;
+        -fx-cursor: hand;
 }
 
 .container-payment{
@@ -311,5 +349,27 @@
 }
 
 .delete-button{
+    -fx-cursor: hand;
+}
+.dutfood-button{
+    -fx-text-fill: rgb(212, 155, 90);
+    -fx-font-family: "Dancing Script";
+    -fx-font-weight: bold;
+}
+.dutfood-label {
+    -fx-text-fill: rgb(212, 155, 90);
+    -fx-font-family: "Dancing Script";
+    -fx-font-weight: bold;
+    -fx-font-size: 24px; /* Thêm một thuộc tính rõ ràng */
+}
+.btn-buy {
+    -fx-font-size: 15px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #D69C52;
+    -fx-border-color: #D69C52;
+    -fx-border-radius: 5;
+    -fx-pref-height: 35;
+    -fx-pref-width: 150;
     -fx-cursor: hand;
 }

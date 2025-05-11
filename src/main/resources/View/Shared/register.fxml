@@ -8,36 +8,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D44C65;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Account.registerController">
+<AnchorPane prefHeight="437.0" prefWidth="694.0" style="-fx-background-color: #213842;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Account.registerController">
    <children>
-      <Label alignment="CENTER" layoutX="228.0" layoutY="12.0" prefHeight="36.0" prefWidth="144.0" text="REGISTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="275.0" layoutY="25.0" prefHeight="36.0" prefWidth="144.0" text="REGISTER" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="245.0" layoutY="58.0" prefHeight="17.0" prefWidth="100.0" text="Full Name" textFill="#fffefe">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="256.0" layoutY="114.0" text="User Name" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="297.0" layoutY="80.0" prefHeight="17.0" prefWidth="100.0" text="Full Name" textFill="#fffefe">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="225.0" text="Password" textFill="WHITE">
+      <TextField fx:id="fullNameTextField" layoutX="215.0" layoutY="111.0" prefHeight="25.0" prefWidth="264.0" />
+      <Label layoutX="308.0" layoutY="141.0" text="User Name" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="fullNameTextField" layoutX="163.0" layoutY="86.0" prefHeight="25.0" prefWidth="264.0" />
-      <TextField fx:id="userNameTextField" layoutX="163.0" layoutY="143.0" prefHeight="25.0" prefWidth="264.0" />
-      <PasswordField fx:id="passwordPasswordField" layoutX="163.0" layoutY="250.0" prefHeight="25.0" prefWidth="264.0" />
-      <Button fx:id="switchLoginButton" layoutX="453.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchLoginOnAction" prefHeight="25.0" prefWidth="119.0" text="LOGIN">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="registerButton" defaultButton="true" layoutX="192.0" layoutY="338.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="25.0" prefWidth="207.0" style="-fx-background-color: #D1D44C;" text="REGISTER">
+      <TextField fx:id="userNameTextField" layoutX="215.0" layoutY="168.0" prefHeight="25.0" prefWidth="264.0" />
+      <Label layoutX="328.0" layoutY="196.0" text="Email" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailTextField" layoutX="215.0" layoutY="221.0" prefHeight="25.0" prefWidth="264.0" />
+      <Label layoutX="314.0" layoutY="247.0" text="Password" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordPasswordField" layoutX="216.0" layoutY="272.0" prefHeight="25.0" prefWidth="264.0" />
+      <Label layoutX="326.0" layoutY="297.0" text="Phone" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="phoneTextField" layoutX="215.0" layoutY="322.0" prefHeight="25.0" prefWidth="264.0" />
+      <Button fx:id="registerButton" defaultButton="true" layoutX="244.0" layoutY="360.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="25.0" prefWidth="207.0" style="-fx-background-color: #D1D44C;" text="REGISTER">
          <font>
             <Font size="16.0" />
          </font>
@@ -45,17 +53,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="275.0" layoutY="168.0" text="Email" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="emailTextField" layoutX="163.0" layoutY="196.0" prefHeight="25.0" prefWidth="264.0" />
-      <Label layoutX="271.0" layoutY="276.0" text="Phone" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="phoneTextField" layoutX="163.0" layoutY="301.0" prefHeight="25.0" prefWidth="264.0" />
+      <Button fx:id="switchLoginButton" layoutX="552.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchLoginOnAction" prefHeight="25.0" prefWidth="119.0" text="LOGIN">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

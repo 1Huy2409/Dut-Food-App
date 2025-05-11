@@ -56,7 +56,7 @@ public class loginController
             {
                 // go to client_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                RouteScreen.switchRouter(currentStage, "/View/Client/client_dashboard.fxml",null, null);
+                RouteScreen.switchRouter(currentStage, "/View/Client/Dashboard/client_dashboard.fxml",null, null);
             }
         }
     }
@@ -64,7 +64,7 @@ public class loginController
     {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Shared/register.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 694, 437);
             Stage stage = (Stage) switchRegisterButton.getScene().getWindow();
 
             stage.setScene(scene);

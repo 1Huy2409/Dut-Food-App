@@ -1,16 +1,11 @@
 package Controller.Client.Product;
 
-import Controller.Client.Account.cartController;
-import DAO.Dao_CartItem;
+import Controller.Client.Cart.cartController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.HandleCartBuy;
-import Helper.UserSession;
-import Model.CartItem;
 import Model.Category;
 import Model.FoodItem;
-import Model.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -35,7 +30,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class categoryController implements Initializable {
+public class productController implements Initializable {
 //    @FXML
 //    private Button categoryBtn;
 
@@ -339,7 +334,7 @@ public void initialize(URL location, ResourceBundle resources) {
         // Tên sản phẩm
         Label nameLabel = new Label(foodItem.getFoodName());
         nameLabel.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
-        nameLabel.setOnMouseClicked(e -> loadUI("/View/Client/detailProduct.fxml", foodItem));
+        nameLabel.setOnMouseClicked(e -> loadUI("/View/Client/Product/detailProduct.fxml", foodItem));
 
         // Giá
         Label priceLabel = new Label(foodItem.getPrice().toString());
@@ -407,7 +402,7 @@ public void initialize(URL location, ResourceBundle resources) {
         HandleCartBuy.getInstance().handleAddToCart(item, null);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Cart/cart.fxml"));
             Parent root = loader.load();
             cartController controller = loader.getController();
             controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea

@@ -1,4 +1,4 @@
-package Controller.Client.Account;
+package Controller.Client.Cart;
 
 import Controller.Client.Payment.addressController;
 import Controller.Client.Payment.paymentController;
@@ -6,14 +6,12 @@ import Helper.AlertMessage;
 import Model.FoodItem;
 import javafx.fxml.FXMLLoader;
 
-import java.awt.*;
 import java.io.IOException;
 import DAO.Dao_Cart;
 import DAO.Dao_CartItem;
 import DAO.Dao_Food;
 import Model.Cart;
 import Model.CartItem;
-import Model.Category;
 import Helper.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,12 +21,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.application.Platform;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -107,7 +102,7 @@ public class cartController implements Initializable {
     }
     private HBox cloneTemplate() {
         try {
-            HBox item = FXMLLoader.load(getClass().getResource("/View/Client/cart_item_template.fxml"));
+            HBox item = FXMLLoader.load(getClass().getResource("/View/Client/Cart/cart_item_template.fxml"));
 
             // DEBUG: Kiểm tra các thành phần
             System.out.println("Tìm thấy productName? " + (item.lookup("#productName") != null));
@@ -302,7 +297,7 @@ public class cartController implements Initializable {
         else {
             try {
                 // Tải màn hình nhập địa chỉ từ
-                FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/address.fxml"));
+                FXMLLoader addressLoader = new FXMLLoader(getClass().getResource("/View/Client/Payment/address.fxml"));
                 Parent addressRoot = addressLoader.load();
                 addressController addressCtrl = addressLoader.getController();
 
@@ -315,7 +310,7 @@ public class cartController implements Initializable {
                 addressCtrl.setOnConfirm(() -> {
                     try {
                         // Sau khi xác nhận địa chỉ, mới load giao diện payment
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/payment.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Payment/payment.fxml"));
                         Parent paymentRoot = loader.load();
                         paymentController paymentCtrl = loader.getController();
 

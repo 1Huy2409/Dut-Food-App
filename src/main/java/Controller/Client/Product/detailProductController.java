@@ -1,11 +1,10 @@
 package Controller.Client.Product;
 
-import Controller.Client.Account.cartController;
+import Controller.Client.Cart.cartController;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
@@ -15,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.beans.binding.Bindings;
 
 import javafx.fxml.Initializable;
 
@@ -150,10 +148,10 @@ public class detailProductController implements Initializable {
     void backDetailOnAction(ActionEvent event) {
         try {
             // Load lại giao diện danh sách sản phẩm
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/category.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Product/product.fxml"));
             Parent root = loader.load();
 
-            categoryController controller = loader.getController();
+            productController controller = loader.getController();
             controller.setContentArea(this.contentArea);
             // Có thể gọi lại renderProduct nếu cần
             this.contentArea.getChildren().clear();
@@ -172,7 +170,7 @@ public class detailProductController implements Initializable {
         System.out.println("Mua ngay: " + item.getFoodName());
         // loadUI ra cart
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Cart/cart.fxml"));
             Parent root = loader.load();
             cartController controller = loader.getController();
             controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea

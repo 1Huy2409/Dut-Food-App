@@ -1,12 +1,11 @@
 
 package Controller.Client;
 
-import Controller.Client.Account.cartController;
-import Controller.Client.Product.categoryController;
+import Controller.Client.Cart.cartController;
+import Controller.Client.Product.productController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.layout.Priority;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class client_dashboardController implements Initializable {
+public class clientController implements Initializable {
 
     @FXML
     private BorderPane overallLayout;
@@ -28,7 +27,7 @@ public class client_dashboardController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources)
     {
-        loadUI("/View/Client/category.fxml");
+        loadUI("/View/Client/Product/product.fxml");
     }
 
     private void loadUI(String fxml) {
@@ -38,15 +37,15 @@ public class client_dashboardController implements Initializable {
 
             switch (fxml)
             {
-                case "/View/Client/category.fxml":
-                    categoryController controller = loader.getController();
+                case "/View/Client/Product/product.fxml":
+                    productController controller = loader.getController();
                     controller.setContentArea(contentArea);
                     break;
-                case "/View/Client/cart.fxml":
+                case "/View/Client/Cart/cart.fxml":
                     cartController cartCtrl = loader.getController();
                     cartCtrl.setContentArea(contentArea);
                     break;
-//                case "/View/Client/category.fxml":
+//                case "/View/Client/product.fxml":
 //                    categoryController controller = loader.getController();
 //                    controller.setContentArea(contentArea);
             }
@@ -70,18 +69,18 @@ public class client_dashboardController implements Initializable {
 
     public void DUTFOODOnAction(MouseEvent e)
     {
-        loadUI("/View/Client/category.fxml");
+        loadUI("/View/Client/Product/product.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
 
     public void ProfileOnAction(MouseEvent e)
     {
-        loadUI("/View/Client/profile.fxml");
+        loadUI("/View/Client/Profile/profile.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
     public void CartOnAction(MouseEvent e)
     {
-        loadUI("/View/Client/cart.fxml");
+        loadUI("/View/Client/Cart/cart.fxml");
 //        btnCategory.getStyleClass().add("selected-button-container");
     }
 }

@@ -37,7 +37,7 @@
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="44.0" onMouseClicked="#ProfileOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Pictures/icons8-account-50.png" />
+                  <Image url="@../../../Pictures/icons8-user-50.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND"/>

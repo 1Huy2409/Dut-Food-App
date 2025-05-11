@@ -21,14 +21,17 @@
             <font>
                 <Font size="14.0" />
             </font>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
         </Label>
         <Label fx:id="address" text="         " textFill="aliceblue">
          <VBox.margin>
-            <Insets left="30.0" />
+            <Insets bottom="10.0" left="30.0" />
          </VBox.margin></Label>
-        <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="menu-background">
+        <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="menu-background" VBox.vgrow="ALWAYS">
             <content>
-                <TilePane fx:id="paymentItemContainer" prefHeight="500.0" prefWidth="1280.0">
+                <TilePane fx:id="paymentItemContainer" prefHeight="500.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
                <padding>
                   <Insets left="20.0" />
                </padding></TilePane>

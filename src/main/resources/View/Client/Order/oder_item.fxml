@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="orderItemTemplate" alignment="CENTER" fillHeight="false" styleClass="list-product-container, shadow" stylesheets="@../../CSS/styles.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="orderItemTemplate" alignment="CENTER" fillHeight="false" styleClass="list-product-container, shadow" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
 
    <ImageView fx:id="productImage" fitHeight="101.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
       <HBox.margin>
-         <Insets right="20.0" />
+         <Insets right="40.0" />
       </HBox.margin></ImageView>
    <Label fx:id="productName" styleClass="cart-text" text="Tên sản phẩm" />
 
-   <VBox alignment="CENTER" prefHeight="101.0" prefWidth="144.0" />
+   <VBox alignment="CENTER" prefHeight="101.0" prefWidth="90.0" />
    <Label fx:id="quantity" styleClass="cart-text" text="Số lượng" />
-   <Pane prefHeight="44.0" prefWidth="172.0" />
+   <Pane prefHeight="44.0" prefWidth="121.0" />
 
    <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" styleClass="cart-text" text="0 VND" />
    <HBox.margin>

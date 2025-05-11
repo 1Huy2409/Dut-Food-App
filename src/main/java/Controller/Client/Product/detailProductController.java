@@ -76,14 +76,6 @@ public class detailProductController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
-        // render food item detail
-
-//        renderDetail(this.item);
-//        foodImage.fitWidthProperty().bind(imageContainer.widthProperty());
-//
-//        // Clip theo bo góc
-//        clipRectangle.widthProperty().bind(foodImage.fitWidthProperty());
-//        clipRectangle.heightProperty().bind(foodImage.fitHeightProperty());
     }
 
     private void loadUI(String fxml)
@@ -117,7 +109,7 @@ public class detailProductController implements Initializable {
             System.err.println("Error file path for: " + item.getFoodName());
         }
         lbName.setText(item.getFoodName());
-        lbPrice.setText(Double.toString(item.getPrice()));
+        lbPrice.setText(String.format("%,.0f VND", item.getPrice()));
         textNum.setText("0");
         btnAdd.setOnAction(event ->
                 {

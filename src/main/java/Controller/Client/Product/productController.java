@@ -343,8 +343,8 @@ public void initialize(URL location, ResourceBundle resources) {
         nameLabel.setOnMouseClicked(e -> loadUI("/View/Client/Product/detailProduct.fxml", foodItem));
 
         // Giá
-        Label priceLabel = new Label(foodItem.getPrice().toString());
-
+        Label priceLabel = new Label();
+        priceLabel.setText(String.format("%,.0f VND", foodItem.getPrice()));
         // Nút thêm vào giỏ
         Button addToCart = new Button("THÊM VÀO GIỎ");
         addToCart.getStyleClass().add("btnAddCart");

@@ -126,11 +126,12 @@ public class paymentController implements Initializable {
             }
         }
     }
+    // setText(String.format("%,.0f VND", foodPrice))
     public void setAddress(String address) {
         this.address.setText(address);
     }
     public void setPrice(double price) {
-        this.lbtien.setText("Thành Tiền: " + Double.toString(price) + " VND");
+        this.lbtien.setText("Thành Tiền: " + String.format("%,.0f VND", price));
     }
     public void acceptPay() {
         if (getSelectedPaymentMethod() == null) {

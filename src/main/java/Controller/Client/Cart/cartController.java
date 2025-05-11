@@ -278,7 +278,7 @@ public class cartController implements Initializable {
             double priceEachItem = Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice();
             this.totalPrice += priceEachItem * item.getQuantity();
         }
-        total.setText(Double.toString(this.totalPrice));
+        total.setText(String.format("%,.0f VND", totalPrice));
     }
     public double priceChecked()
     {

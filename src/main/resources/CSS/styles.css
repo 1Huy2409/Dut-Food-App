@@ -65,6 +65,11 @@
     -fx-background-color: rgb(255,255,255,0.2);
     -fx-border-radius: 10;
 }
+.detail-desc {
+    -fx-background-color: rgb(255,255,255,0.2);
+    -fx-border-radius: 10;
+    -fx-text-fill: #FFFFFF;
+}
 .line-color-client{
     -fx-background-color: #FFFFFF;
 }

@@ -72,7 +72,7 @@
             <ImageView fx:id="imguser" fitHeight="128.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="imgdefault" fitHeight="128.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../Pictures/icons8-customer-50.png" />
+                  <Image url="@../../../Pictures/icons8-customer-50.png" />
                </image>
             </ImageView>
          </children>

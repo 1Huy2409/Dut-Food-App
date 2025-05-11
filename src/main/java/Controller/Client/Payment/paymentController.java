@@ -78,7 +78,7 @@ public class paymentController implements Initializable {
 
         for (CartItem item : checkedItems) {
             try {
-                HBox itemBox = FXMLLoader.load(getClass().getResource("/View/Client/oder_item.fxml"));
+                HBox itemBox = FXMLLoader.load(getClass().getResource("/View/Client/Order/oder_item.fxml"));
                 Label name = (Label) itemBox.lookup("#productName");
 //                Label desc = (Label) itemBox.lookup("#productDesc");
                 Label price = (Label) itemBox.lookup("#productPrice");
@@ -173,12 +173,12 @@ public class paymentController implements Initializable {
             if (payment.getPaymentMethod().equals("Cash"))
             {
                 // load ra giao dien home
-                loadUI("/View/Client/category.fxml");
+                loadUI("/View/Client/Product/product.fxml");
             }
             else
             {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/vnpay.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Payment/vnpay.fxml"));
                     Parent root = loader.load();
                     vnpayController vnpaycontroller = loader.getController();
                     vnpaycontroller.setAmount((int)Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));

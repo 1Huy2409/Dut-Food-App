@@ -1,16 +1,11 @@
 package Controller.Client.Product;
 
-import Controller.Client.Account.cartController;
-import DAO.Dao_CartItem;
+import Controller.Client.Cart.cartController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.HandleCartBuy;
-import Helper.UserSession;
-import Model.CartItem;
 import Model.Category;
 import Model.FoodItem;
-import Model.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -28,14 +23,20 @@ import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
 import javafx.geometry.Pos;
-
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Modality;
+import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class categoryController implements Initializable {
+public class productController implements Initializable {
 //    @FXML
 //    private Button categoryBtn;
 
@@ -339,7 +340,7 @@ public void initialize(URL location, ResourceBundle resources) {
         // Tên sản phẩm
         Label nameLabel = new Label(foodItem.getFoodName());
         nameLabel.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
-        nameLabel.setOnMouseClicked(e -> loadUI("/View/Client/detailProduct.fxml", foodItem));
+        nameLabel.setOnMouseClicked(e -> loadUI("/View/Client/Product/detailProduct.fxml", foodItem));
 
         // Giá
         Label priceLabel = new Label(foodItem.getPrice().toString());
@@ -396,10 +397,74 @@ public void initialize(URL location, ResourceBundle resources) {
         lastSelectedButton = btnAll;
         renderProduct();
     }
+    // Phương thức hiển thị thông báo bằng cửa sổ riêng (stage) - phòng hờ trường hợp toast trong StackPane không hoạt động
+    private void showToastStage(String message) {
+        System.out.println("Hiển thị toast bằng stage mới: " + message);
+        
+        // Tạo Stage mới cho toast
+        Stage toastStage = new Stage();
+        toastStage.initStyle(StageStyle.UNDECORATED);
+        toastStage.setAlwaysOnTop(true);
+        
+        // Lấy stage chính từ scene của root
+        if (root.getScene() != null && root.getScene().getWindow() != null) {
+            Stage mainStage = (Stage) root.getScene().getWindow();
+            toastStage.initOwner(mainStage);
+            toastStage.initModality(Modality.NONE);
+            
+            // Label chứa nội dung thông báo
+            Label toastLabel = new Label(message);
+            toastLabel.setStyle("-fx-background-color: #333333; -fx-text-fill: white; -fx-padding: 15px; " +
+                    "-fx-background-radius: 5px; -fx-font-weight: bold; -fx-font-size: 14px;");
+            toastLabel.setMinWidth(200);
+            toastLabel.setMinHeight(50);
+            toastLabel.setMaxWidth(300);
+            toastLabel.setWrapText(true);
+            toastLabel.setAlignment(Pos.CENTER);
+            
+            StackPane toastPane = new StackPane(toastLabel);
+            toastPane.setStyle("-fx-background-color: transparent;");
+            toastPane.setPadding(new Insets(20));
+            
+            Scene toastScene = new Scene(toastPane);
+            toastScene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            toastStage.setScene(toastScene);
+            
+            // Định vị toast ở góc dưới bên phải của cửa sổ chính
+            toastStage.setX(mainStage.getX() + mainStage.getWidth() - 320);
+            toastStage.setY(mainStage.getY() + mainStage.getHeight() - 120);
+            
+            // Hiển thị toast
+            toastStage.show();
+            
+            // Thiết lập timeout để đóng toast sau 2 giây
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                // Hiệu ứng mờ dần trước khi đóng
+                FadeTransition fade = new FadeTransition(Duration.millis(500), toastPane);
+                fade.setFromValue(1);
+                fade.setToValue(0);
+                fade.setOnFinished(e -> toastStage.close());
+                fade.play();
+            });
+            delay.play();
+        }
+    }
+    
     private void handleAddToCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
         // Dao check xem thử đối với cart_id này đã tồn tại foodItemId này trong đó cart đó chưa
         HandleCartBuy.getInstance().handleAddToCart(item, null);
+        
+        // Debug kiểm tra StackPane root
+        if (root == null) {
+            System.err.println("ERROR: StackPane root là null khi gọi handleAddToCart!");
+        } else {
+            System.out.println("StackPane root OK - Có thể hiển thị toast");
+        }
+        
+        // Hiển thị thông báo đã thêm vào giỏ hàng bằng stage (phương pháp đáng tin cậy hơn)
+        showToastStage("Đã thêm " + item.getFoodName() + " vào giỏ hàng!");
     }
 
     private void handleBuyNow(FoodItem item) {
@@ -407,7 +472,7 @@ public void initialize(URL location, ResourceBundle resources) {
         HandleCartBuy.getInstance().handleAddToCart(item, null);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Cart/cart.fxml"));
             Parent root = loader.load();
             cartController controller = loader.getController();
             controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea
@@ -417,6 +482,62 @@ public void initialize(URL location, ResourceBundle resources) {
             this.contentArea.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // Phương thức hiển thị thông báo tạm thời
+    private void showToastNotification(String message) {
+        System.out.println("Hiển thị toast: " + message);
+        
+        // Tạo label chứa thông báo
+        Label toast = new Label(message);
+        toast.setStyle("-fx-background-color: #333333; -fx-text-fill: white; -fx-padding: 10px 15px; " +
+                "-fx-background-radius: 5px; -fx-font-weight: bold; -fx-opacity: 0.9; -fx-font-size: 14px;");
+        toast.setMaxWidth(300);
+        toast.setWrapText(true);
+        toast.setAlignment(Pos.CENTER);
+        
+        // Đặt vị trí ở góc dưới bên phải
+        StackPane.setAlignment(toast, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(toast, new Insets(0, 20, 20, 0));
+        
+        // Đảm bảo toast hiển thị ở trên cùng (z-index cao nhất)
+        toast.toFront();
+        toast.setViewOrder(-1000);
+        
+        // Ban đầu ẩn toast
+        toast.setOpacity(0);
+        
+        // Thêm toast vào root (StackPane)
+        if (root != null) {
+            System.out.println("Thêm toast vào root StackPane");
+            root.getChildren().add(toast);
+            root.toFront(); // Đảm bảo root ở phía trước
+            
+            // Hiệu ứng hiện dần
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), toast);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setOnFinished(e -> System.out.println("Toast đã hiện hoàn toàn"));
+            fadeIn.play();
+            
+            // Dừng một khoảng thời gian trước khi biến mất
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                System.out.println("Bắt đầu hiệu ứng mất dần của toast");
+                // Hiệu ứng mờ dần và xóa toast
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(500), toast);
+                fadeOut.setFromValue(1);
+                fadeOut.setToValue(0);
+                fadeOut.setOnFinished(e -> {
+                    root.getChildren().remove(toast);
+                    System.out.println("Đã xóa toast khỏi giao diện");
+                });
+                fadeOut.play();
+            });
+            delay.play();
+        } else {
+            System.err.println("ERROR: root StackPane là null, không thể hiển thị toast!");
         }
     }
 }

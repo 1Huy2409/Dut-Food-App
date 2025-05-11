@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="paymentMethodArea" alignment="CENTER" prefWidth="600.0" styleClass="menu-background" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Payment.vnpayController">
+<VBox fx:id="paymentMethodArea" alignment="CENTER" prefWidth="600.0" styleClass="menu-background" stylesheets="@../../../CSS/styles.css" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Payment.vnpayController">
    <children>
       <Button fx:id="btnOpenPaymentBrowser" mnemonicParsing="false" onMouseClicked="#OpenPaymentBrowserOnAction" styleClass="btnAddToCart-detail" text="Open payment browser" />
    </children>

@@ -1,11 +1,10 @@
 package Controller.Client.Product;
 
-import Controller.Client.Account.cartController;
+import Controller.Client.Cart.cartController;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
@@ -15,12 +14,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.beans.binding.Bindings;
-
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -150,10 +156,10 @@ public class detailProductController implements Initializable {
     void backDetailOnAction(ActionEvent event) {
         try {
             // Load lại giao diện danh sách sản phẩm
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/category.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Product/product.fxml"));
             Parent root = loader.load();
 
-            categoryController controller = loader.getController();
+            productController controller = loader.getController();
             controller.setContentArea(this.contentArea);
             // Có thể gọi lại renderProduct nếu cần
             this.contentArea.getChildren().clear();
@@ -164,7 +170,70 @@ public class detailProductController implements Initializable {
     }
     private void handleAddCart(FoodItem item) {
         System.out.println("Thêm vào giỏ: " + item.getFoodName());
-        HandleCartBuy.getInstance().handleAddToCart(item, Integer.parseInt(textNum.getText()));
+        int quantity = Integer.parseInt(textNum.getText());
+        
+        // Kiểm tra số lượng
+        if (quantity <= 0) {
+            showToastStage("Vui lòng chọn số lượng sản phẩm!");
+            return;
+        }
+        
+        HandleCartBuy.getInstance().handleAddToCart(item, quantity);
+        showToastStage("Đã thêm " + quantity + " " + item.getFoodName() + " vào giỏ hàng!");
+    }
+
+    // Phương thức hiển thị thông báo bằng cửa sổ riêng (stage)
+    private void showToastStage(String message) {
+        System.out.println("Hiển thị toast bằng stage mới: " + message);
+        
+        // Tạo Stage mới cho toast
+        Stage toastStage = new Stage();
+        toastStage.initStyle(StageStyle.UNDECORATED);
+        toastStage.setAlwaysOnTop(true);
+        
+        // Lấy stage chính từ scene của btnAddCart
+        if (btnAddCart.getScene() != null && btnAddCart.getScene().getWindow() != null) {
+            Stage mainStage = (Stage) btnAddCart.getScene().getWindow();
+            toastStage.initOwner(mainStage);
+            toastStage.initModality(Modality.NONE);
+            
+            // Label chứa nội dung thông báo
+            Label toastLabel = new Label(message);
+            toastLabel.setStyle("-fx-background-color: #333333; -fx-text-fill: white; -fx-padding: 15px; " +
+                    "-fx-background-radius: 5px; -fx-font-weight: bold; -fx-font-size: 14px;");
+            toastLabel.setMinWidth(200);
+            toastLabel.setMinHeight(50);
+            toastLabel.setMaxWidth(300);
+            toastLabel.setWrapText(true);
+            toastLabel.setAlignment(Pos.CENTER);
+            
+            StackPane toastPane = new StackPane(toastLabel);
+            toastPane.setStyle("-fx-background-color: transparent;");
+            toastPane.setPadding(new Insets(20));
+            
+            Scene toastScene = new Scene(toastPane);
+            toastScene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            toastStage.setScene(toastScene);
+            
+            // Định vị toast ở góc dưới bên phải của cửa sổ chính
+            toastStage.setX(mainStage.getX() + mainStage.getWidth() - 320);
+            toastStage.setY(mainStage.getY() + mainStage.getHeight() - 120);
+            
+            // Hiển thị toast
+            toastStage.show();
+            
+            // Thiết lập timeout để đóng toast sau 2 giây
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                // Hiệu ứng mờ dần trước khi đóng
+                FadeTransition fade = new FadeTransition(Duration.millis(500), toastPane);
+                fade.setFromValue(1);
+                fade.setToValue(0);
+                fade.setOnFinished(e -> toastStage.close());
+                fade.play();
+            });
+            delay.play();
+        }
     }
 
     private void handleBuyNow(FoodItem item) {
@@ -172,7 +241,7 @@ public class detailProductController implements Initializable {
         System.out.println("Mua ngay: " + item.getFoodName());
         // loadUI ra cart
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/cart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Cart/cart.fxml"));
             Parent root = loader.load();
             cartController controller = loader.getController();
             controller.setContentArea(contentArea); // Nếu bạn cần truyền lại contentArea

@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         Font.loadFont(getClass().getResourceAsStream("/Font/Dancing_Script/static/DancingScript-SemiBold.ttf"),10);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Shared/login.fxml")); // Đúng
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Admin/admin_dashboard.fxml")); // Đúng
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 684, 437);
 //        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("Food App!");
         stage.setScene(scene);

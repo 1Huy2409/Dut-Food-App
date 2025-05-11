@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="menu-background" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.categoryController">
+<VBox styleClass="menu-background" stylesheets="@../../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.productController">
     <children>
         <ScrollPane fx:id="productCover" fitToHeight="true" fitToWidth="true" styleClass="menu-background" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
         <content>
@@ -69,7 +69,7 @@
 
                         <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" tileAlignment="TOP_LEFT" vgap="15.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <VBox fx:id="productItemBox" maxWidth="200" styleClass="container-client" stylesheets="@../../CSS/styles.css">
+                                <VBox fx:id="productItemBox" maxWidth="200" styleClass="container-client" stylesheets="@../../../CSS/styles.css">
                                     <children>
                                         <ImageView fitHeight="93.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                             <VBox.margin>
@@ -95,7 +95,7 @@
                                  </cursor>
                                         </Label>
 
-                                        <Button fx:id="btnTVG" prefHeight="25.0" prefWidth="137.0" styleClass="btnAddCart" stylesheets="@../../CSS/styles.css" text="THÊM VÀO GIỎ" textFill="WHITE">
+                                        <Button fx:id="btnTVG" prefHeight="25.0" prefWidth="137.0" styleClass="btnAddCart" stylesheets="@../../../CSS/styles.css" text="THÊM VÀO GIỎ" textFill="WHITE">
                                             <VBox.margin>
                                                 <Insets bottom="10.0" />
                                             </VBox.margin>

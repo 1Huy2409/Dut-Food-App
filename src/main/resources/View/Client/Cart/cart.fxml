@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" stylesheets="@../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Account.cartController">
+<VBox alignment="TOP_CENTER" stylesheets="@../../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Cart.cartController">
    <children>
       <Label prefHeight="35.0" prefWidth="200.0" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 32px" text="Your Cart">
          <font>

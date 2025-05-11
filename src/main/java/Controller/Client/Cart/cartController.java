@@ -116,7 +116,7 @@ public class cartController implements Initializable {
     }
     public void renderCart()
     {
-        total.setText("0.0");
+        total.setText("0 VND");
         Cart cart = Dao_Cart.getInstance().selectedByUserId(UserSession.getInstance().getId());
         List<CartItem> cartItems = Dao_CartItem.getInstance().selectedByIdCart(cart.getId());
         productContainer.getChildren().clear();

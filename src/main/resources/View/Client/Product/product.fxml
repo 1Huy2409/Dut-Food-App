@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox styleClass="menu-background" stylesheets="@../../../CSS/styles.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client.Product.productController">
+    <children>
+        <ScrollPane fx:id="productCover" fitToHeight="true" fitToWidth="true" styleClass="menu-background" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+        <content>
+
+                <VBox fx:id="VBoxProduct" alignment="TOP_CENTER" spacing="10.0" styleClass="menu-background" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                    <children>
+                        <StackPane fx:id="root" maxHeight="Infinity" maxWidth="Infinity" prefHeight="600.0" VBox.vgrow="ALWAYS">
+
+                            <ImageView fx:id="introImage" fitHeight="600.0" fitWidth="800.0" preserveRatio="true" />
+
+                            <Rectangle fx:id="gradientOverlayTop" height="200.0" StackPane.alignment="TOP_CENTER">
+                                <fill>
+                                    <LinearGradient cycleMethod="NO_CYCLE" endX="0" endY="1" proportional="true" startX="0" startY="0">
+                                        <stops>
+                                            <Stop color="rgb(23, 59, 54)" offset="0.0" />
+                                            <Stop color="transparent" offset="1.0" />
+                                        </stops>
+                                    </LinearGradient>
+                                </fill>
+                            </Rectangle>
+<!--                            <Rectangle fx:id="blackOverlay" fill="#000000" opacity="0.4" StackPane.alignment="CENTER" mouseTransparent="true"/>-->
+                            <VBox alignment="CENTER" spacing="10.0">
+                                <Label style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 80px;" text="Dut Food" />
+                                <Button fx:id="btnScrollToProducts" styleClass="btn-buy" text="🛒 Mua sắm ngay" />
+                            </VBox>
+
+                            <Rectangle fx:id="gradientOverlayBot" height="200.0" StackPane.alignment="BOTTOM_CENTER">
+                                <fill>
+                                    <LinearGradient cycleMethod="NO_CYCLE" endX="0" endY="1" proportional="true" startX="0" startY="0">
+                                        <stops>
+                                            <Stop color="transparent" offset="0.0" />
+                                            <Stop color="rgb(23, 59, 54)" offset="1.0" />
+                                        </stops>
+                                    </LinearGradient>
+                                </fill>
+                            </Rectangle>
+                        </StackPane>
+                        <Label fx:id="lbThucdon" style="-fx-text-fill: white; -fx-font-family: 'Dancing Script'; -fx-font-weight: bold; -fx-font-size: 40px;" text="Thực đơn của chúng tôi" />
+                        <TilePane fx:id="categoryButtonBox" alignment="TOP_CENTER" hgap="10.0" prefColumns="2" styleClass="menu-background" vgap="10.0">
+                            <children>
+                                <Button fx:id="btnAll" onMouseClicked="#btnAllOnAction" prefHeight="25.0" prefWidth="100.0" styleClass="btnAll" text="Tất cả" />
+                            </children>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                        </TilePane>
+
+<!--                        <Label text="Label" />-->
+
+                        <TilePane fx:id="productBox" hgap="15.0" maxHeight="Infinity" maxWidth="Infinity" prefColumns="3" styleClass="menu-background" tileAlignment="TOP_LEFT" vgap="15.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <VBox fx:id="productItemBox" maxWidth="200" styleClass="container-client" stylesheets="@../../../CSS/styles.css">
+                                    <children>
+                                        <ImageView fitHeight="93.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </VBox.margin>
+                                        </ImageView>
+
+                                        <Label text="Label">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+
+                                        <Label text="Label">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                        </Label>
+
+                                        <Button fx:id="btnTVG" prefHeight="25.0" prefWidth="137.0" styleClass="btnAddCart" stylesheets="@../../../CSS/styles.css" text="THÊM VÀO GIỎ" textFill="WHITE">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                        </Button>
+
+                                        <Label fx:id="btnMN" text="MUA NGAY" textFill="#e93940">
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
+                     <VBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </VBox.margin>
+                        </TilePane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>

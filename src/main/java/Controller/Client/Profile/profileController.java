@@ -146,7 +146,7 @@ public class profileController {
             }
         }
     }
-    public void btnSavaChange(){
+    public void btnSaveChange(){
         boolean checkinfo = true;
         boolean checkpass = true;
         String password = "";

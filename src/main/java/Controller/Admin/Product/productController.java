@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -72,7 +73,19 @@ public class productController {
     {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
+        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
+        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
+        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.08));
+        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.2));
+        idColumn.setPrefWidth(80);
+        selectColumn.setPrefWidth(80);
         reload();
+        productTable.setFixedCellSize(100);
+
     }
     private void loadCategories() {
         List<Category> categories = Dao_Category.getInstance().getAll();
@@ -82,16 +95,7 @@ public class productController {
     }
     public void reload() {
         loadCategories();
-        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        idColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.05));
-        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
-        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.3));
-        statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();
             return new SimpleStringProperty(status ? "Active" : "Inactive");
@@ -158,6 +162,11 @@ public class productController {
                     imageView.setImage(null); // Xóa ảnh cũ trước khi tải mới
                     setGraphic(imageView);
                     loadImageAsync(imageUrl, imageView);
+
+                    VBox container = new VBox(imageView);
+                    container.setPadding(new Insets(10)); // tạo khoảng hở giữa các ảnh (hàng)
+                    container.setAlignment(Pos.CENTER);
+                    setGraphic(container);
                 }
             }
         });
@@ -237,6 +246,19 @@ public class productController {
         });
 
         productTable.setItems(productList);
+        productTable.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(FoodItem item, boolean empty) {
+                super.updateItem(item, empty);
+                if (!empty) {
+                    setPadding(new Insets(5, 0, 5, 0)); // khoảng cách trên và dưới của mỗi hàng
+                    setStyle("-fx-background-color: transparent;"); // để không bị đè bởi màu nền
+                } else {
+                    setPadding(Insets.EMPTY);
+                }
+            }
+        });
+
         add.setOnAction(event -> {
             Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Product/addProduct.fxml");
             stage.setOnHidden(e -> reload());

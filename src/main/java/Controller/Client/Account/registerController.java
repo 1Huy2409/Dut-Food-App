@@ -60,7 +60,7 @@ public class registerController {
     {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Shared/login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 694, 437);
             Stage stage = (Stage) switchLoginButton.getScene().getWindow();
 
             stage.setScene(scene);

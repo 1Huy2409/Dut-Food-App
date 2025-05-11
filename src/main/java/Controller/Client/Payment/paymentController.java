@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,34 +78,47 @@ public class paymentController implements Initializable {
 
         for (CartItem item : checkedItems) {
             try {
-                HBox itemBox = FXMLLoader.load(getClass().getResource("/View/Client/cart_item_template.fxml"));
+                HBox itemBox = FXMLLoader.load(getClass().getResource("/View/Client/Order/oder_item.fxml"));
                 Label name = (Label) itemBox.lookup("#productName");
-                Label desc = (Label) itemBox.lookup("#productDesc");
+//                Label desc = (Label) itemBox.lookup("#productDesc");
                 Label price = (Label) itemBox.lookup("#productPrice");
-                TextField quantity = (TextField) itemBox.lookup("#productQuantity");
+                Label quantity = (Label) itemBox.lookup("#quantity");
                 ImageView img = (ImageView) itemBox.lookup("#productImage");
-                CheckBox checkbox = (CheckBox) itemBox.lookup("#productCheckbox");
+//                CheckBox checkbox = (CheckBox) itemBox.lookup("#productCheckbox");
 //                Button minus = (Button) itemBox.lookup("#minusButton");
 //                Button plus = (Button) itemBox.lookup("#plusButton");
-                ImageView deleteIcon = (ImageView) itemBox.lookup("#deleteIcon");
+//                ImageView deleteIcon = (ImageView) itemBox.lookup("#deleteIcon");
 
                 // Ẩn các thành phần không cần thiết
-                checkbox.setVisible(false);
-//                minus.setVisible(false);
-//                plus.setVisible(false);
-                deleteIcon.setVisible(false);
-                quantity.setEditable(false);
+//                checkbox.setVisible(false);
+////                minus.setVisible(false);
+////                plus.setVisible(false);
+//                deleteIcon.setVisible(false);
+//                quantity.setEditable(false);
+
 
                 // Gán thông tin
                 FoodItem food = Dao_Food.getInstance().selectedById(item.getFoodItemId());
                 name.setText(food.getFoodName());
-                desc.setText(food.getDescription());
-                price.setText(String.format("%,.0f VND", food.getPrice()));
-                quantity.setText(String.valueOf(item.getQuantity()));
+//                desc.setText(food.getDescription());
+                price.setText(String.format("%,.0f VND", food.getPrice()*item.getQuantity()));
+//                quantity.setText(String.valueOf(item.getQuantity()));
+                quantity.setText(String.format("x%d", item.getQuantity()));
+
 
                 String imgPath = food.getImageUrl();
                 Image image = new Image(getClass().getResource(imgPath.startsWith("/") ? imgPath : "/" + imgPath).toString());
                 img.setImage(image);
+                img.setFitWidth(120);
+                img.setFitHeight(90);
+                img.setPreserveRatio(false);
+                Rectangle clip = new Rectangle(120, 90);
+                clip.setArcWidth(20);
+                clip.setArcHeight(20);
+
+                img.setClip(clip);
+                img.setTranslateX(10);
+//                img.setImage(image);
 
                 paymentItemContainer.getChildren().add(itemBox);
             } catch (IOException e) {
@@ -112,11 +126,12 @@ public class paymentController implements Initializable {
             }
         }
     }
+    // setText(String.format("%,.0f VND", foodPrice))
     public void setAddress(String address) {
         this.address.setText(address);
     }
     public void setPrice(double price) {
-        this.lbtien.setText("Thành Tiền: " + Double.toString(price) + " VND");
+        this.lbtien.setText("Thành Tiền: " + String.format("%,.0f VND", price));
     }
     public void acceptPay() {
         if (getSelectedPaymentMethod() == null) {
@@ -159,12 +174,12 @@ public class paymentController implements Initializable {
             if (payment.getPaymentMethod().equals("Cash"))
             {
                 // load ra giao dien home
-                loadUI("/View/Client/category.fxml");
+                loadUI("/View/Client/Product/product.fxml");
             }
             else
             {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/vnpay.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Payment/vnpay.fxml"));
                     Parent root = loader.load();
                     vnpayController vnpaycontroller = loader.getController();
                     vnpaycontroller.setAmount((int)Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));

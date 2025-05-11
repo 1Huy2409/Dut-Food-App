@@ -119,7 +119,7 @@ public class Dao_Category implements Dao_Interface<Category> {
         List<Category> categoryItems = new ArrayList<>();
         try {
             Connection con = JDBC.getConnection();
-            String query = "select * from categories ";
+            String query = "select * from categories";
             switch (condition)
             {
                 case "categoriesBtn":

@@ -72,6 +72,7 @@ public class customerController {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         customerTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        customerTable.setSelectionModel(null);
         selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.1));
         name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.2));
         email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));

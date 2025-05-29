@@ -94,4 +94,8 @@ public class adminController implements Initializable{
         loadUI("/View/Admin/Customer/customer.fxml");
 //        btnProduct.getStyleClass().add("selected-button-container");
     }
+    public void OrderOnAction(MouseEvent e)
+    {
+        loadUI("/View/Admin/Order/order.fxml");
+    }
 }

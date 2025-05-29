@@ -113,7 +113,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="btnOrder" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
+                  <HBox fx:id="btnOrder" alignment="CENTER" onMouseClicked="#OrderOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                            <image>

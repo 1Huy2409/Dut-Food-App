@@ -74,6 +74,7 @@ public class productController {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        productTable.setSelectionModel(null);
         nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
         priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
         categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
@@ -99,24 +100,6 @@ public class productController {
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();
             return new SimpleStringProperty(status ? "Active" : "Inactive");
-        });
-        statusColumn.setCellFactory(column -> new TableCell<FoodItem, String>() {
-            @Override
-            protected void updateItem(String statusText, boolean empty) {
-                super.updateItem(statusText, empty);
-
-                if (empty || statusText == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(statusText);
-                    if (statusText.equals("Active")) {
-                        setTextFill(Color.GREEN);
-                    } else {
-                        setTextFill(Color.GRAY);
-                    }
-                }
-            }
         });
         List<FoodItem> listFoodItems = new ArrayList<>();
         listFoodItems = Dao_Food.getInstance().getAll();

@@ -45,7 +45,7 @@ public class editCustomerController {
         if(txtphone.getText().isEmpty() || txtname.getText().isEmpty() || txtemail.getText().isEmpty()){
             AlertMessage.showAlertErrorMessage("Please fill in complete information");
         }
-        else if(Validation.isValidPhone(txtphone.getText()) ){
+        else if(!Validation.isValidPhone(txtphone.getText()) ){
             AlertMessage.showAlertErrorMessage("Invalid phone number");
         }
         else {

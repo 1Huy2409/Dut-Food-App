@@ -71,8 +71,13 @@ public class editCategoryController{
         item.setId(Integer.parseInt(cateId.getText()));
         item.setCategoryName(cateName.getText());
         item.setDescription(cateDesc.getText());
+
         if(Validation.isCategoryExists(cateName.getText())){
             AlertMessage.showAlertErrorMessage("Category already exists");
+            return;
+        }
+        else if(cateName.getText().isEmpty()){
+            AlertMessage.showAlertErrorMessage("Please enter category name");
             return;
         }
         if (cateTrue.isSelected())

@@ -3,6 +3,8 @@ package Controller.Admin.Product;
 import Controller.Admin.Category.editCategoryController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
@@ -122,6 +124,10 @@ public class editProductController {
         }
     }
     public void btnok(){
+        if(!Validation.isValidPrice(txtPrice.getText())){
+            AlertMessage.showAlertErrorMessage("Please enter number in price");
+            return;
+        }
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
         FoodItem item = new FoodItem();
         item.setId(productController.foodItemSelected.getId());

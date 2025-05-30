@@ -236,7 +236,6 @@ public class productController {
             checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
             return checkBoxCell;
         });
-
         productTable.setEditable(true); // Bật chế độ chỉnh sửa bảng
 
         selectAll.setOnAction(event -> {

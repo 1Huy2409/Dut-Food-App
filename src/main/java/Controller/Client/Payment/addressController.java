@@ -8,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import Model.OrderInfo;
 public class addressController {
     @FXML
     private TextArea address;
@@ -76,9 +76,10 @@ public class addressController {
             onCancel.run();
         }
     }
-    public String getAddress() {
+    public OrderInfo getAddress() {
         if(!txtName.getText().isEmpty() && !txtSdt.getText().isEmpty() && !address.getText().isEmpty() && !cbbCity.getValue().isEmpty()){
-            return txtName.getText() +", " + "(+84) " + txtSdt.getText() +", " + address.getText() + ", " + cbbCity.getValue();
+            OrderInfo orderInfo = new OrderInfo(txtName.getText(), "(+84) " + txtSdt.getText(), address.getText() + ", " + cbbCity.getValue());
+            return orderInfo;
         }
         return null;
     }

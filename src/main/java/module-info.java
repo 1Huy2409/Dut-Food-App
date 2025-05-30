@@ -11,6 +11,7 @@ module com.example.loginapp {
     requires jakarta.mail;
     requires io.github.cdimascio.dotenv.java;
     requires stripe.java;
+    requires itextpdf;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;

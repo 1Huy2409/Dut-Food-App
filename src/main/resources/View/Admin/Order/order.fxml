@@ -27,7 +27,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="reloadBtn" mnemonicParsing="false" styleClass="functional-buttons" text="Reload" />
+                        <Button fx:id="btnInvoice" mnemonicParsing="false" styleClass="functional-buttons" text="Get invoice" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">

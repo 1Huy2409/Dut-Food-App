@@ -1,10 +1,13 @@
 package Controller.Admin.Order;
 
+import DAO.Dao_OrderInfo;
 import DAO.Dao_Orders;
 import DAO.Dao_User;
+import Helper.InvoiceGenerator;
 import Helper.RouteScreen;
 import Helper.AlertMessage;
 import Model.Order;
+import Model.OrderInfo;
 import Model.User;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -28,7 +31,7 @@ import java.util.HashMap;
 public class orderController {
     @FXML private Button selectAll;
     @FXML private Button btnDetail;
-    @FXML private Button reloadBtn;
+    @FXML private Button btnInvoice;
     @FXML private Button multipleBtn;
 
     @FXML private TableView<Order> orderTable;
@@ -204,7 +207,26 @@ public class orderController {
             orderTable.refresh();
         });
 
-        reloadBtn.setOnAction(event -> reload());
+        btnInvoice.setOnAction(event -> {
+            List<Order> selectedItems = new ArrayList<>();
+            for (int i = 0; i < orderList.size(); i++) {
+                if (checkboxStates.get(i).get()) {
+                    selectedItems.add(orderList.get(i));
+                }
+            }
+            if (selectedItems.isEmpty()) {
+                AlertMessage.showAlertErrorMessage("Please select at least one order to generate invoice.");
+                return;
+            }
+            orderSelected = selectedItems.get(0);
+            OrderInfo orderInfo = Dao_OrderInfo.getInstance().getOrderInfoByOrderId(orderSelected.getId());
+            if (orderInfo == null) {
+                AlertMessage.showAlertErrorMessage("Order information not found for the selected order.");
+                return;
+            }
+            InvoiceGenerator.exportInvoiceAsPDF(orderSelected, orderInfo);
+            AlertMessage.showAlertSuccessMessage("Invoice generated successfully.");
+        });
         btnDetail.setOnAction(event -> {
             List<Order> selectedItems = new ArrayList<>();
             for (int i = 0; i < orderList.size(); i++) {

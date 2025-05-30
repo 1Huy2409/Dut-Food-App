@@ -47,7 +47,7 @@ public class orderController {
     private ObservableList<Order> orderList;
     private ObservableList<BooleanProperty> checkboxStates;
     private Map<Integer, User> userMap = new HashMap<>();
-    protected static Order orderSelected = null;
+    public static Order orderSelected = null;
 
     @FXML
     public void initialize() {

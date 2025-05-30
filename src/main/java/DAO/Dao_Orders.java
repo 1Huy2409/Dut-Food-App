@@ -140,7 +140,7 @@ public class Dao_Orders implements Dao_Interface<Order> {
 
     @Override
     public Order selectedById(int id) {
-        String query = "SELECT * FROM orders WHERE id = ?";
+        String query = "select * from orders where id = ?";
 
         try {
             Connection con = JDBC.getConnection();

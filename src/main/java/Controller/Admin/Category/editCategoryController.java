@@ -92,7 +92,7 @@ public class editCategoryController{
             {
                 if (foodItem.getCategoryId() == item.getId())
                 {
-                    Dao_Food.getInstance().delete(foodItem);
+                    Dao_Food.getInstance().updateStatus(foodItem);
                 }
             }
             item.setStatus(false);

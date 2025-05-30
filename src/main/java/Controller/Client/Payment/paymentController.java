@@ -38,7 +38,7 @@ public class paymentController implements Initializable {
     private RadioButton cash;
     private ToggleGroup paymentGroup;
     private List<CartItem> checkedItems;
-
+    private OrderInfo newOrderInfo;
     private VBox contentArea;
     private void loadUI(String fxml)
     {
@@ -127,8 +127,9 @@ public class paymentController implements Initializable {
         }
     }
     // setText(String.format("%,.0f VND", foodPrice))
-    public void setAddress(String address) {
-        this.address.setText(address);
+    public void setAddress(OrderInfo orderInfo) {
+        this.newOrderInfo = orderInfo;
+        this.address.setText(orderInfo.getFullname() + ", " + orderInfo.getPhone() + ", " + orderInfo.getAddress());
     }
     public void setPrice(double price) {
         this.lbtien.setText("Thành Tiền: " + String.format("%,.0f VND", price));
@@ -160,7 +161,8 @@ public class paymentController implements Initializable {
                 Dao_OrderItems.getInstance().create(orderItem);
                 Dao_CartItem.getInstance().delete(item);
             }
-
+            newOrderInfo.setOrder_id(order.getId());
+            Dao_OrderInfo.getInstance().create(newOrderInfo);
             Payment payment = new Payment();
             payment.setOrderId(order.getId());
             payment.setPaymentMethod(getSelectedPaymentMethod());

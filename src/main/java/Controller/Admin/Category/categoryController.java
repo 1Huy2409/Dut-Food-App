@@ -1,6 +1,5 @@
 package Controller.Admin.Category;
 
-import Controller.Admin.Product.productController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.RouteScreen;
@@ -22,17 +21,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import Helper.AlertMessage;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javafx.geometry.Insets;
-import javafx.scene.shape.Rectangle;
-
 public class categoryController {
-    @FXML private Button selectAll;
-
-    @FXML private Button add;
-    @FXML private Button reloadBtn;
+    @FXML
+    private Button selectAll;
+    @FXML
+    private Button add;
+    @FXML
+    private Button reloadBtn;
     @FXML
     private Button multipleBtn;
 
@@ -52,15 +49,17 @@ public class categoryController {
     private TableColumn<Category, Void> actionColumn;
     @FXML
     private HBox functional;
-    private ObservableList<Category> catagoryList;
+    private ObservableList<Category> categoryList;
     private ObservableList<BooleanProperty> checkboxStates;
     protected static Category categorySelected = null;
     @FXML
     public void initialize() {
+        // get stylesheets for table
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         categoryTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
-        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
-
+        // configure table columns
+        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        categoryTable.setSelectionModel(null);
         selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.1));
         idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
         categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
@@ -79,24 +78,21 @@ public class categoryController {
     }
     public void reload()
     {
+        loadCategoryData();
+        setupTableColumns();
+        setupActionColumn();
+        categoryTable.setEditable(true);
+        setupButtonsAction();
+    }
+    private void loadCategoryData() {
         List<Category> listCategory = Dao_Category.getInstance().getAll();
-//        categoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // để cột co giãn theo tổng width
-//
-//        selectColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.05));
-//        idColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.10));
-//        categoryNameColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
-//        created_timeColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.2));
-//        actionColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.3));
-//        statusColumn.prefWidthProperty().bind(categoryTable.widthProperty().multiply(0.15));
-        for (Category item: listCategory)
-        {
-            System.out.println(item.getCategoryName());
-        }
-        catagoryList = FXCollections.observableArrayList(listCategory);
+        categoryList = FXCollections.observableArrayList(listCategory);
         checkboxStates = FXCollections.observableArrayList();
-        for (int i = 0; i < catagoryList.size(); i++) {
+        for (int i = 0; i < categoryList.size(); i++) {
             checkboxStates.add(new SimpleBooleanProperty(false));
         }
+    }
+    private void setupTableColumns() {
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
         categoryNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoryName()));
         created_timeColumn.setCellValueFactory(cellData -> {
@@ -108,24 +104,20 @@ public class categoryController {
             boolean status = cellData.getValue().getStatus();
             return new SimpleStringProperty(status ? "Active" : "Inactive");
         });
-        statusColumn.setCellFactory(column -> new TableCell<Category, String>() {
-            @Override
-            protected void updateItem(String statusText, boolean empty) {
-                super.updateItem(statusText, empty);
-
-                if (empty || statusText == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(statusText);
-                    if (statusText.equals("Active")) {
-                        setTextFill(Color.GREEN);
-                    } else {
-                        setTextFill(Color.GRAY);
-                    }
-                }
-            }
+        selectColumn.setCellValueFactory(cellData -> {
+            int index = categoryList.indexOf(cellData.getValue());
+            // Trả về BooleanProperty đại diện cho trạng thái checkbox
+            return checkboxStates.get(index);
         });
+
+        selectColumn.setCellFactory(tc -> {
+            CheckBoxTableCell<Category, Boolean> checkBoxCell = new CheckBoxTableCell<>();
+            checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
+            return checkBoxCell;
+        });
+    }
+    private void setupActionColumn()
+    {
         actionColumn.setCellFactory(param -> new TableCell<Category, Void>() {
             private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
             private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
@@ -153,10 +145,8 @@ public class categoryController {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
+                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this category?");
                     if (confirm) {
-                        Dao_Category.getInstance().delete(category);
-                        // update status của product thuộc category này về inactive
                         List<FoodItem> listFoodItem = new ArrayList<>();
                         listFoodItem = Dao_Food.getInstance().getAll();
                         for (FoodItem item : listFoodItem)
@@ -166,6 +156,7 @@ public class categoryController {
                                 Dao_Food.getInstance().delete(item);
                             }
                         }
+                        Dao_Category.getInstance().delete(category);
                         AlertMessage.showAlertSuccessMessage("You have deleted this category!");
                         reload();
                     }
@@ -185,28 +176,15 @@ public class categoryController {
                 }
             }
         });
-
-        selectColumn.setCellValueFactory(cellData -> {
-            int index = catagoryList.indexOf(cellData.getValue());
-            // Trả về BooleanProperty đại diện cho trạng thái checkbox
-            return checkboxStates.get(index);
-        });
-
-        selectColumn.setCellFactory(tc -> {
-            CheckBoxTableCell<Category, Boolean> checkBoxCell = new CheckBoxTableCell<>();
-            checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
-            return checkBoxCell;
-        });
-
-        categoryTable.setEditable(true); // Bật chế độ chỉnh sửa bảng
-
+    }
+    private void setupButtonsAction() {
         selectAll.setOnAction(event -> {
             boolean allSelected = checkboxStates.stream().allMatch(BooleanProperty::get);
             checkboxStates.forEach(state -> state.set(!allSelected)); // Đảo trạng thái
             categoryTable.refresh();
         });
 
-        categoryTable.setItems(catagoryList);
+        categoryTable.setItems(categoryList);
         add.setOnAction(event -> {
             Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
             stage.setOnHidden(e -> reload());
@@ -216,9 +194,9 @@ public class categoryController {
         });
         multipleBtn.setOnAction(actionEvent -> {
             List<Category> selectedItems = new ArrayList<Category>();
-            for (int i = 0; i < catagoryList.size(); i++) {
+            for (int i = 0; i < categoryList.size(); i++) {
                 if (checkboxStates.get(i).get()) {
-                    selectedItems.add(catagoryList.get(i));
+                    selectedItems.add(categoryList.get(i));
                 }
             }
             boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
@@ -235,32 +213,13 @@ public class categoryController {
 
         });
     }
-
-    @FXML private void handleSelectAll() {
-        checkboxStates.forEach(state -> state.set(true)); // Chọn tất cả
-        categoryTable.refresh();
-    }
-
     public void ReloadOnAction(ActionEvent e)
     {
         reload();
     }
-
     public void BtnAddOnAction(ActionEvent event)
     {
         Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
         stage.setOnHidden(e -> reload());
     }
-//    public void handleMultipleDelete(ActionEvent event)
-//    {
-//        for (int i = 0; i < catagoryList.size(); i++)
-//        {
-//            if (checkboxStates.get(i).get())
-//            {
-//                Category category = catagoryList.get(i);
-//                Dao_Category.getInstance().delete(category);
-//            }
-//        }
-//        reload();
-//    }
 }

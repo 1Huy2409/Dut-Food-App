@@ -83,7 +83,7 @@
                      <children>
                         <VBox alignment="CENTER_LEFT" layoutY="1.0" prefHeight="82.0" prefWidth="288.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="288.0" spacing="180.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="288.0" spacing="155.0">
                                  <children>
                                     <Label text="Total" />
                                     <Label fx:id="total" />

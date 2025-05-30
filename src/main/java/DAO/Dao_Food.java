@@ -114,7 +114,7 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         try {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
-                    "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ?, status = ? where id = ?";
+                    "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ?, status = ?, sold = ? where id = ?";
             // where condition ?
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, foodItem.getFoodName());
@@ -124,7 +124,8 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
             pstmt.setString (5, foodItem.getImageUrl());
             pstmt.setInt(6, foodItem.getStock());
             pstmt.setBoolean(7, foodItem.isStatus());
-            pstmt.setInt(8, foodItem.getId());
+            pstmt.setInt(8, foodItem.getSold());
+            pstmt.setInt(9, foodItem.getId());
             res = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + res);
@@ -136,6 +137,22 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
     }
     @Override
     public int delete(FoodItem foodItem) {
+        int res = 0;
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "delete from fooditems where id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, foodItem.getId());
+            res = pstmt.executeUpdate();
+            System.out.println("You executed: " + query);
+            System.out.println("Row have been deleted is: " + res);
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public int updateStatus(FoodItem foodItem) {
         int res = 0;
         try {
             Connection con = JDBC.getConnection();
@@ -152,7 +169,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return res;
     }
-
     @Override
     public FoodItem selectedById(int foodItemId) {
         FoodItem item = new FoodItem();

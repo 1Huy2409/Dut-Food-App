@@ -11,6 +11,7 @@ module com.example.loginapp {
     requires jakarta.mail;
     requires io.github.cdimascio.dotenv.java;
     requires stripe.java;
+    requires itextpdf;
     exports Application;
     opens Application to javafx.fxml;
     exports Controller.Admin.Category;
@@ -19,8 +20,10 @@ module com.example.loginapp {
     opens Controller.Admin.Dashboard to javafx.fxml;
     exports Controller.Admin.Product;
     opens Controller.Admin.Product to javafx.fxml;
-    exports Controller.Admin.User;
-    opens Controller.Admin.User to javafx.fxml;
+    exports Controller.Admin.Customer to javafx.fxml;
+    opens Controller.Admin.Customer to javafx.fxml;
+    exports Controller.Admin.Order to javafx.fxml;
+    opens Controller.Admin.Order to javafx.fxml;
     exports Controller.Admin;
     opens Controller.Admin to javafx.fxml;
     exports Controller.Client.Account;
@@ -29,8 +32,7 @@ module com.example.loginapp {
     opens Controller.Client.Product to javafx.fxml;
     exports Controller.Shared.Auth;
     opens Controller.Shared.Auth to javafx.fxml;
-    exports Controller.Admin.Customer to javafx.fxml;
-    opens Controller.Admin.Customer to javafx.fxml;
+
     exports Controller.Client;
     opens Controller.Client to javafx.fxml;
     exports Controller.Client.Profile to javafx.fxml;

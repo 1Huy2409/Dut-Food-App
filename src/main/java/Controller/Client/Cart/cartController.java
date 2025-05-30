@@ -36,50 +36,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class cartController implements Initializable {
-
-    @FXML
-    private Button applyCouponBtn;
-
-    @FXML
-    private HBox cartItemTemplate;
-
-    @FXML
-    private TextField couponCodeTextField;
-
     @FXML
     private Button proceedToCheckoutBtn;
-
-    @FXML
-    private CheckBox productCheckbox;
-
     @FXML
     private TilePane productContainer;
 
     @FXML
-    private Label productDesc;
-
-    @FXML
-    private ImageView productImage;
-
-    @FXML
-    private Label productName;
-
-    @FXML
-    private Label productPrice;
-
-    @FXML
-    private TextField productQuantity;
-
-    @FXML
-    private Label subtotal;
-
-    @FXML
     private Label total;
-    @FXML
-    private Button minusButton;
-
-    @FXML
-    private Button plusButton;
 
     @FXML
     private Label stockLimitLabel;
@@ -89,9 +52,6 @@ public class cartController implements Initializable {
     private double totalPrice1;
     public List<CartItem> cartItemsChecked = new ArrayList<>();
     private FoodItem checkedItem = null;
-
-
-    // create list cartChecked => then set on action push to order list
 
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -116,7 +76,7 @@ public class cartController implements Initializable {
     }
     public void renderCart()
     {
-        total.setText("0.0");
+        total.setText("0 VND");
         Cart cart = Dao_Cart.getInstance().selectedByUserId(UserSession.getInstance().getId());
         List<CartItem> cartItems = Dao_CartItem.getInstance().selectedByIdCart(cart.getId());
         productContainer.getChildren().clear();

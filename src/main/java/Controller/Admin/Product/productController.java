@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -19,13 +18,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -64,9 +60,8 @@ public class productController {
     @FXML
     private TableColumn<FoodItem, String> statusColumn;
     protected static FoodItem foodItemSelected = null;
-//    protected static FoodItem multifoodItemSelected = null;
     private ObservableList<FoodItem> productList;
-    private ObservableList<BooleanProperty> checkboxStates; // Trạng thái checkbox
+    private ObservableList<BooleanProperty> checkboxStates;
     private final ConcurrentHashMap<Integer, String> categoryMap = new ConcurrentHashMap<>();
     @FXML
     public void initialize()
@@ -74,10 +69,11 @@ public class productController {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.25));
-        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
+        productTable.setSelectionModel(null);
+        nameColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
+        priceColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         categoryColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.10));
-        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
+        imageColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.15));
         created_timeColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.1));
         statusColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.08));
         actionColumn.prefWidthProperty().bind(productTable.widthProperty().multiply(0.2));
@@ -95,38 +91,26 @@ public class productController {
     }
     public void reload() {
         loadCategories();
-
+        loadProductData();
+        setupTableColumn();
+        productTable.setEditable(true);
+        setupButtonsAction();
+    }
+    private void loadProductData()
+    {
+        List<FoodItem> listFoodItems = Dao_Food.getInstance().getAll();
+        productList = FXCollections.observableArrayList(listFoodItems);
+        checkboxStates = FXCollections.observableArrayList();
+        for (int i = 0; i < productList.size(); i++) {
+            checkboxStates.add(new SimpleBooleanProperty(false));
+        }
+    }
+    private void setupTableColumn()
+    {
         statusColumn.setCellValueFactory(cellData -> {
             boolean status = cellData.getValue().isStatus();
             return new SimpleStringProperty(status ? "Active" : "Inactive");
         });
-        statusColumn.setCellFactory(column -> new TableCell<FoodItem, String>() {
-            @Override
-            protected void updateItem(String statusText, boolean empty) {
-                super.updateItem(statusText, empty);
-
-                if (empty || statusText == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(statusText);
-                    if (statusText.equals("Active")) {
-                        setTextFill(Color.GREEN);
-                    } else {
-                        setTextFill(Color.GRAY);
-                    }
-                }
-            }
-        });
-        List<FoodItem> listFoodItems = new ArrayList<>();
-        listFoodItems = Dao_Food.getInstance().getAll();
-        productList = FXCollections.observableArrayList(
-                listFoodItems
-        );
-        checkboxStates = FXCollections.observableArrayList();
-        for (int i = 0; i < productList.size(); i++) {
-            checkboxStates.add(new SimpleBooleanProperty(false)); // mặc định chưa tick
-        }
 
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFoodName()));
@@ -141,15 +125,15 @@ public class productController {
             private final ImageView imageView = new ImageView();
 
             {
-                imageView.setFitWidth(100);  // hoặc kích thước bạn muốn
-                imageView.setFitHeight(120);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
                 imageView.setSmooth(true);
                 imageView.setPreserveRatio(true);
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 setAlignment(Pos.CENTER);
-                Rectangle clip = new Rectangle(100, 100); // Kích thước giống với ImageView
-                clip.setArcWidth(20);  // Độ bo góc theo chiều ngang
-                clip.setArcHeight(20); // Độ bo góc theo chiều dọc
+                Rectangle clip = new Rectangle(100, 100);
+                clip.setArcWidth(20);
+                clip.setArcHeight(20);
                 imageView.setClip(clip);
             }
 
@@ -236,6 +220,9 @@ public class productController {
             checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
             return checkBoxCell;
         });
+    }
+    private void setupButtonsAction()
+    {
         productTable.setEditable(true); // Bật chế độ chỉnh sửa bảng
 
         selectAll.setOnAction(event -> {
@@ -245,7 +232,7 @@ public class productController {
         });
 
         productTable.setItems(productList);
-        productTable.setRowFactory(tv -> new TableRow<>() {
+        productTable.setRowFactory(tv -> new TableRow<FoodItem>() {
             @Override
             protected void updateItem(FoodItem item, boolean empty) {
                 super.updateItem(item, empty);
@@ -265,11 +252,11 @@ public class productController {
         demul.setOnAction(event -> {
             List<FoodItem> selectedItems = new ArrayList<FoodItem>();
 
-                for (int i = 0; i < productList.size(); i++) {
-                    if (checkboxStates.get(i).get()) {
-                        selectedItems.add(productList.get(i));
-                    }
+            for (int i = 0; i < productList.size(); i++) {
+                if (checkboxStates.get(i).get()) {
+                    selectedItems.add(productList.get(i));
                 }
+            }
             boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
             if(confirm) {
                 for (FoodItem items : selectedItems) {
@@ -314,10 +301,5 @@ public class productController {
                 });
             }
         }).start();
-    }
-
-    @FXML private void handleSelectAll() {
-        checkboxStates.forEach(state -> state.set(true)); // Chọn tất cả
-        productTable.refresh();
     }
 }

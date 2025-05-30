@@ -137,6 +137,7 @@ public class editProductController {
         item.setStock(Integer.parseInt(stock.getText()));
         item.setCategoryId(cbCategory.getValue().getId());
         item.setStatus(active.isSelected());
+        item.setSold(productController.foodItemSelected.getSold());
         if(productController.foodItemSelected.getImageUrl().equals(imgURL)){
             item.setImageUrl(productController.foodItemSelected.getImageUrl());
         }

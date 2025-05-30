@@ -22,7 +22,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" styleClass="functional-buttons" text="Add" />
+                        <Button fx:id="btnDetail" mnemonicParsing="false" styleClass="functional-buttons" text="Detail" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">

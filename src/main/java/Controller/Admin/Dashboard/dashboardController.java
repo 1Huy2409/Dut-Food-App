@@ -70,32 +70,21 @@ public class dashboardController implements Initializable {
             VBox itemBox = new VBox();
             itemBox.setPrefWidth(300);
             itemBox.setPrefHeight(210);
-            ImageView imageView = new ImageView();
+            ImageView img = new ImageView();
             String imageUrl = item.getImageUrl();
-            System.out.println("Loading image: " + imageUrl);
-
-            if (imageUrl != null && !imageUrl.isEmpty()) {
-                // Lấy đường dẫn từ resources
-                URL imageUrlPath = getClass().getResource("/" + imageUrl);
-                if (imageUrlPath != null) {
-                    Image image = new Image(imageUrlPath.toExternalForm());
-                    imageView.setImage(image);
-                } else {
-                    System.err.println("This image file does not exist in resources: " + imageUrl);
-                }
-            } else {
-                System.err.println("Error file path for: " + item.getFoodName());
-            }
-            imageView.setFitHeight(140);
-            imageView.setFitWidth(200);
-            Rectangle clip = new Rectangle();
+            System.out.println(imageUrl);
+            File file = new File("src/main/resources/" + imageUrl);
+            Image image = new Image(file.toURI().toString());
+            img.setImage(image);
+            img.setFitWidth(300);
+            img.setFitHeight(150);
+            Rectangle clip = new Rectangle(img.getFitWidth(), img.getFitHeight());
             clip.setArcWidth(20);
             clip.setArcHeight(20);
-            imageView.setClip(clip);
+            img.setClip(clip);
             Label nameLabel = new Label(item.getFoodName());
-            itemBox.getChildren().addAll(imageView, nameLabel);
+            itemBox.getChildren().addAll(img, nameLabel);
             bestSellerBox.getChildren().add(itemBox);
-            System.out.println(item.getFoodName());
         }
     }
 }

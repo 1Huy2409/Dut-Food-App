@@ -83,13 +83,6 @@ public class customerController {
     }
     public void reload() {
         List<User> listUser = Dao_User.getInstance().getAll();
-//        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-//        selectColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.05));
-//        name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
-//        email.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
-//        phone.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.20));
-//        status.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.15));
-//        actionColumn.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.25));
         userList = FXCollections.observableArrayList(listUser);
         filteredUsers = new FilteredList<>(userList, p -> true);
         checkboxStates = FXCollections.observableArrayList();
@@ -154,7 +147,7 @@ public class customerController {
                      boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this usert?");
                     if (confirm) {
                         Dao_User.getInstance().delete(customerController.userSelected);
-                       reload();
+                        reload();
                     }
                 });
             }
@@ -203,14 +196,7 @@ public class customerController {
             customerTable.refresh();
         });
 
-        //customerTable.setItems(userList);
         customerTable.setItems(filteredUsers);
-
-
-//        private void handleSelectAll() {
-//            checkboxStates.forEach(state -> state.set(true)); // Chọn tất cả
-//            customerTable.refresh();
-//        }
         add.setOnAction(event -> {
             Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Customer/addCustomer.fxml");
             stage.setOnHidden(e -> reload());

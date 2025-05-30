@@ -20,7 +20,7 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            String sql = "select * from users";
+            String sql = "select * from users where roleId = 2";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next())
             {
@@ -34,7 +34,6 @@ public class Dao_User implements Dao_Interface<User> {
                 int roleId = rs.getInt("roleId");
                 User user = new User(id,phone,fullName,email,userName,password,roleId,status);
                 users.add(user);
-                System.out.println(id + " - " + phone + " - " + fullName + " - " + email + " - " + userName + " - " + password + " - " + status + " - " + roleId);
             }
 
         } catch (SQLException e) {
@@ -65,13 +64,14 @@ public class Dao_User implements Dao_Interface<User> {
         int result = 0;
         try {
             Connection con = JDBC.getConnection();
-            String sql = "update users set fullName = ?, email = ?, phone = ?, image = ? where id = ?";
+            String sql = "update users set fullName = ?, email = ?, phone = ?, image = ?, status = ? where id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
-            ps.setInt(5, user.getId());
             ps.setString(4,user.getImage());
+            ps.setInt(6, user.getId());
+            ps.setBoolean(5, user.getStatus());
             result = ps.executeUpdate();
             System.out.println("Rows updated: " + result);
             JDBC.closeConnection(con);

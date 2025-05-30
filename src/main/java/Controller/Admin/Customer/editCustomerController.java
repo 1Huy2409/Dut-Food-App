@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import javafx.scene.control.RadioButton;
 public class editCustomerController {
     @FXML
     private Button btnCancel;
@@ -24,6 +24,13 @@ public class editCustomerController {
 
     @FXML
     private TextField txtphone;
+
+    @FXML
+    private RadioButton activeCus;
+
+    @FXML
+    private RadioButton inactiveCus;
+
     private static customerController getInstance() {
         return new customerController();
     }
@@ -35,6 +42,14 @@ public class editCustomerController {
         txtname.setText(user.getFullName());
         txtemail.setText(user.getEmail());
         txtphone.setText(user.getPhone());
+        if (user.getStatus())
+        {
+            activeCus.setSelected(true);
+        }
+        else
+        {
+            inactiveCus.setSelected(true);
+        }
     }
     public void BtnSaveOnAction(ActionEvent e){
         Stage currentStage = (Stage) btnSave.getScene().getWindow();
@@ -47,6 +62,12 @@ public class editCustomerController {
         newUser.setRoleId(customerController.userSelected.getRoleId());
         newUser.setPassWord(customerController.userSelected.getPassWord());
         newUser.setEmail(txtemail.getText());
+        if (activeCus.isSelected()) {
+            newUser.setStatus(true);
+        } else {
+            newUser.setStatus(false);
+        }
+        newUser.setImage("");
         Dao_User.getInstance().update(newUser);
         currentStage.close();
     }

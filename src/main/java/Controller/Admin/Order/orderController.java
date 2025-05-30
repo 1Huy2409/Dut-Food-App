@@ -9,7 +9,6 @@ import Model.User;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -28,7 +27,7 @@ import java.util.HashMap;
 
 public class orderController {
     @FXML private Button selectAll;
-    @FXML private Button add;
+    @FXML private Button btnDetail;
     @FXML private Button reloadBtn;
     @FXML private Button multipleBtn;
 
@@ -52,7 +51,7 @@ public class orderController {
         functional.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         orderTable.getStylesheets().add(getClass().getResource("/CSS/table-style.css").toExternalForm());
         orderTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
+        orderTable.setSelectionModel(null);
         selectColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.1));
         idColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.1));
         userNameColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.2));
@@ -60,7 +59,6 @@ public class orderController {
         statusColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.15));
         orderDateColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.15));
         actionColumn.prefWidthProperty().bind(orderTable.widthProperty().multiply(0.15));
-
         reload();
     }
 
@@ -73,21 +71,27 @@ public class orderController {
     }
 
     public void reload() {
+        loadOrderAndUserData();
+        setupTableColumns();
+
+        orderTable.setEditable(true);
+        orderTable.setItems(orderList);
+        setupButtonsAction();
+    }
+    private void loadOrderAndUserData() {
         List<Order> listOrder = Dao_Orders.getInstance().getAll();
         List<User> listUser = Dao_User.getInstance().getAll();
-
-        // Create a map of users for quick lookup by ID
         userMap.clear();
         for (User user : listUser) {
             userMap.put(user.getId(), user);
         }
-
         orderList = FXCollections.observableArrayList(listOrder);
         checkboxStates = FXCollections.observableArrayList();
         for (int i = 0; i < orderList.size(); i++) {
             checkboxStates.add(new SimpleBooleanProperty(false));
         }
-
+    }
+    private void setupTableColumns() {
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
 
         userNameColumn.setCellValueFactory(cellData -> {
@@ -191,23 +195,34 @@ public class orderController {
             checkBoxCell.setEditable(true);
             return checkBoxCell;
         });
-
-        orderTable.setEditable(true);
-
+    }
+    private void setupButtonsAction()
+    {
         selectAll.setOnAction(event -> {
             boolean allSelected = checkboxStates.stream().allMatch(BooleanProperty::get);
             checkboxStates.forEach(state -> state.set(!allSelected));
             orderTable.refresh();
         });
 
-        orderTable.setItems(orderList);
-
-        add.setOnAction(event -> {
-            Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Order/addOrder.fxml");
-            stage.setOnHidden(e -> reload());
+        reloadBtn.setOnAction(event -> reload());
+        btnDetail.setOnAction(event -> {
+            List<Order> selectedItems = new ArrayList<>();
+            for (int i = 0; i < orderList.size(); i++) {
+                if (checkboxStates.get(i).get()) {
+                    selectedItems.add(orderList.get(i));
+                }
+            }
+            if (selectedItems.size() != 1) {
+                AlertMessage.showAlertErrorMessage("Please select exactly one order to view details.");
+                return;
+            }
+            orderSelected = selectedItems.get(0);
+            if (orderSelected != null) {
+                Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Order/orderDetail.fxml");
+                stage.setOnHidden(e -> reload());
+            }
         });
 
-        reloadBtn.setOnAction(event -> reload());
 
         multipleBtn.setOnAction(actionEvent -> {
             List<Order> selectedItems = new ArrayList<>();
@@ -229,20 +244,5 @@ public class orderController {
                 reload();
             }
         });
-    }
-
-    @FXML
-    private void handleSelectAll() {
-        checkboxStates.forEach(state -> state.set(true));
-        orderTable.refresh();
-    }
-
-    public void ReloadOnAction(ActionEvent e) {
-        reload();
-    }
-
-    public void BtnAddOnAction(ActionEvent event) {
-        Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Order/addOrder.fxml");
-        stage.setOnHidden(e -> reload());
     }
 }

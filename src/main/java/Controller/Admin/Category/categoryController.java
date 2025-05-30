@@ -145,10 +145,8 @@ public class categoryController {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
                     Category category = getTableView().getItems().get(getIndex());
-                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
+                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this category?");
                     if (confirm) {
-                        Dao_Category.getInstance().delete(category);
-                        // update status của product thuộc category này về inactive
                         List<FoodItem> listFoodItem = new ArrayList<>();
                         listFoodItem = Dao_Food.getInstance().getAll();
                         for (FoodItem item : listFoodItem)
@@ -158,6 +156,7 @@ public class categoryController {
                                 Dao_Food.getInstance().delete(item);
                             }
                         }
+                        Dao_Category.getInstance().delete(category);
                         AlertMessage.showAlertSuccessMessage("You have deleted this category!");
                         reload();
                     }

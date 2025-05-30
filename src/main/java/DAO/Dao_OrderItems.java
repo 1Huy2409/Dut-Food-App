@@ -5,6 +5,7 @@ import Model.OrderItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,5 +56,36 @@ public class Dao_OrderItems implements Dao_Interface<OrderItem>{
     @Override
     public List<OrderItem> selectByCondition(String condition) {
         return List.of();
+    }
+
+    public List<OrderItem> getOrderItemsByOrderId(int orderId) {
+        List<OrderItem> orderItems = null;
+        String query = "SELECT * FROM orderitems WHERE order_id = ?";
+        try
+        {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, orderId);
+            ResultSet resultSet = pstmt.executeQuery();
+            while (resultSet.next())
+            {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setId(resultSet.getInt("id"));
+                orderItem.setOrderId(resultSet.getInt("order_id"));
+                orderItem.setFoodItemId(resultSet.getInt("foodItem_id"));
+                orderItem.setQuantity(resultSet.getInt("quantity"));
+                orderItem.setPrice(resultSet.getDouble("price"));
+
+                if (orderItems == null) {
+                    orderItems = new java.util.ArrayList<>();
+                }
+                orderItems.add(orderItem);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return orderItems;
     }
 }

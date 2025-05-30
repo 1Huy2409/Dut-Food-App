@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -65,6 +66,9 @@
                            </padding>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </VBox>
                </children>
             </HBox>
@@ -84,6 +88,9 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </HBox>
                   <HBox fx:id="btnCategory" alignment="CENTER" onMouseClicked="#CategoryOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
@@ -98,6 +105,9 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </HBox>
                   <HBox fx:id="btnProduct" alignment="CENTER" onMouseClicked="#ProductOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
@@ -112,6 +122,9 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </HBox>
                   <HBox fx:id="btnOrder" alignment="CENTER" onMouseClicked="#OrderOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
@@ -126,6 +139,9 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </HBox>
                   <HBox fx:id="btnCustomer" alignment="CENTER" onMouseClicked="#CustomerOnAction" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
@@ -140,6 +156,9 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </HBox>
                   <HBox fx:id="btnStaff" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
                      <children>
@@ -149,34 +168,6 @@
                            </image>
                         </ImageView>
                         <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="26.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="btnReport" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../../Pictures/icons8-report-50.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="185.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Report &amp; Statistics" textFill="#f8f8f8">
-                           <font>
-                              <Font name="Berlin Sans FB" size="26.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="btnSetting" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../../Pictures/icons8-settings-50.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="188.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Setting" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB" size="26.0" />
                            </font>

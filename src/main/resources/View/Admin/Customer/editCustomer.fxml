@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Customer.editCustomerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(60,167,153);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Customer.editCustomerController">
    <children>
       <Label layoutX="47.0" layoutY="95.0" text="Name" />
       <Label layoutX="47.0" layoutY="152.0" text="Email Address" />

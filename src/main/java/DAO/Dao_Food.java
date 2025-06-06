@@ -5,7 +5,9 @@ import Model.FoodItem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Dao_Food implements Dao_Interface<FoodItem> {
 
@@ -227,5 +229,21 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return foodItems;
     }
-
+    public Map<String, Integer> getCategoryRevenue() {
+        Map<String, Integer> result = new HashMap<>();
+        String sql = "SELECT c.category_name AS category_name, SUM(f.sold) AS total_sold " +
+                "FROM fooditems f " +
+                "JOIN categories c ON f.category_id = c.id " +
+                "GROUP BY c.category_name";
+        try (Connection con = JDBC.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                result.put(rs.getString("category_name"), rs.getInt("total_sold"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 }

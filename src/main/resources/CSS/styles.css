@@ -25,10 +25,6 @@
     -fx-tick-lable-fill: #fff;
 }
 
-.default-color0.chart-pie{-fx-pie-color: transparent;}
-.default-color1.chart-pie{-fx-pie-color: transparent;}
-.default-color2.chart-pie{-fx-pie-color: transparent;}
-.default-color3.chart-pie{-fx-pie-color: transparent;}
 
 .chart-pie-label{
     -fx-fill: #FFD6DC;

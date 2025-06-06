@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Dashboard.dashboardController" VBox.vgrow = "ALWAYS">
+<VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Dashboard.dashboardController">
     <BorderPane.margin>
         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
     </BorderPane.margin>
@@ -33,7 +33,7 @@
             <children>
                 <VBox prefHeight="315.0" prefWidth="472.0" styleClass="container" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="Doanh thu trong tuần" textFill="WHITE">
+                        <Label text="Revenue Per Week" textFill="WHITE">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -43,17 +43,17 @@
                         </Label>
                         <LineChart fx:id="lineChart" legendVisible="false" prefWidth="375.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css">
                             <xAxis>
-                                <CategoryAxis side="BOTTOM" />
+                                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                             </xAxis>
                             <yAxis>
-                                <NumberAxis side="LEFT" />
+                                <NumberAxis fx:id="yAxis" side="LEFT" />
                             </yAxis>
                         </LineChart>
                     </children>
                 </VBox>
                 <VBox prefHeight="315.0" prefWidth="472.0" styleClass="container" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="Doanh thu theo danh mục" textFill="WHITE">
+                        <Label text="Percentage of products sold by category" textFill="WHITE">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -62,73 +62,6 @@
                             </padding>
                         </Label>
                         <PieChart fx:id="pieChart" legendVisible="false" prefWidth="309.0" />
-                    </children>
-                </VBox>
-            </children>
-        </HBox>
-        <HBox spacing="20.0">
-            <children>
-                <VBox prefWidth="100.0" styleClass="container" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Label prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="BEST SELLER" textFill="#ffd6dc">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="656.0">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="38.0" prefWidth="67.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="" textFill="WHITE">
-                                    <font>
-                                        <Font size="36.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-                </VBox>
-                <VBox prefWidth="100.0" styleClass="container" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Label prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="BEST SELLER" textFill="#ffd6dc">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="656.0">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="38.0" prefWidth="67.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="" textFill="WHITE">
-                                    <font>
-                                        <Font size="36.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-                </VBox>
-                <VBox prefWidth="100.0" styleClass="container" stylesheets="@../../../CSS/styles.css" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Label prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="BEST SELLER" textFill="#ffd6dc">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="10.0" right="10.0" top="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="656.0">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="38.0" prefWidth="67.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="" textFill="WHITE">
-                                    <font>
-                                        <Font size="36.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
                     </children>
                 </VBox>
             </children>

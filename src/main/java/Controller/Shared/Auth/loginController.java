@@ -33,8 +33,8 @@ public class loginController
     private Hyperlink forgotPwLink;
 
     public void loginButtonOnAction(ActionEvent e) {
-        String emailCheck = emailTextField.getText();
-        String passwordCheck = passwordPasswordField.getText();
+        String emailCheck = emailTextField.getText().trim();
+        String passwordCheck = passwordPasswordField.getText().trim();
         // validate data
         if (!Validation.getInstance().loginValidation(emailCheck, passwordCheck))
         {
@@ -48,13 +48,11 @@ public class loginController
             UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId(), currentCart.getId());
             if (UserSession.getInstance().getRoleId() == 1)
             {
-                // go to admin_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
                 RouteScreen.switchRouter(currentStage, "/View/Admin/admin_dashboard.fxml", null, null);
             }
             else
             {
-                // go to client_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
                 RouteScreen.switchRouter(currentStage, "/View/Client/Dashboard/client_dashboard.fxml",null, null);
             }

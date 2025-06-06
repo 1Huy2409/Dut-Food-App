@@ -1,6 +1,7 @@
 package Controller.Admin.Dashboard;
 
 import DAO.Dao_Food;
+import DAO.Dao_Orders;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,9 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,15 +20,20 @@ import javafx.scene.shape.Rectangle;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class dashboardController implements Initializable {
     @FXML
-    private LineChart<?, ?> lineChart;
+    private LineChart<String, Number> lineChart;
     @FXML
     private HBox bestSellerBox;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -39,27 +43,23 @@ public class dashboardController implements Initializable {
     }
     private void iniLineChart()
     {
-        XYChart.Series series = new XYChart.Series();
-        series.getData().add(new XYChart.Data("Monday",8));
-        series.getData().add(new XYChart.Data("Tuesday",12));
-        series.getData().add(new XYChart.Data("Wednesday",10));
-        series.getData().add(new XYChart.Data("Thursday",15));
-        series.getData().add(new XYChart.Data("Friday",12));
-        series.getData().add(new XYChart.Data("Saturday",8));
-        series.getData().add(new XYChart.Data("Sunday",5));
+        Map <String, Double> revenueData = Dao_Orders.getInstance().getRevenueByWeek();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Doanh thu");
+        revenueData.forEach((day, total) -> {
+            series.getData().add(new XYChart.Data<>(day, total));
+        });
         lineChart.getData().add(series);
         lineChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
         series.getNode().setStyle("-fx-stroke: #FFD6DC");
     }
 
-    private void iniPieChart()
-    {
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Mon chinh", 30),
-                new PieChart.Data("Mon trang mien", 15),
-                new PieChart.Data("Nuoc ngot", 20),
-                new PieChart.Data("Tra sua", 25)
-        );
+    private void iniPieChart() {
+        Map<String, Integer> categoryRevenue = Dao_Food.getInstance().getCategoryRevenue();
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (Map.Entry<String, Integer> entry : categoryRevenue.entrySet()) {
+            pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+        }
         pieChart.setData(pieChartData);
     }
     public void renderBestSeller()

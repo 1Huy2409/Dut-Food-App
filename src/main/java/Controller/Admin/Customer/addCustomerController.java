@@ -41,15 +41,18 @@ public class addCustomerController {
     }
     public void OkOnAction(){
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
-        String password = txtpassword.getText();
-        String confirmPassword = txtpasswordconfirm.getText();
-        // Reset label lỗi
         lbpass.setText("");
-        // Kiểm tra thông tin có bị bỏ trống không
-        if (txtfullname.getText().trim().isEmpty() ||
-                txtemail.getText().trim().isEmpty() ||
-                txtphone.getText().trim().isEmpty() ||
-                txtusername.getText().trim().isEmpty() ||
+        String fullName = txtfullname.getText().trim();
+        String email = txtemail.getText().trim();
+        String phone = txtphone.getText().trim();
+        String userName = txtusername.getText().trim();
+        String password = txtpassword.getText().trim();
+        String confirmPassword = txtpasswordconfirm.getText().trim();
+
+        if (    fullName.isEmpty() ||
+                email.isEmpty() ||
+                phone.isEmpty() ||
+                userName.isEmpty() ||
                 password.trim().isEmpty() ||
                 confirmPassword.trim().isEmpty()) {
 
@@ -58,13 +61,13 @@ public class addCustomerController {
         }
 
         // Kiểm tra email hợp lệ
-        if (!Validation.isValidEmail(txtemail.getText())) {
+        if (!Validation.isValidEmail(email)) {
             AlertMessage.showAlertErrorMessage("Invalid email");
             return;
         }
 
         // Kiểm tra số điện thoại hợp lệ
-        if (!Validation.isValidPhone(txtphone.getText())) {
+        if (!Validation.isValidPhone(phone)) {
             AlertMessage.showAlertErrorMessage("Invalid phone number");
             return;
         }
@@ -80,16 +83,7 @@ public class addCustomerController {
             lbpass.setText("Password confirmation does not match");
             return;
         }
-
-
-        User user = new User();
-        user.setFullName(txtfullname.getText());
-        user.setEmail(txtemail.getText());
-        user.setPhone(txtphone.getText());
-        user.setUserName(txtusername.getText());
-        user.setPassWord(PasswordHelper.hashPassword(password));
-        user.setRoleId(2);
-        Dao_User.getInstance().create(user);
+        Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
         currentStage.close();
     }
     public void cancelOnAction(){

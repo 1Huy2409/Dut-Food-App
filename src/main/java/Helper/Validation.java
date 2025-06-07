@@ -71,7 +71,7 @@ public class Validation {
     {
         if (email.isEmpty() && password.isEmpty())
         {
-            AlertMessage.showAlertErrorMessage("Vui lòng nhập đầy đủ thông tin!");
+            AlertMessage.showAlertErrorMessage("Vui lòng nhập email và mật khẩu!");
             return false;
         }
         if (email.isEmpty())
@@ -91,19 +91,17 @@ public class Validation {
         }
         return true;
     }
-    public static boolean isCategoryExists(String nameInput) {
+    public static boolean isCategoryExists(String nameInput, Integer categoryId) {
         String normalizedInput = normalizeName(nameInput);
-
-        // Lấy toàn bộ danh mục từ database
         List<Category> categoryList = Dao_Category.getInstance().getAll();
 
         for (Category c : categoryList) {
             String normalizedExisting = normalizeName(c.getCategoryName());
-            if (normalizedInput.equals(normalizedExisting)) {
-                return true; // Đã tồn tại
+            if (normalizedInput.equals(normalizedExisting) && c.getId() != categoryId) {
+                return true;
             }
         }
-        return false; // Không tồn tại
+        return false;
     }
 
     // Hàm phụ trợ xóa dấu tiếng Việt

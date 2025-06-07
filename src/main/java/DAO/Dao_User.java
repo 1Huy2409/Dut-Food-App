@@ -82,7 +82,7 @@ public class Dao_User implements Dao_Interface<User> {
     }
 
     public int updatePassword(User user) {
-        String query = "update users set password = ? where id = ?";
+        String query = "update users set password = ?, passwordResetOtp = null, passwordResetExpiration = null where id = ?";
         try {
             Connection con = JDBC.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -176,9 +176,6 @@ public class Dao_User implements Dao_Interface<User> {
 
     public User checkLogin(String emailCheck, String passwordCheck) {
         User currentUser = null;
-        if (emailCheck == "" || passwordCheck == "") {
-            return currentUser;
-        }
         try (Connection con = JDBC.getConnection()) {
             String query = "select * from users where email = ?";
             try (PreparedStatement pstmt = con.prepareStatement(query)) {
@@ -193,7 +190,7 @@ public class Dao_User implements Dao_Interface<User> {
                             AlertMessage.showAlertErrorMessage("Please enter correct password!");
                         }
                     } else {
-                        AlertMessage.showAlertErrorMessage("This account dont exist. Please try again!");
+                        AlertMessage.showAlertErrorMessage("This email doesn't exist. Please try again!");
                     }
                 }
             }
@@ -227,34 +224,52 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return null;
     }
-
     public User checkRegister(String fullName, String email, String userName, String password, String phone) {
         try {
             Connection connection = JDBC.getConnection();
-            Statement statement = connection.createStatement();
-            String verifyRegister = "select count(id) from users where userName = '" + userName + "' or email = '" + email + "' or status = false";
-            ResultSet rs = statement.executeQuery(verifyRegister);
-            while (rs.next()) {
-                if (rs.getInt(1) > 0) {
-                    String errorText = "This username or email have been used by another user!";
-                    AlertMessage.showAlertErrorMessage(errorText);
-                } else {
-                    // create new account
-                    User newUser = new User();
-                    newUser.setFullName(fullName);
-                    newUser.setEmail(email);
-                    newUser.setUserName(userName);
-                    newUser.setPassWord(PasswordHelper.hashPassword(password));
-                    newUser.setRoleId(2);
-                    newUser.setPhone(phone);
-                    this.getInstance().create(newUser);
-                    String successMessage = "New account is created!!! Please click Login Button to Login into App";
-                    AlertMessage.showAlertSuccessMessage(successMessage);
 
-                    return newUser;
-                }
+            // Check username
+            String sqlUserName = "SELECT id FROM users WHERE userName = ?";
+            PreparedStatement psUserName = connection.prepareStatement(sqlUserName);
+            psUserName.setString(1, userName);
+            ResultSet rsUserName = psUserName.executeQuery();
+            if (rsUserName.next()) {
+                AlertMessage.showAlertErrorMessage("Username is already taken!");
+                return null;
             }
-            return null;
+
+            // Check email
+            String sqlEmail = "SELECT id FROM users WHERE email = ?";
+            PreparedStatement psEmail = connection.prepareStatement(sqlEmail);
+            psEmail.setString(1, email);
+            ResultSet rsEmail = psEmail.executeQuery();
+            if (rsEmail.next()) {
+                AlertMessage.showAlertErrorMessage("Email is already registered!");
+                return null;
+            }
+
+            // Check phone
+            String sqlPhone = "SELECT id FROM users WHERE phone = ?";
+            PreparedStatement psPhone = connection.prepareStatement(sqlPhone);
+            psPhone.setString(1, phone);
+            ResultSet rsPhone = psPhone.executeQuery();
+            if (rsPhone.next()) {
+                AlertMessage.showAlertErrorMessage("Phone number is already registered!");
+                return null;
+            }
+
+            // Create new account
+            User newUser = new User();
+            newUser.setFullName(fullName);
+            newUser.setEmail(email);
+            newUser.setUserName(userName);
+            newUser.setPassWord(PasswordHelper.hashPassword(password));
+            newUser.setRoleId(2);
+            newUser.setPhone(phone);
+            this.getInstance().create(newUser);
+            AlertMessage.showAlertSuccessMessage("New account is created!");
+            return newUser;
+
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

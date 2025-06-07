@@ -35,7 +35,6 @@ public class loginController
     public void loginButtonOnAction(ActionEvent e) {
         String emailCheck = emailTextField.getText().trim();
         String passwordCheck = passwordPasswordField.getText().trim();
-        // validate data
         if (!Validation.getInstance().loginValidation(emailCheck, passwordCheck))
         {
             return;
@@ -43,7 +42,6 @@ public class loginController
         User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
-            // user khác null thì gán cart_id vào user session
             Cart currentCart = Dao_Cart.getInstance().selectedByUserId(currentUser.getId());
             UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId(), currentCart.getId());
             if (UserSession.getInstance().getRoleId() == 1)

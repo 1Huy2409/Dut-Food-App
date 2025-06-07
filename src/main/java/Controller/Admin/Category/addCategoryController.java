@@ -32,7 +32,7 @@ public class addCategoryController {
         {
             AlertMessage.showAlertErrorMessage("Please enter category name and description!");
         }
-        else if(Validation.isCategoryExists(cateName.getText())){
+        else if(Validation.isCategoryExists(cateName.getText(), null)){
             AlertMessage.showAlertErrorMessage("Category already exists");
         }
         else

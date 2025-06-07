@@ -59,9 +59,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
                 case "active": // client method
                     query += "where status = true";
                     break;
-//                case "foodOfCategory":
-//                    query += ;
-//                    break;
                 default:
                     break;
             }
@@ -117,7 +114,6 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
                     "set food_name = ?, description = ?, price = ?, category_id = ?, image_url = ?, stock = ?, status = ?, sold = ? where id = ?";
-            // where condition ?
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, foodItem.getFoodName());
             pstmt.setString(2, foodItem.getDescription());
@@ -154,14 +150,15 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return res;
     }
-    public int updateStatus(FoodItem foodItem) {
+    public int updateStatus(FoodItem foodItem, boolean status) {
         int res = 0;
         try {
             Connection con = JDBC.getConnection();
             String query = "update fooditems " +
-                    "set status = false where id = ?";
+                    "set status = ? where id = ?";
             PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setInt(1, foodItem.getId());
+            pstmt.setBoolean(1, status);
+            pstmt.setInt(2, foodItem.getId());
             res = pstmt.executeUpdate();
             System.out.println("You executed: " + query);
             System.out.println("Rows have been changed are: " + res);

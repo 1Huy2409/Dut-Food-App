@@ -33,16 +33,14 @@ public class confirmOtp {
     @FXML
     public void handleConfirmOtp(ActionEvent e)
     {
-        if (otpTextField.getText() == "")
+        if (otpTextField.getText().trim().isEmpty())
         {
             AlertMessage.showAlertErrorMessage("Please enter your OTP code!");
         }
         else
         {
-            // check otp code in users table with expired time
             if (Dao_User.getInstance().checkOtp(emailTextField.getText().trim(), otpTextField.getText().trim()))
             {
-                // redirect route reset password
                 Stage currentStage = (Stage) confirmOtpBtn.getScene().getWindow();
                 currentStage.close();
                 RouteScreen.getInstance().newScreen("/View/Shared/resetPassword.fxml");
@@ -52,7 +50,6 @@ public class confirmOtp {
                 AlertMessage.showAlertErrorMessage("Invalid OTP code! Try again");
             }
         }
-//        System.out.println("Email hien tai la: " + EmailSession.getInstance().getEmail());
     }
     @FXML
     public void handleBack(ActionEvent e)

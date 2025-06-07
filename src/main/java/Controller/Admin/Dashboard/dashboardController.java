@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
 
 import java.io.File;
 import java.net.URL;
@@ -64,12 +65,15 @@ public class dashboardController implements Initializable {
     }
     public void renderBestSeller()
     {
+
         List<FoodItem> foodItems = Dao_Food.getInstance().selectByCondition("bestseller");
         for (FoodItem item: foodItems)
         {
             VBox itemBox = new VBox();
             itemBox.setPrefWidth(300);
-            itemBox.setPrefHeight(210);
+            itemBox.setPrefHeight(300);
+            itemBox.setAlignment(Pos.TOP_CENTER);
+            itemBox.setPadding(new Insets(10));
             ImageView img = new ImageView();
             String imageUrl = item.getImageUrl();
             System.out.println(imageUrl);
@@ -83,8 +87,16 @@ public class dashboardController implements Initializable {
             clip.setArcHeight(20);
             img.setClip(clip);
             Label nameLabel = new Label(item.getFoodName());
+            nameLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
+            nameLabel.setMaxWidth(Double.MAX_VALUE);
+            nameLabel.setAlignment(Pos.CENTER);
+            nameLabel.setTextAlignment(TextAlignment.CENTER);
             itemBox.getChildren().addAll(img, nameLabel);
             bestSellerBox.getChildren().add(itemBox);
         }
+        bestSellerBox.setAlignment(Pos.CENTER);
+        bestSellerBox.setSpacing(150);
+        //bestSellerBox.setPadding(new Insets(20, 0, 20, 0));
+
     }
 }

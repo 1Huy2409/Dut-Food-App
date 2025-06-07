@@ -124,10 +124,21 @@ public class editProductController {
         }
     }
     public void btnok(){
-        if(!Validation.isValidPrice(txtPrice.getText())){
-            AlertMessage.showAlertErrorMessage("Please enter number in price");
+        if(!txtName.getText().isEmpty() && !txtPrice.getText().isEmpty() && !txtDes.getText().isEmpty() && img.getImage() != null && cbCategory.getValue() != null){
+            if(!Validation.isValidPrice(txtPrice.getText())){
+                AlertMessage.showAlertErrorMessage("Please enter number in price");
+                return;
+            }
+            else if( Validation.isProductsExists(txtName.getText())){
+                AlertMessage.showAlertErrorMessage("Product already exists");
+                return;
+            }
+        }
+        else {
+            AlertMessage.showAlertErrorMessage("Please fill in complete information");
             return;
         }
+
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
         FoodItem item = new FoodItem();
         item.setId(productController.foodItemSelected.getId());

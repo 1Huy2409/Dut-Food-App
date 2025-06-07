@@ -1,6 +1,6 @@
 package Controller.Shared.Auth;
 
-import DAO.Dao_ForgotPassword;
+import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.EmailSession;
 import Helper.RouteScreen;
@@ -39,7 +39,8 @@ public class confirmOtp {
         }
         else
         {
-            if (Dao_ForgotPassword.getInstance().checkOtp(emailTextField.getText(), otpTextField.getText()))
+            // check otp code in users table with expired time
+            if (Dao_User.getInstance().checkOtp(emailTextField.getText().trim(), otpTextField.getText().trim()))
             {
                 // redirect route reset password
                 Stage currentStage = (Stage) confirmOtpBtn.getScene().getWindow();

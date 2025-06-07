@@ -1,18 +1,18 @@
 package Controller.Shared.Auth;
 
-import DAO.Dao_ForgotPassword;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.EmailSession;
 import Helper.RouteScreen;
 import Helper.SendingEmail;
-import Model.ForgotPassword;
 import jakarta.mail.MessagingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.sql.Timestamp;
 
 public class forgotPassword {
     @FXML
@@ -30,13 +30,13 @@ public class forgotPassword {
     @FXML
     public void handleBackLogin(ActionEvent event) {
         Stage currentStage = (Stage) btnBack.getScene().getWindow();
-        RouteScreen.switchRouter(currentStage, "/View/Shared/login.fxml", 600, 400);
+        currentStage.close();
     }
 
     @FXML
     public void handleSendOtp(ActionEvent event) throws MessagingException {
-        String email = emailTextField.getText();
-        if (email == "")
+        String email = emailTextField.getText().trim();
+        if (email.isEmpty())
         {
             AlertMessage.showAlertErrorMessage("Please enter your email account here!");
         }
@@ -44,13 +44,11 @@ public class forgotPassword {
         {
             if (Dao_User.getInstance().checkEmail(email) != null)
             {
-                // create new record in table forgotPassword
-                ForgotPassword newRecord = new ForgotPassword();
                 String OTP = SendingEmail.randomOtp(6);
-                newRecord.setEmail(email);
-                newRecord.setOtp(OTP); // tempo OTP waiting random and email sending
+                Timestamp OTPExpiredAt = new Timestamp(System.currentTimeMillis() + 5 * 60 * 1000);
+                System.out.println(OTPExpiredAt);
+                Dao_User.getInstance().updateForgotPassword(email, OTP, OTPExpiredAt);
                 SendingEmail.sendMail(email, OTP);
-                Dao_ForgotPassword.getInstance().create(newRecord);
                 EmailSession.getInstance().setEmail(emailTextField.getText());
                 Stage currentStage = (Stage) sendOtpBtn.getScene().getWindow();
                 RouteScreen.getInstance().newScreen("/View/Shared/confirmOtp.fxml");

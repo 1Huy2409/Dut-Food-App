@@ -18,7 +18,7 @@
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="266.0" styleClass="container" stylesheets="@../../../CSS/styles.css">
             <children>
-                <Label prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="BEST SELLER" textFill="#ffd6dc">
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="184.0" styleClass="shadow" stylesheets="@../../../CSS/styles.css" text="BEST SELLER" textFill="#ffd6dc">
                     <font>
                         <Font size="24.0" />
                     </font>

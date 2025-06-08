@@ -106,13 +106,12 @@ public class categoryController {
         });
         selectColumn.setCellValueFactory(cellData -> {
             int index = categoryList.indexOf(cellData.getValue());
-            // Trả về BooleanProperty đại diện cho trạng thái checkbox
             return checkboxStates.get(index);
         });
 
         selectColumn.setCellFactory(tc -> {
             CheckBoxTableCell<Category, Boolean> checkBoxCell = new CheckBoxTableCell<>();
-            checkBoxCell.setEditable(true); // Cho phép chỉnh sửa trực tiếp trên bảng
+            checkBoxCell.setEditable(true);
             return checkBoxCell;
         });
     }

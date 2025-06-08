@@ -222,7 +222,7 @@ public void initialize(URL location, ResourceBundle resources) {
         productTilePane.setPadding(new Insets(0, 50, 0, 50));
         TilePane.setMargin(productTilePane, new Insets(20,0,0,0));
         // Render sản phẩm
-        List<FoodItem> foodItems = Dao_Food.getInstance().getAll();
+        List<FoodItem> foodItems = Dao_Food.getInstance().getAllActive();
         for (FoodItem foodItem : foodItems) {
             VBox productItemBox = createProductItemBox(foodItem);
             productTilePane.getChildren().add(productItemBox);

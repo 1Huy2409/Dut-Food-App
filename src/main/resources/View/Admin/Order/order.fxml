@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,17 +18,26 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="selectAll" mnemonicParsing="false" styleClass="functional-buttons" text="Select All" />
+                        <Button fx:id="selectAll" mnemonicParsing="false" styleClass="functional-buttons" text="Select All">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="btnDetail" mnemonicParsing="false" styleClass="functional-buttons" text="Detail" />
+                        <Button fx:id="btnDetail" mnemonicParsing="false" styleClass="functional-buttons" text="Detail">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="box-button">
                     <children>
-                        <Button fx:id="btnInvoice" mnemonicParsing="false" styleClass="functional-buttons" text="Get invoice" />
+                        <Button fx:id="btnInvoice" mnemonicParsing="false" styleClass="functional-buttons" text="Get invoice">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                     </children>
                 </HBox>
             </children>

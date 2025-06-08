@@ -61,13 +61,6 @@ public class paymentController implements Initializable {
         cash.setToggleGroup(paymentGroup);
         vnpay.setToggleGroup(paymentGroup);
     }
-    private String getSelectedPaymentMethod() {
-        RadioButton selected = (RadioButton) paymentGroup.getSelectedToggle();
-        if (selected == cash) return "Cash";
-
-        if (selected == vnpay) return "VNPay";
-        return null;
-    }
 
     public void setCheckedItems(List<CartItem> checkedItems) {
         this.checkedItems = checkedItems;
@@ -116,62 +109,43 @@ public class paymentController implements Initializable {
         this.lbtien.setText("Thành Tiền: " + String.format("%,.0f VND", price));
     }
     public void acceptPay() {
-        if (getSelectedPaymentMethod() == null) {
-            AlertMessage.showAlertErrorMessage("Please select payment method");
-        } else {
-            Order order = new Order();
-            order.setUserId(UserSession.getInstance().getId());
-            order.setCartId(UserSession.getInstance().getCartId());
-            order.setTotalPrice(Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));
-            Dao_Orders.getInstance().create(order);
-
-
-            for (CartItem item : checkedItems) {
-                FoodItem foodItem = new FoodItem();
-                foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
-                foodItem.setStock(foodItem.getStock() - item.getQuantity());
-                foodItem.setSold(foodItem.getSold() + item.getQuantity());
-                Dao_Food.getInstance().update(foodItem);
-                OrderItem orderItem = new OrderItem();
-                orderItem.setOrderId(order.getId());
-                orderItem.setFoodItemId(item.getFoodItemId());
-                orderItem.setQuantity(item.getQuantity());
-                orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
-                Dao_OrderItems.getInstance().create(orderItem);
-                Dao_CartItem.getInstance().delete(item);
-            }
-            newOrderInfo.setOrder_id(order.getId());
-            Dao_OrderInfo.getInstance().create(newOrderInfo);
-            Payment payment = new Payment();
-            payment.setOrderId(order.getId());
-            payment.setPaymentMethod(getSelectedPaymentMethod());
-            payment.setAmount(order.getTotalPrice());
-            Dao_Payment.getInstance().create(payment);
-
-            AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
-            if (onCheckoutSuccess != null) {
-                onCheckoutSuccess.run();
-            }
-            if (payment.getPaymentMethod().equals("Cash"))
-            {
-                loadUI("/View/Client/Product/product.fxml");
-            }
-            else
-            {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Client/Payment/vnpay.fxml"));
-                    Parent root = loader.load();
-                    vnpayController vnpaycontroller = loader.getController();
-                    vnpaycontroller.setAmount((int)Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));
-                    vnpaycontroller.setOrderId(Integer.toString(order.getId()));
-                    this.contentArea.getChildren().clear();
-                    this.contentArea.getChildren().add(root);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
+        boolean confirm = AlertMessage.showConfirm("Are you sure you want to order?");
+        if (!confirm) {
+            return;
         }
+        Order order = new Order();
+        order.setUserId(UserSession.getInstance().getId());
+        order.setCartId(UserSession.getInstance().getCartId());
+        order.setTotalPrice(Double.parseDouble(lbtien.getText().replaceAll("[^\\d.]", "")));
+        Dao_Orders.getInstance().create(order);
+
+
+        for (CartItem item : checkedItems) {
+            FoodItem foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
+            foodItem.setStock(foodItem.getStock() - item.getQuantity());
+            foodItem.setSold(foodItem.getSold() + item.getQuantity());
+            Dao_Food.getInstance().update(foodItem);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrderId(order.getId());
+            orderItem.setFoodItemId(item.getFoodItemId());
+            orderItem.setQuantity(item.getQuantity());
+            orderItem.setPrice(Dao_Food.getInstance().selectedById(item.getFoodItemId()).getPrice() * item.getQuantity());
+            Dao_OrderItems.getInstance().create(orderItem);
+            Dao_CartItem.getInstance().delete(item);
+        }
+        newOrderInfo.setOrder_id(order.getId());
+        Dao_OrderInfo.getInstance().create(newOrderInfo);
+        Payment payment = new Payment();
+        payment.setOrderId(order.getId());
+        payment.setPaymentMethod("Cash");
+        payment.setAmount(order.getTotalPrice());
+        Dao_Payment.getInstance().create(payment);
+
+        AlertMessage.showAlertSuccessMessage("Order successful, thank you!");
+        if (onCheckoutSuccess != null) {
+            onCheckoutSuccess.run();
+        }
+        loadUI("/View/Client/Product/product.fxml");
     }
     private Runnable onCheckoutSuccess;
     public void setOnCheckoutSuccess(Runnable callback) {

@@ -139,6 +139,9 @@ public class Validation {
     public static boolean isValidPrice(String priceText) {
         return priceText.matches("\\d+(\\.\\d+)?");
     }
+    public static boolean isValidStock(String stockText) {
+        return stockText.matches("\\d+");
+    }
     public static boolean isValidPassword(String password) {
         String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{6,}$";
         return password.matches(regex);

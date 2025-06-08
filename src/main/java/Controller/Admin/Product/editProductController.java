@@ -133,6 +133,10 @@ public class editProductController {
                 AlertMessage.showAlertErrorMessage("Product already exists");
                 return;
             }
+            else if(!Validation.isValidStock(stock.getText())){
+                AlertMessage.showAlertErrorMessage("Please enter a valid stock (non-negative integer)!");
+                return;
+            }
         }
         else {
             AlertMessage.showAlertErrorMessage("Please fill in complete information");

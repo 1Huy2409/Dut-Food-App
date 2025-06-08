@@ -83,12 +83,16 @@ public class orderController {
                     imgFood.setClip(clip);
 
                     Label foodNameLabel = new Label(foodItem.getFoodName());
+                    foodNameLabel.setStyle("-fx-text-fill: white");
 
                     foodItemBox.getChildren().addAll(imgFood, foodNameLabel);
 
                     Label foodPriceLabel = new Label("Giá: " + String.format("%,.0f VND", foodItem.getPrice()));
+                    foodPriceLabel.setStyle("-fx-text-fill: white");
                     Label quantityLabel = new Label("Số lượng: " + item.getQuantity());
+                    quantityLabel.setStyle("-fx-text-fill: white");
                     Label priceLabel = new Label("Tổng: " + String.format("%,.0f VND", item.getPrice()));
+                    priceLabel.setStyle("-fx-text-fill: white");
 
                     orderItemBox.getChildren().addAll(foodItemBox, foodPriceLabel, quantityLabel, priceLabel);
                     orderContainer.getChildren().add(orderItemBox);
@@ -98,7 +102,7 @@ public class orderController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String formattedDate = order.getOrderDate().toLocalDateTime().format(formatter);
             Label orderDateLabel = new Label("Ngày mua: " + formattedDate);
-            orderDateLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #444; -fx-font-weight: bold;");
+            orderDateLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: white; -fx-font-weight: bold;");
 
             HBox dateBox = new HBox(orderDateLabel);
             dateBox.setAlignment(Pos.CENTER);

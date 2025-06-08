@@ -20,10 +20,13 @@
    <Label fx:id="quantity" styleClass="cart-text" text="Số lượng" />
    <Pane prefHeight="44.0" prefWidth="121.0" />
 
-   <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" styleClass="cart-text" text="0 VND" />
+   <Label fx:id="productPrice" prefHeight="17.0" prefWidth="121.0" styleClass="cart-text" text="0 VND" textFill="#0a0000" />
    <HBox.margin>
       <Insets left="10" />
    </HBox.margin>
+   <padding>
+      <Insets right="10.0" />
+   </padding>
 
 <!--   <TilePane.margin>-->
 <!--      <Insets left="10.0" right="10.0" top="10.0" />-->

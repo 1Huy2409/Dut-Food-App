@@ -32,11 +32,6 @@ public class paymentController implements Initializable {
     @FXML
     private Label lbtien;
 
-    @FXML
-    private RadioButton vnpay;
-    @FXML
-    private RadioButton cash;
-    private ToggleGroup paymentGroup;
     private List<CartItem> checkedItems;
     private OrderInfo newOrderInfo;
     private VBox contentArea;
@@ -56,10 +51,7 @@ public class paymentController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // renderCheckedProducts();
-        paymentGroup = new ToggleGroup();
-        cash.setToggleGroup(paymentGroup);
-        vnpay.setToggleGroup(paymentGroup);
+
     }
 
     public void setCheckedItems(List<CartItem> checkedItems) {

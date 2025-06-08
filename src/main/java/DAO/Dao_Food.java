@@ -45,6 +45,34 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         }
         return foodItems;
     }
+    public List<FoodItem> getAllActive() {
+        List<FoodItem> foodItems = new ArrayList<>();
+        try {
+            Connection con = JDBC.getConnection();
+            String query = "select * from fooditems where status = true";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                String foodName = rs.getString("food_name");
+                String desc = rs.getString("description");
+                double price = rs.getDouble("price");
+                int categoryId = rs.getInt("category_id");
+                String imageURL = rs.getString("image_url");
+                boolean status = rs.getBoolean("status");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                int stock = rs.getInt("stock");
+                int sold = rs.getInt("sold");
+                FoodItem item = new FoodItem(id, foodName, desc, price, stock, categoryId, imageURL, status, createdAt, sold);
+                foodItems.add(item);
+            }
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return foodItems;
+    }
     @Override
     public List<FoodItem> selectByCondition(String condition) {
         List<FoodItem> foodItems = new ArrayList<>();
@@ -201,7 +229,7 @@ public class Dao_Food implements Dao_Interface<FoodItem> {
         List<FoodItem> foodItems = new ArrayList<>();
         try {
             Connection con = JDBC.getConnection();
-            String query = "SELECT * FROM fooditems WHERE category_id = ?";
+            String query = "SELECT * FROM fooditems WHERE category_id = ? and status = true";
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setInt(1, categoryId);
             ResultSet rs = pstmt.executeQuery();

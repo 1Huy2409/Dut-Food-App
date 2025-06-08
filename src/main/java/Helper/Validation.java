@@ -1,7 +1,9 @@
 package Helper;
 import Config.JDBC;
 import DAO.Dao_Category;
+import DAO.Dao_Food;
 import Model.Category;
+import Model.FoodItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -103,7 +105,20 @@ public class Validation {
         }
         return false;
     }
+    public static boolean isProductsExists(String nameInput) {
+        String normalizedInput = normalizeName(nameInput);
 
+        // Lấy toàn bộ danh mục từ database
+        List<FoodItem> foodItemsList = Dao_Food.getInstance().getAll();
+
+        for (FoodItem c : foodItemsList) {
+            String normalizedExisting = normalizeName(c.getFoodName());
+            if (normalizedInput.equals(normalizedExisting)) {
+                return true; // Đã tồn tại
+            }
+        }
+        return false; // Không tồn tại
+    }
     // Hàm phụ trợ xóa dấu tiếng Việt
     private static String normalizeName(String s) {
         String temp = Normalizer.normalize(s, Normalizer.Form.NFD);

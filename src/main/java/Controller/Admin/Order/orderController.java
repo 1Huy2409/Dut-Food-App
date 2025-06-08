@@ -143,17 +143,14 @@ public class orderController {
             private final ImageView editIcon = new ImageView(new Image(getClass().getResource("/Pictures/edit.png").toExternalForm()));
             private final ImageView deleteIcon = new ImageView(new Image(getClass().getResource("/Pictures/delete.png").toExternalForm()));
             private final Button editButton = new Button("Edit");
-            private final Button deleteButton = new Button("Delete");
 
             {
                 editIcon.setFitWidth(20);
                 editIcon.setFitHeight(20);
-                deleteIcon.setFitWidth(20);
-                deleteIcon.setFitHeight(20);
+
 
                 // Gán icon vào button
                 editButton.setGraphic(editIcon);
-                deleteButton.setGraphic(deleteIcon);
                 editButton.getStyleClass().add("edit-button");
                 editButton.setOnAction(event -> {
                     orderSelected = getTableView().getItems().get(getIndex());
@@ -162,16 +159,7 @@ public class orderController {
                         stage.setOnHidden(e -> reload());
                     }
                 });
-                deleteButton.getStyleClass().add("delete-button");
-                deleteButton.setOnAction(event -> {
-                    Order order = getTableView().getItems().get(getIndex());
-                    boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this order?");
-                    if (confirm) {
-                        Dao_Orders.getInstance().delete(order);
-                        AlertMessage.showAlertSuccessMessage("You have deleted this order!");
-                        reload();
-                    }
-                });
+
             }
 
             @Override
@@ -180,7 +168,7 @@ public class orderController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox buttons = new HBox(10, editButton, deleteButton);
+                    HBox buttons = new HBox(10, editButton);
                     buttons.setStyle("-fx-alignment: CENTER;");
                     setGraphic(buttons);
                     setStyle("-fx-alignment: CENTER;");
@@ -242,28 +230,6 @@ public class orderController {
             if (orderSelected != null) {
                 Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Order/orderDetail.fxml");
                 stage.setOnHidden(e -> reload());
-            }
-        });
-
-
-        multipleBtn.setOnAction(actionEvent -> {
-            List<Order> selectedItems = new ArrayList<>();
-            for (int i = 0; i < orderList.size(); i++) {
-                if (checkboxStates.get(i).get()) {
-                    selectedItems.add(orderList.get(i));
-                }
-            }
-
-            boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete these orders?");
-            if (confirm) {
-                for (Order order : selectedItems) {
-                    Dao_Orders.getInstance().delete(order);
-                }
-                for (BooleanProperty state : checkboxStates) {
-                    state.set(false);
-                }
-                AlertMessage.showAlertSuccessMessage("Orders deleted successfully");
-                reload();
             }
         });
     }

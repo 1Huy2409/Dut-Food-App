@@ -48,7 +48,7 @@ public class addCustomerController {
         String userName = txtusername.getText().trim();
         String password = txtpassword.getText().trim();
         String confirmPassword = txtpasswordconfirm.getText().trim();
-
+        String user = Validation.checkUserExists(userName, email,phone,null);
         if (    fullName.isEmpty() ||
                 email.isEmpty() ||
                 phone.isEmpty() ||
@@ -83,6 +83,11 @@ public class addCustomerController {
             lbpass.setText("Password confirmation does not match");
             return;
         }
+        if(user != null){
+            AlertMessage.showAlertErrorMessage(user);
+            return;
+        }
+
         Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
         currentStage.close();
     }

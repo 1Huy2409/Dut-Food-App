@@ -57,7 +57,22 @@ public class editCustomerController {
 
     public void BtnSaveOnAction(ActionEvent e){
         Stage currentStage = (Stage) btnSave.getScene().getWindow();
+        String user = Validation.checkUserExists(customerController.userSelected.getUserName(),txtemail.getText(),txtphone.getText(), customerController.userSelected.getId());
+        if(user != null){
+            AlertMessage.showAlertErrorMessage(user);
+            return;
+        }
+        // Kiểm tra email hợp lệ
+        if (!Validation.isValidEmail(txtemail.getText())) {
+            AlertMessage.showAlertErrorMessage("Invalid email");
+            return;
+        }
 
+        // Kiểm tra số điện thoại hợp lệ
+        if (!Validation.isValidPhone(txtphone.getText())) {
+            AlertMessage.showAlertErrorMessage("Invalid phone number");
+            return;
+        }
         User newUser = new User();
         newUser.setId(customerController.userSelected.getId());
         newUser.setUserName(customerController.userSelected.getUserName());

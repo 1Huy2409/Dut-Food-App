@@ -95,7 +95,7 @@ public class addProductController {
                 AlertMessage.showAlertErrorMessage("Invalid Price");
                 return;
             }
-            else if(Validation.isProductsExists(txtName.getText())){
+            else if(Validation.isProductsExists(txtName.getText(), null)){
                 AlertMessage.showAlertErrorMessage("Product already exists");
                 return;
             }

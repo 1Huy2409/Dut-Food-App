@@ -129,7 +129,7 @@ public class editProductController {
                 AlertMessage.showAlertErrorMessage("Please enter number in price");
                 return;
             }
-            else if( Validation.isProductsExists(txtName.getText())){
+            else if(Validation.isProductsExists(txtName.getText(),productController.foodItemSelected.getId())){
                 AlertMessage.showAlertErrorMessage("Product already exists");
                 return;
             }

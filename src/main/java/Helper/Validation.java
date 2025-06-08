@@ -102,7 +102,11 @@ public class Validation {
 
         for (Category c : categoryList) {
             String normalizedExisting = normalizeName(c.getCategoryName());
-            if (normalizedInput.equals(normalizedExisting) && c.getId() != categoryId) {
+            // Nếu categoryId không null và trùng với ID của category hiện tại, bỏ qua so sánh
+            if (categoryId != null && c.getId() == categoryId) {
+                continue;
+            }
+            if (normalizedInput.equals(normalizedExisting)) {
                 return true;
             }
         }

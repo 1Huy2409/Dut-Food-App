@@ -1,5 +1,6 @@
 package Controller.Client.Profile;
 
+import Controller.Client.clientController;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.PasswordHelper;
@@ -69,6 +70,8 @@ public class profileController {
 
     @FXML
     private ImageView imgdefault;
+        @FXML
+    private Button btnOrder;
 
     @FXML
     private ImageView imguser;
@@ -203,5 +206,7 @@ public class profileController {
         currentStage.close();
         RouteScreen.getInstance().newScreen("/View/Shared/login.fxml");
     }
-
+    public void btnOrder(){
+        clientController.getInstance().loadUI("/View/Client/Order/order_1.fxml");
+    }
 }

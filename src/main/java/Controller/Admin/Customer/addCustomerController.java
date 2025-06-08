@@ -3,6 +3,7 @@ package Controller.Admin.Customer;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.PasswordHelper;
+import Helper.Validation;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,39 +40,56 @@ public class addCustomerController {
     public void initialize(){
     }
     public void OkOnAction(){
-        boolean checkinfo = true;
-        boolean checkpass = true;
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
-        String pass = "";
-        User user = new User();
-        if(txtpassword.getText().equals(txtpasswordconfirm.getText())){
-            pass = txtpassword.getText();
-            lbpass.setText("");
-        }
-        else{
-            checkpass = false;
-            lbpass.setText("Password confirmation does not match");
-        }
-        if(!txtfullname.getText().trim().isEmpty() && !txtemail.getText().trim().isEmpty() && !txtphone.getText().trim().isEmpty() && !txtusername.getText().trim().isEmpty() ){
-            user.setFullName(txtfullname.getText());
-            user.setEmail(txtemail.getText());
-            user.setPhone(txtphone.getText());
-            user.setUserName(txtusername.getText());
-            user.setRoleId(2);
-        }
-        else {
-            checkinfo = false;
+        lbpass.setText("");
+        String fullName = txtfullname.getText().trim();
+        String email = txtemail.getText().trim();
+        String phone = txtphone.getText().trim();
+        String userName = txtusername.getText().trim();
+        String password = txtpassword.getText().trim();
+        String confirmPassword = txtpasswordconfirm.getText().trim();
+        String user = Validation.checkUserExists(userName, email,phone,null);
+        if (    fullName.isEmpty() ||
+                email.isEmpty() ||
+                phone.isEmpty() ||
+                userName.isEmpty() ||
+                password.trim().isEmpty() ||
+                confirmPassword.trim().isEmpty()) {
+
             AlertMessage.showAlertErrorMessage("Please fill in complete information");
-        }
-        if(checkpass){
-            user.setPassWord(PasswordHelper.hashPassword(pass));
+            return;
         }
 
-        if(checkinfo && checkpass){
-            Dao_User.getInstance().create(user);
-            currentStage.close();
+        // Kiểm tra email hợp lệ
+        if (!Validation.isValidEmail(email)) {
+            AlertMessage.showAlertErrorMessage("Invalid email");
+            return;
         }
 
+        // Kiểm tra số điện thoại hợp lệ
+        if (!Validation.isValidPhone(phone)) {
+            AlertMessage.showAlertErrorMessage("Invalid phone number");
+            return;
+        }
+
+        // Kiểm tra mật khẩu mạnh
+        if (!Validation.isValidPassword(password)) {
+            lbpass.setText("Mật khẩu tối thiểu 6 ký tự bao gồm chữ, số và ký tự đặc biệt.");
+            return;
+        }
+
+        // Kiểm tra xác nhận mật khẩu
+        if (!password.equals(confirmPassword)) {
+            lbpass.setText("Password confirmation does not match");
+            return;
+        }
+        if(user != null){
+            AlertMessage.showAlertErrorMessage(user);
+            return;
+        }
+
+        Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
+        currentStage.close();
     }
     public void cancelOnAction(){
         Stage currentStage = (Stage) btnCancel.getScene().getWindow();

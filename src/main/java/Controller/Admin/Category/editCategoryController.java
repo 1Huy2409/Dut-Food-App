@@ -2,7 +2,9 @@ package Controller.Admin.Category;
 
 import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.AlertMessage;
 import Helper.RouteScreen;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.event.ActionEvent;
@@ -69,20 +71,30 @@ public class editCategoryController{
         item.setId(Integer.parseInt(cateId.getText()));
         item.setCategoryName(cateName.getText());
         item.setDescription(cateDesc.getText());
+
+        if(Validation.isCategoryExists(cateName.getText(), Integer.parseInt(cateId.getText()))){
+            AlertMessage.showAlertErrorMessage("Category already exists");
+            return;
+        }
+        else if(cateName.getText().isEmpty()){
+            AlertMessage.showAlertErrorMessage("Please enter category name");
+            return;
+        }
         if (cateTrue.isSelected())
         {
             item.setStatus(true);
+            List<FoodItem> listFoodItem = Dao_Food.getInstance().selectByCategory(Integer.parseInt(cateId.getText()));
+            for (FoodItem foodItem : listFoodItem)
+            {
+                Dao_Food.getInstance().updateStatus(foodItem, true);
+            }
         }
         else
         {
-            List<FoodItem> listFoodItem = new ArrayList<>();
-            listFoodItem = Dao_Food.getInstance().getAll();
+            List<FoodItem> listFoodItem = Dao_Food.getInstance().selectByCategory(Integer.parseInt(cateId.getText()));
             for (FoodItem foodItem : listFoodItem)
             {
-                if (foodItem.getCategoryId() == item.getId())
-                {
-                    Dao_Food.getInstance().updateStatus(foodItem);
-                }
+                Dao_Food.getInstance().updateStatus(foodItem, false);
             }
             item.setStatus(false);
         }

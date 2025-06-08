@@ -119,7 +119,7 @@ public class Dao_Category implements Dao_Interface<Category> {
         List<Category> categoryItems = new ArrayList<>();
         try {
             Connection con = JDBC.getConnection();
-            String query = "select * from categories";
+            String query = "select * from categories where status = true ";
             switch (condition)
             {
                 case "categoriesBtn":
@@ -145,6 +145,20 @@ public class Dao_Category implements Dao_Interface<Category> {
             throw new RuntimeException(e);
         }
         return categoryItems;
-
+    }
+    public boolean checkCategoryActive(int id) {
+        String query = "select status from categories where id = ?";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean("status");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }

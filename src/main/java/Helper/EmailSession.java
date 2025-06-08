@@ -4,11 +4,11 @@ public class EmailSession {
     private String email;
     private static EmailSession _instance;
 
-    private EmailSession() {} // 🔹 Private constructor để ngăn tạo đối tượng bên ngoài
+    private EmailSession() {}
 
     public static EmailSession getInstance() {
         if (_instance == null) {
-            _instance = new EmailSession(); // ✅ Gán _instance để dùng chung
+            _instance = new EmailSession();
         }
         return _instance;
     }

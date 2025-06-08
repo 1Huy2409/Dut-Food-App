@@ -3,7 +3,6 @@ import com.mysql.cj.jdbc.Driver;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
-// import java.sql.DriverManager
 public class JDBC {
     // create connection
     public static Connection getConnection()
@@ -32,23 +31,6 @@ public class JDBC {
             if (c != null)
             {
                 c.close();
-//                System.out.println("The connection to our Database has been closed!!!");
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-    // get information of your connection to database
-    public static void printInformation(Connection c)
-    {
-        try
-        {
-            if (c != null)
-            {
-                DatabaseMetaData metaData = c.getMetaData();
-//                System.out.println(metaData.toString());
             }
         }
         catch (Exception e)

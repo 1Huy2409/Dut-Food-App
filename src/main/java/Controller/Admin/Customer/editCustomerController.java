@@ -1,10 +1,13 @@
 package Controller.Admin.Customer;
 
 import DAO.Dao_User;
+import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -51,9 +54,25 @@ public class editCustomerController {
             inactiveCus.setSelected(true);
         }
     }
+
     public void BtnSaveOnAction(ActionEvent e){
         Stage currentStage = (Stage) btnSave.getScene().getWindow();
+        String user = Validation.checkUserExists(customerController.userSelected.getUserName(),txtemail.getText(),txtphone.getText(), customerController.userSelected.getId());
+        if(user != null){
+            AlertMessage.showAlertErrorMessage(user);
+            return;
+        }
+        // Kiểm tra email hợp lệ
+        if (!Validation.isValidEmail(txtemail.getText())) {
+            AlertMessage.showAlertErrorMessage("Invalid email");
+            return;
+        }
 
+        // Kiểm tra số điện thoại hợp lệ
+        if (!Validation.isValidPhone(txtphone.getText())) {
+            AlertMessage.showAlertErrorMessage("Invalid phone number");
+            return;
+        }
         User newUser = new User();
         newUser.setId(customerController.userSelected.getId());
         newUser.setUserName(customerController.userSelected.getUserName());
@@ -70,6 +89,7 @@ public class editCustomerController {
         newUser.setImage("");
         Dao_User.getInstance().update(newUser);
         currentStage.close();
+
     }
     public void BtnCancelOnACtion(ActionEvent e){
         Stage currentStage = (Stage) btnSave.getScene().getWindow();

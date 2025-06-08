@@ -33,9 +33,8 @@ public class loginController
     private Hyperlink forgotPwLink;
 
     public void loginButtonOnAction(ActionEvent e) {
-        String emailCheck = emailTextField.getText();
-        String passwordCheck = passwordPasswordField.getText();
-        // validate data
+        String emailCheck = emailTextField.getText().trim();
+        String passwordCheck = passwordPasswordField.getText().trim();
         if (!Validation.getInstance().loginValidation(emailCheck, passwordCheck))
         {
             return;
@@ -43,18 +42,15 @@ public class loginController
         User currentUser = Dao_User.getInstance().checkLogin(emailCheck, passwordCheck);
         if (currentUser != null)
         {
-            // user khác null thì gán cart_id vào user session
             Cart currentCart = Dao_Cart.getInstance().selectedByUserId(currentUser.getId());
             UserSession.getInstance().setUser(currentUser.getId(), currentUser.getPhone(), currentUser.getFullName(), currentUser.getEmail(), currentUser.getUserName(), currentUser.getStatus(), currentUser.getRoleId(), currentCart.getId());
             if (UserSession.getInstance().getRoleId() == 1)
             {
-                // go to admin_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
                 RouteScreen.switchRouter(currentStage, "/View/Admin/admin_dashboard.fxml", null, null);
             }
             else
             {
-                // go to client_dashboard
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
                 RouteScreen.switchRouter(currentStage, "/View/Client/Dashboard/client_dashboard.fxml",null, null);
             }

@@ -24,13 +24,16 @@ public class clientController implements Initializable {
 
     @FXML
     private VBox contentArea;
-
+    private static clientController instance;
+    public clientController() {
+        instance = this; // gán khi JavaFX tạo controller từ FXML
+    }
     public void initialize(URL location, ResourceBundle resources)
     {
         loadUI("/View/Client/Product/product.fxml");
     }
-
-    private void loadUI(String fxml) {
+    public static clientController  getInstance() {return instance; }
+    public void loadUI(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
@@ -45,6 +48,7 @@ public class clientController implements Initializable {
                     cartController cartCtrl = loader.getController();
                     cartCtrl.setContentArea(contentArea);
                     break;
+
 //                case "/View/Client/product.fxml":
 //                    categoryController controller = loader.getController();
 //                    controller.setContentArea(contentArea);

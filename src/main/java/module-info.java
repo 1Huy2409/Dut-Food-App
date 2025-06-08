@@ -41,4 +41,6 @@ module com.example.loginapp {
     opens Controller.Client.Payment to javafx.fxml;
     exports Controller.Client.Cart;
     opens Controller.Client.Cart to javafx.fxml;
+    opens Controller.Client.Order to javafx.fxml;
+    exports Controller.Client.Order;
 }

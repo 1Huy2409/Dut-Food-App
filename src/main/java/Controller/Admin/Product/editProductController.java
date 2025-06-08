@@ -3,6 +3,8 @@ package Controller.Admin.Product;
 import Controller.Admin.Category.editCategoryController;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
+import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
@@ -122,6 +124,21 @@ public class editProductController {
         }
     }
     public void btnok(){
+        if(!txtName.getText().isEmpty() && !txtPrice.getText().isEmpty() && !txtDes.getText().isEmpty() && img.getImage() != null && cbCategory.getValue() != null){
+            if(!Validation.isValidPrice(txtPrice.getText())){
+                AlertMessage.showAlertErrorMessage("Please enter number in price");
+                return;
+            }
+            else if(Validation.isProductsExists(txtName.getText(),productController.foodItemSelected.getId())){
+                AlertMessage.showAlertErrorMessage("Product already exists");
+                return;
+            }
+        }
+        else {
+            AlertMessage.showAlertErrorMessage("Please fill in complete information");
+            return;
+        }
+
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
         FoodItem item = new FoodItem();
         item.setId(productController.foodItemSelected.getId());
@@ -130,7 +147,22 @@ public class editProductController {
         item.setDescription(txtDes.getText());
         item.setStock(Integer.parseInt(stock.getText()));
         item.setCategoryId(cbCategory.getValue().getId());
-        item.setStatus(active.isSelected());
+        // check status of category
+        if (!active.isSelected())
+        {
+            item.setStatus(false);
+        }
+        else
+        {
+            boolean check = Dao_Category.getInstance().checkCategoryActive(cbCategory.getValue().getId());
+            if (!check)
+            {
+                AlertMessage.showAlertErrorMessage("Category is not active, you cant active food item in this category");
+                return;
+            }
+            item.setStatus(true);
+        }
+        // end check
         item.setSold(productController.foodItemSelected.getSold());
         if(productController.foodItemSelected.getImageUrl().equals(imgURL)){
             item.setImageUrl(productController.foodItemSelected.getImageUrl());

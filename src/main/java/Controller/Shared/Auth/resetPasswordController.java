@@ -23,13 +23,11 @@ public class resetPasswordController {
 
     @FXML
     public void handleResetPassword(ActionEvent event) {
-        System.out.println(newPasswordField.getText());
-        System.out.println(confirmNewPasswordField.getText());
-        if (confirmNewPasswordField.getText() == "" || newPasswordField.getText() == "")
+        if (confirmNewPasswordField.getText().trim().isEmpty() || newPasswordField.getText().trim().isEmpty())
         {
             AlertMessage.showAlertErrorMessage("Please enter full field!");
         }
-        else if (!confirmNewPasswordField.getText().equals(newPasswordField.getText()))
+        else if (!confirmNewPasswordField.getText().equals(newPasswordField.getText().trim()))
         {
             AlertMessage.showAlertErrorMessage("Invalid confirm password!");
         }
@@ -38,7 +36,6 @@ public class resetPasswordController {
 
             String userEmail = EmailSession.getInstance().getEmail();
             User currentUser = Dao_User.getInstance().checkEmail(userEmail);
-            //update user with new hashed password
             String newPassword = newPasswordField.getText();
             String hashedPassword = PasswordHelper.hashPassword(newPassword);
             currentUser.setPassWord(hashedPassword);

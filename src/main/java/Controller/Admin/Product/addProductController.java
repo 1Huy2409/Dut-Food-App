@@ -3,6 +3,7 @@ package Controller.Admin.Product;
 import DAO.Dao_Category;
 import DAO.Dao_Food;
 import Helper.AlertMessage;
+import Helper.Validation;
 import Model.Category;
 import Model.FoodItem;
 import javafx.collections.FXCollections;
@@ -88,13 +89,25 @@ public class addProductController {
     }
     public void btnok(){
         Stage currentStage = (Stage) btnOK.getScene().getWindow();
-        if(txtName.getText() != " " && txtPrice.getText() != " " && txtDes.getText() != " " && img.getImage() != null && cbCategory.getValue() != null){
-            item.setFoodName(txtName.getText());
-            item.setPrice(Double.parseDouble(txtPrice.getText()));
-            item.setDescription(txtDes.getText());
-            item.setCategoryId(cbCategory.getValue().getId());
-            Dao_Food.getInstance().create(item);
-            currentStage.close();
+
+        if(!txtName.getText().isEmpty() && !txtPrice.getText().isEmpty() && !txtDes.getText().isEmpty() && img.getImage() != null && cbCategory.getValue() != null){
+            if(!Validation.isValidPrice(txtPrice.getText())){
+                AlertMessage.showAlertErrorMessage("Invalid Price");
+                return;
+            }
+            else if(Validation.isProductsExists(txtName.getText(), null)){
+                AlertMessage.showAlertErrorMessage("Product already exists");
+                return;
+            }
+            else {
+                item.setFoodName(txtName.getText());
+                item.setPrice(Double.parseDouble(txtPrice.getText()));
+                item.setDescription(txtDes.getText());
+                item.setCategoryId(cbCategory.getValue().getId());
+                Dao_Food.getInstance().create(item);
+                currentStage.close();
+            }
+
         }
         else {
             AlertMessage.showAlertErrorMessage("Please fill in complete information");

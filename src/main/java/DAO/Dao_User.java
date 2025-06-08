@@ -9,10 +9,10 @@ import java.util.List;
 import Helper.*;
 
 public class Dao_User implements Dao_Interface<User> {
-    public static Dao_User getInstance()
-    {
+    public static Dao_User getInstance() {
         return new Dao_User();
     }
+
     @Override
     // return all users in user table
     public List<User> getAll() {
@@ -20,10 +20,9 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
-            String sql = "select * from users where roleId = 2";
+            String sql = "select * from users";
             ResultSet rs = st.executeQuery(sql);
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String phone = rs.getString("phone");
                 String fullName = rs.getString("fullName");
@@ -32,7 +31,33 @@ public class Dao_User implements Dao_Interface<User> {
                 String password = rs.getString("password");
                 boolean status = rs.getBoolean("status");
                 int roleId = rs.getInt("roleId");
-                User user = new User(id,phone,fullName,email,userName,password,roleId,status);
+                User user = new User(id, phone, fullName, email, userName, password, roleId, status);
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
+    }
+    public List<User> getAllCustomer()
+    {
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            Connection con = JDBC.getConnection();
+            Statement st = con.createStatement();
+            String sql = "select * from users where roleId = 2";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String phone = rs.getString("phone");
+                String fullName = rs.getString("fullName");
+                String email = rs.getString("email");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                boolean status = rs.getBoolean("status");
+                int roleId = rs.getInt("roleId");
+                User user = new User(id, phone, fullName, email, userName, password, roleId, status);
                 users.add(user);
             }
 
@@ -48,7 +73,7 @@ public class Dao_User implements Dao_Interface<User> {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
             String sql = "insert into users (fullName, email, userName, password, status, roleId, phone)" +
-                    " values ('"+user.getFullName()+"', '"+user.getEmail()+"', '"+user.getUserName()+"', '"+user.getPassWord()+"', "+user.getStatus()+", "+user.getRoleId()+" , "+user.getPhone()+")";
+                    " values ('" + user.getFullName() + "', '" + user.getEmail() + "', '" + user.getUserName() + "', '" + user.getPassWord() + "', " + user.getStatus() + ", " + user.getRoleId() + " , '" + user.getPhone() + "')";
             int result = st.executeUpdate(sql);
             System.out.println("You executed: " + sql);
             System.out.println("Rows have been changed are: " + result);
@@ -69,7 +94,7 @@ public class Dao_User implements Dao_Interface<User> {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
-            ps.setString(4,user.getImage());
+            ps.setString(4, user.getImage());
             ps.setInt(6, user.getId());
             ps.setBoolean(5, user.getStatus());
             result = ps.executeUpdate();
@@ -80,16 +105,16 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return result;
     }
+
     public int updatePassword(User user) {
-        String query = "update users set password = ? where id = ?";
+        String query = "update users set password = ?, passwordResetOtp = null, passwordResetExpiration = null where id = ?";
         try {
             Connection con = JDBC.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, user.getPassWord());
             pstmt.setInt(2, user.getId());
             int rs = pstmt.executeUpdate();
-            if (rs > 0)
-            {
+            if (rs > 0) {
                 System.out.println("You have changed: " + rs + " rows");
             }
         } catch (SQLException e) {
@@ -97,6 +122,7 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return 0;
     }
+
     public int updateAccount(User user) {
         String query = "update users set password = ?, username = ? where id = ?";
         try {
@@ -104,10 +130,9 @@ public class Dao_User implements Dao_Interface<User> {
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, user.getPassWord());
             pstmt.setString(2, user.getUserName());
-            pstmt.setInt(3,user.getId());
+            pstmt.setInt(3, user.getId());
             int rs = pstmt.executeUpdate();
-            if (rs > 0)
-            {
+            if (rs > 0) {
                 System.out.println("You have changed: " + rs + " rows");
             }
         } catch (SQLException e) {
@@ -115,6 +140,7 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return 0;
     }
+
     // find user and delete user in user table
     @Override
     public int delete(User user) {
@@ -172,13 +198,9 @@ public class Dao_User implements Dao_Interface<User> {
     public List<User> selectByCondition(String condition) {
         return List.of();
     }
-    public User checkLogin (String emailCheck, String passwordCheck)
-    {
+
+    public User checkLogin(String emailCheck, String passwordCheck) {
         User currentUser = null;
-        if (emailCheck == "" || passwordCheck == "")
-        {
-            return currentUser;
-        }
         try (Connection con = JDBC.getConnection()) {
             String query = "select * from users where email = ?";
             try (PreparedStatement pstmt = con.prepareStatement(query)) {
@@ -188,12 +210,12 @@ public class Dao_User implements Dao_Interface<User> {
                         String hashedPassword = rs.getString("password");
                         // Check password with BCrypt
                         if (PasswordHelper.checkPassword(passwordCheck, hashedPassword)) {
-                            currentUser = new User(rs.getInt("id"),rs.getString("phone"), rs.getString("fullName"), rs.getString("email"), rs.getString("userName"), rs.getString("password"), rs.getInt("roleId"), rs.getBoolean("status"));
+                            currentUser = new User(rs.getInt("id"), rs.getString("phone"), rs.getString("fullName"), rs.getString("email"), rs.getString("userName"), rs.getString("password"), rs.getInt("roleId"), rs.getBoolean("status"));
                         } else {
                             AlertMessage.showAlertErrorMessage("Please enter correct password!");
                         }
                     } else {
-                        AlertMessage.showAlertErrorMessage("This account dont exist. Please try again!");
+                        AlertMessage.showAlertErrorMessage("This email doesn't exist. Please try again!");
                     }
                 }
             }
@@ -202,8 +224,8 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return currentUser;
     }
-    public User checkEmail(String email)
-    {
+
+    public User checkEmail(String email) {
         User currentUser = new User();
         try {
             Connection con = JDBC.getConnection();
@@ -211,8 +233,7 @@ public class Dao_User implements Dao_Interface<User> {
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 currentUser.setId(rs.getInt("id"));
                 currentUser.setFullName(rs.getString("fullName"));
                 currentUser.setEmail(rs.getString("email"));
@@ -228,40 +249,95 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return null;
     }
-    public User checkRegister(String fullName, String email, String userName, String password, String phone)
-    {
+    public User checkRegister(String fullName, String email, String userName, String password, String phone) {
         try {
             Connection connection = JDBC.getConnection();
-            Statement statement = connection.createStatement();
-            String verifyRegister = "select count(id) from users where userName = '"+ userName +"' or email = '"+ email +"' or status = false";
-            ResultSet rs = statement.executeQuery(verifyRegister);
-            while (rs.next())
-            {
-                if (rs.getInt(1) > 0)
-                {
-                    String errorText = "This username or email have been used by another user!";
-                    AlertMessage.showAlertErrorMessage(errorText);
-                }
-                else
-                {
-                    // create new account
-                    User newUser = new User();
-                    newUser.setFullName(fullName);
-                    newUser.setEmail(email);
-                    newUser.setUserName(userName);
-                    newUser.setPassWord(PasswordHelper.hashPassword(password));
-                    newUser.setRoleId(2);
-                    newUser.setPhone(phone);
-                    this.getInstance().create(newUser);
-                    String successMessage = "New account is created!!! Please click Login Button to Login into App";
-                    AlertMessage.showAlertSuccessMessage(successMessage);
 
-                    return newUser;
-                }
+            // Check username
+            String sqlUserName = "SELECT id FROM users WHERE userName = ?";
+            PreparedStatement psUserName = connection.prepareStatement(sqlUserName);
+            psUserName.setString(1, userName);
+            ResultSet rsUserName = psUserName.executeQuery();
+            if (rsUserName.next()) {
+                AlertMessage.showAlertErrorMessage("Username is already taken!");
+                return null;
             }
-            return null;
+
+            // Check email
+            String sqlEmail = "SELECT id FROM users WHERE email = ?";
+            PreparedStatement psEmail = connection.prepareStatement(sqlEmail);
+            psEmail.setString(1, email);
+            ResultSet rsEmail = psEmail.executeQuery();
+            if (rsEmail.next()) {
+                AlertMessage.showAlertErrorMessage("Email is already registered!");
+                return null;
+            }
+
+            // Check phone
+            String sqlPhone = "SELECT id FROM users WHERE phone = ?";
+            PreparedStatement psPhone = connection.prepareStatement(sqlPhone);
+            psPhone.setString(1, phone);
+            ResultSet rsPhone = psPhone.executeQuery();
+            if (rsPhone.next()) {
+                AlertMessage.showAlertErrorMessage("Phone number is already registered!");
+                return null;
+            }
+
+            // Create new account
+            User newUser = new User();
+            newUser.setFullName(fullName);
+            newUser.setEmail(email);
+            newUser.setUserName(userName);
+            newUser.setPassWord(PasswordHelper.hashPassword(password));
+            newUser.setRoleId(2);
+            newUser.setPhone(phone);
+            this.getInstance().create(newUser);
+            AlertMessage.showAlertSuccessMessage("New account is created!");
+            return newUser;
+
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    // method for forgot password
+    public int updateForgotPassword(String email, String otp, Timestamp expiredAt) {
+        try
+        {
+            Connection con = JDBC.getConnection();
+            String query = "update users set passwordResetOtp = ?, passwordResetExpiration = ? where email = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, otp);
+            pstmt.setTimestamp(2, expiredAt);
+            pstmt.setString(3, email);
+            int rs = pstmt.executeUpdate();
+            if (rs > 0) {
+                System.out.println("You have changed: " + rs + " rows!");
+            } else {
+                System.out.println("Cannot create new records");
+            }
+            return rs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean checkOtp(String email, String otp) {
+        String query = "select count(id) from users where email = ? and passwordResetOtp = ? and passwordResetExpiration >= NOW() limit 1";
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, email);
+            pstmt.setString(2, otp);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    // exist this otp code for this email
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }

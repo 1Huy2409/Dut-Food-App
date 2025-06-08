@@ -4,8 +4,7 @@ import Config.JDBC;
 import Model.Order;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Dao_Orders implements Dao_Interface<Order> {
     public static Dao_Orders getInstance() {
@@ -140,7 +139,7 @@ public class Dao_Orders implements Dao_Interface<Order> {
 
     @Override
     public Order selectedById(int id) {
-        String query = "SELECT * FROM orders WHERE id = ?";
+        String query = "select * from orders where id = ?";
 
         try {
             Connection con = JDBC.getConnection();
@@ -233,5 +232,37 @@ public class Dao_Orders implements Dao_Interface<Order> {
         }
 
         return orderList;
+    }
+    public Map<String, Double> getRevenueByWeek() {
+        Map<String, Double> revenueMap = new LinkedHashMap<>();
+        List<String> days = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+        for (String day : days) {
+            revenueMap.put(day, 0.0);
+        }
+        String query = "SELECT DAYNAME(order_date) AS day, SUM(total_price) AS total\n" +
+                "        FROM orders\n" +
+                "        WHERE WEEK(order_date) = WEEK(CURDATE())\n" +
+                "        GROUP BY day\n" +
+                "        ORDER BY FIELD(day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')";
+
+        try {
+            Connection con = JDBC.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String date = rs.getString("day");
+                double revenue = rs.getDouble("total");
+                revenueMap.put(date, revenue);
+            }
+
+            rs.close();
+            pstmt.close();
+            JDBC.closeConnection(con);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return revenueMap;
     }
 }

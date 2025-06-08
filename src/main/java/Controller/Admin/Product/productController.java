@@ -6,6 +6,7 @@ import Helper.AlertMessage;
 import Helper.RouteScreen;
 import Model.Category;
 import Model.FoodItem;
+import com.itextpdf.text.pdf.XfaXmlLocator;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -187,7 +188,7 @@ public class productController {
                     foodItemSelected = getTableView().getItems().get(getIndex());
                     boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this dish?");
                     if (confirm) {
-                        Dao_Food.getInstance().delete(productController.foodItemSelected);
+                        Dao_Food.getInstance().updateStatus(productController.foodItemSelected,false);
                         AlertMessage.showAlertSuccessMessage("Deleted successfully");
                         reload();
                     }
@@ -223,6 +224,8 @@ public class productController {
     }
     private void setupButtonsAction()
     {
+        productTable.setEditable(true); // Bật chế độ chỉnh sửa bảng
+
         selectAll.setOnAction(event -> {
             boolean allSelected = checkboxStates.stream().allMatch(BooleanProperty::get);
             checkboxStates.forEach(state -> state.set(!allSelected)); // Đảo trạng thái
@@ -258,7 +261,7 @@ public class productController {
             boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
             if(confirm) {
                 for (FoodItem items : selectedItems) {
-                    Dao_Food.getInstance().delete(items);
+                    Dao_Food.getInstance().updateStatus(items, false);
                 }
                 for (BooleanProperty state : checkboxStates) {
                     state.set(false);

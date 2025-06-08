@@ -72,7 +72,7 @@ public class editCategoryController{
         item.setCategoryName(cateName.getText());
         item.setDescription(cateDesc.getText());
 
-        if(Validation.isCategoryExists(cateName.getText())){
+        if(Validation.isCategoryExists(cateName.getText(), Integer.parseInt(cateId.getText()))){
             AlertMessage.showAlertErrorMessage("Category already exists");
             return;
         }
@@ -83,17 +83,18 @@ public class editCategoryController{
         if (cateTrue.isSelected())
         {
             item.setStatus(true);
+            List<FoodItem> listFoodItem = Dao_Food.getInstance().selectByCategory(Integer.parseInt(cateId.getText()));
+            for (FoodItem foodItem : listFoodItem)
+            {
+                Dao_Food.getInstance().updateStatus(foodItem, true);
+            }
         }
         else
         {
-            List<FoodItem> listFoodItem = new ArrayList<>();
-            listFoodItem = Dao_Food.getInstance().getAll();
+            List<FoodItem> listFoodItem = Dao_Food.getInstance().selectByCategory(Integer.parseInt(cateId.getText()));
             for (FoodItem foodItem : listFoodItem)
             {
-                if (foodItem.getCategoryId() == item.getId())
-                {
-                    Dao_Food.getInstance().updateStatus(foodItem);
-                }
+                Dao_Food.getInstance().updateStatus(foodItem, false);
             }
             item.setStatus(false);
         }

@@ -96,7 +96,5 @@ public class dashboardController implements Initializable {
         }
         bestSellerBox.setAlignment(Pos.CENTER);
         bestSellerBox.setSpacing(150);
-        //bestSellerBox.setPadding(new Insets(20, 0, 20, 0));
-
     }
 }

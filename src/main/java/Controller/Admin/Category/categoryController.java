@@ -147,16 +147,7 @@ public class categoryController {
                     Category category = getTableView().getItems().get(getIndex());
                     boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this category?");
                     if (confirm) {
-                        List<FoodItem> listFoodItem = new ArrayList<>();
-                        listFoodItem = Dao_Food.getInstance().getAll();
-                        for (FoodItem item : listFoodItem)
-                        {
-                            if (item.getCategoryId() == category.getId())
-                            {
-                                Dao_Food.getInstance().delete(item);
-                            }
-                        }
-                        Dao_Category.getInstance().delete(category);
+                        DeleteCategoryWithFood(category);
                         AlertMessage.showAlertSuccessMessage("You have deleted this category!");
                         reload();
                     }
@@ -201,8 +192,8 @@ public class categoryController {
             }
             boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete ?");
             if(confirm){
-                for (Category items : selectedItems) {
-                    Dao_Category.getInstance().delete(items);
+                for (Category item : selectedItems) {
+                    DeleteCategoryWithFood(item);
                 }
                 for (BooleanProperty state : checkboxStates) {
                     state.set(false);
@@ -221,5 +212,15 @@ public class categoryController {
     {
         Stage stage = RouteScreen.getInstance().newScreen("/View/Admin/Category/addCategory.fxml");
         stage.setOnHidden(e -> reload());
+    }
+    public void DeleteCategoryWithFood(Category category)
+    {
+        List<FoodItem> listFoodItem = Dao_Food.getInstance().selectByCategory(category.getId());
+        for (FoodItem item : listFoodItem)
+        {
+            Dao_Food.getInstance().updateStatus(item, false);
+        }
+        category.setStatus(false);
+        Dao_Category.getInstance().update(category);
     }
 }

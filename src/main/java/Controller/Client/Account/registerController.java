@@ -48,7 +48,6 @@ public class registerController {
         {
             return;
         }
-        // check userName and email has been existed in databases yet, if yes => "try again", else => "create new user"
         User newUser = Dao_User.getInstance().checkEmail(Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone).getEmail());
         if (newUser != null)
         {

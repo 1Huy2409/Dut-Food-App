@@ -147,7 +147,22 @@ public class editProductController {
         item.setDescription(txtDes.getText());
         item.setStock(Integer.parseInt(stock.getText()));
         item.setCategoryId(cbCategory.getValue().getId());
-        item.setStatus(active.isSelected());
+        // check status of category
+        if (!active.isSelected())
+        {
+            item.setStatus(false);
+        }
+        else
+        {
+            boolean check = Dao_Category.getInstance().checkCategoryActive(cbCategory.getValue().getId());
+            if (!check)
+            {
+                AlertMessage.showAlertErrorMessage("Category is not active, you cant active food item in this category");
+                return;
+            }
+            item.setStatus(true);
+        }
+        // end check
         item.setSold(productController.foodItemSelected.getSold());
         if(productController.foodItemSelected.getImageUrl().equals(imgURL)){
             item.setImageUrl(productController.foodItemSelected.getImageUrl());

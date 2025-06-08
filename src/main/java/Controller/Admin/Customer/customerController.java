@@ -144,7 +144,7 @@ public class customerController {
 
                 deleteButton.setOnAction(event -> {
                    userSelected = getTableView().getItems().get(getIndex());
-                     boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this usert?");
+                   boolean confirm = AlertMessage.showConfirm("Are you sure you want to delete this user?");
                     if (confirm) {
                         Dao_User.getInstance().delete(customerController.userSelected);
                         reload();
@@ -229,5 +229,4 @@ public class customerController {
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
         return normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
-
 }

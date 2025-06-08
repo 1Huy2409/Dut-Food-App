@@ -46,10 +46,9 @@ public class forgotPassword {
             {
                 String OTP = SendingEmail.randomOtp(6);
                 Timestamp OTPExpiredAt = new Timestamp(System.currentTimeMillis() + 5 * 60 * 1000);
-                System.out.println(OTPExpiredAt);
                 Dao_User.getInstance().updateForgotPassword(email, OTP, OTPExpiredAt);
                 SendingEmail.sendMail(email, OTP);
-                EmailSession.getInstance().setEmail(emailTextField.getText());
+                EmailSession.getInstance().setEmail(email);
                 Stage currentStage = (Stage) sendOtpBtn.getScene().getWindow();
                 RouteScreen.getInstance().newScreen("/View/Shared/confirmOtp.fxml");
                 currentStage.close();

@@ -83,7 +83,7 @@ public class orderController {
     }
     private void loadOrderAndUserData() {
         List<Order> listOrder = Dao_Orders.getInstance().getAll();
-        List<User> listUser = Dao_User.getInstance().getAll();
+        List<User> listUser = Dao_User.getInstance().getAllCustomer();
         userMap.clear();
         for (User user : listUser) {
             userMap.put(user.getId(), user);

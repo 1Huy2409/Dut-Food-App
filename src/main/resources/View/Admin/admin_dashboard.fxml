@@ -160,20 +160,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </HBox>
-                  <HBox fx:id="btnStaff" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="button-container-mouse-moved" stylesheets="@../../CSS/styles.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../../Pictures/icons8-staff-50.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="27.0" prefWidth="181.0" styleClass="shadow" stylesheets="@../../CSS/styles.css" text="Staff" textFill="WHITE">
-                           <font>
-                              <Font name="Berlin Sans FB" size="26.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
                   <fx:include source="../Shared/logout.fxml" />
                </children>
             </VBox>

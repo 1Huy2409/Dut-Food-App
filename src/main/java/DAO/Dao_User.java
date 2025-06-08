@@ -20,6 +20,32 @@ public class Dao_User implements Dao_Interface<User> {
         try {
             Connection con = JDBC.getConnection();
             Statement st = con.createStatement();
+            String sql = "select * from users";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String phone = rs.getString("phone");
+                String fullName = rs.getString("fullName");
+                String email = rs.getString("email");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                boolean status = rs.getBoolean("status");
+                int roleId = rs.getInt("roleId");
+                User user = new User(id, phone, fullName, email, userName, password, roleId, status);
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
+    }
+    public List<User> getAllCustomer()
+    {
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            Connection con = JDBC.getConnection();
+            Statement st = con.createStatement();
             String sql = "select * from users where roleId = 2";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
@@ -40,7 +66,6 @@ public class Dao_User implements Dao_Interface<User> {
         }
         return users;
     }
-
     // create new user and insert into user table
     @Override
     public void create(User user) {

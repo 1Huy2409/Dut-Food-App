@@ -80,29 +80,12 @@ public class paymentController implements Initializable {
             try {
                 HBox itemBox = FXMLLoader.load(getClass().getResource("/View/Client/Order/oder_item.fxml"));
                 Label name = (Label) itemBox.lookup("#productName");
-//                Label desc = (Label) itemBox.lookup("#productDesc");
                 Label price = (Label) itemBox.lookup("#productPrice");
                 Label quantity = (Label) itemBox.lookup("#quantity");
                 ImageView img = (ImageView) itemBox.lookup("#productImage");
-//                CheckBox checkbox = (CheckBox) itemBox.lookup("#productCheckbox");
-//                Button minus = (Button) itemBox.lookup("#minusButton");
-//                Button plus = (Button) itemBox.lookup("#plusButton");
-//                ImageView deleteIcon = (ImageView) itemBox.lookup("#deleteIcon");
-
-                // Ẩn các thành phần không cần thiết
-//                checkbox.setVisible(false);
-////                minus.setVisible(false);
-////                plus.setVisible(false);
-//                deleteIcon.setVisible(false);
-//                quantity.setEditable(false);
-
-
-                // Gán thông tin
                 FoodItem food = Dao_Food.getInstance().selectedById(item.getFoodItemId());
                 name.setText(food.getFoodName());
-//                desc.setText(food.getDescription());
                 price.setText(String.format("%,.0f VND", food.getPrice()*item.getQuantity()));
-//                quantity.setText(String.valueOf(item.getQuantity()));
                 quantity.setText(String.format("x%d", item.getQuantity()));
 
 
@@ -118,7 +101,6 @@ public class paymentController implements Initializable {
 
                 img.setClip(clip);
                 img.setTranslateX(10);
-//                img.setImage(image);
 
                 paymentItemContainer.getChildren().add(itemBox);
             } catch (IOException e) {
@@ -126,7 +108,6 @@ public class paymentController implements Initializable {
             }
         }
     }
-    // setText(String.format("%,.0f VND", foodPrice))
     public void setAddress(OrderInfo orderInfo) {
         this.newOrderInfo = orderInfo;
         this.address.setText(orderInfo.getFullname() + ", " + orderInfo.getPhone() + ", " + orderInfo.getAddress());
@@ -147,12 +128,10 @@ public class paymentController implements Initializable {
 
             for (CartItem item : checkedItems) {
                 FoodItem foodItem = new FoodItem();
-                // cập nhật lại fooditem (stock và sold)
                 foodItem = Dao_Food.getInstance().selectedById(item.getFoodItemId());
                 foodItem.setStock(foodItem.getStock() - item.getQuantity());
-                foodItem.setSold(item.getQuantity());
+                foodItem.setSold(foodItem.getSold() + item.getQuantity());
                 Dao_Food.getInstance().update(foodItem);
-                // done update fooditem
                 OrderItem orderItem = new OrderItem();
                 orderItem.setOrderId(order.getId());
                 orderItem.setFoodItemId(item.getFoodItemId());
@@ -175,7 +154,6 @@ public class paymentController implements Initializable {
             }
             if (payment.getPaymentMethod().equals("Cash"))
             {
-                // load ra giao dien home
                 loadUI("/View/Client/Product/product.fxml");
             }
             else

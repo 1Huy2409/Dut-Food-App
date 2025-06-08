@@ -40,10 +40,17 @@ public class InvoiceGenerator {
             List<OrderItem> items = Dao_OrderItems.getInstance().getOrderItemsByOrderId(order.getId());
             for (OrderItem item : items) {
                 FoodItem food = Dao_Food.getInstance().selectedById(item.getFoodItemId());
-                table.addCell(food.getFoodName());
-                table.addCell(String.valueOf(item.getQuantity()));
-                table.addCell(String.format("%,.0f", food.getPrice()));
-                table.addCell(String.format("%,.0f", item.getPrice()));
+                PdfPCell foodNameCell = new PdfPCell(new Phrase(food.getFoodName(), unicodeFont));
+                table.addCell(foodNameCell);
+
+                PdfPCell quantityCell = new PdfPCell(new Phrase(String.valueOf(item.getQuantity()), unicodeFont));
+                table.addCell(quantityCell);
+
+                PdfPCell priceCell = new PdfPCell(new Phrase(String.format("%,.0f", food.getPrice()), unicodeFont));
+                table.addCell(priceCell);
+
+                PdfPCell totalCell = new PdfPCell(new Phrase(String.format("%,.0f", item.getPrice()), unicodeFont));
+                table.addCell(totalCell);
             }
             document.add(table);
             document.add(new Paragraph("\n"));

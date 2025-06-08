@@ -1,6 +1,5 @@
-package Controller.Client.Profile;
+package Controller.Admin.Profile;
 
-import Controller.Client.clientController;
 import DAO.Dao_User;
 import Helper.*;
 import Model.User;
@@ -28,7 +27,6 @@ public class profileController {
 
     @FXML
     private Button btnLog;
-
     @FXML
     private Button btnUI;
 
@@ -45,7 +43,10 @@ public class profileController {
     private TextField fullname;
 
     @FXML
-    private ImageView img;
+    private ImageView imgdefault;
+
+    @FXML
+    private ImageView imguser;
 
     @FXML
     private Label lbemail;
@@ -64,21 +65,10 @@ public class profileController {
 
     @FXML
     private TextField username;
-
-    @FXML
-    private ImageView imgdefault;
-        @FXML
-    private Button btnOrder;
-
-    @FXML
-    private ImageView imguser;
     private String currentImagePath = null;
     public void initialize() {
         anchoACC.setVisible(false);
         loadInfo(Dao_User.getInstance().selectedById(UserSession.getInstance().getId()));
-    }
-    public void EditAccountAction(ActionEvent event){
-        anchoACC.setVisible(true);
     }
     public void loadInfo(User user){
         lbfullname.setText(user.getFullName());
@@ -108,45 +98,12 @@ public class profileController {
             }
         }
     }
-    public void importImg() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Chọn ảnh");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-        );
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            currentImagePath = file.toURI().toString();
-            try {
-                // Tạo Image và đặt preserveRatio để giữ tỉ lệ ảnh gốc
-                Image image = new Image(file.toURI().toString(), 100, 100, true, true);
-
-                // Đặt hình ảnh vào ImageView
-                imguser.setImage(image);
-
-                // Đặt kích thước cố định cho ImageView
-                imguser.setFitWidth(100);
-                imguser.setFitHeight(100);
-                imguser.setPreserveRatio(false); // Tắt preserveRatio để ảnh lấp đầy kích thước
-
-                // Tạo mặt nạ hình elip
-                Ellipse clip = new Ellipse();
-                clip.radiusXProperty().bind(imguser.fitWidthProperty().divide(2));
-                clip.radiusYProperty().bind(imguser.fitHeightProperty().divide(2));
-                clip.centerXProperty().bind(imguser.fitWidthProperty().divide(2));
-                clip.centerYProperty().bind(imguser.fitHeightProperty().divide(2));
-
-                imguser.setClip(clip);
-                imgdefault.setVisible(false);
-                imguser.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Xử lý lỗi nếu cần
-            }
-        }
+    @FXML
+    void EditAccountAction(ActionEvent event) {
+        anchoACC.setVisible(true);
     }
-    public void btnSaveChange(){
+    @FXML
+    void btnSaveChange(ActionEvent event) {
         boolean checkinfo = true;
         boolean checkpass = true;
         String password = "";
@@ -191,7 +148,57 @@ public class profileController {
             confirmpass.setText("");
         }
     }
-    public void saveUI(){
+
+    @FXML
+    void importImg(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chọn ảnh");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            currentImagePath = file.toURI().toString();
+            try {
+                // Tạo Image và đặt preserveRatio để giữ tỉ lệ ảnh gốc
+                Image image = new Image(file.toURI().toString(), 100, 100, true, true);
+
+                // Đặt hình ảnh vào ImageView
+                imguser.setImage(image);
+
+                // Đặt kích thước cố định cho ImageView
+                imguser.setFitWidth(100);
+                imguser.setFitHeight(100);
+                imguser.setPreserveRatio(false); // Tắt preserveRatio để ảnh lấp đầy kích thước
+
+                // Tạo mặt nạ hình elip
+                Ellipse clip = new Ellipse();
+                clip.radiusXProperty().bind(imguser.fitWidthProperty().divide(2));
+                clip.radiusYProperty().bind(imguser.fitHeightProperty().divide(2));
+                clip.centerXProperty().bind(imguser.fitWidthProperty().divide(2));
+                clip.centerYProperty().bind(imguser.fitHeightProperty().divide(2));
+
+                imguser.setClip(clip);
+                imgdefault.setVisible(false);
+                imguser.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Xử lý lỗi nếu cần
+            }
+        }
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
+        UserSession.getInstance().clearSession();
+        Stage currentStage = (Stage) btnLog.getScene().getWindow();
+        currentStage.close();
+        RouteScreen.getInstance().newScreen("/View/Shared/login.fxml");
+    }
+
+    @FXML
+    void saveUI(ActionEvent event) {
         if(!fullname.getText().trim().isEmpty() && !email.getText().trim().isEmpty() && !phone.getText().trim().isEmpty()){
             User user = Dao_User.getInstance().selectedById(UserSession.getInstance().getId());
             String result =  Validation.checkUserExists(UserSession.getInstance().getUserName(), email.getText(), phone.getText(), user.getId());
@@ -203,7 +210,6 @@ public class profileController {
                 AlertMessage.showAlertErrorMessage(result);
                 return;
             }
-
             user.setFullName(fullname.getText());
             user.setEmail(email.getText());
             user.setPhone(phone.getText());
@@ -217,15 +223,6 @@ public class profileController {
         else{
             AlertMessage.showAlertErrorMessage("Please fill in complete information");
         }
+    }
 
-    }
-    public void logout(){
-        UserSession.getInstance().clearSession();
-        Stage currentStage = (Stage) btnLog.getScene().getWindow();
-        currentStage.close();
-        RouteScreen.getInstance().newScreen("/View/Shared/login.fxml");
-    }
-    public void btnOrder(){
-        clientController.getInstance().loadUI("/View/Client/Order/order_1.fxml");
-    }
 }

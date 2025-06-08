@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -45,6 +46,9 @@ public class adminController implements Initializable{
     private HBox btnSetting;
     @FXML
     private HBox btnReport;
+    @FXML
+    private ImageView profile;
+
     @FXML
     private VBox contentArea;
     @Override
@@ -98,4 +102,10 @@ public class adminController implements Initializable{
     {
         loadUI("/View/Admin/Order/order.fxml");
     }
+
+    public void ProfileOnAction(MouseEvent e)
+    {
+        loadUI("/View/Admin/Profile/adminProfile.fxml");
+    }
+
 }

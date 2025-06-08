@@ -45,10 +45,13 @@
          <children>
             <HBox alignment="CENTER" prefHeight="84.0" prefWidth="290.0">
                <children>
-                  <ImageView fitHeight="60.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                  <ImageView fx:id="profile" fitHeight="60.0" fitWidth="62.0" onMouseClicked="#ProfileOnAction" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                      <image>
                         <Image url="@../../Pictures/icons8-account-50.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="193.0">
                      <children>

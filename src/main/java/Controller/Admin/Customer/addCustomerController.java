@@ -1,9 +1,11 @@
 package Controller.Admin.Customer;
 
+import DAO.Dao_Cart;
 import DAO.Dao_User;
 import Helper.AlertMessage;
 import Helper.PasswordHelper;
 import Helper.Validation;
+import Model.Cart;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -87,8 +89,13 @@ public class addCustomerController {
             AlertMessage.showAlertErrorMessage(user);
             return;
         }
-
-        Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone);
+        User newUser = Dao_User.getInstance().checkEmail(Dao_User.getInstance().checkRegister(fullName, email, userName, password, phone).getEmail());
+        // create cart for user
+        if (newUser != null)
+        {
+            Cart newCart = new Cart(newUser.getId());
+            Dao_Cart.getInstance().create(newCart);
+        }
         currentStage.close();
     }
     public void cancelOnAction(){
